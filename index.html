@@ -423,7 +423,12 @@
                     const isScrolled = scrolled > heroHeight * 0.75;
                     const strokeColor = isScrolled ? '#141414' : '#faf8f3';
                     
-                    navRibbon.classList.toggle('scrolled', isScrolled);
+                    // Explicitly add/remove class to ensure it works reliably
+                    if (isScrolled) {
+                        navRibbon.classList.add('scrolled');
+                    } else {
+                        navRibbon.classList.remove('scrolled');
+                    }
                     navIcons.forEach(icon => icon.setAttribute('stroke', strokeColor));
                     // Only fill circles that should be filled (menu dots and cart wheels, not search circle)
                     navIconCircles.forEach(circle => {

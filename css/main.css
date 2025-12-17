@@ -15,6 +15,7 @@
             overflow-x: hidden;
             background-color: #faf8f3;
             min-height: 100vh;
+            padding-top: 84px; /* promo-banner (40) + nav-ribbon (44) */
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto;
         }
 
@@ -51,14 +52,18 @@
             color: #141414;
             background: #c5cfd0;
             overflow: hidden;
-            position: relative;
+            position: fixed; /* Fixed at very top of page */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
         }
 
         .ticker-wrapper {
             display: flex;
             position: absolute;
             white-space: nowrap;
-            animation: scroll-left 60s linear infinite;
+            animation: scroll-left 200s linear infinite;
         }
 
         .ticker-item {
@@ -68,27 +73,31 @@
 
         @keyframes scroll-left {
             0% {
-                transform: translateX(0%);
+                transform: translateX(0);
             }
             100% {
-                transform: translateX(-33.333%);
+                transform: translateX(-50%);
             }
         }
 
         .nav-ribbon {
             height: 44px;
-            background: transparent;
-            border-top: 1.5px solid #faf8f3;
-            border-bottom: 1.5px solid #faf8f3;
+            background: rgba(250, 248, 243, 0.95);
+            border-top: 1.5px solid #141414;
+            border-bottom: 1.5px solid #141414;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.5s ease;
-            position: relative;
-            z-index: 10;
+            backdrop-filter: blur(10px);
+            position: fixed; /* Fixed at top below promo banner */
+            top: 40px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         .nav-ribbon.scrolled {
+            /* Keep behavior consistent even if JS still toggles .scrolled */
             background: rgba(250, 248, 243, 0.95);
             border-top-color: #141414;
             border-bottom-color: #141414;
@@ -98,9 +107,8 @@
         .nav-center {
             display: flex;
             height: 100%;
-            border-left: 1.5px solid #faf8f3;
-            border-right: 1.5px solid #faf8f3;
-            transition: border-color 0.5s ease;
+            border-left: 1.5px solid #141414;
+            border-right: 1.5px solid #141414;
         }
 
         .nav-ribbon.scrolled .nav-center {
@@ -113,14 +121,14 @@
             display: flex;
             align-items: center;
             text-decoration: none;
-            color: #faf8f3;
+            color: #141414;
             font-size: 0.9rem;
             font-weight: 500;
             letter-spacing: 1.2px;
             text-transform: uppercase;
-            transition: all 0.5s ease;
+            transition: color 0.5s ease;
             cursor: pointer;
-            border-right: 1.5px solid #faf8f3;
+            border-right: 1.5px solid #141414;
         }
 
         .landing-nav-link:last-child {
@@ -173,7 +181,7 @@
         }
 
         .nav-icon:hover svg circle {
-            fill: #583c4a !important;
+            fill: #ffffff !important;
         }
 
         .nav-icon svg {
@@ -185,7 +193,7 @@
             height: 100vh;
             width: 100%;
             overflow: visible;
-            margin-top: 40px;
+            margin-top: 0;
         }
 
         .hero-slide {

@@ -1,0 +1,810 @@
+/* Furniture page-specific styles. Shared header/nav/cart/modal/footer styles live in css/main.css. */
+
+html {
+    background-color: #c5cfd0;
+    overscroll-behavior-y: none;
+}
+body {
+    background-color: #fafafa;
+    padding-top: 124px; /* promo-banner (40) + nav-ribbon (44) + furniture-nav (40) */
+}
+
+a:hover .back-arrow-icon path {
+    stroke: #583c4a !important;
+}
+.floating-showhouse-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #faf8f3;
+    color: #141414;
+    padding: 14px 28px;
+    border: 1.5px solid #141414;
+    border-radius: 50px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Tactile shadows for depth */
+    box-shadow:
+        0 2px 4px rgba(20, 20, 20, 0.1),
+        0 6px 12px rgba(20, 20, 20, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1px 0 rgba(20, 20, 20, 0.05);
+}
+.floating-showhouse-btn::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #c5cfd0;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow:
+        0 1px 3px rgba(197, 207, 208, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.floating-showhouse-btn:hover {
+    background: linear-gradient(135deg, #583c4a 0%, #3d2a34 100%);
+    color: #fafafa;
+    border-color: #583c4a;
+    transform: translateY(-3px);
+    box-shadow:
+        0 4px 8px rgba(88, 60, 74, 0.2),
+        0 10px 20px rgba(88, 60, 74, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.floating-showhouse-btn:active {
+    transform: translateY(-1px);
+    box-shadow:
+        0 1px 3px rgba(20, 20, 20, 0.2),
+        0 2px 6px rgba(20, 20, 20, 0.15),
+        inset 0 2px 4px rgba(20, 20, 20, 0.15);
+}
+.furniture-nav {
+    height: 40px;
+    background: #fafafa;
+    border-bottom: 1.5px solid #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    position: fixed; /* Fixed at top below nav-ribbon */
+    top: 84px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+.makemake-logo-container {
+    position: relative;
+    left: 0;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    background: #141414;
+    z-index: 10;
+    overflow: hidden;
+}
+.grid-title-band {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: #faf8f3;
+    border-top: 1.5px solid #141414;
+    border-bottom: 1.5px solid #141414;
+    padding: 20px 0;
+    text-align: center;
+    z-index: 11;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.grid-title-band .section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #141414;
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.grid-title-band .section-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    margin-top: 8px;
+}
+.furniture-nav-link {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    color: #141414;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    transition: color 0.3s ease;
+    padding: 8px 0;
+    cursor: pointer;
+}
+.furniture-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1.5px;
+    background: #583c4a;
+    transition: width 0.3s ease;
+}
+.furniture-nav-link:hover,
+.furniture-nav-link.active {
+    color: #583c4a;
+}
+.furniture-nav-link:hover::after,
+.furniture-nav-link.active::after {
+    width: 80%;
+}
+.main-content {
+    padding: 0 50px 80px; /* Normal side padding, no top padding needed */
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #141414;
+    margin-bottom: 12px;
+}
+.section-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+}
+.grid-header .section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #141414;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.collection-showcase {
+    background: #fafafa;
+    padding: 0;
+    margin: 0 -50px 120px; /* Negative margin to break out of main-content padding */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.grid-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 50px;
+}
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    width: 100%;
+}
+.showcase-item {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    cursor: pointer;
+    transition: none;
+    aspect-ratio: 1 / 1;
+    border-right: 1.5px solid #141414;
+    border-bottom: 1.5px solid #141414;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+.showcase-item:nth-child(4n) {
+    border-right: none;
+}
+.showcase-item-wide {
+    grid-column: span 2;
+    aspect-ratio: 2 / 1;
+    border-right: 1.5px solid #141414 !important;
+}
+.showcase-item:hover {
+    z-index: 10;
+}
+.showcase-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.showcase-item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(250, 248, 243, 0.95);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+.showcase-item:hover .showcase-item-overlay {
+    transform: translateY(0);
+}
+.showcase-item-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+.showcase-item-prices {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.showcase-item-original-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #141414;
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+.showcase-item-sale-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #583c4a;
+    font-weight: 600;
+}
+.showcase-item-markdown {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+.showcase-item-source {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+.showcase-item-source.makemake {
+    color: #141414;
+    letter-spacing: 0.05em;
+}
+.showcase-item-source.curated {
+    color: #583c4a;
+}
+.editorial-moment {
+    background: #fafafa;
+    padding: 40px 0;
+    margin: 80px -50px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.editorial-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+    text-align: center;
+}
+.editorial-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: #141414;
+    margin-bottom: 40px;
+    line-height: 1.3;
+}
+.editorial-text {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #583c4a;
+    font-weight: 300;
+    margin-bottom: 24px;
+}
+.editorial-text strong {
+    color: #141414;
+    font-weight: 500;
+}
+.statement-text {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: #141414;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+.statement-text strong {
+    font-weight: 600;
+}
+.featured-products {
+    margin: 120px 0;
+}
+.featured-pair {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 120px;
+}
+.featured-pair:nth-child(even) {
+    flex-direction: row-reverse;
+}
+.featured-image {
+    flex: 1.2;
+}
+.featured-image img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 20px rgba(20, 20, 20, 0.15);
+}
+.featured-text {
+    flex: 0.8;
+}
+.featured-product-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #141414;
+    margin-bottom: 16px;
+}
+.featured-product-description {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #583c4a;
+    margin-bottom: 60px;
+    font-weight: 300;
+}
+.featured-product-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #141414;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+.featured-cta {
+    display: inline-block;
+    padding: 12px 36px;
+    background: #faf8f3;
+    color: #141414;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1.5px solid #141414;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    font-family: 'Geist Mono', monospace;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
+}
+.featured-cta:hover {
+    background: #583c4a;
+    color: #faf8f3;
+    border-color: #583c4a;
+}
+.triptych-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 120px 0 160px 0;
+    padding: 0;
+}
+.triptych-section .section-header {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: #faf8f3;
+    border-top: 1.5px solid #141414;
+    border-bottom: 1.5px solid #141414;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 0;
+}
+.triptych-section .section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #141414;
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.triptych-section .section-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    margin-top: 8px;
+}
+.triptych-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.triptych-card {
+    display: block;
+    position: relative;
+    border-right: 1.5px solid #141414;
+    line-height: 0;
+}
+.triptych-card:last-child {
+    border-right: none;
+}
+.triptych-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 570px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    display: block;
+}
+.triptych-image-wrapper.window-treatments {
+    background-image: url('https://i.imgur.com/RfWXDS8.jpg');
+    background-position: center 65%;
+}
+.triptych-image-wrapper.works-wall {
+    background-image: url('https://i.imgur.com/zc8a5eu.jpg');
+    background-position: center 70%;
+}
+.triptych-image-wrapper.guest-brands {
+    background-image: url('https://i.imgur.com/qhsuy9j.jpg');
+    background-position: center center;
+}
+.triptych-title-tag {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c5cfd0;
+    color: #141414;
+    padding: 10px 24px 12px;
+    z-index: 4;
+    border-left: 1.5px solid #141414;
+    border-right: 1.5px solid #141414;
+    border-bottom: 1.5px solid #141414;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.triptych-title-tag h3 {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #141414;
+    margin: 0;
+    white-space: nowrap;
+}
+.triptych-content-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    background: #faf8f3;
+    border-top: 1.5px solid #141414;
+    border-bottom: 1.5px solid #141414;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.triptych-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 30px 25px;
+    border-right: 1.5px solid #141414;
+}
+.triptych-content:last-child {
+    border-right: none;
+}
+.triptych-description {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #141414;
+    line-height: 1.6;
+}
+.triptych-link {
+    display: inline-block;
+    color: #141414;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Geist Mono', monospace;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+.triptych-link:hover {
+    color: #583c4a;
+}
+.all-furniture-section {
+    margin: 120px 0;
+}
+.all-furniture-section .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+.all-furniture-section .section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #141414;
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.all-furniture-section .section-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    margin-top: 8px;
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.product-card {
+    position: relative;
+    background: #fff;
+    border: 1.5px solid #141414;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.product-card.hidden {
+    display: none;
+}
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(20, 20, 20, 0.08);
+}
+.product-image-container {
+    width: 100%;
+    height: calc((100% * 4/3) - 20px);
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1.5px solid #141414;
+}
+.sale-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c5cfd0;
+    color: #141414;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    padding: 4px 16px 6px;
+    z-index: 2;
+    text-transform: uppercase;
+    border-left: 1.5px solid #141414;
+    border-right: 1.5px solid #141414;
+    border-bottom: 1.5px solid #141414;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    white-space: nowrap;
+    margin: 0;
+}
+.hide-grid-badges .sale-badge {
+    display: none;
+}
+.product-image-container::after {
+    content: 'IMAGE';
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #c5cfd0;
+    position: absolute;
+}
+.product-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+.btn-view {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-bottom: 1.5px solid #141414;
+    background: transparent;
+    color: #141414;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+}
+.btn-view:hover {
+    background: #c5cfd0;
+    color: #141414;
+}
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    border-bottom: 1.5px solid #141414;
+    background: #faf8f3;
+}
+.product-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #141414;
+    line-height: 1.4;
+}
+.product-price {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #583c4a;
+}
+.price-original {
+    text-decoration: line-through;
+    opacity: 0.5;
+    font-size: 0.85rem;
+    margin-right: 8px;
+}
+.price-sale {
+    color: #141414;
+    font-weight: 600;
+}
+.btn-add-cart {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+    color: #141414;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+}
+.btn-add-cart:hover {
+    background: #583c4a;
+    color: #fafafa;
+}
+.btn-add-cart.added {
+    background: #4a8b5c;
+    color: #fafafa;
+}
+.load-more-container {
+    text-align: center;
+    padding: 40px 0;
+}
+.load-more-btn {
+    padding: 0;
+    background: transparent;
+    color: #141414;
+    border: none;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+.load-more-btn:hover {
+    color: #583c4a;
+}
+.load-more-btn:hover svg:first-child {
+    transform: translateX(-4px);
+}
+.load-more-btn:hover svg:last-child {
+    transform: translateX(4px);
+}
+.load-more-btn svg {
+    transition: transform 0.3s ease;
+}
+.footer-section:nth-child(1) .social-icons {
+    justify-content: flex-start;
+}
+.search-result-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.search-result-code {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.page-sections-wrapper {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.page-sections-wrapper.loaded {
+    opacity: 1;
+}

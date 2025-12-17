@@ -1,3 +1,6 @@
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -19,18 +22,14 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto;
         }
 
-        /* Global cursor override */
+        /* Custom cursor for all elements */
         * {
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto !important;
         }
 
-        /* Override cursor for all interactive elements */
-        a, button, input[type="submit"], input[type="button"], 
-        .nav-icon, .landing-nav-link, .product-card, 
-        [onclick], [role="button"] {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto !important;
-        }
-
+        /* ============================================
+           HEADER & NAVIGATION
+           ============================================ */
         .header-container {
             position: fixed;
             top: 0;
@@ -98,10 +97,7 @@
 
         .nav-ribbon.scrolled {
             /* Keep behavior consistent even if JS still toggles .scrolled */
-            background: rgba(250, 248, 243, 0.95);
-            border-top-color: #141414;
-            border-bottom-color: #141414;
-            backdrop-filter: blur(10px);
+            /* Styles already match base .nav-ribbon, kept for JS compatibility */
         }
 
         .nav-center {
@@ -169,6 +165,7 @@
         }
 
         .nav-icon {
+            position: relative;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -188,12 +185,20 @@
             transition: all 0.5s ease;
         }
 
+        /* ============================================
+           HERO SECTION
+           ============================================ */
         .hero-carousel {
             position: relative;
             height: 100vh;
             width: 100%;
             overflow: visible;
-            margin-top: 0;
+            margin-top: -84px; /* Compensate for body padding-top to start at top */
+        }
+
+        /* Fix for hero sections in interiors.html and similar pages */
+        .page-content > section[style*="min-height: 100vh"] {
+            margin-top: -84px; /* Compensate for body padding-top */
         }
 
         .hero-slide {
@@ -249,6 +254,9 @@
             z-index: 10;
         }
 
+        /* ============================================
+           MISSION & SERVICES
+           ============================================ */
         .mission-section {
             background: #fafafa;
             padding: 80px 80px;
@@ -484,6 +492,9 @@
             display: none;
         }
 
+        /* ============================================
+           FOOTER
+           ============================================ */
         footer {
             background: #c5cfd0;
             color: #141414;
@@ -598,6 +609,9 @@
             margin-top: 20px;
         }
 
+        /* ============================================
+           MODALS (Info, Cart, Newsletter, Search)
+           ============================================ */
         /* Info Modals (Shipping, Returns, Trade) */
         .info-modal {
             position: fixed;
@@ -710,10 +724,6 @@
         }
 
         /* Cart Counter */
-        .nav-icon {
-            position: relative;
-        }
-
         .cart-counter {
             position: absolute;
             top: -13px;

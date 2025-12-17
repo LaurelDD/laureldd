@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosario Bistro Table — Laurel Depto. de Diseño</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto !important;
+        }
+
+        html {
+            background-color: #c5cfd0;
+            overscroll-behavior-y: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa;
+            color: #141414;
+            line-height: 1.6;
+            padding-top: 0;
+        }
+
+        /* Main page scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fafafa;
+            margin-right: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 6px;
+            border-right: 5px solid #fafafa;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(20, 20, 20, 0.9);
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(20, 20, 20, 0.8) #fafafa;
+        }
+
+        /* Header Styles */
+        .promo-banner {
+            background: #c5cfd0;
+            color: #141414;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 1.9px;
+            text-transform: uppercase;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            position: absolute;
+            white-space: nowrap;
+            animation: scroll-left 60s linear infinite;
+        }
+
+        .ticker-item {
+            padding: 0 80px;
+            display: inline-block;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-33.333%);
+            }
+        }
+
+        .nav-ribbon {
+            height: 44px;
+            background: rgba(250, 248, 243, 0.95);
+            border-top: 1.5px solid #141414;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            position: fixed; /* Fixed at top below promo banner */
+            top: 40px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-center {
+            display: flex;
+            height: 100%;
+            border-left: 1.5px solid #141414;
+            border-right: 1.5px solid #141414;
+        }
+
+        .landing-nav-link {
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #141414;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            transition: color 0.5s ease;
+            border-right: 1.5px solid #141414;
+        }
+
+        .landing-nav-link:last-child {
+            border-right: none;
+        }
+
+        .landing-nav-link.active,
+        .landing-nav-link:hover {
+            color: #583c4a;
+        }
+
+        .back-arrow-icon path {
+            transition: stroke 0.5s ease;
+        }
+
+        a:hover .back-arrow-icon path {
+            stroke: #583c4a !important;
+        }
+
+        .nav-icons {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1001;
+        }
+
+        .nav-icon {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            position: relative;
+        }
+
+        .nav-icon:hover svg {
+            stroke: #583c4a !important;
+        }
+
+        .nav-icon:hover svg circle {
+            fill: #ffffff !important;
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #583c4a;
+            color: white;
+            border-radius: 50%;
+            min-width: 18px;
+            height: 18px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fafafa;
+        }
+
+        .cart-counter.has-items {
+            display: flex;
+        }
+
+        /* Furniture Categories Ribbon - Fixed below main navigation */
+        .furniture-nav {
+            height: 40px;
+            background: #fafafa;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            position: fixed; /* Fixed at top below nav-ribbon */
+            top: 84px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        .furniture-nav-link {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: transparent;
+            border: none;
+            color: #141414;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .furniture-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1.5px;
+            background: #583c4a;
+            transition: width 0.3s ease;
+        }
+
+        .furniture-nav-link:hover,
+        .furniture-nav-link.active {
+            color: #583c4a;
+        }
+
+        .furniture-nav-link:hover::after,
+        .furniture-nav-link.active::after {
+            width: 80%;
+        }
+
+        /* Cart Modal Styles */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* CART MODAL - Fixed structure */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
+            background: #faf8f3;
+            border-left: 1.5px solid #141414;
+            z-index: 10000;
+            transition: right 0.3s ease;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        /* HEADER - Fixed 40px */
+        .cart-header {
+            height: 40px;
+            padding: 0 30px;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .clear-items-link:hover {
+            opacity: 0.6 !important;
+        }
+
+        /* Clear Items Modal - Ultra Simple */
+        .clear-modal {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 280px;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .clear-modal.active {
+            display: block;
+        }
+
+        .clear-modal-message {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #141414;
+            padding: 20px;
+        }
+
+        .clear-modal-buttons {
+            display: flex;
+            height: 25px;
+            border-top: 1.5px solid #141414;
+        }
+
+        .clear-modal-btn {
+            flex: 1;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: #faf8f3;
+            color: #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clear-modal-btn:first-child:not(:only-child) {
+            border-right: 1.5px solid #141414;
+        }
+
+        .clear-modal-btn:hover {
+            background: #c5cfd0;
+            color: #141414;
+        }
+
+        /* Newsletter Modal */
+        .newsletter-modal {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 380px;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .newsletter-modal.active {
+            display: block;
+        }
+
+        .newsletter-modal-header {
+            height: 30px;
+            background: #faf8f3;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .newsletter-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s ease;
+            margin-top: 4px;
+        }
+
+        .newsletter-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .newsletter-modal-content {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .newsletter-modal-title {
+            font-size: 1.2rem;
+            color: #583c4a;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .newsletter-modal-subtitle {
+            font-size: 0.85rem;
+            color: #141414;
+        }
+
+        /* Info Modals (Shipping & Returns) */
+        .info-modal {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 600px;
+            max-width: 90vw;
+            max-height: 80vh;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .info-modal.active {
+            display: block;
+        }
+
+        .info-modal-header {
+            height: 50px;
+            background: #faf8f3;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .info-modal-title {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #141414;
+        }
+
+        .info-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .info-modal-content {
+            padding: 32px;
+            overflow-y: auto;
+            max-height: calc(80vh - 50px);
+        }
+
+        .info-modal-content h3 {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #583c4a;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .info-modal-content p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #141414;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #141414;
+            margin-bottom: 8px;
+        }
+
+        .info-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+        }
+
+        .info-modal-overlay.active {
+            display: block;
+        }
+
+        /* ITEMS - Fixed calculated height */
+        .cart-items {
+            height: calc(100vh - 220px);
+            overflow-y: auto;
+            padding: 20px 30px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 20px 0;
+            color: #583c4a;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(20, 20, 20, 0.1);
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background: #ffffff;
+            border: 1.5px solid #141414;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-name {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-code {
+            font-size: 0.6rem;
+            color: #583c4a;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-spec {
+            font-size: 0.6rem;
+            color: #141414;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: #583c4a;
+            margin-top: 8px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .cart-item-remove:hover {
+            opacity: 1;
+        }
+
+        /* FOOTER - Fixed 180px */
+        .cart-footer {
+            min-height: 180px;
+            padding: 16px 30px;
+            border-top: 1.5px solid #141414;
+            background: #faf8f3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-total {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding-top: 4px;
+            margin-top: 4px;
+            border-top: 1.5px solid #141414;
+        }
+
+        .total-line .total-value {
+            font-size: 0.9rem;
+        }
+
+        .cart-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cart-checkout {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            background: #fafafa;
+            color: #141414;
+            border: 1.5px solid #141414;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-checkout:hover:not(:disabled) {
+            background: #583c4a;
+            color: #faf8f3;
+        }
+
+        .cart-checkout:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .clear-cart-btn {
+            width: 100%;
+            padding: 8px;
+            margin-top: -5px;
+            background: transparent;
+            color: #583c4a;
+            border: none;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-cart-btn:hover {
+            color: #141414;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #c5cfd0;
+            border-top: 1.5px solid #141414;
+            padding: 4rem 50px 3rem;
+            margin-bottom: 60px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        .footer-section:nth-child(2) {
+            text-align: center;
+        }
+
+        .footer-section:nth-child(3) {
+            text-align: right;
+        }
+
+        .footer-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            line-height: 2;
+        }
+
+        .footer-link {
+            color: #141414;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-link:hover {
+            opacity: 0.6;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-section:nth-child(1) .social-icons {
+            justify-content: flex-start;
+        }
+
+        .footer-section:nth-child(2) .social-icons {
+            justify-content: center;
+        }
+
+        .social-icon {
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .newsletter-form {
+            display: inline-flex;
+            gap: 0;
+            margin-bottom: 25px;
+        }
+
+        .newsletter-input {
+            width: 220px;
+            padding: 0 16px;
+            height: 44px;
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-right: none;
+            color: #141414;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .newsletter-button {
+            padding: 12px 36px;
+            height: auto;
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            color: #141414;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-button:hover {
+            background: #583c4a;
+            color: #faf8f3;
+            border-color: #583c4a;
+        }
+
+        .footer-logo {
+            margin-top: 20px;
+        }
+
+        /* Synthesis Logo Watermark */
+        .synthesis-watermark {
+            position: fixed;
+            top: 24px;
+            right: 40px;
+            opacity: 0.3;
+            z-index: 999;
+        }
+
+        /* Main Container */
+        .product-container {
+            margin-top: 124px;
+            display: flex;
+            min-height: calc(100vh - 124px);
+        }
+
+        /* Wrapper to contain the absolute scrollbar */
+        .gallery-wrapper {
+            position: sticky;
+            top: 124px;
+            width: 50%;
+            height: calc(100vh - 124px);
+        }
+
+        /* Image Gallery Section - 50% width, vertical scroll */
+        .gallery-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            height: 100%;
+            overflow-y: hidden;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        /* Inner scrollable container */
+        .gallery-scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+
+        .gallery-scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        /* Custom scrollbar track on left - floating over image */
+        .custom-scrollbar {
+            position: absolute;
+            left: 8px;
+            top: 50px;
+            width: 18px;
+            height: calc(100% - 150px);
+            background: transparent;
+            z-index: 1500;
+            pointer-events: all;
+        }
+
+        /* Custom scrollbar thumb */
+        .custom-scrollbar-thumb {
+            position: absolute;
+            left: 3px;
+            width: 12px;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            will-change: transform;
+            border: 1.5px solid #fafafa;
+            backdrop-filter: blur(4px);
+        }
+
+        .custom-scrollbar-thumb:hover {
+            background: rgba(250, 250, 250, 0.1);
+            border-color: #fafafa;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #ffffff;
+        }
+
+        .product-image.first-image {
+            /* Removed transform to prevent image from being cut off at top */
+            margin-bottom: 0;
+        }
+
+        .product-image:not(:last-child) {
+            border-bottom: 1.5px solid #141414;
+        }
+
+        /* Details Panel Wrapper */
+        .details-wrapper {
+            position: sticky;
+            top: 124px;
+            width: 50%;
+            height: calc(100vh - 124px);
+        }
+
+        /* Product Details Panel - 50% width, sticky */
+        .details-panel {
+            width: calc(100% - 50px);
+            background: #fafafa;
+            border-left: 1.5px solid #141414;
+            padding: 0;
+            height: 100%;
+            overflow-y: hidden;
+        }
+
+        /* Inner scrollable container for details */
+        .details-scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 60px 50px 100px 50px;
+        }
+
+        .details-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Custom scrollbar track on right - for details panel */
+        .custom-scrollbar-right {
+            position: absolute;
+            right: 33px;
+            top: 50px;
+            width: 18px;
+            height: calc(100% - 150px);
+            background: transparent;
+            z-index: 1500;
+            pointer-events: all;
+        }
+
+        /* Custom scrollbar thumb for right side */
+        .custom-scrollbar-thumb-right {
+            position: absolute;
+            left: 3px;
+            width: 12px;
+            background: #fafafa;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            will-change: transform;
+            border: 1.5px solid #141414;
+            backdrop-filter: blur(4px);
+        }
+
+        .custom-scrollbar-thumb-right:hover {
+            background: #fafafa;
+            border-color: #141414;
+        }
+
+        .product-badge {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #141414;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .product-name {
+            font-family: 'Geist Mono', monospace;
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #141414;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .product-code {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #141414;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: #141414;
+            margin-bottom: 24px;
+        }
+
+        .product-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #583c4a;
+            margin-bottom: 40px;
+        }
+
+        /* Selectors */
+        .selector-group {
+            margin-bottom: 32px;
+        }
+
+        .selector-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #141414;
+            margin-bottom: 12px;
+        }
+
+        /* Size Options */
+        .size-options {
+            display: flex;
+            gap: 0;
+        }
+
+        .size-option {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1.5px solid #141414;
+            border-right: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .size-option:last-child {
+            border-right: 1.5px solid #141414;
+        }
+
+        .size-option:hover,
+        .size-option.selected {
+            background: #c5cfd0;
+            color: #141414;
+        }
+
+        /* One Size - Non-interactive styling */
+        .size-option.one-size-only {
+            cursor: default;
+            background: transparent;
+        }
+
+        .size-option.one-size-only:hover {
+            background: transparent;
+        }
+
+        .size-name {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .size-dims {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+                        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                        0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch.flat {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-swatch.flat::before {
+            display: none;
+        }
+
+        .color-swatch::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 40%;
+            height: 30%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        .color-swatch:hover,
+        .color-swatch.selected {
+            border-color: #141414;
+        }
+
+        .color-swatch.walnut { background-color: #6b4423; }
+        .color-swatch.oak { background-color: #c4a57b; }
+        .color-swatch.black { background-color: #141414; }
+
+        /* Image-based color swatches for cedar wood */
+        .color-swatch-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .color-swatch-image:hover,
+        .color-swatch-image.selected {
+            border-color: #141414;
+        }
+
+        /* Matte color swatch - no gloss effect */
+        .color-swatch-matte {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+
+        .color-swatch-matte:hover,
+        .color-swatch-matte.selected {
+            border-color: #141414;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .material-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .material-chip {
+            padding: 10px 20px;
+            border: 1.5px solid #141414;
+            background: transparent;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .material-chip:hover,
+        .material-chip.selected {
+            background: #141414;
+            color: #faf8f3;
+        }
+
+        /* Specifications Accordion */
+        .specs-section {
+            margin-bottom: 32px;
+        }
+
+        .spec-item {
+            border-top: 1.5px solid #141414;
+            padding: 20px 0;
+        }
+
+        .spec-item:last-child {
+            border-bottom: 1.5px solid #141414;
+        }
+
+        .spec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .spec-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .spec-item.open .spec-toggle {
+            transform: rotate(45deg);
+        }
+
+        .spec-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .spec-item.open .spec-content {
+            max-height: 500px;
+            margin-top: 16px;
+        }
+
+        .spec-content p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #583c4a;
+            margin-bottom: 8px;
+        }
+
+        .dimension-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .dimension-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .dimension-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #583c4a;
+        }
+
+        /* Lead Time Badge */
+        .lead-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #141414;
+            margin-bottom: 32px;
+        }
+
+        /* Quantity Selector */
+        .quantity-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 0;
+            align-items: center;
+        }
+
+        .quantity-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            border-bottom: 1.5px solid #141414;
+            width: 100%;
+        }
+
+        .btn-add-truck {
+            width: auto;
+            display: inline-block;
+            padding: 12px 28px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: 1.5px solid #141414;
+            background: transparent;
+            color: #141414;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 50px;
+            margin-bottom: 24px;
+        }
+
+        .quantity-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #141414;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .quantity-value {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            color: #141414;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .quantity-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            color: #141414;
+            padding: 4px 8px;
+            transition: color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            color: #583c4a;
+        }
+
+        .btn-add-truck:hover {
+            background: #583c4a;
+            color: #fafafa;
+            border-color: #583c4a;
+        }
+
+        .btn-consult:hover {
+            color: #141414;
+        }
+
+        /* Craftsmanship Section */
+        .craft-section {
+            padding: 80px 60px;
+            background: #fafafa;
+            border-top: 1.5px solid #141414;
+        }
+
+        .craft-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .craft-title {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .craft-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #583c4a;
+            margin-bottom: 16px;
+        }
+
+        .made-badge {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 37px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #141414;
+        }
+
+        .made-badge svg {
+            transform: translateY(-3px) translateX(10px);
+        }
+
+        .made-badge::after {
+            content: attr(data-text);
+        }
+
+        /* Move just the text down */
+        .made-badge {
+            padding-top: 10px;
+        }
+
+        .made-badge svg {
+            margin-top: -10px;
+        }
+
+        /* Back to Furniture Link */
+        .back-to-furniture {
+            text-align: center;
+            padding: 60px 0;
+            background: #fafafa;
+            position: relative;
+        }
+
+        .back-furniture-btn {
+            display: inline-block;
+            padding: 0;
+            background: transparent;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #141414;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .back-furniture-btn span {
+            text-decoration: underline;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 3px;
+        }
+
+        .back-furniture-btn:hover {
+            color: #583c4a;
+        }
+
+        /* Search Modal */
+        .search-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9997;
+        }
+
+        .search-overlay.active {
+            display: block;
+        }
+
+        .search-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            max-height: 70vh;
+            background: #faf8f3;
+            border: 1.5px solid #141414;
+            z-index: 9998;
+            display: none;
+            flex-direction: column;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-header {
+            padding: 20px 24px;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1rem;
+            padding: 12px 0;
+            border: none;
+            background: transparent;
+            color: #141414;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #583c4a;
+            opacity: 0.5;
+        }
+
+        .search-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-results {
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .search-result-item {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: #141414;
+        }
+
+        .search-result-item:hover {
+            background: #f0f0f0;
+        }
+
+        .search-result-image {
+            width: 60px;
+            height: 60px;
+            background: #ffffff;
+            border: 1px solid #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .search-result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .search-result-code {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            color: #583c4a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .search-result-price {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            color: #583c4a;
+            white-space: nowrap;
+        }
+
+        .search-no-results {
+            padding: 40px 24px;
+            text-align: center;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            color: #583c4a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="promo-banner">
+        <div class="ticker-wrapper">
+            <span class="ticker-item">Try Our Virtual Consultations!</span>
+            <span class="ticker-item">New Site Offer: 10% Off All Full Price Products and Services</span>
+            <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+            <span class="ticker-item">Try Our Virtual Consultations!</span>
+            <span class="ticker-item">New Site Offer: 10% Off All Full Price Products and Services</span>
+            <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+            <span class="ticker-item">Try Our Virtual Consultations!</span>
+            <span class="ticker-item">New Site Offer: 10% Off All Full Price Products and Services</span>
+            <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+        </div>
+    </div>
+
+    <nav class="nav-ribbon">
+        <div style="position: absolute; left: 50px; height: 100%; display: flex; align-items: center;">
+            <a href="index.html" style="padding: 0; cursor: pointer; text-decoration: none; display: flex; align-items: center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="back-arrow-icon">
+                    <path d="M19 12H5M12 19l-7-7 7-7" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <a class="landing-nav-link" href="SemiFinal_Furniture.html">Furniture</a>
+            <a class="landing-nav-link" href="interiors.html">Interior Design</a>
+            <a class="landing-nav-link" href="#">Properties</a>
+        </div>
+
+        <div class="nav-icons">
+            <div class="nav-icon" onclick="toggleSearch()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8">
+                    <circle cx="10" cy="10" r="7"/>
+                    <path d="M21 21l-6-6" stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <a href="about.html" class="nav-icon" style="text-decoration: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <circle cx="5" cy="12" r="1.5" fill="#141414"/>
+                    <circle cx="12" cy="12" r="1.5" fill="#141414"/>
+                    <circle cx="19" cy="12" r="1.5" fill="#141414"/>
+                </svg>
+            </a>
+
+            <div class="nav-icon" onclick="toggleCart()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8">
+                    <path d="M1.5 6.5C1.5 6.2 1.7 6 2 6H15.5C15.8 6 16 6.2 16 6.5V16H1.5V6.5Z" stroke-linejoin="round"/>
+                    <path d="M16 7.8L18.8 7.9L21.5 10.8C21.6 10.9 21.7 11.1 21.7 11.3V15.9H16V6" stroke-linejoin="round"/>
+                    <circle cx="6" cy="18.8" r="1.5" fill="#141414"/>
+                    <circle cx="17.5" cy="18.8" r="1.5" fill="#141414"/>
+                </svg>
+                <div class="cart-counter" id="cartCounter">0</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Furniture Categories Navigation -->
+    <nav class="furniture-nav">
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html'">Home</button>
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html#all'">All</button>
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html#seating'">Seating</button>
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html#tables'">Tables</button>
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html#lighting'">Lighting</button>
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html#outdoor'">Outdoor</button>
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html#window-treatments'">Window Treatments</button>
+        <button class="furniture-nav-link" onclick="window.location.href='furniture.html#grid'">The Grid</button>
+    </nav>
+
+    <!-- Synthesis Watermark -->
+    <div class="synthesis-watermark">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="520 0 280 195" width="60" height="auto">
+            <path d="M664.79,184.76c0,3.37-2.74,6.11-6.11,6.11h-33.36c-3.37,0-6.11-2.74-6.11-6.11v-41.05c0-.91-.68-1.68-1.57-1.81-.95-.12-1.77.44-2.01,1.32l-12.68,45.72c-.73,2.64-3.16,4.48-5.89,4.48h-8.2c-2.74,0-5.16-1.84-5.89-4.48l-12.68-45.75c-.22-.8-.95-1.34-1.76-1.34-.08,0-.16,0-.24.02-.9.12-1.58.89-1.58,1.81v41.07c0,3.37-2.74,6.11-6.11,6.11h-33.35c-3.37,0-6.11-2.74-6.11-6.11V21.97c0-3.37,2.74-6.11,6.11-6.11h50.67c3.01,0,5.56,2.16,6.03,5.13l7.21,44.22c.3,1.77,3.31,1.77,3.6,0l7.21-44.22c.48-2.97,3.02-5.13,6.03-5.13h50.67c3.37,0,6.11,2.74,6.11,6.11v162.8Z" fill="#141414"/>
+            <path d="M790.98,82.64h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-10.76-8.76-19.52-19.52-19.52-10.76,0-19.51,8.76-19.51,19.52v8.94h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-32.59,26.51-59.1,59.1-59.1,32.59,0,59.1,26.51,59.1,59.1v8.94Z" fill="#141414"/>
+        </svg>
+    </div>
+
+    <!-- Main Product Container -->
+    <div class="product-container">
+        
+        <!-- Gallery Wrapper (contains scrollbar and images) -->
+        <div class="gallery-wrapper">
+            <!-- Custom Scrollbar Track (Left Side) -->
+            <div class="custom-scrollbar">
+                <div class="custom-scrollbar-thumb" id="galleryScrollThumb"></div>
+            </div>
+
+            <!-- Image Gallery Section -->
+            <div class="gallery-section">
+                <div class="gallery-scroll-container" id="galleryScrollContainer">
+                    <img src="https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160700/Rosario_1_rtf6aw.jpg" alt="Rosario Bistro Table - View 1" class="product-image first-image">
+                    <img src="https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160705/Rosario_2_vqmmwo.jpg" alt="Rosario Bistro Table - View 2" class="product-image">
+                    <img src="https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160694/Rosario_3_tvwsw7.jpg" alt="Rosario Bistro Table - View 3" class="product-image">
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Panel Wrapper -->
+        <div class="details-wrapper">
+            <!-- Custom Scrollbar Track (Right Side) -->
+            <div class="custom-scrollbar-right">
+                <div class="custom-scrollbar-thumb-right" id="detailsScrollThumb"></div>
+            </div>
+
+            <!-- Product Details Panel -->
+            <div class="details-panel">
+                <div class="details-scroll-container" id="detailsScrollContainer">
+                    <div class="product-badge">MAKEMAKE</div>
+                    <h1 class="product-name">Rosario Bistro Table</h1>
+                    <div class="product-code">BT001</div>
+                    <div class="product-price">$715 + iva</div>
+            
+            <p class="product-description">
+                Expertly crafted in our San José workshop, the Rosario Bistro Table embodies the perfect balance of contemporary design and traditional craftsmanship. Each piece is made to order, ensuring attention to every detail.
+            </p>
+
+            <!-- Size Selection -->
+            <!-- For ONE SIZE ONLY products: Delete all size-option buttons except one, and add class "one-size-only" to it -->
+            <div class="selector-group">
+                <div class="selector-label">Size</div>
+                <div class="size-options">
+                    <button class="size-option selected one-size-only" data-price="715" data-dimensions="Ø60 x H72 cm" onclick="selectSize(this)">
+                        <span class="size-name">One Size</span>
+                        <span class="size-dimensions"></span>
+                    </button>
+                </div>
+            </div>
+
+            
+
+            <!-- LOCAL TEAK OPTIONS - Delete this section if not needed -->
+            <div class="selector-group" id="local-teak-section" style="display: none;">
+                <div class="selector-label">Local Teak</div>
+                <div class="color-swatches">
+                    <div class="color-swatch flat" style="background-image: url('https://res.cloudinary.com/duoqn1csd/image/upload/v1764006650/Teak_cd0mut.jpg'); background-size: cover; background-position: center;" title="Local Teak" onclick="selectTeakFinish(this)"></div>
+                </div>
+            </div>
+
+            
+
+            <!-- SEMI-SATIN LACQUER OPTIONS - Delete this section if not needed -->
+            <div class="selector-group" id="semi-satin-lacquer-section" style="display:none">
+                <div class="selector-label">Semi-Satin Lacquer</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-matte" style="background-color: #F7EDD4;" title="Crema" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B85C4F;" title="Sienna" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #E8E4DF;" title="Dove" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #C4A57B;" title="Camel" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B8B695;" title="Seagrass" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #5F6E52;" title="Olive" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #8A9BA8;" title="Bay" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #3A4D5C;" title="Nautical" onclick="selectColor(this)"></div>
+                </div>
+            </div>
+
+            
+
+            <!-- WHITE CEMENT AGGREGATE OPTIONS - Delete this section if not needed -->
+            <div class="selector-group" id="white-cement-section" style="display: none;">
+                <div class="selector-label">White Cement Aggregate</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-matte" style="background-color: #F5F5F5;" title="White" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #9E9E9E;" title="Grey" onclick="selectColor(this)"></div>
+                </div>
+            </div>
+
+            <!-- METAL FINISH OPTIONS - Delete this section if not needed -->
+            <div class="selector-group" id="metal-section" style="display: none;">
+                <div class="selector-label">Powder-Coated Steel</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-matte" style="background-color: #F7EDD4;" title="Crema" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B85C4F;" title="Sienna" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #E8E4DF;" title="Dove" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #C4A57B;" title="Camel" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B8B695;" title="Seagrass" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #5F6E52;" title="Olive" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #8A9BA8;" title="Bay" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #3A4D5C;" title="Nautical" onclick="selectColor(this)"></div>
+                </div>
+            </div>
+
+            
+
+            
+
+            <!-- GRS (STONE AND RESIN AGGREGATE) OPTIONS - Delete this section if not needed -->
+            <div class="selector-group" id="grs-section">
+                <div class="selector-label">GRS</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-image" title="Sierpe" onclick="selectCedarColor(this)" style="background-image: url('https://imgur.com/fuOXY84.jpg'); background-size: 210%; background-position: center; background-repeat: no-repeat;"></div>
+                    <div class="color-swatch-image" title="Daylight" onclick="selectCedarColor(this)" style="background-image: url('https://imgur.com/iHmueje.jpg'); background-size: 210%; background-position: center; background-repeat: no-repeat;"></div>
+                    <div class="color-swatch-image" title="Midnight" onclick="selectCedarColor(this)" style="background-image: url('https://imgur.com/RjtO1cy.jpg'); background-size: 210%; background-position: center; background-repeat: no-repeat;"></div>
+                    <div class="color-swatch-image" title="Nicoya" onclick="selectCedarColor(this)" style="background-image: url('https://imgur.com/HoNgE3D.jpg'); background-size: 210%; background-position: center; background-repeat: no-repeat;"></div>
+                </div>
+            </div>
+
+            <!-- Quantity and Add to Truck -->
+            <div class="quantity-group">
+                <div class="quantity-row">
+                    <span class="quantity-label">Quantity</span>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                        <span class="quantity-value" id="quantityValue">1</span>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+                <button class="btn-add-truck" onclick="addToTruck()">Add to Truck</button>
+            </div>
+
+            <!-- Specifications -->
+            <div class="specs-section">
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Dimensions</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        <div class="dimension-row">
+                            <span class="dimension-label">Diameter</span>
+                            <span class="dimension-value">60 cm / 23.6"</span>
+                        </div>
+                        <div class="dimension-row">
+                            <span class="dimension-label">Height</span>
+                            <span class="dimension-value">72 cm / 28.3"</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Materials</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        <p><strong>GRS (Glass-Reinforced Stone):</strong> A weather-resistant composite of fiberglass, resin, and crushed stone aggregate. UV-stable, and built for outdoor durability"”resists cracking, fading, and moisture damage while maintaining structural integrity through tropical climate extremes.</p>
+                        
+                        <p><strong>Indoor/Outdoor Use:</strong> Designed for year-round outdoor use in tropical climates. UV-stable and weather-resistant. Equally striking indoors.</p>
+                    </div>
+                </div>
+
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Care Instructions</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        
+                        <p><strong>Regular Cleaning:</strong> Clean with mild soap and warm water using a soft cloth or sponge. Rinse thoroughly and allow to air dry.</p>
+                        <p><strong>Stubborn Stains:</strong> For tougher stains, use a soft brush with mild detergent. Avoid abrasive cleaners or metal brushes that could scratch the surface.</p>
+                        <p><strong>What to Avoid:</strong> Do not use harsh chemicals, bleach, or acidic cleaners. Avoid pressure washers at close range.</p>
+                        <!-- LEATHER_CARE_PLACEHOLDER -->
+                    </div>
+                </div>
+
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Shipping & Delivery</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        <!-- WHITE_GLOVE_DELIVERY_PLACEHOLDER -->
+                        <!-- SHIPPING_RESTRICTIONS_PLACEHOLDER -->
+                        
+                        <p>Delivery is available throughout Costa Rica, with shipping costs calculated at checkout based on your location. For international orders, please contact us directly to arrange shipping. Local clients are welcome to collect their purchases at our Escazú warehouse by appointment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lead Time -->
+            <div class="lead-time">
+                Lead Time: 6-8 weeks
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Craftsmanship Section -->
+    <section class="craft-section">
+        <div class="craft-content">
+            <h2 class="craft-title">Hand-Crafted in San José</h2>
+            <p class="craft-text">
+                Each Rosario bistro table is crafted by hand in San José using sustainably sourced Costa Rican hardwoods. The wood is carefully selected for grain pattern and character, then shaped and finished with natural oils that enhance its warm tones while protecting the surface.
+            </p>
+            <div class="made-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="520 0 280 195" width="40" height="auto">
+                    <path d="M664.79,184.76c0,3.37-2.74,6.11-6.11,6.11h-33.36c-3.37,0-6.11-2.74-6.11-6.11v-41.05c0-.91-.68-1.68-1.57-1.81-.95-.12-1.77.44-2.01,1.32l-12.68,45.72c-.73,2.64-3.16,4.48-5.89,4.48h-8.2c-2.74,0-5.16-1.84-5.89-4.48l-12.68-45.75c-.22-.8-.95-1.34-1.76-1.34-.08,0-.16,0-.24.02-.9.12-1.58.89-1.58,1.81v41.07c0,3.37-2.74,6.11-6.11,6.11h-33.35c-3.37,0-6.11-2.74-6.11-6.11V21.97c0-3.37,2.74-6.11,6.11-6.11h50.67c3.01,0,5.56,2.16,6.03,5.13l7.21,44.22c.3,1.77,3.31,1.77,3.6,0l7.21-44.22c.48-2.97,3.02-5.13,6.03-5.13h50.67c3.37,0,6.11,2.74,6.11,6.11v162.8Z" fill="#141414"/>
+                    <path d="M790.98,82.64h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-10.76-8.76-19.52-19.52-19.52-10.76,0-19.51,8.76-19.51,19.52v8.94h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-32.59,26.51-59.1,59.1-59.1,32.59,0,59.1,26.51,59.1,59.1v8.94Z" fill="#141414"/>
+                </svg>
+                Made in Costa Rica
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Furniture -->
+    <section class="back-to-furniture">
+        <a href="furniture.html" class="back-furniture-btn">
+            <span>Back to Home</span>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <p class="footer-title">Info</p>
+                <div class="footer-text">
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showShippingModal();">Shipping Terms</a></p>
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showReturnsModal();">Returns & Conditions</a></p>
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showTradeModal();">Trade Program</a></p>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/laurel_dd/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.pinterest.com/00xk5cvuw4lswxqu422ox0n4rov3hw/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.63 7.87 6.35 9.33-.09-.79-.17-2 .04-2.85.19-.77 1.21-5.14 1.21-5.14s-.31-.62-.31-1.54c0-1.44.84-2.52 1.88-2.52.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.89 1.55 1.89 1.86 0 3.29-1.96 3.29-4.79 0-2.5-1.8-4.25-4.37-4.25-2.98 0-4.72 2.23-4.72 4.54 0 .9.35 1.86.78 2.39.09.11.1.2.07.31-.08.33-.26 1.04-.29 1.18-.04.19-.15.23-.35.14-1.31-.61-2.13-2.52-2.13-4.05 0-3.3 2.39-6.33 6.9-6.33 3.62 0 6.43 2.58 6.43 6.03 0 3.6-2.27 6.5-5.42 6.5-1.06 0-2.06-.55-2.4-1.2l-.65 2.48c-.24.91-.88 2.05-1.31 2.75.99.3 2.04.47 3.13.47 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <p class="footer-title">Newsletter</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); showNewsletterModal(); this.reset();">
+                    <input type="email" placeholder="Your email" required class="newsletter-input">
+                    <button type="submit" class="newsletter-button">Submit</button>
+                </form>
+                <div class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="826 500 267 90" style="width: 140px; height: auto;">
+                        <path fill="#141414" d="M842.56,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                        <path fill="#141414" d="M900.54,501.02l17.37,49.25h-12.52l-3.25-9.54h-17.02l-3.25,9.54h-11.83l17.37-49.25h13.14ZM888.5,530.81h10.24l-4.98-14.54h-.28l-4.98,14.54Z"/>
+                        <path fill="#141414" d="M920.94,530.73v-29.71h11.69v27.52c0,7.5,2.08,11.49,8.09,11.49s8.09-3.99,8.09-11.49v-27.52h11.76v29.71c0,14.38-8.65,20.48-19.86,20.48s-19.79-6.1-19.79-20.48Z"/>
+                        <path fill="#141414" d="M995.88,550.27c-.9-1.33-1.45-4.38-1.8-9.46-.35-5.63-2.49-6.88-6.43-6.88h-7.82v16.34h-11.55v-49.25h22c11.28,0,16.88,6.02,16.88,15.63,0,7.19-3.94,11.88-9.27,12.66,4.5,1.02,7.13,3.91,7.61,9.61.62,7.35.83,9.54,2.28,11.33h-11.9ZM988.2,523.69c4.98,0,7.47-1.41,7.47-5.94,0-3.99-2.49-6.1-7.47-6.1h-8.37v12.04h8.37Z"/>
+                        <path fill="#141414" d="M1049.36,550.27h-34.31v-49.25h33.69v10.94h-22.14v8.05h17.09v10.79h-17.09v8.52h22.76v10.94Z"/>
+                        <path fill="#141414" d="M1069.21,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                        <rect fill="#141414" x="826.93" y="574.92" width="266.14" height="12.04"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <p class="footer-title">Contact</p>
+                <div class="footer-text">
+                    <p><a href="mailto:contact@la-urel.com" class="footer-link">contact@la-urel.com</a></p>
+                    <p>+(506) 6317-3038</p>
+                    <p style="margin-top: 15px; opacity: 0.7; font-size: 0.85rem;">Laurel Depto. de Diseño Â© 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // SEASON MARKDOWNS CONFIGURATION - Synced with main furniture page
+        const seasonMarkdowns = [
+            { code: 'RUG001', originalPrice: 2300, salePrice: 1955 },
+            { code: 'CT018', originalPrice: 1900, salePrice: 1615 },
+            { code: 'VES001', originalPrice: 310, salePrice: 265 },
+            { code: 'CH020', originalPrice: 1800, salePrice: 1530 },
+            { code: 'SB001', originalPrice: 2225, salePrice: 1891 },
+            { code: 'SO015', originalPrice: 6800, salePrice: 5780 },
+            { code: 'DT015', originalPrice: 1700, salePrice: 1445 },
+            { code: 'CON001', originalPrice: 2200, salePrice: 1870 },
+            { code: 'CH021', originalPrice: 1700, salePrice: 1445 },
+            { code: 'AT006', originalPrice: 526, salePrice: 447 }
+        ];
+
+        // PRODUCT MATERIAL CONFIGURATION
+        // MATERIAL SELECTION CONFIGURATION
+        // =====================================
+        // Set to a NUMBER for how many material types must be selected:
+        // - 'none' = No customization needed (fixed design)
+        // - '1' = Customer selects ONE material type only
+        // - '2' = Customer must select TWO material types  
+        // - 'all' = Customer must select ALL available material types
+        // 
+        // EXAMPLES:
+        // - Pablo Side Table: 'all' (needs both hardwood AND color - all available)
+        // - Upholstered Chair: '2' (needs fabric AND wood, but not metal even if shown)
+        // - Custom Shelf: '1' (choose either powder coat color OR wood finish OR metal)
+        // - Sofa: '2' (choose fabric AND legs, ignore other options)
+        // - Limited Edition Piece: 'none' (fixed design, no customization)
+        
+        const materialSelectionMode = '1'; // Auto-set based on product materials
+
+        function checkAndApplySalePrice() {
+            const productCode = document.querySelector('.product-code').textContent.trim();
+            const saleItem = seasonMarkdowns.find(item => item.code === productCode);
+            
+            if (saleItem) {
+                const priceElement = document.querySelector('.product-price');
+                const discount = Math.round(((saleItem.originalPrice - saleItem.salePrice) / saleItem.originalPrice) * 100);
+                
+                priceElement.innerHTML = `
+                    <span style="text-decoration: line-through; opacity: 0.5; font-size: 0.9em;">$${saleItem.originalPrice.toLocaleString()}</span>
+                    <span style="color: #583c4a; font-weight: 600;">$${saleItem.salePrice.toLocaleString()} + iva</span>
+                    <span style="display: block; font-size: 0.75em; color: #583c4a; margin-top: 4px;">${discount}% Off Season Markdown</span>
+                `;
+                
+                document.querySelectorAll('.size-option').forEach(option => {
+                    option.setAttribute('data-price', saleItem.salePrice);
+                });
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', checkAndApplySalePrice);
+
+        // Custom scrollbar functionality for gallery
+        const galleryContainer = document.getElementById('galleryScrollContainer');
+        const scrollThumb = document.getElementById('galleryScrollThumb');
+        const scrollTrack = document.querySelector('.custom-scrollbar');
+
+        function updateScrollbarVisibility() {
+            // Only show scrollbar if content is actually scrollable
+            if (galleryContainer.scrollHeight <= galleryContainer.clientHeight) {
+                scrollTrack.style.display = 'none';
+            } else {
+                scrollTrack.style.display = 'block';
+            }
+        }
+
+        function updateScrollThumb() {
+            if (galleryContainer.scrollHeight <= galleryContainer.clientHeight) return;
+            
+            const scrollPercentage = galleryContainer.scrollTop / (galleryContainer.scrollHeight - galleryContainer.clientHeight);
+            const thumbHeight = 100; // Fixed height
+            const thumbTop = scrollPercentage * (scrollTrack.clientHeight - thumbHeight);
+            
+            scrollThumb.style.height = thumbHeight + 'px';
+            scrollThumb.style.top = thumbTop + 'px';
+        }
+
+        galleryContainer.addEventListener('scroll', updateScrollThumb);
+        window.addEventListener('load', () => {
+            updateScrollbarVisibility();
+            updateScrollThumb();
+        });
+        window.addEventListener('resize', () => {
+            updateScrollbarVisibility();
+            updateScrollThumb();
+        });
+
+        // Make scrollbar draggable
+        let isDragging = false;
+        let startY = 0;
+        let startScrollTop = 0;
+
+        scrollThumb.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startY = e.clientY;
+            startScrollTop = galleryContainer.scrollTop;
+            scrollThumb.style.background = 'rgba(250, 250, 250, 0.15)';
+            scrollThumb.style.borderColor = '#fafafa';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            requestAnimationFrame(() => {
+                const deltaY = e.clientY - startY;
+                const scrollRatio = galleryContainer.scrollHeight / scrollTrack.clientHeight;
+                galleryContainer.scrollTop = startScrollTop + (deltaY * scrollRatio);
+            });
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                scrollThumb.style.background = 'transparent';
+                scrollThumb.style.borderColor = '#fafafa';
+            }
+        });
+
+        // Click on track to scroll
+        scrollTrack.addEventListener('click', (e) => {
+            if (e.target === scrollTrack) {
+                const clickPosition = e.clientY - scrollTrack.getBoundingClientRect().top;
+                const scrollPercentage = clickPosition / scrollTrack.clientHeight;
+                galleryContainer.scrollTop = scrollPercentage * (galleryContainer.scrollHeight - galleryContainer.clientHeight);
+            }
+        });
+
+        // Custom scrollbar functionality for details panel
+        const detailsContainer = document.getElementById('detailsScrollContainer');
+        const detailsScrollThumb = document.getElementById('detailsScrollThumb');
+        const detailsScrollTrack = document.querySelector('.custom-scrollbar-right');
+
+        function updateDetailsScrollbarVisibility() {
+            if (detailsContainer.scrollHeight <= detailsContainer.clientHeight) {
+                detailsScrollTrack.style.display = 'none';
+            } else {
+                detailsScrollTrack.style.display = 'block';
+            }
+        }
+
+        function updateDetailsScrollThumb() {
+            if (detailsContainer.scrollHeight <= detailsContainer.clientHeight) return;
+            
+            const scrollPercentage = detailsContainer.scrollTop / (detailsContainer.scrollHeight - detailsContainer.clientHeight);
+            const thumbHeight = 100; // Fixed height
+            const thumbTop = scrollPercentage * (detailsScrollTrack.clientHeight - thumbHeight);
+            
+            detailsScrollThumb.style.height = thumbHeight + 'px';
+            detailsScrollThumb.style.top = thumbTop + 'px';
+        }
+
+        detailsContainer.addEventListener('scroll', updateDetailsScrollThumb);
+        window.addEventListener('load', () => {
+            updateDetailsScrollbarVisibility();
+            updateDetailsScrollThumb();
+        });
+        window.addEventListener('resize', () => {
+            updateDetailsScrollbarVisibility();
+            updateDetailsScrollThumb();
+        });
+
+        // Make details scrollbar draggable
+        let isDetailsDragging = false;
+        let detailsStartY = 0;
+        let detailsStartScrollTop = 0;
+
+        detailsScrollThumb.addEventListener('mousedown', (e) => {
+            isDetailsDragging = true;
+            detailsStartY = e.clientY;
+            detailsStartScrollTop = detailsContainer.scrollTop;
+            detailsScrollThumb.style.background = '#fafafa';
+            detailsScrollThumb.style.borderColor = '#141414';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDetailsDragging) return;
+            
+            requestAnimationFrame(() => {
+                const deltaY = e.clientY - detailsStartY;
+                const scrollRatio = detailsContainer.scrollHeight / detailsScrollTrack.clientHeight;
+                detailsContainer.scrollTop = detailsStartScrollTop + (deltaY * scrollRatio);
+            });
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDetailsDragging) {
+                isDetailsDragging = false;
+                detailsScrollThumb.style.background = '#fafafa';
+                detailsScrollThumb.style.borderColor = '#141414';
+            }
+        });
+
+        // Click on details track to scroll
+        detailsScrollTrack.addEventListener('click', (e) => {
+            if (e.target === detailsScrollTrack) {
+                const clickPosition = e.clientY - detailsScrollTrack.getBoundingClientRect().top;
+                const scrollPercentage = clickPosition / detailsScrollTrack.clientHeight;
+                detailsContainer.scrollTop = scrollPercentage * (detailsContainer.scrollHeight - detailsContainer.clientHeight);
+            }
+        });
+
+        // Quantity selector functions
+        let quantity = 1;
+
+        function increaseQuantity() {
+            if (quantity < 10) {
+                quantity++;
+                document.getElementById('quantityValue').textContent = quantity;
+            }
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantityValue').textContent = quantity;
+            }
+        }
+
+        function addToTruck() {
+            const productName = document.querySelector('.product-name').textContent;
+            const productCode = document.querySelector('.product-code').textContent;
+            
+            // Get selected size
+            const selectedSizeElement = document.querySelector('.size-option.selected');
+            const selectedSize = selectedSizeElement ? selectedSizeElement.querySelector('.size-name').textContent : null;
+            const selectedDimensions = selectedSizeElement ? selectedSizeElement.getAttribute('data-dimensions') : null;
+            
+            // Get all possible material selections
+            const selectedColorElement = document.querySelector('.color-swatch.selected, .color-swatch-matte.selected');
+            const selectedHardwoodElement = document.querySelector('#hardwood-finish-section .color-swatch-image.selected');
+            const selectedLocalTeakElement = document.querySelector('#local-teak-section .color-swatch-image.selected');
+            const selectedAllWoodsElement = document.querySelector('#all-woods-section .color-swatch-image.selected');
+            const selectedWhiteCementElement = document.querySelector('#white-cement-section .color-swatch-matte.selected');
+            const selectedMetalElement = document.querySelector('#metal-section .color-swatch-image.selected');
+            const selectedFabricElement = document.querySelector('#fabric-section .color-swatch-image.selected');
+            const selectedLeatherElement = document.querySelector('#leather-section .color-swatch-image.selected');
+            const selectedGRSElement = document.querySelector('#grs-section .color-swatch-image.selected');
+            
+            // Check which sections exist on this product page
+            const hasColorSection = document.getElementById('color-section') || document.getElementById('lacquer-section') || document.getElementById('semi-satin-lacquer-section');
+            const hasHardwoodSection = document.getElementById('hardwood-finish-section');
+            const hasLocalTeakSection = document.getElementById('local-teak-section');
+            const hasAllWoodsSection = document.getElementById('all-woods-section');
+            const hasWhiteCementSection = document.getElementById('white-cement-section');
+            const hasMetalSection = document.getElementById('metal-section');
+            const hasFabricSection = document.getElementById('fabric-section');
+            const hasLeatherSection = document.getElementById('leather-section');
+            const hasGRSSection = document.getElementById('grs-section');
+            
+            // Count available and selected materials
+            const availableSections = [hasColorSection, hasHardwoodSection, hasLocalTeakSection, hasAllWoodsSection, hasWhiteCementSection, hasMetalSection, hasFabricSection, hasLeatherSection, hasGRSSection].filter(Boolean).length;
+            const selectedMaterials = [selectedColorElement, selectedHardwoodElement, selectedLocalTeakElement, selectedAllWoodsElement, selectedWhiteCementElement, selectedMetalElement, selectedFabricElement, selectedLeatherElement, selectedGRSElement].filter(Boolean).length;
+            
+            // Validate based on material selection mode
+            if (materialSelectionMode === 'none') {
+                // Mode 'none': No validation needed, product has fixed configuration
+                // Continue without material validation
+            } else if (materialSelectionMode === '1') {
+                // Mode '1': Exactly ONE material must be selected
+                if (selectedMaterials === 0) {
+                    showSelectionWarning();
+                    return;
+                }
+                if (selectedMaterials > 1) {
+                    showSelectionWarning();
+                    return;
+                }
+            } else if (materialSelectionMode === '2') {
+                // Mode '2': Exactly TWO materials must be selected
+                if (selectedMaterials < 2) {
+                    showSelectionWarning();
+                    return;
+                }
+                if (selectedMaterials > 2) {
+                    showSelectionWarning();
+                    return;
+                }
+            } else if (materialSelectionMode === '3') {
+                // Mode '3': Exactly THREE materials must be selected
+                if (selectedMaterials < 3) {
+                    showSelectionWarning();
+                    return;
+                }
+                if (selectedMaterials > 3) {
+                    showSelectionWarning();
+                    return;
+                }
+            } else if (materialSelectionMode === 'all') {
+                // Mode 'all': ALL available materials must be selected
+                if (selectedMaterials < availableSections) {
+                    showSelectionWarning();
+                    return;
+                }
+            }
+            
+            // Get price - handle both regular and sale price formats
+            const priceElement = document.querySelector('.product-price');
+            let priceValue;
+            let originalPrice = null;
+            const salePriceSpan = priceElement.querySelector('span[style*="font-weight: 600"]');
+            if (salePriceSpan) {
+                // Item is on sale - get both prices
+                priceValue = parseInt(salePriceSpan.textContent.replace(/[^0-9]/g, ''));
+                const strikethroughSpan = priceElement.querySelector('span[style*="text-decoration: line-through"]');
+                if (strikethroughSpan) {
+                    originalPrice = parseInt(strikethroughSpan.textContent.replace(/[^0-9]/g, ''));
+                }
+            } else {
+                priceValue = parseInt(priceElement.textContent.replace(/[^0-9]/g, ''));
+            }
+            
+            // Use specific thumbnail image for cart
+            // Use thumbnail from products database (same as home page and search)
+            const currentProduct = productsDatabase.find(p => p.code === productCode);
+            const imageUrl = currentProduct ? currentProduct.image : 'https://imgur.com/placeholder.jpg';
+            
+            // Get material descriptions for cart display
+            const selectedHardwood = selectedHardwoodElement ? selectedHardwoodElement.getAttribute('title') : 'N/A';
+            const selectedLocalTeak = selectedLocalTeakElement ? 'Local Teak' : 'N/A';
+            const selectedAllWoods = selectedAllWoodsElement ? selectedAllWoodsElement.getAttribute('title') : 'N/A';
+            const selectedWhiteCement = selectedWhiteCementElement ? selectedWhiteCementElement.getAttribute('title') : 'N/A';
+            const selectedColor = selectedColorElement ? selectedColorElement.getAttribute('title') : 'N/A';
+            const selectedMetal = selectedMetalElement ? selectedMetalElement.getAttribute('title') : 'N/A';
+            const selectedFabric = selectedFabricElement ? selectedFabricElement.getAttribute('title') : 'N/A';
+            const selectedLeather = selectedLeatherElement ? selectedLeatherElement.getAttribute('title') : 'N/A';
+            const selectedGRS = selectedGRSElement ? selectedGRSElement.getAttribute('title') : 'N/A';
+            
+            // Build material description string
+            let materials = [];
+            if (selectedLocalTeak !== 'N/A') materials.push(`Wood: ${selectedLocalTeak}`);
+            if (selectedHardwood !== 'N/A') materials.push(`Wood: ${selectedHardwood}`);
+            if (selectedAllWoods !== 'N/A') materials.push(`Wood: ${selectedAllWoods}`);
+            if (selectedWhiteCement !== 'N/A') materials.push(`Cement: ${selectedWhiteCement}`);
+            if (selectedColor !== 'N/A') materials.push(`Color: ${selectedColor}`);
+            if (selectedMetal !== 'N/A') materials.push(`Metal: ${selectedMetal}`);
+            if (selectedFabric !== 'N/A') materials.push(`Fabric: ${selectedFabric}`);
+            if (selectedLeather !== 'N/A') materials.push(`Leather: ${selectedLeather}`);
+            if (selectedGRS !== 'N/A') materials.push(`GRS: ${selectedGRS}`);
+            
+            // Add each quantity as a separate item with full specifications
+            for (let i = 0; i < quantity; i++) {
+                addToCart({
+                    name: productName,
+                    image: imageUrl,
+                    size: selectedSize,
+                    dimensions: selectedDimensions,
+                    materials: materials.join(', '),
+                    price: priceValue,
+                    originalPrice: originalPrice,
+                    code: `${productCode}-${Date.now()}-${i}`
+                });
+            }
+            
+            // Reset quantity
+            quantity = 1;
+            document.getElementById('quantityValue').textContent = quantity;
+            
+            // Show confirmation
+            toggleCart();
+        }
+
+        function selectSize(element) {
+            // Remove selected class from all size options
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Update price
+            const price = element.getAttribute('data-price');
+            document.querySelector('.product-price').textContent = '$' + price + ' + iva';
+        }
+
+        function selectColor(element) {
+            document.querySelectorAll('.color-swatch, .color-swatch-matte').forEach(swatch => {
+                swatch.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            // If mode is 'one', deselect hardwood finishes when MDF color is selected
+            if (materialSelectionMode === 'one') {
+                document.querySelectorAll('.color-swatch-image').forEach(swatch => {
+                    swatch.classList.remove('selected');
+                });
+            }
+        }
+
+        function selectCedarColor(element) {
+            document.querySelectorAll('.color-swatch-image').forEach(swatch => {
+                swatch.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            // If mode is 'one', deselect MDF colors when hardwood finish is selected
+            if (materialSelectionMode === 'one') {
+                document.querySelectorAll('.color-swatch, .color-swatch-matte').forEach(swatch => {
+                    swatch.classList.remove('selected');
+                });
+            }
+            
+            // Update price with potential upcharges
+            if (typeof updatePriceWithUpcharges === 'function') {
+                updatePriceWithUpcharges();
+            }
+        }
+
+        function selectTeakFinish(element) {
+            // Only deselect within local-teak-section
+            const teakSection = document.getElementById('local-teak-section');
+            if (teakSection) {
+                teakSection.querySelectorAll('.color-swatch').forEach(swatch => {
+                    swatch.classList.remove('selected');
+                });
+            }
+            element.classList.add('selected');
+        }
+
+        function selectMaterial(element) {
+            document.querySelectorAll('.material-chip').forEach(chip => {
+                chip.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        // Update price based on material selections (including upcharges)
+        function updatePriceWithUpcharges() {
+            // Get base price from selected size or product base price
+            const selectedSize = document.querySelector('.size-option.selected');
+            let basePrice = selectedSize ? parseInt(selectedSize.getAttribute('data-price')) : (window.baseProductPrice || 0);
+            
+            // Check for material upcharges
+            if (window.materialUpcharges) {
+                // Check if leather is selected
+                const leatherSection = document.getElementById('leather-section');
+                if (leatherSection && leatherSection.querySelector('.color-swatch-image.selected')) {
+                    if (window.materialUpcharges.Leather) {
+                        basePrice += window.materialUpcharges.Leather;
+                    }
+                }
+                // Add other upcharge checks here if needed
+            }
+            
+            // Update displayed price
+            document.querySelector('.product-price').textContent = '$' + basePrice.toLocaleString() + ' + iva';
+        }
+
+        function toggleSpec(element) {
+            element.classList.toggle('open');
+        }
+
+        // Cart functionality with localStorage for cross-page persistence
+        let cartItems = [];
+
+        // Load cart from localStorage on page load
+        function loadCart() {
+            const savedCart = localStorage.getItem('laurelCart');
+            if (savedCart) {
+                cartItems = JSON.parse(savedCart);
+            }
+            updateCart();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('laurelCart', JSON.stringify(cartItems));
+        }
+
+        function addToCart(item) {
+            if (!cartItems.find(cartItem => cartItem.code === item.code)) {
+                cartItems.push(item);
+                saveCart();
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            updateCartCounter();
+            updateCartDisplay();
+        }
+
+        function updateCartCounter() {
+            const counter = document.getElementById('cartCounter');
+            counter.textContent = cartItems.length;
+            counter.classList.toggle('has-items', cartItems.length > 0);
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('cartOverlay');
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartSubtotalElement = document.getElementById('cartSubtotal');
+            const cartIVAElement = document.getElementById('cartIVA');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+                cartSubtotalElement.textContent = '$0';
+                document.getElementById('savingsLine').style.display = 'none';
+                cartIVAElement.textContent = '$0';
+                cartTotalElement.textContent = '$0';
+                checkoutBtn.disabled = true;
+            } else {
+                // Group items by matching specifications
+                const groupedItems = [];
+                cartItems.forEach((item, index) => {
+                    const existingGroup = groupedItems.find(group => 
+                        group.name === item.name &&
+                        group.size === item.size &&
+                        group.dimensions === item.dimensions &&
+                        group.materials === item.materials
+                    );
+                    
+                    if (existingGroup) {
+                        existingGroup.quantity += 1;
+                        existingGroup.indices.push(index);
+                    } else {
+                        groupedItems.push({
+                            ...item,
+                            quantity: 1,
+                            indices: [index]
+                        });
+                    }
+                });
+
+                let total = 0;
+                let originalTotal = 0;
+                let html = '';
+
+                groupedItems.forEach((group) => {
+                    // Build specifications display
+                    let specsHTML = '';
+                    if (group.dimensions) {
+                        specsHTML += `<div class="cart-item-spec">${group.size}: ${group.dimensions}</div>`;
+                    } else if (group.size) {
+                        specsHTML += `<div class="cart-item-spec">${group.size}</div>`;
+                    }
+                    if (group.materials && group.materials !== 'N/A') {
+                        specsHTML += `<div class="cart-item-spec">${group.materials}</div>`;
+                    }
+                    
+                    const lineTotal = group.price * group.quantity;
+                    const originalLineTotal = (group.originalPrice || group.price) * group.quantity;
+                    total += lineTotal;
+                    originalTotal += originalLineTotal;
+                    
+                    // Build price display based on quantity and sale status
+                    let priceHTML = '';
+                    
+                    // Safety check - skip items with invalid prices
+                    if (!group.price || group.price <= 0) {
+                        console.error('Invalid price for item:', group);
+                        priceHTML = '<div class="cart-item-price">Price error</div>';
+                    } else if (group.originalPrice && group.originalPrice > group.price) {
+                        // Item is on sale - show crossed out original price
+                        if (group.quantity > 1) {
+                            const originalLineTotal = group.originalPrice * group.quantity;
+                            priceHTML = `
+                                <div class="cart-item-price">
+                                    <span style="text-decoration: line-through; opacity: 0.5; font-size: 0.85em;">$${group.originalPrice.toLocaleString()}</span>
+                                    <span style="color: #583c4a; font-weight: 600;">$${group.price.toLocaleString()}</span> each
+                                </div>
+                                <div class="cart-item-price" style="font-weight: 600;">
+                                    <span style="text-decoration: line-through; opacity: 0.5; font-size: 0.85em;">$${originalLineTotal.toLocaleString()}</span>
+                                    <span style="color: #583c4a;">$${lineTotal.toLocaleString()}</span> total
+                                </div>
+                            `;
+                        } else {
+                            priceHTML = `
+                                <div class="cart-item-price">
+                                    <span style="text-decoration: line-through; opacity: 0.5; font-size: 0.85em;">$${group.originalPrice.toLocaleString()}</span>
+                                    <span style="color: #583c4a; font-weight: 600;">$${group.price.toLocaleString()}</span>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        // Regular price display
+                        if (group.quantity > 1) {
+                            priceHTML = `
+                                <div class="cart-item-price">$${group.price.toLocaleString()} each</div>
+                                <div class="cart-item-price" style="font-weight: 600;">$${lineTotal.toLocaleString()} total</div>
+                            `;
+                        } else {
+                            priceHTML = `<div class="cart-item-price">$${group.price.toLocaleString()}</div>`;
+                        }
+                    }
+                    
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-image"><img src="${group.image}" alt="${group.name}"></div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${group.name}</div>
+                                ${group.quantity > 1 ? `<div class="cart-item-code">Qty: ${group.quantity}</div>` : ''}
+                                ${specsHTML}
+                                ${priceHTML}
+                            </div>
+                            <button class="cart-item-remove" onclick="removeFromCart(${group.indices.join(',')})">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                });
+
+                cartItemsContainer.innerHTML = html;
+                
+                // Calculate savings (difference between original total and discounted total)
+                const totalSavings = originalTotal - total;
+                
+                // Calculate IVA (13%) on discounted total
+                const iva = Math.round(total * 0.13);
+                const totalWithIVA = total + iva;
+                
+                // Show subtotal as original prices
+                cartSubtotalElement.textContent = `$${originalTotal.toLocaleString()}`;
+                
+                // Show/hide savings line
+                const savingsLine = document.getElementById('savingsLine');
+                const savingsElement = document.getElementById('cartSavings');
+                if (totalSavings > 0) {
+                    savingsLine.style.display = 'flex';
+                    savingsElement.textContent = `-$${totalSavings.toLocaleString()}`;
+                } else {
+                    savingsLine.style.display = 'none';
+                }
+                
+                cartIVAElement.textContent = `$${iva.toLocaleString()}`;
+                cartTotalElement.textContent = `$${totalWithIVA.toLocaleString()}`;
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        function removeFromCart(indices) {
+            // Convert comma-separated string to array of numbers
+            const indexArray = indices.toString().split(',').map(Number);
+            // Sort in descending order to remove from end first (prevents index shifting issues)
+            indexArray.sort((a, b) => b - a);
+            // Remove all items in the group
+            indexArray.forEach(index => {
+                cartItems.splice(index, 1);
+            });
+            saveCart();
+            updateCart();
+        }
+
+        function checkout() {
+            if (cartItems.length > 0) {
+                const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
+                const iva = Math.round(subtotal * 0.13);
+                const total = subtotal + iva;
+                const itemsList = cartItems.map(item => `ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ ${item.name} - $${item.price.toLocaleString()}`).join('\n');
+
+                alert(`Thank you for your order!\n\n${itemsList}\n\nSubtotal: $${subtotal.toLocaleString()}\nIVA (13%): $${iva.toLocaleString()}\nTotal: $${total.toLocaleString()}\n\nWe'll contact you shortly to complete your purchase.`);
+
+                cartItems = [];
+                saveCart();
+                updateCart();
+                closeCart();
+            }
+        }
+
+        function clearCart() {
+            if (confirm('Are you sure you want to clear all items from your cart?')) {
+                cartItems = [];
+                saveCart();
+                updateCart();
+            }
+        }
+
+        // Load cart from localStorage when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            initializeTicker();
+            // autoSelectLocalTeak(); // DISABLED - user must manually select Local Teak
+        });
+        
+        // Auto-select first Local-Teak option if product has Local-Teak material
+        function autoSelectLocalTeak() {
+            const localTeakSection = document.getElementById('local-teak-section');
+            if (localTeakSection && localTeakSection.style.display !== 'none') {
+                // Find the first swatch option in the Local-Teak section
+                const firstOption = localTeakSection.querySelector('.color-swatch');
+                if (firstOption && !firstOption.classList.contains('selected')) {
+                    // Auto-select the teak finish
+                    selectTeakFinish(firstOption);
+                }
+            }
+        }
+
+        // Smart Ticker Control
+        function initializeTicker() {
+            const ticker = document.querySelector('.ticker-wrapper');
+            let roundCount = 0;
+            const maxRounds = 6;
+            const pauseDuration = 600000; // 10 minutes in milliseconds
+            
+            // Monitor animation iterations
+            ticker.addEventListener('animationiteration', function() {
+                roundCount++;
+                
+                if (roundCount >= maxRounds) {
+                    // Calculate position to center "Support Local Craftsmanship" (3rd item)
+                    // With padding of 80px on each side, approximate center position
+                    const messageWidth = ticker.offsetWidth / 6; // 6 total messages
+                    const centerPosition = -(messageWidth * 2.5); // Position for 3rd message
+                    
+                    setTimeout(function() {
+                        ticker.style.animationPlayState = 'paused';
+                        ticker.style.transform = `translateX(${centerPosition}px)`;
+                        
+                        // Restart after 10 minutes
+                        setTimeout(function() {
+                            roundCount = 0;
+                            ticker.style.transform = ''; // Clear inline transform
+                            ticker.style.animationPlayState = 'running';
+                        }, pauseDuration);
+                    }, 100);
+                }
+            });
+        }
+
+        function clearCart() {
+            if (cartItems.length > 0) {
+                // Show custom modal instead of browser confirm
+                document.getElementById('clearModal').classList.add('active');
+                // Add event listeners for closing
+                document.addEventListener('click', handleClickOutside);
+                document.addEventListener('keydown', handleEscape);
+            }
+        }
+
+        function closeClearModal() {
+            document.getElementById('clearModal').classList.remove('active');
+            // Remove event listeners
+            document.removeEventListener('click', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
+        }
+
+        function confirmClearCart() {
+            cartItems = [];
+            saveCart();
+            updateCart();
+            closeClearModal();
+        }
+
+        function handleClickOutside(e) {
+            const modal = document.getElementById('clearModal');
+            if (!modal.contains(e.target) && !e.target.classList.contains('clear-items-link')) {
+                closeClearModal();
+            }
+        }
+
+        function handleEscape(e) {
+            if (e.key === 'Escape') {
+                closeClearModal();
+            }
+        }
+
+        // Selection Warning Modal Functions
+        function showSelectionWarning() {
+            document.getElementById('selectionWarningModal').classList.add('active');
+        }
+
+        function closeSelectionWarning() {
+            document.getElementById('selectionWarningModal').classList.remove('active');
+        }
+
+
+        function showNewsletterModal() {
+            document.getElementById('newsletterModal').classList.add('active');
+        }
+
+        function closeNewsletterModal() {
+            document.getElementById('newsletterModal').classList.remove('active');
+        }
+
+        // Info Modals (Shipping & Returns)
+        function showShippingModal() {
+            document.getElementById('shippingModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function showReturnsModal() {
+            document.getElementById('returnsModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function showTradeModal() {
+            document.getElementById('tradeModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function closeInfoModals() {
+            document.getElementById('shippingModal').classList.remove('active');
+            document.getElementById('returnsModal').classList.remove('active');
+            document.getElementById('tradeModal').classList.remove('active');
+            document.getElementById('infoModalOverlay').classList.remove('active');
+        }
+
+        // Close info modals with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeInfoModals();
+            }
+        });
+
+        // Category filtering
+        function filterCategory(category) {
+            // Navigate to furniture page with filter
+            window.location.href = '/furniture#' + category;
+        }
+
+        // Products Database for Search
+        const productsDatabase = [
+            { name: 'Globo Side Table', code: 'AT001', price: 675, url: 'globo-side-table.html', image: 'https://i.imgur.com/Cd7ykMg.jpg' },
+            { name: 'Parsons Depto. Desk', code: 'DK001', price: 1150, url: 'parsons-desk.html', image: 'https://i.imgur.com/HEbJZWe.jpg' },
+            { name: 'Ronda Coffee Table', code: 'CT001', price: 1380, url: 'ronda-coffee-table.html', image: 'https://i.imgur.com/mI4q6Tw.jpg' },
+            { name: 'Dizi Side Table', code: 'AT006', price: 525, url: 'dizi-side-table.html', image: 'https://i.imgur.com/TKxFHwF.jpg' },
+            { name: 'Dizi Coffee Table', code: 'CT004', price: 1200, url: 'dizi-coffee-table.html', image: 'https://i.imgur.com/u7g9gGh.jpg' },
+            { name: 'Petra Coffee Table', code: 'CT018', price: 1900, url: 'petra-coffee-table.html', image: 'https://i.imgur.com/qPjmklI.jpg' },
+            { name: 'Barro No.2 Side Table', code: 'AT016', price: 555, url: 'barro-no2-side-table.html', image: 'https://imgur.com/33rxsRE.jpg' },
+            { name: 'Rosario Bistro Table', code: 'BT001', price: 715, url: 'rosario-bistro-table.html', image: 'https://i.imgur.com/YAGAkjx.jpg' },
+            { name: 'Cazo Side Chair', code: 'SCH002', price: 900, url: 'cazo-side-chair.html', image: 'https://i.imgur.com/JWGGElK.jpg' },
+            { name: 'Mano Sofa', code: 'SO010', price: 2255, url: 'mano-sofa.html', image: 'https://imgur.com/49H7ne0.jpg' },
+            { name: 'Mano Chair', code: 'CH017', price: 1240, url: 'mano-chair.html', image: 'https://imgur.com/j0tiNoK.jpg' },
+            { name: 'Rio Chair', code: 'CH005', price: 1130, url: 'rio-chair.html', image: 'https://imgur.com/n44X42p.jpg' },
+            { name: 'Perse Chair', code: 'CH010', price: 815, url: 'perse-chair.html', image: 'https://imgur.com/LLPcFeT.jpg' },
+            { name: 'Fortuna Chair', code: 'CH012', price: 695, url: 'fortuna-chair.html', image: 'https://imgur.com/AWfloWe.jpg' },
+            { name: 'Poroti Side Table', code: 'AT007', price: 565, url: 'poroti-side-table.html', image: 'https://imgur.com/9PWrxwV.jpg' },
+            { name: 'Poroti Side Table', code: 'AT007', price: 565, url: 'poroti-side-table.html', image: 'https://imgur.com/9PWrxwV.jpg' },
+            { name: 'Bloque No.1 Side table', code: 'AT009', price: 400, url: 'bloque-no1-side-table.html', image: 'https://imgur.com/RIdRDOH.jpg' },
+            { name: 'Plato Side Table', code: 'AT018', price: 675, url: 'plato-side-table.html', image: 'https://imgur.com/RlrAxed.jpg' },
+            { name: '1/2 and 1/2 Side Table', code: 'AT004', price: 495, url: 'half-and-half-side-table.html', image: 'https://imgur.com/djg5FcM.jpg' },
+            { name: 'Test Product', code: 'TEST001', price: 500, url: 'test.html', image: 'https://imgur.com/ubigwdC.jpg' },
+            { name: 'Pablo Side Table', code: 'AT016', price: 475, url: 'pablo-side-table.html', image: 'https://imgur.com/ubigwdC.jpg' },
+            { name: 'Amanita Side Table', code: 'AT026', price: 700, url: 'amanita-side-table.html', image: 'https://imgur.com/yqqOIm5.jpg' },
+            { name: 'Gracia Dining Table', code: 'DT012', price: 2835, url: 'gracia-dining-table.html', image: 'https://imgur.com/X7p2oJC.jpg' }
+        ];
+
+        // Search Functions
+        function toggleSearch() {
+            const modal = document.getElementById('searchModal');
+            const overlay = document.getElementById('searchOverlay');
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            if (modal.classList.contains('active')) {
+                document.getElementById('searchInput').focus();
+            } else {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('searchResults').innerHTML = '<div class="search-no-results">Start typing to search...</div>';
+            }
+        }
+
+        function closeSearch() {
+            document.getElementById('searchModal').classList.remove('active');
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '<div class="search-no-results">Start typing to search...</div>';
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (query.length === 0) {
+                resultsContainer.innerHTML = '<div class="search-no-results">Start typing to search...</div>';
+                return;
+            }
+            
+            const results = productsDatabase.filter(product => 
+                product.name.toLowerCase().includes(query) || 
+                product.code.toLowerCase().includes(query)
+            );
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<div class="search-no-results">No products found matching "' + query + '"</div>';
+                return;
+            }
+            
+            let html = '';
+            results.forEach(product => {
+                html += `
+                    <a href="${product.url}" class="search-result-item">
+                        <div class="search-result-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="search-result-info">
+                            <div class="search-result-name">${product.name}</div>
+                            <div class="search-result-code">${product.code}</div>
+                        </div>
+                        <div class="search-result-price">$${product.price.toLocaleString()} + iva</div>
+                    </a>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
+        // Close search with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSearch();
+            }
+        });
+    </script>
+
+    <!-- Search Modal -->
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearch()"></div>
+    <div class="search-modal" id="searchModal">
+        <div class="search-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input 
+                type="text" 
+                class="search-input" 
+                id="searchInput" 
+                placeholder="Search by name or code..." 
+                oninput="performSearch()"
+            />
+            <button class="search-close" onclick="closeSearch()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-results" id="searchResults">
+            <div class="search-no-results">Start typing to search...</div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-header">
+            <div style="display: flex; align-items: baseline; gap: 20px;">
+                <h2>Your Truck</h2>
+                <a href="#" onclick="clearCart(); return false;" class="clear-items-link" style="font-size: 0.75rem; font-weight: 500; color: #583c4a; text-decoration: none; font-family: 'Geist Mono', monospace; transition: opacity 0.3s ease;">(clear items)</a>
+            </div>
+            <button class="cart-close" onclick="closeCart()" style="align-self: center; margin-top: 8px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div id="cartItems" class="cart-items">
+            <div class="cart-empty">Your cart is empty</div>
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <div class="pricing-line">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0</span>
+                </div>
+                <div class="pricing-line" id="savingsLine" style="display: none; color: #583c4a;">
+                    <span>Savings:</span>
+                    <span id="cartSavings">-$0</span>
+                </div>
+                <div class="pricing-line">
+                    <span>IVA (13%):</span>
+                    <span id="cartIVA">$0</span>
+                </div>
+                <div class="total-line">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="total-value">$0</span>
+                </div>
+            </div>
+            <div class="cart-buttons">
+                <button id="checkoutBtn" class="cart-checkout" onclick="checkout()" disabled>Proceed to Checkout</button>
+            </div>
+        </div>
+
+
+    <!-- Clear Items Modal -->
+    <div class="clear-modal" id="clearModal">
+        <div class="clear-modal-message">
+            Clear all items from your cart?
+        </div>
+        <div class="clear-modal-buttons">
+            <button class="clear-modal-btn" onclick="confirmClearCart()">Yes Sure</button>
+            <button class="clear-modal-btn" onclick="closeClearModal()">No</button>
+        </div>
+    </div>
+
+    <!-- Selection Warning Modal -->
+    <div class="clear-modal" id="selectionWarningModal">
+        <div class="clear-modal-message">
+            Please select size and finish
+        </div>
+        <div class="clear-modal-buttons">
+            <button class="clear-modal-btn" onclick="closeSelectionWarning()">Ok</button>
+        </div>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletterModal" class="newsletter-modal">
+        <div class="newsletter-modal-header">
+            <button class="newsletter-modal-close" onclick="closeNewsletterModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="newsletter-modal-content">
+            <div class="newsletter-modal-title">— Thanks for your visit —</div>
+            <div class="newsletter-modal-subtitle">We'll be in touch soon!</div>
+        </div>
+    </div>
+
+    <!-- Info Modal Overlay -->
+    <div id="infoModalOverlay" class="info-modal-overlay" onclick="closeInfoModals()"></div>
+
+    <!-- Shipping Modal -->
+    <div id="shippingModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Shipping Terms</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Delivery Areas</h3>
+            <p>We deliver throughout Costa Rica's Greater Metropolitan Area (GAM) including San José, Escazú, Santa Ana, Heredia, Alajuela, and Cartago. Extended delivery is available to Guanacaste, the Pacific and Caribbean coasts, and other regions nationwide—contact us for details.</p>
+
+            <h3>Production & Shipping Times</h3>
+            <p>Most furniture pieces are made to order by Costa Rican artisans. Standard production and delivery takes 6-8 weeks from order confirmation. We'll keep you updated throughout the process.</p>
+
+            <h3>Pickup Option</h3>
+            <p>Prefer to pick up your order? Pieces can be collected from our dispatch warehouse in Escazú at no additional charge once production is complete.</p>
+
+            <h3>Delivery Service</h3>
+            <p>Delivery costs are calculated based on your location and order size—you'll see the exact cost before finalizing your purchase. White-glove service (unpacking, assembly, placement, and packaging removal) is complimentary for pieces requiring assembly. Freestanding pieces are delivered and placed in your space.</p>
+
+            <h3>International Shipping</h3>
+            <p>We ship select pieces internationally. Contact us at <a href="mailto:contact@la-urel.com" class="footer-link">contact@la-urel.com</a> for international shipping rates and arrangements.</p>
+        </div>
+    </div>
+
+    <!-- Returns Modal -->
+    <div id="returnsModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Returns & Conditions</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Our Commitment</h3>
+            <p>Each piece from Laurel Depto. de Diseño is handcrafted by skilled Costa Rican artisans using premium materials. We stand behind the quality of our work and want you to love your furniture.</p>
+
+            <h3>Return Policy</h3>
+            <p>Custom and made-to-order pieces (which represent most of our collection) are non-returnable due to their bespoke nature. However, if your piece arrives damaged or with manufacturing defects, we'll make it right.</p>
+
+            <h3>Damaged or Defective Items</h3>
+            <p>Please inspect your furniture upon delivery. If you notice any damage or defects, contact us within 48 hours at <a href="mailto:contact@la-urel.com" class="footer-link">contact@la-urel.com</a>. We'll arrange for repair, replacement, or refund as appropriate.</p>
+
+            <h3>Cancellations</h3>
+            <p>Orders can be cancelled within 24 hours of placement for a full refund. After production begins, cancellations may incur a 25% restocking fee to cover materials and labor costs.</p>
+
+            <h3>Quality Guarantee</h3>
+            <p>All our furniture comes with a 1-year warranty against manufacturing defects. Natural variations in wood grain, color, and texture are inherent to handcrafted pieces and are not considered defects.</p>
+
+            <h3>Questions?</h3>
+            <p>Contact us at +(506) 6317-3038 or <a href="mailto:contact@la-urel.com" class="footer-link">contact@la-urel.com</a>. We're here to help.</p>
+        </div>
+    </div>
+
+    <!-- Trade Program Modal -->
+    <div id="tradeModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Trade Program</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>For Interior Designers & Design Professionals</h3>
+            <p>We welcome collaboration with interior designers, architects, and design professionals on projects of all sizes. Laurel Depto. de Diseño is equipped to support your vision with quality craftsmanship and dedicated service.</p>
+
+            <h3>What We Offer</h3>
+            <p>Our trade program provides access to our full collection with the flexibility you need for client projects. We handle large orders, offer customization options to match your specifications, and work on your timeline to ensure seamless project execution.</p>
+
+            <h3>Custom Capabilities</h3>
+            <p>Many pieces in our collection can be customized—dimensions, finishes, materials, and configurations can be tailored to your project requirements. Our artisans work closely with designers to bring specific visions to life while maintaining our commitment to quality craftsmanship.</p>
+
+            <p>Contact Lucia Echeverria at <a href="mailto:lucia@laureldd.com" style="color: #583c4a; text-decoration: underline;">lucia@laureldd.com</a> for more info on our trade services.

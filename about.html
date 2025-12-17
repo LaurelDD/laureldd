@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Laurel Depto. de Diseño</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf8f3;
+            color: #141414;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .message {
+            max-width: 600px;
+        }
+
+        h1 {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: #583c4a;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #141414;
+            margin-bottom: 16px;
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin-top: 24px;
+        }
+
+        .back-link {
+            margin-top: 48px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .back-link a {
+            color: #141414;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #583c4a;
+        }
+
+        .back-link a:hover svg path {
+            stroke: #583c4a;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>More About Us Coming Soon</h1>
+        
+        <!-- Outlined happy face -->
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none" stroke="#141414" stroke-width="2" style="margin-top: 40px;">
+            <!-- Face circle -->
+            <circle cx="50" cy="50" r="40"/>
+            <!-- Left eye -->
+            <path d="M33 42 L43 42" stroke-linecap="round"/>
+            <!-- Right eye -->
+            <path d="M57 42 L67 42" stroke-linecap="round"/>
+            <!-- Smile -->
+            <path d="M35 60 Q50 70 65 60" stroke-linecap="round"/>
+        </svg>
+        
+        <div class="back-link">
+            <a href="index.html">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 12H5M12 19l-7-7 7-7" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>

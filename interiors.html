@@ -1,0 +1,3338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LDD - Interior Design Section</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Turbo for smooth page transitions -->
+    <script src="https://unpkg.com/@hotwired/turbo@7/dist/turbo.es2017-umd.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #c5cfd0;
+        }
+
+        /* Custom cursor */
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #141414;
+            overflow-x: hidden;
+            background-color: #c5cfd0;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto;
+        }
+
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto !important;
+        }
+
+        .page-wrapper {
+            min-height: 100vh;
+            display: none;
+        }
+        
+        .page-wrapper.active {
+            display: block;
+        }
+
+        #main-wrapper { background-color: #faf8f3; }
+        #interior-design-wrapper { background-color: #fafafa; }
+        #makemake-wrapper { background-color: #fff; }
+        #properties-wrapper { background-color: #fcffec; }
+
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .promo-banner {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 1.9px;
+            text-transform: uppercase;
+            color: #141414;
+            background: #c5cfd0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            position: absolute;
+            white-space: nowrap;
+            animation: scroll-left 200s linear infinite;
+        }
+
+        .ticker-item {
+            padding: 0 80px;
+            display: inline-block;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .nav-ribbon {
+            height: 44px;
+            background: transparent;
+            border-top: 1.5px solid #faf8f3;
+            border-bottom: 1.5px solid #faf8f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .nav-ribbon.scrolled {
+            background: rgba(250, 248, 243, 0.95);
+            border-top-color: #141414;
+            border-bottom-color: #141414;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-center {
+            display: flex;
+            height: 100%;
+            border-left: 1.5px solid #faf8f3;
+            border-right: 1.5px solid #faf8f3;
+            transition: border-color 0.5s ease;
+        }
+
+        .nav-ribbon.scrolled .nav-center {
+            border-left-color: #141414;
+            border-right-color: #141414;
+        }
+
+        .landing-nav-link {
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #faf8f3;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            border-right: 1.5px solid #faf8f3;
+        }
+
+        .landing-nav-link:last-child {
+            border-right: none;
+        }
+
+        .landing-nav-link.active {
+            color: #583c4a !important;
+        }
+
+        .nav-ribbon.scrolled .landing-nav-link {
+            color: #141414;
+            border-right-color: #141414;
+        }
+
+        .nav-ribbon.scrolled .landing-nav-link.active {
+            color: #583c4a !important;
+        }
+
+        .landing-nav-link:hover {
+            color: #583c4a !important;
+        }
+
+        .nav-ribbon.scrolled .landing-nav-link:hover {
+            color: #583c4a !important;
+            opacity: 1;
+        }
+
+        .back-arrow-icon {
+            transition: all 0.5s ease;
+        }
+
+        .back-arrow-icon path {
+            transition: stroke 0.5s ease;
+        }
+
+        /* Hover effect for back arrow - always turns plum with maximum specificity */
+        a:hover .back-arrow-icon path,
+        .nav-ribbon a:hover .back-arrow-icon path,
+        .nav-left a:hover .back-arrow-icon path {
+            stroke: #583c4a !important;
+        }
+        
+        /* Force hover state to override inline styles */
+        a:hover svg.back-arrow-icon > path {
+            stroke: #583c4a !important;
+        }
+        
+        /* Active/click state */
+        a:active .back-arrow-icon path {
+            stroke: #583c4a !important;
+            opacity: 0.8;
+        }
+
+        .nav-icons {
+            position: fixed;
+            right: 50px;
+            top: 40px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-icon {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .nav-icon:hover svg {
+            stroke: #583c4a !important;
+        }
+
+        .nav-icon:hover svg circle {
+            fill: #583c4a !important;
+        }
+
+        .nav-icon svg {
+            transition: all 0.5s ease;
+        }
+
+        /* Page content padding */
+        .page-content {
+            background-color: #fafafa;
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: -13px;
+            right: -8px;
+            background: #583c4a;
+            color: white;
+            border-radius: 50%;
+            min-width: 18px;
+            height: 18px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #faf8f3;
+        }
+
+        .cart-counter.has-items {
+            display: flex !important;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #583c4a;
+            transition: all 0.3s ease;
+            display: inline-block;
+            opacity: 1;
+        }
+
+        .carousel-dot-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            margin: -5px;
+            cursor: pointer;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .text-slide {
+            position: relative;
+        }
+
+        .text-slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fafafa;
+        }
+
+        .text-slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 120px;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+
+        .text-container {
+            font-family: 'Geist Mono', monospace;
+            max-width: 520px;
+        }
+
+        .text-container p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #583c4a;
+            font-weight: 300;
+        }
+
+        .text-container strong {
+            color: #141414;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .nav-header { padding: 10px 20px; }
+            .menu-item { font-size: 0.8rem; padding: 5px 8px; margin: 0 4px; }
+        }
+
+        /* Secondary Projects Hover Effect */
+        .secondary-project-overlay:hover {
+            opacity: 1 !important;
+        }
+
+        /* ============================================
+           FOOTER STYLES
+           ============================================ */
+        footer {
+            background: #c5cfd0;
+            color: #141414;
+            padding: 4rem 50px 3rem;
+            border-top: 1.5px solid #141414;
+            margin-bottom: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-section {
+            text-align: left;
+        }
+
+        .footer-section:nth-child(2) {
+            text-align: center;
+        }
+
+        .footer-section:nth-child(3) {
+            text-align: right;
+        }
+
+        .footer-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            line-height: 2;
+        }
+
+        .footer-link {
+            color: #141414;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-link:hover {
+            opacity: 0.6;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-section:nth-child(1) .social-icons {
+            justify-content: flex-start;
+        }
+
+        .footer-section:nth-child(2) .social-icons {
+            justify-content: center;
+        }
+
+        .social-icon {
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .newsletter-form {
+            display: inline-flex;
+            gap: 0;
+            margin-bottom: 25px;
+        }
+
+        .newsletter-input {
+            width: 220px;
+            padding: 0 16px;
+            height: 44px;
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-right: none;
+            color: #141414;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .newsletter-button {
+            padding: 12px 36px;
+            height: auto;
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            color: #141414;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .newsletter-button:hover {
+            background: #583c4a;
+            color: #faf8f3;
+            border-color: #583c4a;
+        }
+
+        .footer-logo {
+            margin-top: 20px;
+        }
+
+        /* Magazine-Style Lightbox for Casa Laurel - Filmstrip Version */
+        .magazine-lightbox {
+            display: none;
+            position: fixed;
+            top: 84px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 84px);
+            background: #fafafa;
+            z-index: 9999;
+            overflow: hidden;
+            /* Prevent text selection during gallery interaction */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .magazine-lightbox.active {
+            display: block;
+        }
+
+        /* Force nav ribbon to have solid background when lightbox is open */
+        .magazine-lightbox.active ~ #interior-design-wrapper .nav-ribbon,
+        body:has(.magazine-lightbox.active) .nav-ribbon {
+            background: rgba(250, 248, 243, 0.95) !important;
+            border-top-color: #141414 !important;
+            border-bottom-color: #141414 !important;
+            backdrop-filter: blur(10px);
+        }
+
+        body:has(.magazine-lightbox.active) .nav-ribbon .nav-center {
+            border-left-color: #141414 !important;
+            border-right-color: #141414 !important;
+        }
+
+        body:has(.magazine-lightbox.active) .landing-nav-link {
+            color: #141414 !important;
+            border-right-color: #141414 !important;
+        }
+
+        body:has(.magazine-lightbox.active) .back-arrow-icon path {
+            stroke: #141414 !important;
+        }
+
+        body:has(.magazine-lightbox.active) .nav-icon svg {
+            stroke: #141414 !important;
+        }
+
+        /* Only fill menu dots and cart wheels when lightbox active, not search circle */
+        body:has(.magazine-lightbox.active) .nav-icon svg circle[r="1.5"] {
+            fill: #141414 !important;
+        }
+
+        .magazine-filmstrip {
+            display: flex;
+            height: 100%;
+            gap: 12px;
+            cursor: grab;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .magazine-filmstrip:active {
+            cursor: grabbing;
+        }
+
+        .magazine-film-slide {
+            position: relative;
+            flex-shrink: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+        }
+
+        .magazine-film-slide img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .magazine-film-slide::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 0;
+            bottom: 0;
+            width: 12px;
+            background: #fafafa;
+            pointer-events: none;
+        }
+
+        .magazine-close {
+            position: fixed;
+            top: 114px;
+            left: 50px;
+            background: #ffffff;
+            border: 1.5px solid #141414;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10000;
+            transition: all 0.3s;
+        }
+
+        .magazine-close:hover {
+            background: #c5cfd0;
+            transform: rotate(90deg);
+        }
+
+        .magazine-close:hover svg {
+            stroke: #141414;
+        }
+
+        /* Cart Modal Styles */
+        .cart-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+        }
+
+        .cart-overlay.active {
+            display: block;
+        }
+
+        .cart-modal {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fafafa;
+            border-left: 1.5px solid #141414;
+            z-index: 10000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 30px;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .clear-items-link:hover {
+            opacity: 0.6 !important;
+        }
+
+        /* Update cart footer styling */
+        .cart-footer {
+            min-height: 200px;
+            padding: 20px;
+            border-top: 1.5px solid #141414;
+            background: #faf8f3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-totals {
+            margin-bottom: 12px;
+        }
+
+        .cart-total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .cart-total-line.total {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1.5px solid #141414;
+        }
+
+        .cart-buttons {
+            margin-top: 16px;
+        }
+
+        .cart-checkout {
+            width: 100%;
+            padding: 12px;
+            background: #fafafa;
+            color: #141414;
+            border: 1.5px solid #141414;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-checkout:hover:not(:disabled) {
+            background: #583c4a;
+            color: #faf8f3;
+        }
+
+        .cart-checkout:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Clear Items Modal */
+        .clear-modal {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 280px;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .clear-modal.active {
+            display: block;
+        }
+
+        .clear-modal-message {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #141414;
+            padding: 20px;
+        }
+
+        .clear-modal-buttons {
+            display: flex;
+            height: 25px;
+            border-top: 1.5px solid #141414;
+        }
+
+        .clear-modal-btn {
+            flex: 1;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: #faf8f3;
+            color: #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clear-modal-btn:first-child {
+            border-right: 1.5px solid #141414;
+        }
+
+        .clear-modal-btn:hover {
+            background: #c5cfd0;
+            color: #141414;
+        }
+
+        /* Newsletter Modal */
+        .newsletter-modal {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 380px;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .newsletter-modal.active {
+            display: block;
+        }
+
+        .newsletter-modal-header {
+            height: 30px;
+            background: #faf8f3;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .newsletter-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s ease;
+            margin-top: 4px;
+        }
+
+        .newsletter-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .newsletter-modal-content {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .newsletter-modal-title {
+            font-size: 1.2rem;
+            color: #583c4a;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .newsletter-modal-subtitle {
+            font-size: 0.85rem;
+            color: #141414;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 30px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #583c4a;
+            font-style: italic;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(20, 20, 20, 0.1);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #ffffff;
+            border: 1.5px solid #141414;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-code {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.65rem;
+            color: #583c4a;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-spec {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.65rem;
+            color: #141414;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #583c4a;
+            margin-top: 8px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-item-remove:hover {
+            opacity: 1;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1.5px solid #141414;
+            background: #fff;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: #583c4a;
+            color: #fafafa;
+            border: 1.5px solid #583c4a;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover:not(:disabled) {
+            background: #6d4a5d;
+            border-color: #6d4a5d;
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .clear-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #583c4a;
+            border: none;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 12px;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .clear-cart-btn:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Info Modal Styles (for Shipping, Returns, Trade Program) */
+        .info-modal {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 600px;
+            max-width: 90vw;
+            max-height: 80vh;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .info-modal.active {
+            display: block;
+        }
+
+        .info-modal-header {
+            height: 50px;
+            background: #faf8f3;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .info-modal-title {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #141414;
+        }
+
+        .info-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .info-modal-content {
+            padding: 32px;
+            overflow-y: auto;
+            max-height: calc(80vh - 50px);
+        }
+
+        .info-modal-content h3 {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #583c4a;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .info-modal-content p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #141414;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #141414;
+            margin-bottom: 8px;
+        }
+
+        .info-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+        }
+
+        .info-modal-overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-wrapper" class="page-wrapper">
+        <div style="padding: 100px; text-align: center;">
+            <h1>MAIN LANDING - PLACEHOLDER</h1>
+            <button onclick="showPage('interior')" style="padding: 10px 20px;">Go to Interior Design</button>
+        </div>
+    </div>
+
+    <div id="interior-design-wrapper" class="page-wrapper active">
+        <div class="header-container">
+            <div class="promo-banner">
+                <div class="ticker-wrapper">
+                    <span class="ticker-item">Try Our Virtual Consultations!</span>
+                    <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                    <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                    <span class="ticker-item">Try Our Virtual Consultations!</span>
+                    <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                    <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                    <span class="ticker-item">Try Our Virtual Consultations!</span>
+                    <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                    <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                    <span class="ticker-item">Try Our Virtual Consultations!</span>
+                    <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                    <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                    <span class="ticker-item">Try Our Virtual Consultations!</span>
+                    <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                    <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                    <span class="ticker-item">Try Our Virtual Consultations!</span>
+                    <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                    <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                </div>
+            </div>
+
+            <nav class="nav-ribbon" id="navRibbon">
+                <!-- Back arrow on the left -->
+                <div style="position: absolute; left: 50px; height: 100%; display: flex; align-items: center;">
+                    <a href="index.html" style="padding: 0; cursor: pointer; text-decoration: none; display: flex; align-items: center;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="back-arrow-icon">
+        <path d="M19 12H5M12 19l-7-7 7-7" stroke="#faf8f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</a>
+                </div>
+                
+                <div class="nav-center">
+                    <a class="landing-nav-link menu-item" href="furniture.html">Furniture</a>
+                    <a class="landing-nav-link menu-item active" data-page="interior">Interior Design</a>
+                    <a class="landing-nav-link menu-item" data-page="properties">Properties</a>
+                </div>
+            </nav>
+        </div>
+
+        <div class="nav-icons">
+            <div class="nav-icon" onclick="toggleSearch()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#faf8f3" stroke-width="1.8">
+                    <circle cx="10" cy="10" r="7"/>
+                    <path d="M21 21l-6-6" stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <a href="about.html" class="nav-icon" style="text-decoration: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#faf8f3" stroke-width="2">
+                    <circle cx="5" cy="12" r="1.5" fill="#faf8f3"/>
+                    <circle cx="12" cy="12" r="1.5" fill="#faf8f3"/>
+                    <circle cx="19" cy="12" r="1.5" fill="#faf8f3"/>
+                </svg>
+            </a>
+            
+            <div class="nav-icon" onclick="toggleCart()">
+                <svg id="cartIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#faf8f3" stroke-width="1.8">
+                    <path d="M1.5 6.5C1.5 6.2 1.7 6 2 6H15.5C15.8 6 16 6.2 16 6.5V16H1.5V6.5Z" stroke-linejoin="round"/>
+                    <path d="M16 7.8L18.8 7.9L21.5 10.8C21.6 10.9 21.7 11.1 21.7 11.3V15.9H16V6" stroke-linejoin="round"/>
+                    <circle cx="6" cy="18.8" r="1.5" fill="#faf8f3"/>
+                    <circle cx="17.5" cy="18.8" r="1.5" fill="#faf8f3"/>
+                </svg>
+                <div class="cart-counter" id="cartCounter">0</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+        <section style="background: #fafafa; min-height: 100vh; padding-top: 0;">
+            <div id="hero" style="position: relative; height: 100vh; overflow: hidden; width: 100vw; margin-left: calc(-50vw + 50%); left: 0;">
+                <div id="parallax-hero" style="position: absolute; top: 0; left: 0; width: 100%; height: 110%; background: url('https://i.imgur.com/tV28oRB.jpg') center center / cover no-repeat;"></div>
+                <div style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;">
+                    <div style="width: 544px; margin: 0 auto;">
+                        <svg viewBox="540 890 890 130" style="width: 100%; height: auto; filter: drop-shadow(0px 2px 6px rgba(20, 20, 20, 0.4));">
+                            <path d="M563.85,908.37v38.21h21.58v10.92h-33.35v-49.12h11.76Z" style="fill: #faf8f3;"/>
+                            <path d="M621.83,908.37l17.37,49.12h-12.52l-3.25-9.51h-17.02l-3.25,9.51h-11.83l17.37-49.12h13.14ZM609.79,938.07h10.24l-4.98-14.5h-.28l-4.98,14.5Z" style="fill: #faf8f3;"/>
+                            <path d="M642.24,938v-29.63h11.69v27.45c0,7.49,2.08,11.46,8.09,11.46s8.09-3.98,8.09-11.46v-27.45h11.76v29.63c0,14.35-8.65,20.43-19.86,20.43s-19.79-6.08-19.79-20.43Z" style="fill: #faf8f3;"/>
+                            <path d="M717.16,957.49c-.9-1.33-1.45-4.37-1.8-9.43-.35-5.61-2.49-6.86-6.43-6.86h-7.82v16.3h-11.55v-49.12h22c11.28,0,16.88,6,16.88,15.59,0,7.17-3.94,11.85-9.27,12.63,4.5,1.01,7.13,3.9,7.61,9.59.62,7.33.83,9.51,2.28,11.31h-11.9ZM709.48,930.98c4.98,0,7.47-1.4,7.47-5.93,0-3.98-2.49-6.08-7.47-6.08h-8.37v12.01h8.37Z" style="fill: #faf8f3;"/>
+                            <path d="M770.64,957.49h-34.32v-49.12h33.69v10.92h-22.14v8.03h17.09v10.76h-17.09v8.5h22.76v10.92Z" style="fill: #faf8f3;"/>
+                            <path d="M790.5,908.37v38.21h21.58v10.92h-33.35v-49.12h11.76Z" style="fill: #faf8f3;"/>
+                            <path d="M832.29,908.37h17.23c14.46,0,23.38,9.2,23.38,24.56s-8.92,24.56-23.38,24.56h-17.23v-49.12ZM848.68,947.04c7.61,0,12.11-5.15,12.11-14.19s-4.5-14.03-12.11-14.03h-4.64v28.23h4.64Z" style="fill: #faf8f3;"/>
+                            <path d="M913.37,957.49h-34.31v-49.12h33.69v10.92h-22.14v8.03h17.09v10.76h-17.09v8.5h22.76v10.92Z" style="fill: #faf8f3;"/>
+                            <path d="M930.32,957.49h-11.69v-49.12h19.16c11.42,0,18.06,6,18.06,16.84s-6.64,16.92-18.06,16.92h-7.47v15.36ZM937.24,931.52c5.26,0,7.26-2.11,7.26-6.24s-2.01-6.32-7.26-6.32h-6.92v12.55h6.92Z" style="fill: #faf8f3;"/>
+                            <path d="M973.01,957.49v-38.21h-14.94v-10.92h41.79v10.92h-15.15v38.21h-11.69Z" style="fill: #faf8f3;"/>
+                            <path d="M1023.51,958.42c-12.66,0-22.62-10.37-22.62-25.5s9.96-25.5,22.62-25.5,22.62,10.37,22.62,25.5-9.96,25.5-22.62,25.5ZM1023.51,919.13c-6.43,0-10.52,5.46-10.52,13.8s4.08,13.8,10.52,13.8,10.52-5.46,10.52-13.8-4.08-13.8-10.52-13.8Z" style="fill: #faf8f3;"/>
+                            <rect x="1049.32" y="944.08" width="11.9" height="13.41" style="fill: #faf8f3;"/>
+                            <path d="M1081.77,908.37h17.23c14.46,0,23.38,9.2,23.38,24.56s-8.92,24.56-23.38,24.56h-17.23v-49.12ZM1098.16,947.04c7.61,0,12.11-5.15,12.11-14.19s-4.5-14.03-12.11-14.03h-4.63v28.23h4.63Z" style="fill: #faf8f3;"/>
+                            <path d="M1161.4,957.49h-34.31v-49.12h33.69v10.92h-22.14v8.03h17.09v10.76h-17.09v8.5h22.76v10.92Z" style="fill: #faf8f3;"/>
+                            <path d="M1181.81,908.37h17.23c14.46,0,23.38,9.2,23.38,24.56s-8.92,24.56-23.38,24.56h-17.23v-49.12ZM1198.2,947.04c7.61,0,12.11-5.15,12.11-14.19s-4.5-14.03-12.11-14.03h-4.63v28.23h4.63Z" style="fill: #faf8f3;"/>
+                            <path d="M1240.2,908.37v49.12h-11.76v-49.12h11.76Z" style="fill: #faf8f3;"/>
+                            <path d="M1257.22,939.71c.42,6.16,4.63,8.26,9.48,8.26,4.08,0,6.71-1.64,6.71-4.37,0-2.88-2.56-3.35-5.88-4.05l-7.96-1.56c-7.12-1.48-12.11-6-12.11-14.58,0-9.98,6.92-15.98,17.78-15.98,12.04,0,18.54,6.63,18.75,17.54l-10.79.23c-.35-5.07-3.6-7.41-8.09-7.41-3.87,0-6.09,1.71-6.09,4.44,0,2.26,1.66,3.12,4.36,3.66l8.23,1.64c9.13,1.79,13.28,7.17,13.28,15.21,0,10.45-8.03,15.67-18.2,15.67-11.83,0-20.27-6.47-20.27-18.32l10.79-.39Z" style="fill: #faf8f3;"/>
+                            <path d="M1324.6,957.49h-34.32v-49.12h33.69v10.92h-22.14v8.03h17.09v10.76h-17.09v8.5h22.76v10.92Z" style="fill: #faf8f3;"/>
+                            <path d="M1358.09,935.58v-27.21h10.79v49.12h-9.41l-18.82-29.08v29.08h-10.79v-49.12h11.21l17.02,27.21ZM1339.55,905.4c0-6.63,2.14-11.31,6.23-11.31,3.18,0,5.05,2.88,7.4,2.88,1.04,0,2.08-.62,2.21-2.65h5.19c0,6.63-2.14,11.31-6.23,11.31-3.18,0-5.05-2.88-7.4-2.88-1.04,0-2.08.62-2.21,2.65h-5.19Z" style="fill: #faf8f3;"/>
+                            <path d="M1396.21,958.42c-12.66,0-22.62-10.37-22.62-25.5s9.96-25.5,22.62-25.5,22.62,10.37,22.62,25.5-9.96,25.5-22.62,25.5ZM1396.21,919.13c-6.43,0-10.52,5.46-10.52,13.8s4.08,13.8,10.52,13.8,10.52-5.46,10.52-13.8-4.08-13.8-10.52-13.8Z" style="fill: #faf8f3;"/>
+                            <rect x="547.8" y="982.14" width="266.14" height="12.04" style="fill: #faf8f3;"/>
+                        </svg>
+                    </div>
+                    
+                    <div onclick="document.getElementById('projects-section').scrollIntoView({ behavior: 'smooth' })" style="margin-top: 30px; cursor: pointer;">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#faf8f3" stroke-width="2">
+                            <path d="M12 5v14M19 12l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container" id="projects-section" style="max-width: 1200px; margin: 0 auto; padding: 120px 40px 40px; background: #fafafa; position: relative; z-index: 1;">
+                
+                <!-- Row 1: Projects 8 & 9 -->
+                <div style="display: flex; justify-content: space-between; width: 930px; margin: 0 auto 60px auto;">
+                    <!-- Project 8: At The End of The Road -->
+                    <div style="position: relative; width: 424px;">
+                        <div style="padding: 0;">
+                            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                                <div id="carousel8" class="carousel-container" data-current="0">
+                                    <div style="min-width: 424px; height: 636px;"><img src="https://i.imgur.com/PTONGTm.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="At The End of The Road 1"></div>
+                                    <div style="min-width: 424px; height: 636px;"><img src="https://i.imgur.com/A9s5pOU.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="At The End of The Road 2"></div>
+                                    <div style="min-width: 424px; height: 636px;"><img src="https://i.imgur.com/YokYuns.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: center 30%;" alt="At The End of The Road 3"></div>
+                                    <div style="min-width: 424px; height: 636px;"><img src="https://i.imgur.com/AL74GAw.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="At The End of The Road 4"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dots8" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+                        <div style="margin-top: 20px; width: 424px;">
+                            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">At The End of The Road</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Work in Progress - Delivery Date November 2025 -<br>Full Design Services and Consulting Package</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 9: Casa Laurel -->
+                    <div style="position: relative; width: 424px;">
+                        <div style="padding: 0;">
+                            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                                <div id="carousel9" class="carousel-container" data-current="0">
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/UAtJF69.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Laurel 1"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/9XEzje7.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Laurel 2"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/IBLMQOb.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Laurel 3"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/c1B2ovW.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: right center;" alt="Casa Laurel 4"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dots9" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+                        <div style="margin-top: 20px; width: 424px;">
+                            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Casa Laurel</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2025 - Full Design Services and Consulting Package</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">San Jose, Costa Rica</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- Row 2: Projects 6 & 1 -->
+                <div style="display: flex; justify-content: space-between; width: 930px; margin: 0 auto 60px auto;">
+                    <!-- Project 6: Friends & Family -->
+                    <div style="position: relative; width: 424px;">
+                        <div style="padding: 0;">
+                            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                                <div id="carousel6" class="carousel-container" data-current="0">
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/NNuWeQC.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Friends & Family 1"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/CGs2nwW.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Friends & Family 2"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/9qSn6I8.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: right center;" alt="Friends & Family 3"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/sNqlRDk.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: left center;" alt="Friends & Family 4"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dots6" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+                        <div style="margin-top: 20px; width: 424px;">
+                            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Friends & Family</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2024 - Full Design Services and Consulting Package</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">San Jose, Costa Rica</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 1: Casa Piedras Blancas - UPDATED VERSION -->
+                    <div style="position: relative; width: 424px;">
+                        <div style="padding: 0;">
+                            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                                <div id="carousel1" class="carousel-container" data-current="0">
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/cQeNhr3.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Piedras Blancas 1"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/UioM0WX.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Piedras Blancas 2"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/iGIJP4r.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: right center;" alt="Casa Piedras Blancas 3"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/NvCKVEd.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Piedras Blancas 4"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dots1" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+                        <div style="margin-top: 20px; width: 424px;">
+                            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Casa Piedras Blancas</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2023 - Full Design Services and Consulting Package</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Guanacaste, Costa Rica</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Projects 5 & 2 -->
+                <div style="display: flex; justify-content: space-between; width: 930px; margin: 0 auto 60px auto;">
+                    <!-- Project 5: A House for Susanne -->
+<div style="position: relative; width: 424px;">
+    <div style="padding: 0;">
+        <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+            <div id="carousel5" class="carousel-container" data-current="0">
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/LBv9alY.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House for Susanne 1"></div>
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/xbMcROm.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House for Susanne 2"></div>
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/QZh186y.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House for Susanne 3"></div>
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/VpyuxGs.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House for Susanne 4"></div>
+            </div>
+        </div>
+    </div>
+    <div id="dots5" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+    <div style="margin-top: 20px; width: 424px;">
+        <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">A House for Susanne</p>
+        <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2022 - Full Design Services and Consulting Package</p>
+        <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Guanacaste, Costa Rica</p>
+    </div>
+</div>
+                    
+                <!-- Project 2: A House of Color -->
+<div style="position: relative; width: 424px;">
+    <div style="padding: 0;">
+        <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+            <div id="carousel2" class="carousel-container" data-current="0">
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/TWpYoLp.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House of Color 1"></div>
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/CpyAQ6R.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House of Color 2"></div>
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/CHmSiQG.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House of Color 3"></div>
+                <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/qTKcFWh.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="A House of Color 4"></div>
+            </div>
+        </div>
+    </div>
+    <div id="dots2" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+    <div style="margin-top: 20px; width: 424px;">
+        <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">A House of Color</p>
+        <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2022 - Full Design Services and Consulting Package</p>
+        <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Guanacaste, Costa Rica</p>
+    </div>
+</div>
+</div>    
+                
+                <!-- CONSULTATION EGG MODULE - START -->
+<style>
+    /* Consultation Egg Styles */
+    .consultation-card {
+        width: 424px;
+        height: 560px;
+        background: #ffffff;
+        border: 1.5px solid #141414;
+        border-radius: 50%;
+    }
+
+    .card-inner {
+        padding: 20px 15px;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+    }
+
+    .main-view {
+        transition: opacity 0.3s ease;
+        position: relative;
+        width: 100%;
+    }
+
+    .main-view.hidden {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+
+    .egg-title {
+        font-family: 'Geist Mono', monospace;
+        font-size: 1.92rem;
+        font-weight: 500;
+        color: #141414;
+        margin-bottom: 28px;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+    }
+
+    .director-badge {
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.6rem;
+        color: #583c4a;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        margin-bottom: 16px;
+        font-weight: 400;
+        transform: translateY(-20px);
+    }
+
+    .egg-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.76rem;
+        color: #141414;
+        margin-bottom: 40px;
+        font-weight: 400;
+        line-height: 1.6;
+        letter-spacing: 0.02em;
+        transform: translateY(16px);
+    }
+
+    .cta-button {
+        display: inline-block;
+        padding: 11.2px 32px;
+        background: #fafafa;
+        color: #141414;
+        text-decoration: none;
+        font-size: 0.68rem;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        border: 1px solid #141414;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .cta-button:hover {
+        background: #583c4a;
+        color: #ffffff;
+        border-color: #583c4a;
+    }
+
+    .info-badges {
+        margin-top: 48px;
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        transform: translateY(32px);
+    }
+
+    .egg-badge {
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.6rem;
+        color: #583c4a;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 400;
+    }
+
+    .expanded-view {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #ffffff;
+        padding: 20px 15px;
+        transition: opacity 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .expanded-view.visible {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        color: #666;
+        cursor: pointer;
+        padding: 10px;
+        font-weight: 300;
+        transition: color 0.3s ease;
+    }
+
+    .close-button:hover {
+        color: #141414;
+    }
+
+    .session-header {
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.64rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #583c4a;
+        margin-bottom: 24px;
+        font-weight: 400;
+    }
+
+    .session-description {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.76rem;
+        color: #141414;
+        line-height: 1.6;
+        margin-bottom: 28px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+    }
+
+    .session-details {
+        border-top: 1px solid #583c4a;
+        border-bottom: 1px solid #583c4a;
+        padding: 16px 0;
+        margin-bottom: 28px;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 9.6px;
+        padding: 0 16px;
+    }
+
+    .detail-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .detail-label {
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.64rem;
+        color: #583c4a;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 400;
+    }
+
+    .detail-value {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.64rem;
+        color: #141414;
+        font-weight: 400;
+        line-height: 1.6;
+        letter-spacing: 0.02em;
+    }
+
+    .contact-button {
+        display: inline-block;
+        padding: 11.2px 32px;
+        background: #c5cfd0;
+        color: #141414;
+        text-decoration: none;
+        font-size: 0.68rem;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        border: 1px solid #141414;
+        transition: all 0.3s ease;
+    }
+
+    .contact-button:hover {
+        background: #fafafa;
+        color: #141414;
+    }
+
+    @media (max-width: 640px) {
+        .consultation-card {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .card-inner {
+            padding: 60px 40px;
+        }
+        
+        .egg-title {
+            font-size: 1.76rem;
+        }
+        
+        .info-badges {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .expanded-view {
+            padding: 60px 40px;
+        }
+
+        .close-button {
+            top: 30px;
+            right: 30px;
+        }
+    }
+</style>
+
+<!-- Row 3: Punta Plumeria & Project 3 (Casa Sirena) -->
+<div style="display: flex; justify-content: space-between; width: 930px; margin: 0 auto 60px auto;">    
+    <!-- Project 10: Punta Plumeria -->
+    <div style="position: relative; width: 424px;">
+        <div style="padding: 0;">
+            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                <div id="carousel10" class="carousel-container" data-current="0">
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/Pbu2Zfm.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: right center;" alt="Punta Plumeria 1"></div>
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/Rm66h2C.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: left center;" alt="Punta Plumeria 2"></div>
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/cpHQpVB.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Punta Plumeria 3"></div>
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/Lf3MK6m.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Punta Plumeria 4"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dots Navigation -->
+        <div id="dots10" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+        
+        <!-- Project Info Text -->
+        <div style="margin-top: 20px; width: 424px;">
+            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Punta Plumeria</p>
+            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2021 - Full Design Services and Consulting Package</p>
+            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Guanacaste, Costa Rica</p>
+        </div>
+    </div>
+    
+    <!-- Project 3: Casa Sirena -->
+    <div style="position: relative; width: 424px;">
+        <div style="padding: 0;">
+            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                <div id="carousel3" class="carousel-container" data-current="0">
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/TjFjtbK.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: right center;" alt="Casa Sirena 1"></div>
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/gGhYb9A.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Sirena 2"></div>
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/HUWMPHR.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Sirena 3"></div>
+                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/zu5Ccoj.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Sirena 4"></div>
+                </div>
+            </div>
+        </div>
+        <div id="dots3" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+        <div style="margin-top: 20px; width: 424px;">
+            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Casa Sirena</p>
+            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2020 - Full Renovation Services : Interior Design, Architecture and Management</p>
+        </div>
+    </div>
+</div>
+<script>
+    function showExpandedEgg() {
+        document.getElementById('mainViewEgg').classList.add('hidden');
+        document.getElementById('expandedViewEgg').classList.add('visible');
+    }
+
+    function hideExpandedEgg() {
+        document.getElementById('expandedViewEgg').classList.remove('visible');
+        document.getElementById('mainViewEgg').classList.remove('hidden');
+    }
+</script>
+                
+                <!-- Row 4: Projects 10 & 7 -->
+                <div style="display: flex; justify-content: space-between; width: 930px; margin: 0 auto 60px auto;">
+                    
+                    <!-- Project 7: Calle Virginia Diez -->
+                    <div style="position: relative; width: 424px;">
+                        <div style="padding: 0;">
+                            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                                <div id="carousel7" class="carousel-container" data-current="0">
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/qxgRfLr.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: left center;" alt="Calle Virginia Diez 1"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/dpywAmA.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Calle Virginia Diez 2"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/gPuHsOh.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: left center;" alt="Calle Virginia Diez 3"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/XullJ8t.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Calle Virginia Diez 4"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dots7" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+                        <div style="margin-top: 20px; width: 424px;">
+                            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Calle Virginia Diez</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2019 - Full Design Services and Consulting Package</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Guanacaste, Costa Rica</p>
+                      </div>
+                    </div>
+                    
+                    <!-- Project 11: NEW PROJECT -->
+                    <div style="position: relative; width: 424px;">
+                        <div style="padding: 0;">
+                            <div style="position: relative; width: 424px; height: 636px; overflow: hidden; background: transparent;">
+                                <div id="carousel11" class="carousel-container" data-current="0">
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/69UgLkL.jpg" style="height: 100%; width: 100%; object-fit: cover; transform: scale(1.05);" alt="Casa Ventanas 1"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/jrwXcWS.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Casa Ventanas 2"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/cCUpVm7.jpg" style="height: 100%; width: 100%; object-fit: cover; object-position: right center;" alt="Casa Ventanas 3"></div>
+                                    <div style="min-width: 100%; height: 100%;"><img src="https://i.imgur.com/CqLowjA.jpg" style="height: 100%; width: 100%; object-fit: cover; transform: scale(1.05);" alt="Casa Ventanas 4"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dots Navigation -->
+                        <div id="dots11" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px; align-items: center;"></div>
+                        
+                        <!-- Project Info Text -->
+                        <div style="margin-top: 20px; width: 424px;">
+                            <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Casa Ventanas</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Completed 2016 - Full Design Services and Consulting Package</p>
+                            <p style="font-style: italic; font-size: 0.85rem; color: #141414; opacity: 0.8;">Guanacaste, Costa Rica</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- How We Work Section -->
+        <section id="working-with-us" style="padding: 60px 0 0;">
+            <div style="max-width: 1400px; width: 100%; margin: 60px auto 0 auto; padding: 0 40px 80px;">
+                <!-- Section Title - Left Aligned -->
+                <h2 style="font-family: 'Geist Mono', monospace; font-size: 2rem; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #141414; margin-bottom: 47px; line-height: 1.2; text-align: center;">Working With Us</h2>
+                
+                <!-- Sub-header - Mission Statement Style - Centered -->
+                <p style="font-family: 'Geist Mono', monospace; font-size: 1.8rem; line-height: 1.5; color: #141414; font-weight: 300; letter-spacing: -0.02em; text-align: center; margin-bottom: 79px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    Our first intent is always client satisfaction<br>—acting as mediator, maker, and creative partner to deliver bespoke solutions tailored to each project's unique aspirations.
+                </p>
+                
+                <div style="display: flex; justify-content: space-between; gap: 50px;">
+                    
+                    <!-- Left Column: Full-Scope Design Services -->
+                    <div style="flex: 1;">
+                        <h3 style="font-family: 'Geist Mono', monospace; font-size: 1.1rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #141414; margin-bottom: 16px; line-height: 1.2;">Full-Scope Design Services</h3>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #141414; margin-bottom: 12px; font-weight: 600; text-transform: uppercase;">
+                            Creative partners from concept to completion.
+                        </p>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-bottom: 8px; font-weight: 300;">
+                            Laurel Depto. de Diseño specializes in comprehensive interior design for upscale residential and hospitality projects throughout Costa Rica. With over a decade of experience, we've built a studio that exceeds the capabilities of a traditional design firm.
+                        </p>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-bottom: 24px; font-weight: 300;">
+                            Our approach is holistic: we act as a valuable mediator between clients and construction teams, guiding projects from concept through completion. From luxury rental properties to high-end residences, our commitment to quality and attention to detail ensure that each space reflects our clients' needs and aspirations—whether large-scale renovations or thoughtfully curated interiors.
+                        </p>
+                        <a href="mailto:interiors@la-urel.com" style="display: inline-flex; align-items: center; gap: 8px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; font-family: 'Geist Mono', monospace;"
+                           onmouseover="this.style.color='#583c4a'; this.style.transform='scale(1.05)';" 
+                           onmouseout="this.style.color='#141414'; this.style.transform='scale(1)';">
+                            <span style="text-decoration: underline; text-underline-offset: 2px;">Get in Touch</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: all 0.3s ease;">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <!-- Middle Column: Partial Scope -->
+                    <div style="flex: 1;">
+                        <h3 style="font-family: 'Geist Mono', monospace; font-size: 1.1rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #141414; margin-bottom: 16px; line-height: 1.2;">Partial Scope</h3>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #141414; margin-bottom: 12px; font-weight: 600; text-transform: uppercase;">
+                            Design documentation on your timeline.
+                        </p>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-bottom: 24px; font-weight: 300;">
+                            Comprehensive conceptual design and documentation, ready for your timeline—whether building immediately, planning ahead, preparing properties for sale, or managing projects with your own team be it locally or overseas.
+                        </p>
+                    </div>
+                    
+                    <!-- Right Column: Virtual Consultations -->
+                    <div style="flex: 1;">
+                        <h3 style="font-family: 'Geist Mono', monospace; font-size: 1.1rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: #141414; margin-bottom: 16px; line-height: 1.2;">Virtual Consultations</h3>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #141414; margin-bottom: 12px; font-weight: 600; text-transform: uppercase;">
+                            Expert insight, flexible investment.
+                        </p>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-bottom: 8px; font-weight: 300;">
+                            Leading your own project but seeking professional guidance? Our hourly virtual consultations offer flexible design support for clients who value expert insight without full-service engagement. These collaborative sessions are ideal for homeowners and property developers who need strategic direction—from space planning and material selection to color palettes and styling decisions.
+                        </p>
+                        <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-bottom: 50px; font-weight: 300;">
+                            As design director and founder, I personally lead each consultation, bringing our studio's decade of experience to your specific challenges and providing actionable design solutions tailored to your timeline and budget.
+                        </p>
+                        <a href="#" onclick="document.getElementById('virtualConsultsModal').style.display='flex'; return false;" style="display: inline-flex; align-items: center; gap: 8px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; font-family: 'Geist Mono', monospace;"
+                           onmouseover="this.style.color='#583c4a'; this.style.transform='scale(1.05)';" 
+                           onmouseout="this.style.color='#141414'; this.style.transform='scale(1)';">
+                            <span style="text-decoration: underline; text-underline-offset: 2px;">Book Consultation</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: all 0.3s ease;">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mood Boards Section -->
+        <section id="process" style="padding: 60px 0 0; width: 100vw; position: relative; margin-left: calc(-50vw + 50%);">
+            <div style="text-align: center; padding: 0 20px 60px;">
+                <h2 style="font-family: 'Geist Mono', monospace; font-size: 1.5rem; font-weight: 500; color: #141414; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Bits and Parts of Our Process</h2>
+                <p style="font-family: 'Geist Mono', monospace; font-size: 0.7rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0; font-weight: 400;">Behind-the-scenes glimpse at our design work and sample project deliverables</p>
+            </div>
+            
+            <div style="text-align: center; padding: 40px 20px 20px;">
+                <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; color: #141414; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0; font-weight: 500;">Featured Project: Prado Ochenta & Tres</p>
+            </div>
+            
+            <div style="border-top: 1.5px solid #141414; border-bottom: 1.5px solid #141414;">
+                <div id="moodboardCarousel" style="position: relative; width: 100%; height: 636px; overflow: hidden; cursor: pointer;">
+                    <div id="moodboardTrack" style="display: flex; height: 100%;">
+                        <img src="https://i.imgur.com/GlXt50C.jpg" alt="Design Process" style="height: 100%; width: auto; object-fit: contain;">
+                        <img src="https://i.imgur.com/GlXt50C.jpg" alt="Design Process" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Bottom CTA Section -->
+        <section style="padding: 80px 80px; width: 100%; position: relative; z-index: 1;">
+            <div style="max-width: 1300px; margin: 0 auto; text-align: center; padding: 0 50px;">
+                <p style="font-family: 'Geist Mono', monospace; font-size: 1.8rem; line-height: 1.5; color: #141414; font-weight: 300; letter-spacing: -0.02em;">
+                    If you think we can help you realize your design<br>
+                    objectives—whether full-service design, strategic consultation,<br>
+                    or conceptual development, reach out to <a href="mailto:interiors@la-urel.com" style="color: #141414; text-decoration: underline; text-underline-offset: 4px;">interiors@la-urel.com</a>.<br>
+                    We'd be happy to guide you further through our process,<br>
+                    let's schedule a discovery meeting.
+                </p>
+            </div>
+        </section>
+        
+        <script>
+            // Mood board smooth continuous scroll
+            let isScrolling = true;
+            let animationId;
+            let currentPosition = 0;
+            const moodboardTrack = document.getElementById('moodboardTrack');
+            const moodboardCarousel = document.getElementById('moodboardCarousel');
+            
+            function smoothScroll() {
+                if (isScrolling) {
+                    currentPosition += 0.45; // Scroll speed (pixels per frame) - slowed down from 0.90
+                    
+                    const firstImage = moodboardTrack.querySelector('img');
+                    const imageWidth = firstImage.offsetWidth;
+                    
+                    // Reset position when we've scrolled through one full image
+                    if (currentPosition >= imageWidth) {
+                        currentPosition = 0;
+                    }
+                    
+                    moodboardTrack.style.transform = `translateX(-${currentPosition}px)`;
+                }
+                
+                animationId = requestAnimationFrame(smoothScroll);
+            }
+            
+            // Start smooth scroll
+            smoothScroll();
+            
+            // Toggle scroll on click
+            moodboardCarousel.addEventListener('click', () => {
+                isScrolling = !isScrolling;
+            });
+        </script>
+        
+    </div>
+    <!-- End interior-design-wrapper -->
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <p class="footer-title">Info</p>
+                <div class="footer-text">
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showShippingModal();">Shipping Terms</a></p>
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showReturnsModal();">Returns & Conditions</a></p>
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showTradeModal();">Trade Program</a></p>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/laurel_dd/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.pinterest.com/00xk5cvuw4lswxqu422ox0n4rov3hw/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.63 7.87 6.35 9.33-.09-.79-.17-2 .04-2.85.19-.77 1.21-5.14 1.21-5.14s-.31-.62-.31-1.54c0-1.44.84-2.52 1.88-2.52.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.89 1.55 1.89 1.86 0 3.29-1.96 3.29-4.79 0-2.5-1.8-4.25-4.37-4.25-2.98 0-4.72 2.23-4.72 4.54 0 .9.35 1.86.78 2.39.09.11.1.2.07.31-.08.33-.26 1.04-.29 1.18-.04.19-.15.23-.35.14-1.31-.61-2.13-2.52-2.13-4.05 0-3.3 2.39-6.33 6.9-6.33 3.62 0 6.43 2.58 6.43 6.03 0 3.6-2.27 6.5-5.42 6.5-1.06 0-2.06-.55-2.4-1.2l-.65 2.48c-.24.91-.88 2.05-1.31 2.75.99.3 2.04.47 3.13.47 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <p class="footer-title">Newsletter</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); showNewsletterModal(); this.reset();">
+                    <input type="email" placeholder="Your email" required class="newsletter-input">
+                    <button type="submit" class="newsletter-button">Submit</button>
+                </form>
+                <div class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="826 500 267 90" style="width: 140px; height: auto;">
+                        <path fill="#141414" d="M842.56,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                        <path fill="#141414" d="M900.54,501.02l17.37,49.25h-12.52l-3.25-9.54h-17.02l-3.25,9.54h-11.83l17.37-49.25h13.14ZM888.5,530.81h10.24l-4.98-14.54h-.28l-4.98,14.54Z"/>
+                        <path fill="#141414" d="M920.94,530.73v-29.71h11.69v27.52c0,7.5,2.08,11.49,8.09,11.49s8.09-3.99,8.09-11.49v-27.52h11.76v29.71c0,14.38-8.65,20.48-19.86,20.48s-19.79-6.1-19.79-20.48Z"/>
+                        <path fill="#141414" d="M995.88,550.27c-.9-1.33-1.45-4.38-1.8-9.46-.35-5.63-2.49-6.88-6.43-6.88h-7.82v16.34h-11.55v-49.25h22c11.28,0,16.88,6.02,16.88,15.63,0,7.19-3.94,11.88-9.27,12.66,4.5,1.02,7.13,3.91,7.61,9.61.62,7.35.83,9.54,2.28,11.33h-11.9ZM988.2,523.69c4.98,0,7.47-1.41,7.47-5.94,0-3.99-2.49-6.1-7.47-6.1h-8.37v12.04h8.37Z"/>
+                        <path fill="#141414" d="M1049.36,550.27h-34.31v-49.25h33.69v10.94h-22.14v8.05h17.09v10.79h-17.09v8.52h22.76v10.94Z"/>
+                        <path fill="#141414" d="M1069.21,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                        <rect fill="#141414" x="826.93" y="574.92" width="266.14" height="12.04"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <p class="footer-title">Contact</p>
+                <div class="footer-text">
+                    <p><a href="mailto:contact@la-urel.com" class="footer-link">contact@la-urel.com</a></p>
+                    <p>+(506) 6317-3038</p>
+                    <p style="margin-top: 15px; opacity: 0.7; font-size: 0.85rem;">Laurel Depto. de Diseño © 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ======================================== END ROW 9 ========================================
+        </div><!-- end page-content -->
+
+    <div id="makemake-wrapper" class="page-wrapper">
+        <div style="padding: 100px; text-align: center; background: white; min-height: 100vh;">
+            <h1>FURNITURE (MAKEMAKE) - PLACEHOLDER</h1>
+            <p>This section is under development</p>
+        </div>
+    </div>
+
+    <div id="properties-wrapper" class="page-wrapper">
+        <div style="padding: 100px; text-align: center; background: #fcffec; min-height: 100vh;">
+            <h1>PROPERTIES - PLACEHOLDER</h1>
+            <p>This section is under development</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLightboxProject = null;
+        let currentLightboxIndex = 0;
+        let projectImages = {
+            1: [ // Casa Piedras Blancas
+                {src: 'https://i.imgur.com/cQeNhr3.jpg', alt: 'Casa Piedras Blancas 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/IpfdGs6.jpg', alt: 'Casa Piedras Blancas 2', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/S8lYOYL.jpg', alt: 'Casa Piedras Blancas 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/UioM0WX.jpg', alt: 'Casa Piedras Blancas 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/ML1R7o2.jpg', alt: 'Casa Piedras Blancas 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/iGIJP4r.jpg', alt: 'Casa Piedras Blancas 6', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/X8raM2b.jpg', alt: 'Casa Piedras Blancas 7', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/dZjHHlE.jpg', alt: 'Casa Piedras Blancas 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/kOzmq1x.jpg', alt: 'Casa Piedras Blancas 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/Q1ALdTY.jpg', alt: 'Casa Piedras Blancas 10', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/NvCKVEd.jpg', alt: 'Casa Piedras Blancas 11', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/F5PIFGE.jpg', alt: 'Casa Piedras Blancas 12', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/g5o54hY.jpg', alt: 'Casa Piedras Blancas 13', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/du72QMD.jpg', alt: 'Casa Piedras Blancas 14', style: 'height: 100%; width: 100%; object-fit: cover; object-position: left center;'}
+            ],
+            2: [ // A House of Color
+                {src: 'https://i.imgur.com/TWpYoLp.jpg', alt: 'A House of Color 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/CpyAQ6R.jpg', alt: 'A House of Color 2', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/CHmSiQG.jpg', alt: 'A House of Color 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/qTKcFWh.jpg', alt: 'A House of Color 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/EezitHz.jpg', alt: 'A House of Color 5', style: 'height: 100%; width: 100%; object-fit: cover;'}
+            ],
+            3: [ // Casa Sirena
+                {src: 'https://i.imgur.com/x1xA9DD.jpg', alt: 'Casa Sirena 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/TjFjtbK.jpg', alt: 'Casa Sirena 2', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/RJaAb9q.jpg', alt: 'Casa Sirena 3', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/gGhYb9A.jpg', alt: 'Casa Sirena 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/RrPqthY.jpg', alt: 'Casa Sirena 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/S2efaoi.jpg', alt: 'Casa Sirena 6', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/HUWMPHR.jpg', alt: 'Casa Sirena 7', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/jAF2u0E.jpg', alt: 'Casa Sirena 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/OhvMTGb.jpg', alt: 'Casa Sirena 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/0fVzFwc.jpg', alt: 'Casa Sirena 10', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/zu5Ccoj.jpg', alt: 'Casa Sirena 11', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/oFqtIPD.jpg', alt: 'Casa Sirena 12', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/vfi5bxx.jpg', alt: 'Casa Sirena 13', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/rKd6IBu.jpg', alt: 'Casa Sirena 14', style: 'height: 100%; width: 100%; object-fit: cover;'}
+            ],
+            5: [ // A House for Susanne
+                {src: 'https://i.imgur.com/1jF3imt.jpg', alt: 'A House for Susanne 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/LBv9alY.jpg', alt: 'A House for Susanne 2', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/AheAAp8.jpg', alt: 'A House for Susanne 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/xbMcROm.jpg', alt: 'A House for Susanne 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/ci7lkxJ.jpg', alt: 'A House for Susanne 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/i7JiAh4.jpg', alt: 'A House for Susanne 6', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/QZh186y.jpg', alt: 'A House for Susanne 7', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/9mILHef.jpg', alt: 'A House for Susanne 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/5vvbDUM.jpg', alt: 'A House for Susanne 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/nVF4ZzW.jpg', alt: 'A House for Susanne 10', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/VpyuxGs.jpg', alt: 'A House for Susanne 11', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/ZyLo4ap.jpg', alt: 'A House for Susanne 12', style: 'height: 100%; width: 100%; object-fit: cover;'}
+            ],
+            6: [ // Friends & Family
+                {src: 'https://i.imgur.com/NNuWeQC.jpg', alt: 'Friends & Family 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/pu0JEOE.jpg', alt: 'Friends & Family 2', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/lRW4XrJ.jpg', alt: 'Friends & Family 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/CGs2nwW.jpg', alt: 'Friends & Family 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/v9U4Fcm.jpg', alt: 'Friends & Family 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/9qSn6I8.jpg', alt: 'Friends & Family 6', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/kAt5y1D.jpg', alt: 'Friends & Family 7', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/UfJt5tV.jpg', alt: 'Friends & Family 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/LtfLa26.jpg', alt: 'Friends & Family 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/sNqlRDk.jpg', alt: 'Friends & Family 10', style: 'height: 100%; width: 100%; object-fit: cover; object-position: left center;'},
+                {src: 'https://i.imgur.com/aPQEklw.jpg', alt: 'Friends & Family 11', style: 'height: 100%; width: 100%; object-fit: cover; object-position: center center;'},
+                {src: 'https://i.imgur.com/aKTUqkD.jpg', alt: 'Friends & Family 12', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/apgceYN.jpg', alt: 'Friends & Family 13', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/HuQD3JY.jpg', alt: 'Friends & Family 14', style: 'height: 100%; width: 100%; object-fit: cover;'}
+            ],
+            7: [ // Calle Virginia Diez
+                {src: 'https://i.imgur.com/qxgRfLr.jpg', alt: 'Calle Virginia Diez 1', style: 'height: 100%; width: 100%; object-fit: cover; object-position: left center;'},
+                {src: 'https://i.imgur.com/mbjDhqa.jpg', alt: 'Calle Virginia Diez 2', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/FfBj5EB.jpg', alt: 'Calle Virginia Diez 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/dpywAmA.jpg', alt: 'Calle Virginia Diez 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/QbkRRJq.jpg', alt: 'Calle Virginia Diez 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/gPuHsOh.jpg', alt: 'Calle Virginia Diez 6', style: 'height: 100%; width: 100%; object-fit: cover; object-position: left center;'},
+                {src: 'https://i.imgur.com/CAwY9d0.jpg', alt: 'Calle Virginia Diez 7', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/BOKYZdR.jpg', alt: 'Calle Virginia Diez 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/wW0VfGj.jpg', alt: 'Calle Virginia Diez 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/XullJ8t.jpg', alt: 'Calle Virginia Diez 10', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/k3QyatH.jpg', alt: 'Calle Virginia Diez 11', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/bt1Ytqx.jpg', alt: 'Calle Virginia Diez 12', style: 'height: 100%; width: 100%; object-fit: cover;'}
+            ],
+            8: [ // At The End of The Road
+                {src: 'https://i.imgur.com/PTONGTm.jpg', alt: 'At The End of The Road 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/iHzhjzv.jpg', alt: 'At The End of The Road 2', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/3EmSYQc.jpg', alt: 'At The End of The Road 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/A9s5pOU.jpg', alt: 'At The End of The Road 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/DD0uMOT.jpg', alt: 'At The End of The Road 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/efjESPH.jpg', alt: 'At The End of The Road 6', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/YokYuns.jpg', alt: 'At The End of The Road 7', style: 'height: 100%; width: 100%; object-fit: cover; object-position: center 30%;'},
+                {src: 'https://i.imgur.com/FKpN3oP.jpg', alt: 'At The End of The Road 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/XTfZOBJ.jpg', alt: 'At The End of The Road 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/R6ZxMm7.jpg', alt: 'At The End of The Road 10', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/tbFJJ8b.jpg', alt: 'At The End of The Road 11', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/DG4tqlC.jpg', alt: 'At The End of The Road 12', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/AL74GAw.jpg', alt: 'At The End of The Road 13', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/a2IiPeI.jpg', alt: 'At The End of The Road 14', style: 'height: 100%; width: 100%; object-fit: cover;'}
+            ],
+            9: [ // Casa Laurel
+                {src: 'https://i.imgur.com/UAtJF69.jpg', alt: 'Casa Laurel 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/r4m4ute.jpg', alt: 'Casa Laurel 2', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/AxWIjWP.jpg', alt: 'Casa Laurel 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/9XEzje7.jpg', alt: 'Casa Laurel 4', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/X6V5tVn.jpg', alt: 'Casa Laurel 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/4RThpXn.jpg', alt: 'Casa Laurel 6', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/IBLMQOb.jpg', alt: 'Casa Laurel 7', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/pAVjO4I.jpg', alt: 'Casa Laurel 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/18HZ1tb.jpg', alt: 'Casa Laurel 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/bFbHXD2.jpg', alt: 'Casa Laurel 10', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/tw80JDQ.jpg', alt: 'Casa Laurel 11', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/l8nh1hD.jpg', alt: 'Casa Laurel 12', style: 'height: 100%; width: 100%; object-fit: cover; object-position: left center;'},
+                {src: 'https://i.imgur.com/c1B2ovW.jpg', alt: 'Casa Laurel 13', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'}
+            ],
+            10: [ // Punta Plumeria
+                {src: 'https://i.imgur.com/pnzPXJh.jpg', alt: 'Punta Plumeria 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/Pbu2Zfm.jpg', alt: 'Punta Plumeria 2', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/5FURGg5.jpg', alt: 'Punta Plumeria 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/Rm66h2C.jpg', alt: 'Punta Plumeria 4', style: 'height: 100%; width: 100%; object-fit: cover; object-position: left center;'},
+                {src: 'https://i.imgur.com/CG1JxSp.jpg', alt: 'Punta Plumeria 5', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/cpHQpVB.jpg', alt: 'Punta Plumeria 6', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/6l1erZ9.jpg', alt: 'Punta Plumeria 7', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/kKq0BGl.jpg', alt: 'Punta Plumeria 8', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/Lf3MK6m.jpg', alt: 'Punta Plumeria 9', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/ESfrdfx.jpg', alt: 'Punta Plumeria 10', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/T6EH40E.jpg', alt: 'Punta Plumeria 11', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/IPTGAaK.jpg', alt: 'Punta Plumeria 12', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/tXoUadZ.jpg', alt: 'Punta Plumeria 13', style: 'height: 100%; width: 100%; object-fit: cover;'}
+            ],
+            11: [ // Casa Ventanas
+                {src: 'https://i.imgur.com/BDyWzLe.jpg', alt: 'Casa Ventanas 1', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/69UgLkL.jpg', alt: 'Casa Ventanas 2', style: 'height: 100%; width: 100%; object-fit: cover; transform: scale(1.05);'},
+                {src: 'https://i.imgur.com/jrwXcWS.jpg', alt: 'Casa Ventanas 3', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/cCUpVm7.jpg', alt: 'Casa Ventanas 4', style: 'height: 100%; width: 100%; object-fit: cover; object-position: right center;'},
+                {src: 'https://i.imgur.com/TyJi6x7.jpg', alt: 'Casa Ventanas 5', style: 'height: 100%; width: 100%; object-fit: cover;'},
+                {src: 'https://i.imgur.com/CqLowjA.jpg', alt: 'Casa Ventanas 6', style: 'height: 100%; width: 100%; object-fit: cover; transform: scale(1.05);'}
+            ]
+        };
+        
+        // Project descriptions for filmstrip text panel
+        let projectDescriptions = {
+            1: {
+                title: 'Casa Piedras Blancas',
+                text: 'Contemporary organic residence defined by warm whites, natural oak tones, and fluted details with low-profile furniture and curved forms throughout. This neutral home is accentuated by pops of blue and pattern. While each interior creates its own serene moment, our favorite feature remains the floor treatments—an array of natural Tempisque stone in varying formats and textures paired with bespoke cement mosaics to deliver a lasting impact.',
+                collaborators: [
+                    { label: 'Photography', name: 'Alvaro Arroyo' },
+                    { label: 'Architecture Studio', name: 'Anthony Way' },
+                    { label: 'General Contractor', name: 'Frame Projects' }
+                ]
+            },
+            2: {
+                title: 'A House of Color',
+                text: 'This permanent residence embodies the clients\' artistic vision brought to life through unapologetic color and bold design choices. With a clear creative direction from the outset, the owners embraced vibrant hues as the home\'s defining characteristic. Planters punctuate the architecture throughout, designed with anticipation—waiting for gardens to overflow and eventually envelope the home in greenery. Bespoke trellis work and custom elements provide the supporting structure for this evolving dialogue between architecture and nature.',
+                collaborators: [
+                    { label: 'Photography', name: 'Roberto Castillo' },
+                    { label: 'Architecture Studio', name: 'RAWA Arquitectura' },
+                    { label: 'General Contractor', name: 'Frame Projects' }
+                ]
+            },
+            3: {
+                title: 'Casa Sirena',
+                text: 'A complete renovation that reimagined every element. New flooring, redesigned ceilings, custom cabinetry, and carefully selected finishes throughout transformed this residence into a refined coastal retreat. Drawing inspiration from sirens and the marine world, the color palette embraces oceanic hues—deep blues and aquatic tones that resurface throughout the spaces, bringing cohesion and contemporary elegance to every space.',
+                collaborators: [
+                    { label: 'Photography', name: 'Juan Tribaldos' },
+                    { label: 'General Contractor', name: 'Remodelaciones RMR' }
+                ]
+            },
+            4: {
+                title: 'Prado Ochenta & Tres',
+                text: 'This was a partial scope project, encompassing conceptual and design development services, material and finish selections, furnishing specifications, and detailed construction documentation. Through iterative refinement and client collaboration, we established a comprehensive design direction that balanced aesthetic vision with functional requirements. These slides offer a glimpse into our design deliverables. We hope that the comprehensive design package will help our clients successfully market this exceptional investment property opportunity.',
+                collaborators: []
+            },
+            5: {
+                title: 'A House for Susanne',
+                text: 'A Kelly Green love affair. Our client expressed a deep desire to have this signature color present throughout the home—a directive we embraced wholeheartedly. Working closely with the homeowners, we harmonized four essential elements: Spanish colonial architecture, tropical building materials, elegant finishes, and the underlining memory of a mid-western North American ranch. Rich wood details, custom millwork, and carefully selected furnishings come together in a home defined by craftsmanship and understated elegance.',
+                collaborators: [
+                    { label: 'Photography', name: 'Juan Tribaldos' },
+                    { label: 'Architecture Studio', name: 'Lake Geneva Architects' },
+                    { label: 'General Contractor', name: 'Constructora Alfaco' }
+                ]
+            },
+            6: {
+                title: 'Friends & Family',
+                text: 'Current trends meet everyday comfort. Natural light and thoughtful spatial planning are complemented by warm wood tones, layered textiles, and carefully curated furnishings. Special attention was paid to lighting details—choosing organic, contemporary pieces that add character throughout. The space balances minimalist sensibilities with livable warmth. Designed as a home for a family to grow into as the years go by, with all the building blocks and room necessary for personalization.',
+                collaborators: [
+                    { label: 'Photography', name: 'Alvaro Arroyo' },
+                    { label: 'Architecture Studio', name: 'LOOP' },
+                    { label: 'General Contractor', name: 'Inmobiliaria Diversa' }
+                ]
+            },
+            7: {
+                title: 'Calle Virginia Diez',
+                text: 'Mediterranean influences meet tropical living in this warm, inviting residence. Natural materials, from weathered wood to handcrafted tile, create tactile richness throughout. The design embraces open, breathable spaces that celebrate indoor-outdoor connection, while maintaining an understated elegance. A palette of warm neutrals, terracotta, and ocean-inspired blues brings cohesion to interiors that feel effortlessly refined yet thoroughly livable.',
+                collaborators: [
+                    { label: 'Photography', name: 'Juan Tribaldos' },
+                    { label: 'Architecture Studio', name: 'Lake Geneva Architects' },
+                    { label: 'General Contractor', name: 'Constructora Alfaco' }
+                ]
+            },
+            8: {
+                title: 'At The End of The Road',
+                text: 'This elegant coastal retreat embodies four years of meticulous design work, blending French provincial undertones with contemporary refinement. Our concept maximized texture through architectural molding, wall-coverings, and rich veneers. Despite the abundance of detail, a cohesive color palette keeps the spaces feeling light and harmonious—a true gem that balances richness with restraint.',
+                collaborators: [
+                    { label: '3D Rendering Studio', name: 'ARCHE Studio' },
+                    { label: 'Architecture Studio', name: 'RAWA Arquitectura' },
+                    { label: 'General Contractor', name: 'Constructora Alfaco' }
+                ]
+            },
+            9: {
+                title: 'Casa Laurel',
+                text: 'An urban tropical retreat designed as a cultivated yet modern sanctuary with a sense of sophisticated simplicity. Created as a market-ready residence, we selected furniture with broad aesthetic appeal—unique yet approachable for diverse tastes. The refined space features clean lines, natural materials, and indirect cove lighting that creates luminous, spacious interiors throughout.',
+                collaborators: [
+                    { label: 'Photography', name: 'Alvaro Arroyo' },
+                    { label: 'Architecture Studio', name: 'Laurel Departamento de Diseño' },
+                    { label: 'General Contractor', name: 'Machado / Solano' }
+                ]
+            },
+            10: {
+                title: 'Punta Plumeria',
+                text: 'Restraint becomes luxury in this coastal residence. Working closely with the homeowners, we crafted contemporary transitional interiors suited for life by the sea. Local vendors furnished nearly every space, their pieces harmonizing with the home\'s architectural dialogue between plaster vaulted ceilings and panoramic ocean views framed by expansive glass. Each detail was considered with precision, avoiding excess while embracing the essential—creating a fresh yet elegant retreat that speaks to both place and purpose.',
+                collaborators: [
+                    { label: 'Photography', name: 'Juan Tribaldos' },
+                    { label: 'Architecture Studio', name: 'RAWA Arquitectura' },
+                    { label: 'General Contractor', name: 'Frame Projects' }
+                ]
+            },
+            11: {
+                title: 'Casa Ventanas',
+                text: 'PROJECT DESCRIPTION TEXT GOES HERE - Replace this text with the project description.',
+                collaborators: [
+                    { label: 'Photography', name: 'Photographer Name' },
+                    { label: 'Architecture Studio', name: 'Architecture Studio Name' },
+                    { label: 'General Contractor', name: 'Contractor Name' }
+                ]
+            }
+        };
+
+        function slideTo(carouselId, slideIndex) {
+            const carousel = document.getElementById('carousel' + carouselId);
+            const dotsContainer = document.getElementById('dots' + carouselId);
+            
+            if (carousel && dotsContainer) {
+                carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
+                carousel.setAttribute('data-current', slideIndex);
+                
+                const wrappers = dotsContainer.querySelectorAll('.carousel-dot-wrapper');
+                wrappers.forEach((wrapper, i) => {
+                    const dot = wrapper.querySelector('.carousel-dot');
+                    if (dot) {
+                        dot.style.opacity = (i === slideIndex) ? '0.5' : '1';
+                    }
+                });
+            }
+        }
+
+        function initCarouselDots() {
+            const carouselIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+            const maxVisibleSlides = 4; // Show only 4 slides in carousel
+            
+            carouselIds.forEach(id => {
+                const carousel = document.getElementById('carousel' + id);
+                const dotsContainer = document.getElementById('dots' + id);
+                
+                if (carousel && dotsContainer) {
+                    const slides = carousel.children;
+                    const totalSlides = slides.length;
+                    const visibleSlides = Math.min(maxVisibleSlides, totalSlides);
+                    
+                    dotsContainer.innerHTML = '';
+                    
+                    // Create dots only for first 4 slides
+                    for (let i = 0; i < visibleSlides; i++) {
+                        const wrapper = document.createElement('span');
+                        wrapper.className = 'carousel-dot-wrapper';
+                        
+                        const dot = document.createElement('span');
+                        dot.className = 'carousel-dot';
+                        dot.style.opacity = i === 0 ? '0.5' : '1';
+                        
+                        wrapper.onclick = () => slideTo(id, i);
+                        wrapper.appendChild(dot);
+                        dotsContainer.appendChild(wrapper);
+                    }
+                    
+                    // Add "+" button for all projects except carousel4 (Prado Ochenta & Tres)
+                    // This opens the full filmstrip lightbox with all images
+                    if (id !== 4) {
+                        const plusButton = document.createElement('div');
+                        plusButton.style.cssText = 'position: absolute; right: -5px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; opacity: 1; padding: 10px;';
+                        plusButton.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+                        plusButton.onmouseover = () => {
+                            plusButton.style.transform = 'translateY(-50%) scale(1.4)';
+                        };
+                        plusButton.onmouseout = () => {
+                            plusButton.style.transform = 'translateY(-50%) scale(1)';
+                        };
+                        plusButton.onclick = () => openMagazineLightbox(0, id);
+                        dotsContainer.style.position = 'relative';
+                        dotsContainer.appendChild(plusButton);
+                    }
+                }
+            });
+        }
+
+        function initLightboxImages() {
+            for (let i = 1; i <= 11; i++) {
+                // Skip carousel4 (Prado Ochenta & Tres) - no lightbox for this project
+                if (i === 4) continue;
+                
+                const carousel = document.getElementById('carousel' + i);
+                if (carousel) {
+                    const images = carousel.querySelectorAll('img');
+                    images.forEach((img, index) => {
+                        if (img.src && !img.src.includes('placeholder')) {
+                            img.style.cursor = 'pointer';
+                            // Click handler uses the index in the carousel, but opens full filmstrip
+                            img.onclick = () => openMagazineLightbox(index, i);
+                        }
+                    });
+                }
+            }
+        }
+
+        // Magazine Filmstrip Functions for All Projects
+        let magazineImages = [];
+        let filmstripElement = null;
+        let isDragging = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        let currentSlide = 2; // Start on third image (index 2)
+
+        function openMagazineLightbox(imageIndex, projectId) {
+            const lightbox = document.getElementById('magazineLightbox');
+            const filmstrip = document.getElementById('magazineFilmstrip');
+            const textPanel = document.getElementById('magazineTextPanel');
+            
+            // Get images from the projectImages array
+            magazineImages = projectImages[projectId] || [];
+            
+            // Hide filmstrip initially to prevent positioning glitch
+            filmstrip.style.opacity = '0';
+            
+            // Build filmstrip with images only
+            filmstrip.innerHTML = '';
+            magazineImages.forEach((img, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'magazine-film-slide';
+                const image = document.createElement('img');
+                image.src = img.src;
+                image.alt = img.alt;
+                slide.appendChild(image);
+                filmstrip.appendChild(slide);
+            });
+            
+            // Populate text panel if description exists
+            const projectDesc = projectDescriptions[projectId];
+            if (projectDesc && textPanel) {
+                textPanel.innerHTML = '';
+                
+                // Add project title
+                if (projectDesc.title) {
+                    const titleElement = document.createElement('h3');
+                    titleElement.style.cssText = 'font-size: 1.1rem; line-height: 1.2; color: #141414; margin-bottom: 16px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; text-align: left;';
+                    titleElement.textContent = projectDesc.title;
+                    textPanel.appendChild(titleElement);
+                }
+                
+                const descText = document.createElement('p');
+                descText.style.cssText = 'font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-bottom: 16px; font-weight: 300; text-align: left;';
+                descText.textContent = projectDesc.text;
+                textPanel.appendChild(descText);
+                
+                if (projectDesc.collaborators && projectDesc.collaborators.length > 0) {
+                    const collabContainer = document.createElement('div');
+                    collabContainer.style.cssText = 'font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-top: 20px; text-align: left;';
+                    
+                    const collabTitle = document.createElement('p');
+                    collabTitle.style.cssText = 'margin-bottom: 10px; font-weight: 300;';
+                    collabTitle.textContent = 'In collaboration with:';
+                    collabContainer.appendChild(collabTitle);
+                    
+                    projectDesc.collaborators.forEach(collab => {
+                        const collabItem = document.createElement('p');
+                        collabItem.style.cssText = 'margin-top: 6px; font-weight: 300;';
+                        collabItem.innerHTML = `<strong style="color: #141414; font-weight: 500;">${collab.label}</strong><br>${collab.name}`;
+                        collabContainer.appendChild(collabItem);
+                    });
+                    
+                    textPanel.appendChild(collabContainer);
+                }
+                textPanel.style.display = 'block';
+                textPanel.style.opacity = '1';
+                
+                // Center the text panel in the left margin space
+                setTimeout(() => {
+                    const navCenter = document.querySelector('.nav-center');
+                    const navCenterRect = navCenter.getBoundingClientRect();
+                    const leftBoundary = navCenterRect.left;
+                    
+                    // Calculate center position: half of the left margin space minus half the panel width, plus 20px offset
+                    const centerPosition = (leftBoundary / 2) - (280 / 2) + 20;
+                    textPanel.style.left = `${centerPosition}px`;
+                }, 50);
+            } else if (textPanel) {
+                textPanel.style.display = 'none';
+            }
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Start at the right boundary (first image aligned with left divider)
+            setTimeout(() => {
+                const navCenter = document.querySelector('.nav-center');
+                const navCenterRect = navCenter.getBoundingClientRect();
+                const leftBoundary = navCenterRect.left;
+                
+                // Position at the minimum scroll (rightmost position)
+                filmstrip.style.transition = 'none';
+                filmstrip.style.transform = `translateX(${leftBoundary}px)`;
+                
+                // Show filmstrip after positioning with smooth fade-in
+                setTimeout(() => {
+                    filmstrip.style.transition = 'opacity 0.3s ease';
+                    filmstrip.style.opacity = '1';
+                }, 20);
+            }, 100);
+            
+            // Setup drag functionality
+            setupDragScroll(filmstrip);
+        }
+
+        function scrollToSlide(index, smooth = true) {
+            const filmstrip = document.getElementById('magazineFilmstrip');
+            const slides = filmstrip.querySelectorAll('.magazine-film-slide');
+            
+            if (slides[index]) {
+                const slide = slides[index];
+                const slideRect = slide.getBoundingClientRect();
+                
+                // Calculate position to center the slide
+                const slideCenter = slide.offsetLeft + (slideRect.width / 2);
+                const viewportCenter = window.innerWidth / 2;
+                const scrollPosition = slideCenter - viewportCenter;
+                
+                filmstrip.style.transition = 'none';
+                filmstrip.style.transform = `translateX(-${scrollPosition}px)`;
+                
+                currentSlide = index;
+            }
+        }
+
+        function setupDragScroll(element) {
+            let currentTranslateX = 0;
+            
+            // Calculate scroll boundaries based on actual nav-center position
+            function getScrollBoundaries() {
+                const navCenter = document.querySelector('.nav-center');
+                const navCenterRect = navCenter.getBoundingClientRect();
+                const leftBoundary = navCenterRect.left;
+                const rightBoundary = window.innerWidth; // Use full viewport width for right boundary
+                
+                const filmstripWidth = element.scrollWidth;
+                
+                // Minimum scroll (most positive/rightward) - when scrolled all the way right, first image aligns with left border
+                const minScroll = leftBoundary;
+                
+                // Maximum scroll left (most negative/leftward) - when scrolled all the way left, last image aligns with right border
+                const maxScrollLeft = -(filmstripWidth - rightBoundary);
+                
+                return { maxScrollLeft, minScroll };
+            }
+            
+            element.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX;
+                
+                // Get current transform value
+                const style = window.getComputedStyle(element);
+                const matrix = new DOMMatrix(style.transform);
+                currentTranslateX = matrix.m41;
+                
+                element.style.transition = 'none';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const x = e.pageX;
+                const walk = (x - startX);
+                let newPosition = currentTranslateX + walk;
+                
+                // Apply boundaries
+                const { maxScrollLeft, minScroll } = getScrollBoundaries();
+                newPosition = Math.max(maxScrollLeft, Math.min(minScroll, newPosition));
+                
+                element.style.transform = `translateX(${newPosition}px)`;
+            });
+
+            document.addEventListener('mouseup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const x = e.pageX;
+                const walk = (x - startX);
+                let finalPosition = currentTranslateX + walk;
+                
+                // Apply boundaries
+                const { maxScrollLeft, minScroll } = getScrollBoundaries();
+                finalPosition = Math.max(maxScrollLeft, Math.min(minScroll, finalPosition));
+                
+                // Update the current position for next drag
+                element.style.transform = `translateX(${finalPosition}px)`;
+            });
+        }
+
+        function closeMagazineLightbox() {
+            document.getElementById('magazineLightbox').classList.remove('active');
+            document.body.style.overflow = '';
+            isDragging = false;
+            
+            // Clear any text selection that might have occurred
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            } else if (document.selection) {
+                document.selection.empty();
+            }
+        }
+
+        // Call this after page load
+        window.addEventListener('load', initLightboxImages);
+
+
+        function showPage(page) {
+            const pages = ['main', 'interior', 'makemake', 'properties'];
+            pages.forEach(p => {
+                let wrapper = document.getElementById(p === 'main' ? 'main-wrapper' : p + '-wrapper');
+                if (p === 'interior') wrapper = document.getElementById('interior-design-wrapper');
+                if (wrapper) wrapper.classList.toggle('active', p === page);
+            });
+            
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.page === page);
+            });
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Cart functionality with localStorage for cross-page persistence
+        let cartItems = [];
+
+        // Load cart from localStorage on page load
+        function loadCart() {
+            const savedCart = localStorage.getItem('laurelCart');
+            if (savedCart) {
+                cartItems = JSON.parse(savedCart);
+            }
+            updateCart();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('laurelCart', JSON.stringify(cartItems));
+        }
+
+        function addToCart(name, price, code, imageUrl, originalPrice = null) {
+            // Add item with unique timestamp code and image
+            const cartItem = {
+                name: name,
+                price: price,
+                originalPrice: originalPrice || price, // Store original price if provided
+                code: `${code}-${Date.now()}`,
+                image: imageUrl || ''
+            };
+            
+            cartItems.push(cartItem);
+            saveCart();
+            updateCart();
+            
+            // Show cart briefly to confirm addition
+            toggleCart();
+        }
+
+        function updateCart() {
+            updateCartCounter();
+            updateCartDisplay();
+        }
+
+        function updateCartCounter() {
+            const counter = document.getElementById('cartCounter');
+            if (counter) {
+                counter.textContent = cartItems.length;
+                counter.classList.toggle('has-items', cartItems.length > 0);
+            }
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('cartOverlay');
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+                const cartSubtotalElement = document.getElementById('cartSubtotal');
+                const savingsLine = document.getElementById('savingsLine');
+                const cartIVAElement = document.getElementById('cartIVA');
+                
+                if (cartSubtotalElement) cartSubtotalElement.textContent = '$0';
+                if (savingsLine) savingsLine.style.display = 'none';
+                if (cartIVAElement) cartIVAElement.textContent = '$0';
+                cartTotalElement.textContent = '$0';
+                checkoutBtn.disabled = true;
+            } else {
+                // Group identical items together
+                const groupedItems = [];
+                
+                cartItems.forEach((item, index) => {
+                    const existingGroup = groupedItems.find(group => 
+                        group.name === item.name &&
+                        group.price === item.price &&
+                        group.size === item.size &&
+                        group.dimensions === item.dimensions &&
+                        group.mdfColor === item.mdfColor &&
+                        group.cedarColor === item.cedarColor
+                    );
+                    
+                    if (existingGroup) {
+                        existingGroup.quantity += 1;
+                        existingGroup.indices.push(index);
+                    } else {
+                        groupedItems.push({
+                            ...item,
+                            quantity: 1,
+                            indices: [index]
+                        });
+                    }
+                });
+
+                let total = 0;
+                let html = '';
+
+                groupedItems.forEach((group) => {
+                    // Build specifications display
+                    let specsHTML = '';
+                    if (group.dimensions) {
+                        specsHTML += `<div class="cart-item-spec">${group.size}: ${group.dimensions}</div>`;
+                    } else if (group.size) {
+                        specsHTML += `<div class="cart-item-spec">${group.size}</div>`;
+                    }
+                    if (group.mdfColor && group.mdfColor !== 'No color selected' && group.mdfColor !== 'N/A') {
+                        specsHTML += `<div class="cart-item-spec">MDF: ${group.mdfColor}</div>`;
+                    }
+                    if (group.cedarColor && group.cedarColor !== 'No wood selected' && group.cedarColor !== 'N/A') {
+                        specsHTML += `<div class="cart-item-spec">Cedar: ${group.cedarColor}</div>`;
+                    }
+                    
+                    const lineTotal = group.price * group.quantity;
+                    total += lineTotal;
+                    
+                    // Build price display based on quantity and discount
+                    let priceHTML = '';
+                    const safePrice = group.price || 0;
+                    const safeOriginalPrice = group.originalPrice || safePrice;
+                    const safeLineTotal = lineTotal || 0;
+                    const hasDiscount = safeOriginalPrice > safePrice;
+                    
+                    if (group.quantity > 1) {
+                        if (hasDiscount) {
+                            priceHTML = `
+                                <div class="cart-item-price">
+                                    <span style="text-decoration: line-through; opacity: 0.6;">$${safeOriginalPrice.toLocaleString()}</span>
+                                    $${safePrice.toLocaleString()} each
+                                </div>
+                                <div class="cart-item-price" style="font-weight: 600;">$${safeLineTotal.toLocaleString()} total</div>
+                            `;
+                        } else {
+                            priceHTML = `
+                                <div class="cart-item-price">$${safePrice.toLocaleString()} each</div>
+                                <div class="cart-item-price" style="font-weight: 600;">$${safeLineTotal.toLocaleString()} total</div>
+                            `;
+                        }
+                    } else {
+                        if (hasDiscount) {
+                            priceHTML = `
+                                <div class="cart-item-price">
+                                    <span style="text-decoration: line-through; opacity: 0.6;">$${safeOriginalPrice.toLocaleString()}</span>
+                                    $${safePrice.toLocaleString()}
+                                </div>
+                            `;
+                        } else {
+                            priceHTML = `<div class="cart-item-price">$${safePrice.toLocaleString()}</div>`;
+                        }
+                    }
+                    
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-image">${group.image ? `<img src="${group.image}" alt="${group.name}">` : ''}</div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${group.name}</div>
+                                ${group.quantity > 1 ? `<div class="cart-item-code">Qty: ${group.quantity}</div>` : ''}
+                                ${specsHTML}
+                                ${priceHTML}
+                            </div>
+                            <button class="cart-item-remove" onclick="removeFromCart(${group.indices.join(',')})">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                });
+
+                cartItemsContainer.innerHTML = html;
+                
+                // Calculate and display all totals
+                const subtotal = total;
+                const originalTotal = groupedItems.reduce((sum, group) => {
+                    return sum + ((group.originalPrice || group.price || 0) * group.quantity);
+                }, 0);
+                const savings = originalTotal - subtotal;
+                const iva = Math.round(subtotal * 0.13);
+                const finalTotal = subtotal + iva;
+                
+                // Update all total displays
+                const cartSubtotalElement = document.getElementById('cartSubtotal');
+                const cartSavingsElement = document.getElementById('cartSavings');
+                const savingsLine = document.getElementById('savingsLine');
+                const cartIVAElement = document.getElementById('cartIVA');
+                
+                if (cartSubtotalElement) cartSubtotalElement.textContent = `$${subtotal.toLocaleString()}`;
+                if (savings > 0 && cartSavingsElement && savingsLine) {
+                    cartSavingsElement.textContent = `-$${savings.toLocaleString()}`;
+                    savingsLine.style.display = 'flex';
+                } else if (savingsLine) {
+                    savingsLine.style.display = 'none';
+                }
+                if (cartIVAElement) cartIVAElement.textContent = `$${iva.toLocaleString()}`;
+                cartTotalElement.textContent = `$${finalTotal.toLocaleString()}`;
+                
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        function removeFromCart(indices) {
+            // Convert comma-separated string to array of numbers
+            const indexArray = indices.toString().split(',').map(Number);
+            // Sort in descending order to remove from end first (prevents index shifting issues)
+            indexArray.sort((a, b) => b - a);
+            // Remove all items in the group
+            indexArray.forEach(index => {
+                cartItems.splice(index, 1);
+            });
+            saveCart();
+            updateCart();
+        }
+
+        function checkout() {
+            if (cartItems.length > 0) {
+                const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+                const itemsList = cartItems.map(item => `â€¢ ${item.name} - $${item.price.toLocaleString()}`).join('\n');
+
+                alert(`Thank you for your order!\n\n${itemsList}\n\nTotal: $${total.toLocaleString()}\n\nWe'll contact you shortly to complete your purchase.`);
+
+                cartItems = [];
+                saveCart();
+                updateCart();
+                closeCart();
+            }
+        }
+
+        function clearCart() {
+            if (cartItems.length > 0) {
+                document.getElementById('clearModal').classList.add('active');
+                document.addEventListener('click', handleClickOutside);
+                document.addEventListener('keydown', handleEscape);
+            }
+        }
+
+        function closeClearModal() {
+            document.getElementById('clearModal').classList.remove('active');
+            document.removeEventListener('click', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
+        }
+
+        function confirmClearCart() {
+            cartItems = [];
+            saveCart();
+            updateCart();
+            closeClearModal();
+        }
+
+        function handleClickOutside(e) {
+            const modal = document.getElementById('clearModal');
+            if (!modal.contains(e.target) && !e.target.classList.contains('clear-items-link')) {
+                closeClearModal();
+            }
+        }
+
+        function handleEscape(e) {
+            if (e.key === 'Escape') {
+                closeClearModal();
+            }
+        }
+
+        // Newsletter Modal Functions
+        function showNewsletterModal() {
+            document.getElementById('newsletterModal').classList.add('active');
+        }
+
+        function closeNewsletterModal() {
+            document.getElementById('newsletterModal').classList.remove('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart(); // Load cart on page load
+            initCarouselDots();
+            initLightboxImages();
+            
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    // Only prevent default if this is a data-page link (not a real href)
+                    if (item.dataset.page) {
+                        e.preventDefault();
+                        showPage(item.dataset.page);
+                    }
+                    // If it has an href, let it navigate normally
+                });
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMagazineLightbox();
+        });
+
+        // Navigation scroll handler
+        const navRibbon = document.getElementById('navRibbon');
+        const navIcons = document.querySelectorAll('.nav-icon svg');
+        const navIconCircles = document.querySelectorAll('.nav-icon svg circle');
+        const backArrow = document.querySelector('.back-arrow-icon path');
+        
+        let ticking = false;
+
+        function handleScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const scrollThreshold = window.innerHeight * 0.85; // 85% of viewport height
+                    const isScrolled = scrolled > scrollThreshold;
+                    const strokeColor = isScrolled ? '#141414' : '#faf8f3';
+                    
+                    navRibbon.classList.toggle('scrolled', isScrolled);
+                    navIcons.forEach(icon => icon.setAttribute('stroke', strokeColor));
+                    // Only fill circles that should be filled (menu dots and cart wheels, not search circle)
+                    navIconCircles.forEach(circle => {
+                        // Skip the search icon circle - it should never be filled
+                        if (circle.getAttribute('r') !== '7') {
+                            circle.setAttribute('fill', strokeColor);
+                        }
+                    });
+                    
+                    // Only update back arrow if not hovering
+                    if (backArrow) {
+                        const backArrowLink = backArrow.closest('a');
+                        if (!backArrowLink || !backArrowLink.matches(':hover')) {
+                            backArrow.setAttribute('stroke', strokeColor);
+                        }
+                    }
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            handleScroll();
+            
+            const parallaxHero = document.getElementById('parallax-hero');
+            if (parallaxHero) {
+                const scrolled = window.pageYOffset;
+                if (scrolled < window.innerHeight) {
+                    parallaxHero.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+                }
+            }
+        }, { passive: true });
+    </script>
+
+    <!-- Magazine-Style Lightbox for Casa Laurel - Filmstrip -->
+    <div class="magazine-lightbox" id="magazineLightbox">
+        <button class="magazine-close" onclick="closeMagazineLightbox()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        
+        <!-- Text panel in left margin -->
+        <div class="magazine-text-panel" id="magazineTextPanel" style="position: fixed; left: 20px; top: 119px; width: 280px; font-family: 'Geist Mono', monospace; z-index: 1;">
+            <!-- Text content will be dynamically inserted here -->
+        </div>
+        
+        <div class="magazine-filmstrip" id="magazineFilmstrip" style="position: relative; z-index: 10;">
+            <!-- Images will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Virtual Consults Modal -->
+    <div id="virtualConsultsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(197, 207, 208, 0.75); backdrop-filter: blur(4px); z-index: 9997; align-items: center; justify-content: center;">
+        <div style="position: relative; width: 400px; height: 600px; max-width: 90%; background: #fafafa; border: 1.5px solid #141414; padding: 40px 50px; text-align: center; display: flex; flex-direction: column; z-index: 9998;">
+            <!-- Close button -->
+            <button onclick="document.getElementById('virtualConsultsModal').style.display='none';" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; cursor: pointer; padding: 8px; width: auto; height: auto; display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <h2 style="font-family: 'Geist Mono', monospace; font-size: 1.6rem; font-weight: 500; color: #141414; margin-bottom: 10px; line-height: 1.1; letter-spacing: -0.02em;">Design Consults</h2>
+                <p style="font-family: 'Geist Mono', monospace; font-size: 0.55rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 15px; font-weight: 400;">WITH STUDIO DIRECTOR</p>
+                
+                <div style="margin: 0 0 15px 0; height: 240px; width: 240px; margin-left: auto; margin-right: auto; background: transparent;">
+                    <!-- Empty space matching art image dimensions -->
+                </div>
+                
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #141414; margin-bottom: 15px; font-weight: 400; line-height: 1.4;">
+                    One-on-one virtual sessions offering expert guidance and creative direction for your projects.
+                </p>
+                
+                <div style="margin-bottom: auto;">
+                    <div style="text-align: left; display: inline-block;">
+                        <div style="margin-bottom: 0px;">
+                            <span style="font-family: 'Geist Mono', monospace; font-size: 0.56rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 400;">â€¢ Duration: 60 Minutes</span>
+                        </div>
+                        <div>
+                            <span style="font-family: 'Geist Mono', monospace; font-size: 0.56rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 400;">â€¢ Investment: $150+IVA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="mailto:contact@la-urel.com" style="display: inline-block; padding: 12px 36px; background: #faf8f3; color: #141414; text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #141414; transition: all 0.3s ease; cursor: pointer; font-family: 'Geist Mono', monospace; width: fit-content; margin: 0 auto;" 
+               onmouseover="this.style.background='#583c4a'; this.style.color='#ffffff'; this.style.borderColor='#583c4a';" 
+               onmouseout="this.style.background='#faf8f3'; this.style.color='#141414'; this.style.borderColor='#141414';">Schedule Now</a>
+        </div>
+    </div>
+
+    <!-- Newsletter Confirmation Modal -->
+
+    <!-- Cart Modal -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <div style="display: flex; align-items: baseline; gap: 20px;">
+                <h2>Your Truck</h2>
+                <a href="#" onclick="clearCart(); return false;" class="clear-items-link" style="font-size: 0.75rem; font-weight: 500; color: #583c4a; text-decoration: none; font-family: 'Geist Mono', monospace; transition: opacity 0.3s ease;">(clear items)</a>
+            </div>
+            <button class="cart-close" onclick="closeCart()" style="align-self: center; margin-top: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-totals">
+                <div class="cart-total-line">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0</span>
+                </div>
+                <div class="cart-total-line" id="savingsLine" style="display: none;">
+                    <span>Savings:</span>
+                    <span id="cartSavings" style="color: #583c4a;">-$0</span>
+                </div>
+                <div class="cart-total-line">
+                    <span>IVA (13%):</span>
+                    <span id="cartIVA">$0</span>
+                </div>
+                <div class="cart-total-line total">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+            </div>
+            <div class="cart-buttons">
+                <button id="checkoutBtn" class="cart-checkout" onclick="checkout()" disabled>Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearch()"></div>
+    <div class="search-modal" id="searchModal">
+        <div class="search-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                <circle cx="10" cy="10" r="7"/>
+                <path d="M21 21l-6-6" stroke-linecap="round"/>
+            </svg>
+            <input 
+                type="text" 
+                class="search-input" 
+                id="searchInput" 
+                placeholder="Search furniture by name or code..." 
+                oninput="performSearch()"
+                autofocus
+            >
+            <button class="search-close" onclick="closeSearch()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-results" id="searchResults">
+            <div class="search-no-results">Start typing to search...</div>
+        </div>
+    </div>
+
+    <script>
+        // Furniture products database
+        const searchDatabase = [
+            { name: 'Globo Side Table', code: 'MM-DC-001', price: 675, url: 'globo-side-table.html', image: 'https://i.imgur.com/Cd7ykMg.jpg' },
+            { name: 'Parsons Depto. Desk', code: 'DK001', price: 1150, url: 'depto-parsons-desk.html', image: 'https://i.imgur.com/HEbJZWe.jpg' },
+            { name: 'Ronda Coffee Table', code: 'MM-TL-003', price: 1380, url: 'ronda-coffee-table.html', image: 'https://i.imgur.com/mI4q6Tw.jpg' },
+            { name: 'Dizi Side Table', code: 'AT006', price: 446, originalPrice: 525, url: 'dizi-side-table.html', image: 'https://i.imgur.com/mGwzc7m.jpg' },
+            { name: 'Dizi Coffee Table', code: 'CT004', price: 1200, url: 'dizi-coffee-table.html', image: 'https://i.imgur.com/u7g9gGh.jpg' },
+            { name: 'Petra Coffee Table', code: 'CT018', price: 1615, originalPrice: 1900, url: 'petra-coffee-table.html', image: 'https://i.imgur.com/qPjmklI.jpg' },
+            { name: 'Barro No.2 Side Table', code: 'AT016', price: 555, url: 'barro-no2-side-table.html', image: 'https://i.imgur.com/MUPkmH7.jpg' },
+            { name: 'Rosario Bistro Table', code: 'BT001', price: 715, url: 'rosario-bistro-table.html', image: 'https://i.imgur.com/Iq5eg0R.jpg' },
+            { name: 'Cazo Side Chair', code: 'SCH002', price: 900, url: 'cazo-side-chair.html', image: 'https://i.imgur.com/aPrJrZg.jpg' },
+            { name: 'Mano Sofa', code: 'SO010', price: 2255, url: 'mano-sofa.html', image: 'https://i.imgur.com/lIcg44s.jpg' },
+            { name: 'Mano Chair', code: 'CH017', price: 1240, url: 'mano-chair.html', image: 'https://i.imgur.com/8zaPHCL.jpg' },
+            { name: 'Rio Chair', code: 'CH005', price: 1130, url: 'rio-chair.html', image: 'https://i.imgur.com/xgMrofZ.jpg' },
+            { name: 'Perse Chair', code: 'CH010', price: 815, url: 'perse-chair.html', image: 'https://i.imgur.com/XwMXs6o.jpg' },
+            { name: 'Fortuna Chair', code: 'CH012', price: 695, url: 'fortuna-chair.html', image: 'https://i.imgur.com/Nzky6sa.jpg' },
+            { name: 'Poroti Side Table', code: 'AT007', price: 565, url: 'poroti-side-table.html', image: 'https://i.imgur.com/cCff85m.jpg' },
+            { name: 'Bloque No.1 Side table', code: 'AT009', price: 400, url: 'bloque-no1-side-table.html', image: 'https://i.imgur.com/OPIXl1H.jpg' },
+            { name: 'Plato Side Table', code: 'AT018', price: 675, url: 'plato-side-table.html', image: 'https://i.imgur.com/lyqffq4.jpg' },
+            { name: '1/2 and 1/2 Side Table', code: 'AT004', price: 495, url: 'half-and-half-side-table.html', image: 'https://i.imgur.com/dXgmyPU.jpg' },
+            { name: 'Pablo Side Table', code: 'AT020', price: 475, url: 'pablo-side-table.html', image: 'https://i.imgur.com/qWpb5ea.jpg' },
+            { name: 'Amanita Side Table', code: 'AT019', price: 485, url: 'amanita-side-table.html', image: 'https://i.imgur.com/bDH1fs5.jpg' },
+            { name: 'Gracia Dining Table', code: 'DT012', price: 2835, url: 'gracia-dining-table.html', image: 'https://i.imgur.com/9VFjyk2.jpg' }
+        ];
+
+        function toggleSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.getElementById('searchModal').classList.add('active');
+            document.getElementById('searchInput').focus();
+        }
+
+        function closeSearch() {
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.getElementById('searchModal').classList.remove('active');
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '<div class="search-no-results">Start typing to search...</div>';
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (query.length < 1) {
+                resultsContainer.innerHTML = '<div class="search-no-results">Start typing to search...</div>';
+                return;
+            }
+            
+            const results = searchDatabase.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.code.toLowerCase().includes(query)
+            );
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<div class="search-no-results">No products found</div>';
+                return;
+            }
+            
+            let html = '';
+            results.forEach(item => {
+                const priceDisplay = item.originalPrice ? 
+                    `<span style="text-decoration: line-through; opacity: 0.5;">$${item.originalPrice}</span> $${item.price} + iva` :
+                    `$${item.price} + iva`;
+                
+                html += `
+                    <a href="${item.url}" class="search-result-item">
+                        <img src="${item.image}" alt="${item.name}" class="search-result-image">
+                        <div class="search-result-info">
+                            <div class="search-result-name">${item.name}</div>
+                            <div class="search-result-type">${item.code}</div>
+                        </div>
+                        <div class="search-result-price">${priceDisplay}</div>
+                    </a>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
+        // Smart Ticker Control
+        function initializeTicker() {
+            const ticker = document.querySelector('.ticker-wrapper');
+            let loopCount = 0;
+            const maxLoops = 3;
+            const pauseDuration = 600000; // 10 minutes in milliseconds
+            
+            ticker.addEventListener('animationiteration', function() {
+                loopCount++;
+                
+                if (loopCount >= maxLoops) {
+                    ticker.style.animationPlayState = 'paused';
+                    
+                    // Restart after 10 minutes
+                    setTimeout(function() {
+                        loopCount = 0;
+                        ticker.style.animationPlayState = 'running';
+                    }, pauseDuration);
+                }
+            });
+        }
+
+        // Initialize ticker control
+        initializeTicker();
+    
+        function showShippingModal() {
+            document.getElementById('shippingModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function showReturnsModal() {
+            document.getElementById('returnsModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function showTradeModal() {
+            document.getElementById('tradeModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function closeInfoModals() {
+            document.getElementById('shippingModal').classList.remove('active');
+            document.getElementById('returnsModal').classList.remove('active');
+            document.getElementById('tradeModal').classList.remove('active');
+            document.getElementById('infoModalOverlay').classList.remove('active');
+        }
+
+    </script>
+
+    <style>
+        .search-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9998;
+        }
+
+        .search-overlay.active {
+            display: block;
+        }
+
+        .search-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            max-height: 70vh;
+            background: #faf8f3;
+            border: 1.5px solid #141414;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-header {
+            padding: 20px 24px;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1rem;
+            padding: 12px 0;
+            border: none;
+            background: transparent;
+            color: #141414;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #583c4a;
+            opacity: 0.5;
+        }
+
+        .search-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-results {
+            overflow-y: auto;
+            max-height: calc(70vh - 80px);
+            padding: 20px;
+        }
+
+        .search-no-results {
+            text-align: center;
+            color: #583c4a;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            padding: 40px;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            border: 1.5px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+
+        .search-result-item:hover {
+            border-color: #141414;
+            background: #fafafa;
+        }
+
+        .search-result-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border: 1.5px solid #141414;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-name {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.95rem;
+            color: #141414;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .search-result-type {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            color: #583c4a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .search-result-price {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            color: #141414;
+            text-align: right;
+        }
+    </style>
+
+    <!-- Clear Items Modal -->
+    <div class="clear-modal" id="clearModal">
+        <div class="clear-modal-message">
+            Clear all items from your cart?
+        </div>
+        <div class="clear-modal-buttons">
+            <button class="clear-modal-btn" onclick="confirmClearCart()">Yes Sure</button>
+            <button class="clear-modal-btn" onclick="closeClearModal()">No</button>
+        </div>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletterModal" class="newsletter-modal">
+        <div class="newsletter-modal-header">
+            <button class="newsletter-modal-close" onclick="closeNewsletterModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="newsletter-modal-content">
+            <div class="newsletter-modal-title">— Thanks for your visit —</div>
+            <div class="newsletter-modal-subtitle">We'll be in touch soon!</div>
+        </div>
+    </div>
+
+    <!-- Info Modal Overlay -->
+    <div id="infoModalOverlay" class="info-modal-overlay" onclick="closeInfoModals()"></div>
+
+    <!-- Shipping Modal -->
+    <div id="shippingModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Shipping Terms</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Delivery Areas</h3>
+            <p>We deliver throughout Costa Rica's Greater Metropolitan Area (GAM) including San José, Escazú, Santa Ana, Heredia, Alajuela, and Cartago. Extended delivery is available to Guanacaste, the Pacific and Caribbean coasts, and other regions nationwide—contact us for details.</p>
+
+            <h3>Production & Shipping Times</h3>
+            <p>Most furniture pieces are made to order by Costa Rican artisans. Standard production and delivery takes 6-8 weeks from order confirmation. We'll keep you updated throughout the process.</p>
+
+            <h3>Pickup Option</h3>
+            <p>Prefer to pick up your order? Pieces can be collected from our dispatch warehouse in Escazú at no additional charge once production is complete.</p>
+
+            <h3>Delivery Service</h3>
+            <p>Delivery costs are calculated based on your location and order size—you'll see the exact cost before finalizing your purchase. White-glove service (unpacking, assembly, placement, and packaging removal) is complimentary for pieces requiring assembly. Freestanding pieces are delivered and placed in your space.</p>
+
+            <h3>International Shipping</h3>
+            <p>We ship select pieces internationally. Contact us at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a> for international shipping rates and arrangements.</p>
+        </div>
+    </div>
+
+    <!-- Returns Modal -->
+    <div id="returnsModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Returns & Conditions</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Our Commitment</h3>
+            <p>Each piece from Laurel Depto. de Diseño is handcrafted by skilled Costa Rican artisans using premium materials. We stand behind the quality of our work and want you to love your furniture.</p>
+
+            <h3>Return Policy</h3>
+            <p>Custom and made-to-order pieces (which represent most of our collection) are non-returnable due to their bespoke nature. However, if your piece arrives damaged or with manufacturing defects, we'll make it right.</p>
+
+            <h3>Damaged or Defective Items</h3>
+            <p>Please inspect your furniture upon delivery. If you notice any damage or defects, contact us within 48 hours at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We'll arrange for repair, replacement, or refund as appropriate.</p>
+
+            <h3>Cancellations</h3>
+            <p>Orders can be cancelled within 24 hours of placement for a full refund. After production begins, cancellations may incur a 25% restocking fee to cover materials and labor costs.</p>
+
+            <h3>Quality Guarantee</h3>
+            <p>All our furniture comes with a 1-year warranty against manufacturing defects. Natural variations in wood grain, color, and texture are inherent to handcrafted pieces and are not considered defects.</p>
+
+            <h3>Questions?</h3>
+            <p>Contact us at +(506) 6317-3038 or <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We're here to help.</p>
+        </div>
+    </div>
+
+    <!-- Trade Program Modal -->
+    <div id="tradeModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Trade Program</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>For Interior Designers & Design Professionals</h3>
+            <p>We welcome collaboration with interior designers, architects, and design professionals on projects of all sizes. Laurel Depto. de Diseño is equipped to support your vision with quality craftsmanship and dedicated service.</p>
+
+            <h3>What We Offer</h3>
+            <p>Our trade program provides access to our full collection with the flexibility you need for client projects. We handle large orders, offer customization options to match your specifications, and work on your timeline to ensure seamless project execution.</p>
+
+            <h3>Custom Capabilities</h3>
+            <p>Many pieces in our collection can be customized—dimensions, finishes, materials, and configurations can be tailored to your project requirements. Our artisans work closely with designers to bring specific visions to life while maintaining our commitment to quality.</p>
+
+            <h3>Project Support</h3>
+            <p>From initial specification to final installation, we provide dedicated support for your projects. This includes material samples, technical drawings, project coordination, and white-glove delivery service for client satisfaction.</p>
+
+            <h3>Get Started</h3>
+            <p>To discuss your project or learn more about our trade program, reach out to us at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We're here to make your projects exceptional.</p>
+        </div>
+    </div>
+
+</body>
+</html>

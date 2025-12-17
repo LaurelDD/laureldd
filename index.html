@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laurel Depto. de Diseño</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Turbo for smooth page transitions -->
+    <script src="https://unpkg.com/@hotwired/turbo@7/dist/turbo.es2017-umd.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #c5cfd0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #141414;
+            overflow-x: hidden;
+            background-color: #faf8f3;
+            min-height: 100vh;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto;
+        }
+
+        /* Override cursor for all interactive elements */
+        a, button, input[type="submit"], input[type="button"], 
+        .nav-icon, .landing-nav-link, .product-card, 
+        [onclick], [role="button"] {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g transform="rotate(60 12 12)"><path d="M22 12H5M12 19l-7-7 7-7" stroke="%23141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>') 10 10, auto !important;
+        }
+
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .promo-banner {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 1.9px;
+            text-transform: uppercase;
+            color: #141414;
+            background: #c5cfd0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            position: absolute;
+            white-space: nowrap;
+            animation: scroll-left 60s linear infinite;
+        }
+
+        .ticker-item {
+            padding: 0 80px;
+            display: inline-block;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-33.333%);
+            }
+        }
+
+        .nav-ribbon {
+            height: 44px;
+            background: transparent;
+            border-top: 1.5px solid #faf8f3;
+            border-bottom: 1.5px solid #faf8f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-ribbon.scrolled {
+            background: rgba(250, 248, 243, 0.95);
+            border-top-color: #141414;
+            border-bottom-color: #141414;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-center {
+            display: flex;
+            height: 100%;
+            border-left: 1.5px solid #faf8f3;
+            border-right: 1.5px solid #faf8f3;
+            transition: border-color 0.5s ease;
+        }
+
+        .nav-ribbon.scrolled .nav-center {
+            border-left-color: #141414;
+            border-right-color: #141414;
+        }
+
+        .landing-nav-link {
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #faf8f3;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            border-right: 1.5px solid #faf8f3;
+        }
+
+        .landing-nav-link:last-child {
+            border-right: none;
+        }
+
+        .nav-ribbon.scrolled .landing-nav-link {
+            color: #141414;
+            border-right-color: #141414;
+        }
+
+        .landing-nav-link:hover {
+            color: #583c4a !important;
+        }
+
+        .nav-ribbon.scrolled .landing-nav-link:hover {
+            color: #583c4a !important;
+            opacity: 1;
+        }
+
+        .nav-icons {
+            position: fixed;
+            right: 50px;
+            top: 40px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-icon {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .nav-icon:hover svg {
+            stroke: #583c4a !important;
+        }
+
+        .nav-icon:hover svg circle {
+            fill: #583c4a !important;
+        }
+
+        .nav-icon svg {
+            transition: all 0.5s ease;
+        }
+
+        .hero-carousel {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: visible;
+            margin-top: 40px;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 0;
+            background-color: #faf8f3;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            will-change: transform;
+            transition: transform 0.3s ease-out;
+        }
+
+        .hero-slide:nth-child(1)::before {
+            background-image: url('https://i.imgur.com/60eFKGr.jpg');
+            background-position: center top;
+        }
+
+        .hero-slide:nth-child(2)::before {
+            background-image: url('https://i.imgur.com/8DSxGei.jpg');
+        }
+
+        .hero-slide:nth-child(3)::before {
+            background-image: url('https://i.imgur.com/CY3yXGl.jpg');
+        }
+
+        .hero-logo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .mission-section {
+            background: #fafafa;
+            padding: 80px 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0;
+        }
+
+        .mission-content {
+            width: 1200px;
+            max-width: 100%;
+            text-align: center;
+            margin-top: -50px;
+        }
+
+        .mission-text {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.8rem;
+            line-height: 1.5;
+            color: #141414;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        .mission-text .first-word {
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .mission-text strong {
+            font-weight: 600;
+        }
+
+        .mission-text em {
+            font-style: italic;
+        }
+
+        .mission-text .regular {
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        .services-timeline {
+            background: #fafafa;
+            padding: 80px 50px 80px;
+            width: 100%;
+        }
+
+        .timeline-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            margin-bottom: 180px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .timeline-text {
+            flex: 1;
+            max-width: 440px;
+        }
+
+        .service-name {
+            font-family: 'Geist Mono', monospace;
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #141414;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .service-intro {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #583c4a;
+            margin-bottom: 8px;
+            font-weight: 300;
+        }
+
+        .service-intro strong {
+            color: #141414;
+            font-weight: 600;
+        }
+
+        .timeline-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .timeline-image img {
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ROW 3: INTERIOR DESIGN - Independent styling */
+        #interior-design-section .timeline-content {
+            align-items: center;
+        }
+
+        #interior-design-section .timeline-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin-left: 8px; /* Aligned with ShowHouse center */
+        }
+
+        #interior-design-section .timeline-image img {
+            width: 460px;
+            height: 620px;
+        }
+
+        #interior-design-section .service-ribbon {
+            width: 460px; /* Matches image width */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ROW 5: PROPERTIES - Independent styling */
+        #properties-section .timeline-content {
+            align-items: center;
+        }
+
+        #properties-section .timeline-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin-left: 8px; /* Aligned with ShowHouse center */
+        }
+
+        #properties-section .timeline-image img {
+            width: 460px;
+            height: 620px;
+        }
+        
+        #properties-section .service-ribbon {
+            width: 460px; /* Matches image width */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ROW 7: MAKEMAKE - Independent styling */
+        #makemake-section .timeline-content {
+            align-items: center;
+        }
+
+        #makemake-section .timeline-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin-left: 8px; /* Aligned with ShowHouse center */
+        }
+
+        #makemake-section .timeline-image img {
+            width: 460px;
+            height: 620px;
+        }
+        
+        #makemake-section .service-ribbon {
+            width: 460px; /* Matches image width */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .service-ribbon {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 44px;
+            background: transparent;
+            border-top: 1.5px solid #faf8f3;
+            border-bottom: 1.5px solid #faf8f3;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-ribbon a {
+            text-decoration: none;
+            color: #faf8f3;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 0 24px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-ribbon a:hover {
+            color: #faf8f3 !important;
+            transform: scale(1.05);
+        }
+
+        .service-ribbon a:hover svg {
+            stroke: #faf8f3 !important;
+        }
+
+        .chevron-right {
+            width: 18px;
+            height: 18px;
+            stroke: #faf8f3;
+        }
+
+        .read-more-btn, .read-less-btn {
+            cursor: pointer;
+            color: #141414;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .expanded-content {
+            display: none;
+        }
+
+        footer {
+            background: #c5cfd0;
+            color: #141414;
+            padding: 4rem 50px 3rem;
+            border-top: 1.5px solid #141414;
+            margin-bottom: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-section {
+            text-align: left;
+        }
+
+        .footer-section:nth-child(2) {
+            text-align: center;
+        }
+
+        .footer-section:nth-child(3) {
+            text-align: right;
+        }
+
+        .footer-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            line-height: 2;
+        }
+
+        .footer-link {
+            color: #141414;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-link:hover {
+            opacity: 0.6;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-section:nth-child(2) .social-icons {
+            justify-content: center;
+        }
+
+        .social-icon {
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .newsletter-form {
+            display: inline-flex;
+            gap: 0;
+            margin-bottom: 25px;
+        }
+
+        .newsletter-input {
+            width: 220px;
+            padding: 0 16px;
+            height: 44px;
+            background: #faf8f3;
+            border: 1.5px solid #141414;
+            border-right: none;
+            color: #141414;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .newsletter-button {
+            padding: 12px 36px;
+            height: auto;
+            background: #faf8f3;
+            border: 1.5px solid #141414;
+            color: #141414;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-button:hover {
+            background: #583c4a;
+            color: #faf8f3;
+            border-color: #583c4a;
+        }
+
+        .footer-logo {
+            margin-top: 20px;
+        }
+
+        /* Info Modals (Shipping, Returns, Trade) */
+        .info-modal {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 600px;
+            max-width: 90vw;
+            max-height: 80vh;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .info-modal.active {
+            display: block;
+        }
+
+        .info-modal-header {
+            height: 50px;
+            background: #faf8f3;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .info-modal-title {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #141414;
+        }
+
+        .info-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .info-modal-content {
+            padding: 32px;
+            overflow-y: auto;
+            max-height: calc(80vh - 50px);
+        }
+
+        .info-modal-content h3 {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #583c4a;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .info-modal-content p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #141414;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .info-modal-content li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #141414;
+            margin-bottom: 8px;
+        }
+
+        .info-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+        }
+
+        .info-modal-overlay.active {
+            display: block;
+        }
+
+        /* Cart Counter */
+        .nav-icon {
+            position: relative;
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: -13px;
+            right: -8px;
+            background: #583c4a;
+            color: white;
+            border-radius: 50%;
+            min-width: 18px;
+            height: 18px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #faf8f3;
+        }
+
+        .cart-counter.has-items {
+            display: flex !important;
+        }
+
+        /* Cart Modal Styles */
+        .cart-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+        }
+
+        .cart-overlay.active {
+            display: block;
+        }
+
+        .cart-modal {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fafafa;
+            border-left: 1.5px solid #141414;
+            z-index: 10000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 30px;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .clear-items-link:hover {
+            opacity: 0.6 !important;
+        }
+
+        /* Clear Items Modal */
+        .clear-modal {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 280px;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .clear-modal.active {
+            display: block;
+        }
+
+        .clear-modal-message {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #141414;
+            padding: 20px;
+        }
+
+        .clear-modal-buttons {
+            display: flex;
+            height: 25px;
+            border-top: 1.5px solid #141414;
+        }
+
+        .clear-modal-btn {
+            flex: 1;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: #faf8f3;
+            color: #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clear-modal-btn:first-child {
+            border-right: 1.5px solid #141414;
+        }
+
+        .clear-modal-btn:hover {
+            background: #c5cfd0;
+            color: #141414;
+        }
+
+        /* Newsletter Modal */
+        .newsletter-modal {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 380px;
+            padding: 0;
+            font-family: 'Geist Mono', monospace;
+            z-index: 10001;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .newsletter-modal.active {
+            display: block;
+        }
+
+        .newsletter-modal-header {
+            height: 30px;
+            background: #faf8f3;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .newsletter-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            transition: transform 0.3s ease;
+            margin-top: 4px;
+        }
+
+        .newsletter-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .newsletter-modal-content {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .newsletter-modal-title {
+            font-size: 1.2rem;
+            color: #583c4a;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .newsletter-modal-subtitle {
+            font-size: 0.85rem;
+            color: #141414;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 30px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #583c4a;
+            font-style: italic;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(20, 20, 20, 0.1);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #ffffff;
+            border: 1.5px solid #141414;
+            flex-shrink: 0;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-code {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.65rem;
+            color: #583c4a;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-spec {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.65rem;
+            color: #141414;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #583c4a;
+            margin-top: 8px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-item-remove:hover {
+            opacity: 1;
+        }
+
+        .cart-footer {
+            min-height: 200px;
+            padding: 20px;
+            border-top: 1.5px solid #141414;
+            background: #faf8f3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-totals {
+            margin-bottom: 12px;
+        }
+
+        .cart-total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .cart-total-line.total {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1.5px solid #141414;
+        }
+
+        .cart-buttons {
+            margin-top: 16px;
+        }
+
+        .cart-checkout {
+            width: 100%;
+            padding: 12px;
+            background: #fafafa;
+            color: #141414;
+            border: 1.5px solid #141414;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-checkout:hover:not(:disabled) {
+            background: #583c4a;
+            color: #faf8f3;
+        }
+
+        .cart-checkout:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: #583c4a;
+            color: #fafafa;
+            border: 1.5px solid #583c4a;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover:not(:disabled) {
+            background: #6d4a5d;
+            border-color: #6d4a5d;
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .clear-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #583c4a;
+            border: none;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 12px;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .clear-cart-btn:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="promo-banner">
+            <div class="ticker-wrapper">
+                <span class="ticker-item">Try Our Virtual Consultations!</span>
+                <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                <span class="ticker-item">Try Our Virtual Consultations!</span>
+                <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+                <span class="ticker-item">Try Our Virtual Consultations!</span>
+                <span class="ticker-item">New Site Offer: 10% Off all Products and Services - November Only</span>
+                <span class="ticker-item">Proudly Made in Costa Rica — Support Local Craftsmanship</span>
+            </div>
+        </div>
+
+        <nav class="nav-ribbon" id="navRibbon">
+            <div class="nav-center">
+                <a href="furniture.html" class="landing-nav-link">Furniture</a>
+                <a href="interiors.html" class="landing-nav-link">Interior Design</a>
+                <a href="properties.html" class="landing-nav-link">Properties</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="nav-icons">
+        <div class="nav-icon" onclick="toggleSearch()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#faf8f3" stroke-width="1.8">
+                <circle cx="10" cy="10" r="7"/>
+                <path d="M21 21l-6-6" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <a href="about.html" class="nav-icon" style="text-decoration: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#faf8f3" stroke-width="2">
+                <circle cx="5" cy="12" r="1.5" fill="#faf8f3"/>
+                <circle cx="12" cy="12" r="1.5" fill="#faf8f3"/>
+                <circle cx="19" cy="12" r="1.5" fill="#faf8f3"/>
+            </svg>
+        </a>
+        
+        <div class="nav-icon" onclick="toggleCart()">
+            <svg id="cartIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#faf8f3" stroke-width="1.8">
+                <path d="M1.5 6.5C1.5 6.2 1.7 6 2 6H15.5C15.8 6 16 6.2 16 6.5V16H1.5V6.5Z" stroke-linejoin="round"/>
+                <path d="M16 7.8L18.8 7.9L21.5 10.8C21.6 10.9 21.7 11.1 21.7 11.3V15.9H16V6" stroke-linejoin="round"/>
+                <circle cx="6" cy="18.8" r="1.5" fill="#faf8f3"/>
+                <circle cx="17.5" cy="18.8" r="1.5" fill="#faf8f3"/>
+            </svg>
+            <div class="cart-counter" id="cartCounter">0</div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         ROW 1: HERO CAROUSEL
+         ======================================== -->
+    <section class="hero-carousel" id="heroCarousel">
+        <div class="hero-slide active"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="826 500 267 90" style="width: 800px; height: auto;">
+                <path fill="#faf8f3" d="M842.56,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                <path fill="#faf8f3" d="M900.54,501.02l17.37,49.25h-12.52l-3.25-9.54h-17.02l-3.25,9.54h-11.83l17.37-49.25h13.14ZM888.5,530.81h10.24l-4.98-14.54h-.28l-4.98,14.54Z"/>
+                <path fill="#faf8f3" d="M920.94,530.73v-29.71h11.69v27.52c0,7.5,2.08,11.49,8.09,11.49s8.09-3.99,8.09-11.49v-27.52h11.76v29.71c0,14.38-8.65,20.48-19.86,20.48s-19.79-6.1-19.79-20.48Z"/>
+                <path fill="#faf8f3" d="M995.88,550.27c-.9-1.33-1.45-4.38-1.8-9.46-.35-5.63-2.49-6.88-6.43-6.88h-7.82v16.34h-11.55v-49.25h22c11.28,0,16.88,6.02,16.88,15.63,0,7.19-3.94,11.88-9.27,12.66,4.5,1.02,7.13,3.91,7.61,9.61.62,7.35.83,9.54,2.28,11.33h-11.9ZM988.2,523.69c4.98,0,7.47-1.41,7.47-5.94,0-3.99-2.49-6.1-7.47-6.1h-8.37v12.04h8.37Z"/>
+                <path fill="#faf8f3" d="M1049.36,550.27h-34.31v-49.25h33.69v10.94h-22.14v8.05h17.09v10.79h-17.09v8.52h22.76v10.94Z"/>
+                <path fill="#faf8f3" d="M1069.21,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                <rect fill="#faf8f3" x="826.93" y="574.92" width="266.14" height="12.04"/>
+            </svg>
+        </div>
+    </section>
+    <!-- ======================================== END ROW 1 ======================================== -->
+
+    <!-- ========================================
+         ROW 2: MISSION STATEMENT
+         ROW 2: MISSION STATEMENT
+         ======================================== -->
+    <section class="mission-section">
+        <div class="mission-content">
+            <p class="mission-text">
+                <span class="first-word">Laurel</span> is a design studio based in Costa Rica, dedicated<br>
+                to creating thoughtfully <strong><em>crafted interiors and original furniture</em></strong><span class="regular">.</span><br>
+                The studio thrives on close collaboration<br>
+                — between our team, our clients, and our craftsmen —<br>
+                to create spaces and pieces that go beyond trends<br>
+                and enrich everyday experiences.
+            </p>
+        </div>
+    </section>
+    <!-- ======================================== END ROW 2 ======================================== -->
+
+    <!-- ========================================
+
+    <!-- ========================================
+         ROW 3: INTERIOR DESIGN SECTION
+         ======================================== -->
+    <section class="services-timeline" id="interior-design-section">
+        <div class="timeline-container">
+            <!-- ======================================== ROW 4: INTERIOR DESIGN ======================================== -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-text">
+                        <h3 class="service-name">Interior Design</h3>
+                        <p class="service-intro">We work on a limited number of projects at a time, allowing María José our design director to remain intimately involved in the creative direction of each commission. Our interiors team—led by head of interior design Stephanie Arroyo—ensures meticulous execution from initial concept through to completion.</p>
+                        
+                        <div style="margin: 8px 0; text-align: left;">
+                            <span class="read-more-btn" onclick="this.parentElement.style.display='none'; this.parentElement.parentElement.querySelector('.expanded-content').style.display='block';">• READ MORE</span>
+                        </div>
+                        
+                        <div class="expanded-content">
+                            <p class="service-intro">Our studio specializes in high-end residential projects and hospitality spaces. With a contemporary eclectic aesthetic, we embrace tropical materials, elaborate millwork and organic textures.</p>
+                            
+                            <p class="service-intro">From a building's initial planning stages to 360Ã‚Â° remodels, we manage projects at every scale. Every environment we design tells its own story, shaped by the unique lifestyle and personality of our clients. We welcome both international and local projects throughout Costa Rica and Central America.</p>
+                            <div style="text-align: left;">
+                                <span class="read-less-btn" onclick="this.parentElement.parentElement.style.display='none'; this.parentElement.parentElement.previousElementSibling.style.display='block';">• READ LESS</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Virtual Consults Text -->
+                        <p class="service-intro" style="margin-top: 30px;">For those leading their own projects but seeking professional insight, we offer hourly virtual consultations.</p>
+                        
+                        <!-- Virtual Consults Link - Always Visible, positioned after expanded content -->
+                        <div style="margin-top: 16px; text-align: left;">
+                            <a href="#" onclick="document.getElementById('virtualConsultsModal').style.display='flex'; return false;" style="display: inline-flex; align-items: center; gap: 8px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; cursor: pointer; font-family: 'Geist Mono', monospace;"
+                               onmouseover="this.style.color='#141414'; this.style.transform='scale(1.05)'; this.querySelector('svg').style.stroke='#141414';" 
+                               onmouseout="this.style.color='#141414'; this.style.transform='scale(1)'; this.querySelector('svg').style.stroke='#141414';">
+                                <span style="text-decoration: underline; text-underline-offset: 2px;">Virtual Consults</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="transition: stroke 0.3s ease;">
+                                    <path d="M22 12H5M12 19l-7-7 7-7" stroke="#141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="scale(-1, 1) translate(-24, 0)"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="https://i.imgur.com/3f2kK2b.jpg" alt="Interior Design">
+                        <div class="service-ribbon">
+                            <a href="interiors.html#portfolio">
+                                View Portfolio
+                                <svg class="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ======================================== END ROW 3 ======================================== -->
+        </div>
+    </section>
+
+    <!-- ========================================
+         ROW 4: VISIT SHOWHOUSE SECTION
+         ======================================== -->
+    <section style="background: #fafafa; padding: 80px 0 80px 0; width: 100vw; position: relative; margin-left: calc(-50vw + 50%);">
+        <div style="display: flex; align-items: center; max-width: 100%; margin: 0;">
+            <div style="flex: 0 0 auto; width: 520px;">
+                <img src="https://imgur.com/qOXrC8H.jpg" alt="Laurel Show House" style="width: 100%; height: auto; display: block;">
+            </div>
+            
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 0 50px;">
+                <div style="max-width: 600px; text-align: center;">
+                    <h2 style="font-family: 'Geist Mono', monospace; font-size: 2rem; font-weight: 400; color: #141414; margin-bottom: 24px; line-height: 1.1; letter-spacing: 2px; text-transform: uppercase;">Visit Our Show House</h2>
+                    <p style="font-family: 'Geist Mono', monospace; font-size: 0.7rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 25px; font-weight: 400;">By Appointment Only</p>
+                    <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: #141414; margin-bottom: 35px; font-weight: 400; line-height: 1.6;">
+                        Experience how our ideas transform a 415mÃ‚Â² residence.<br>
+                        Walk through <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Casa Laurel</span>, our temporal retail space, and find furniture perfect<br>
+                        for your home from our Makemake collection, <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Four Hands</span>, and other<br>
+                        exceptional international brands.
+                    </p>
+                    <a href="mailto:contact@la-urel.com" style="display: inline-block; padding: 12px 36px; background: #faf8f3; color: #141414; text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s ease; cursor: pointer; border: 1.5px solid #141414; font-family: 'Geist Mono', monospace;" 
+                       onmouseover="this.style.background='#583c4a'; this.style.color='#faf8f3'; this.style.borderColor='#583c4a';" 
+                       onmouseout="this.style.background='#faf8f3'; this.style.color='#141414'; this.style.borderColor='#141414';">Book Appointment</a>
+                    <div style="margin-top: 30px;">
+                        <span style="font-family: 'Geist Mono', monospace; font-size: 0.65rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 400;">Conveniently located in EscazÃƒÂº, near La Paco</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ======================================== END ROW 6 ======================================== -->
+
+    <!-- ========================================
+         ROW 7: ART VISITS CTA
+
+    <!-- ========================================
+         ROW 5: PROPERTIES SECTION
+         ======================================== -->
+    <section class="services-timeline" id="properties-section">
+        <div class="timeline-container">
+            <!-- ======================================== ROW 5: PROPERTIES ======================================== -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-text">
+                        <h3 class="service-name">Properties</h3>
+                        <p class="service-intro">Our property venture applies a decade of design expertise to select transformations. We acquire homes with exceptional bones and reimagine them completely—architecture, interiors, and furnishings—creating turn-key residences that embody sophisticated living with a laid-back approach.</p>
+                        
+                        <div style="margin: 8px 0; text-align: left;">
+                            <span class="read-more-btn" onclick="this.parentElement.style.display='none'; this.parentElement.parentElement.querySelector('.expanded-content').style.display='block';">• READ MORE</span>
+                        </div>
+                        
+                        <div class="expanded-content">
+                            <p class="service-intro">Each property represents our holistic philosophy realized: move-in ready homes where every detail has been considered, yet nothing feels ostentatious.</p>
+                            
+                            <p class="service-intro">We embrace grace over grandiosity, preserving the authentic character of each structure while breathing new life into forgotten spaces.</p>
+                            <div style="text-align: left;">
+                                <span class="read-less-btn" onclick="this.parentElement.parentElement.style.display='none'; this.parentElement.parentElement.previousElementSibling.style.display='block';">• READ LESS</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Art Gallery Text - Always Visible, positioned after expanded content -->
+                        <p class="service-intro" style="margin-top: 30px;">Each property becomes a living art gallery—<br>residential spaces transformed by deCERCA into<br>temporal exhibitions for Costa Rican artists.</p>
+                        
+                        <!-- Gallery Space Link - Always Visible -->
+                        <div style="margin-top: 16px; text-align: left;">
+                            <a href="#" onclick="document.getElementById('artGalleryModal').style.display='flex'; return false;" style="display: inline-flex; align-items: center; gap: 8px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; cursor: pointer; font-family: 'Geist Mono', monospace;"
+                               onmouseover="this.style.color='#583c4a'; this.querySelector('svg').style.stroke='#583c4a';" 
+                               onmouseout="this.style.color='#141414'; this.querySelector('svg').style.stroke='#141414';">
+                                <span style="text-decoration: underline; text-underline-offset: 2px;">Gallery Space</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="transition: stroke 0.3s ease;">
+                                    <path d="M22 12H5M12 19l-7-7 7-7" stroke="#141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="scale(-1, 1) translate(-24, 0)"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="https://i.imgur.com/Ysa3ZLL.jpg" alt="Properties">
+                        <div class="service-ribbon">
+                            <a href="#" onclick="alert('Properties section coming soon'); return false;">
+                                Discover Properties
+                                <svg class="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ======================================== END ROW 5 ======================================== -->
+        </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         ROW 7: MAKEMAKE SECTION
+         ======================================== -->
+    <section class="services-timeline" id="makemake-section">
+        <div class="timeline-container">
+            <!-- ======================================== ROW 3: MAKEMAKE ======================================== -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-text">
+                        <h3 class="service-name">MakeMake</h3>
+                        <p class="service-intro">Our original line of furniture and retail goods is created with a select network of Costa Rican craftsmen and trusted global artisans. What began as custom pieces for our earliest design projects has evolved into a comprehensive collection—each item designed in-house to ensure every home has its own distinct character. Alongside our original designs, we curate exceptional pieces from our favorite international and local brands.</p>
+                        
+                        <div style="margin: 8px 0; text-align: left;">
+                            <span class="read-more-btn" onclick="this.parentElement.style.display='none'; this.parentElement.parentElement.querySelector('.expanded-content').style.display='block';">• READ MORE</span>
+                        </div>
+                        
+                        <div class="expanded-content">
+                            <p class="service-intro">From statement furniture and sofas to considered details like lighting and drapery, we offer timeless pieces that make any house feel authentically yours.</p>
+                            <p class="service-intro">Quality-driven and thoughtfully edited, our collection grows organically, one exciting piece at a time.</p>
+                            <div style="text-align: left;">
+                                <span class="read-less-btn" onclick="this.parentElement.parentElement.style.display='none'; this.parentElement.parentElement.previousElementSibling.style.display='block';">• READ LESS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-image">
+                        <img src="https://i.imgur.com/IBMCRw0.jpg" alt="Furniture">
+                        <div class="service-ribbon">
+                            <a href="furniture.html">
+                                Explore the Makemake Collection
+                                <svg class="chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ======================================== END ROW 3 ======================================== -->
+
+            <!-- ======================================== ROW 4: INTERIOR DESIGN ======================================== -->
+        </div>
+    </section>
+    <!-- ========================================
+         ROW 8: GRID (CTA + IMAGE)
+         ======================================== -->
+    <!-- Grid CTA Section -->
+    <div style="text-align: center; padding: 80px 20px 80px; background: #fafafa;">
+        <h2 style="font-family: 'Geist Mono', monospace; font-size: 1.5rem; font-weight: 500; color: #141414; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">All Furniture on Our Grid is Always Marked Down</h2>
+        <p style="font-family: 'Geist Mono', monospace; font-size: 0.7rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 25px; font-weight: 400;">Find your perfect piece, the seasonal grid is our window to select collections</p>
+        <a href="furniture.html" style="display: inline-flex; align-items: center; gap: 12px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-size: 1.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; cursor: pointer; font-family: 'Geist Mono', monospace;" 
+           onmouseover="this.style.color='#583c4a'; this.querySelector('svg').style.stroke='#583c4a';" 
+           onmouseout="this.style.color='#141414'; this.querySelector('svg').style.stroke='#141414';"
+           onclick="localStorage.setItem('openToGrid', 'true');">
+            <span style="text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px;">Shop Now</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="transition: stroke 0.3s ease;">
+                <path d="M22 12H5M12 19l-7-7 7-7" stroke="#141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="scale(-1, 1) translate(-24, 0)"/>
+            </svg>
+        </a>
+    </div>
+
+    <div id="gridContainer" style="width: 100%; height: 616px; position: relative; overflow: hidden; background: #fafafa; margin-bottom: 0; margin-top: 0;">
+        <a href="furniture.html" onclick="localStorage.setItem('openToGrid', 'true');" style="display: block; width: 100%; height: 100%; position: relative;">
+            <img src="https://i.imgur.com/cCY7S1C.jpg" alt="Laurel Grid Collection" style="width: 100%; height: 100%; object-fit: cover; object-position: bottom;">
+        </a>
+        
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to right, #faf8f3 1.5px, transparent 1.5px), linear-gradient(to bottom, #faf8f3 1.5px, transparent 1.5px); background-size: 88px 88px; background-position: 0 0; pointer-events: none; z-index: 1;"></div>
+    </div>
+    <!-- ======================================== END ROW 8 ======================================== -->
+
+    <!-- ========================================
+         ROW 9: FOOTER
+         ROW 9: FOOTER
+         ======================================== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <p class="footer-title">Info</p>
+                <div class="footer-text">
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showShippingModal();">Shipping Terms</a></p>
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showReturnsModal();">Returns & Conditions</a></p>
+                    <p><a href="#" class="footer-link" onclick="event.preventDefault(); showTradeModal();">Trade Program</a></p>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/laurel_dd/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.pinterest.com/00xk5cvuw4lswxqu422ox0n4rov3hw/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.63 7.87 6.35 9.33-.09-.79-.17-2 .04-2.85.19-.77 1.21-5.14 1.21-5.14s-.31-.62-.31-1.54c0-1.44.84-2.52 1.88-2.52.89 0 1.32.67 1.32 1.47 0 .9-.57 2.24-.87 3.48-.25 1.04.52 1.89 1.55 1.89 1.86 0 3.29-1.96 3.29-4.79 0-2.5-1.8-4.25-4.37-4.25-2.98 0-4.72 2.23-4.72 4.54 0 .9.35 1.86.78 2.39.09.11.1.2.07.31-.08.33-.26 1.04-.29 1.18-.04.19-.15.23-.35.14-1.31-.61-2.13-2.52-2.13-4.05 0-3.3 2.39-6.33 6.9-6.33 3.62 0 6.43 2.58 6.43 6.03 0 3.6-2.27 6.5-5.42 6.5-1.06 0-2.06-.55-2.4-1.2l-.65 2.48c-.24.91-.88 2.05-1.31 2.75.99.3 2.04.47 3.13.47 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <p class="footer-title">Newsletter</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); showNewsletterModal(); this.reset();">
+                    <input type="email" placeholder="Your email" required class="newsletter-input">
+                    <button type="submit" class="newsletter-button">Submit</button>
+                </form>
+                <div class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="826 500 267 90" style="width: 140px; height: auto;">
+                        <path fill="#141414" d="M842.56,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                        <path fill="#141414" d="M900.54,501.02l17.37,49.25h-12.52l-3.25-9.54h-17.02l-3.25,9.54h-11.83l17.37-49.25h13.14ZM888.5,530.81h10.24l-4.98-14.54h-.28l-4.98,14.54Z"/>
+                        <path fill="#141414" d="M920.94,530.73v-29.71h11.69v27.52c0,7.5,2.08,11.49,8.09,11.49s8.09-3.99,8.09-11.49v-27.52h11.76v29.71c0,14.38-8.65,20.48-19.86,20.48s-19.79-6.1-19.79-20.48Z"/>
+                        <path fill="#141414" d="M995.88,550.27c-.9-1.33-1.45-4.38-1.8-9.46-.35-5.63-2.49-6.88-6.43-6.88h-7.82v16.34h-11.55v-49.25h22c11.28,0,16.88,6.02,16.88,15.63,0,7.19-3.94,11.88-9.27,12.66,4.5,1.02,7.13,3.91,7.61,9.61.62,7.35.83,9.54,2.28,11.33h-11.9ZM988.2,523.69c4.98,0,7.47-1.41,7.47-5.94,0-3.99-2.49-6.1-7.47-6.1h-8.37v12.04h8.37Z"/>
+                        <path fill="#141414" d="M1049.36,550.27h-34.31v-49.25h33.69v10.94h-22.14v8.05h17.09v10.79h-17.09v8.52h22.76v10.94Z"/>
+                        <path fill="#141414" d="M1069.21,501.02v38.3h21.58v10.94h-33.35v-49.25h11.76Z"/>
+                        <rect fill="#141414" x="826.93" y="574.92" width="266.14" height="12.04"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <p class="footer-title">Contact</p>
+                <div class="footer-text">
+                    <p><a href="mailto:contact@la-urel.com" class="footer-link">contact@la-urel.com</a></p>
+                    <p>+(506) 6317-3038</p>
+                    <p style="margin-top: 15px; opacity: 0.7; font-size: 0.85rem;">Laurel Depto. de Diseño © 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ======================================== END ROW 9 ======================================== -->
+
+    <script>
+        // Cache DOM elements
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const navRibbon = document.getElementById('navRibbon');
+        const navIcons = document.querySelectorAll('.nav-icon svg');
+        const navIconCircles = document.querySelectorAll('.nav-icon svg circle');
+        const searchIcon = document.getElementById('searchIcon');
+        
+        let currentSlide = 0;
+        let ticking = false;
+
+        function nextSlide() {
+            heroSlides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % heroSlides.length;
+            heroSlides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 6000);
+        
+        function handleScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const heroHeight = window.innerHeight;
+                    
+                    // Parallax effect
+                    if (scrolled < heroHeight) {
+                        const yPos = -(scrolled * 0.2);
+                        heroSlides.forEach(slide => {
+                            slide.style.transform = `translateY(${yPos}px)`;
+                        });
+                    }
+                    
+                    // Navigation style changes
+                    const isScrolled = scrolled > heroHeight * 0.75;
+                    const strokeColor = isScrolled ? '#141414' : '#faf8f3';
+                    
+                    navRibbon.classList.toggle('scrolled', isScrolled);
+                    navIcons.forEach(icon => icon.setAttribute('stroke', strokeColor));
+                    // Only fill circles that should be filled (menu dots and cart wheels, not search circle)
+                    navIconCircles.forEach(circle => {
+                        // Skip the search icon circle - it should never be filled
+                        if (circle.getAttribute('r') !== '7') {
+                            circle.setAttribute('fill', strokeColor);
+                        }
+                    });
+                    if (searchIcon) searchIcon.setAttribute('stroke', strokeColor);
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+    </script>
+
+    <!-- ========================================
+         ART GALLERY MODAL POP-UP
+         ======================================== -->
+    <div id="artGalleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(197, 207, 208, 0.75); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="position: relative; width: 400px; height: 600px; max-width: 90%; background: #fafafa; border: 1.5px solid #141414; padding: 40px 50px; text-align: center;">
+            <!-- Close button -->
+            <button onclick="document.getElementById('artGalleryModal').style.display='none';" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; cursor: pointer; padding: 8px; width: auto; height: auto; display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <h2 style="font-family: 'Geist Mono', monospace; font-size: 1.6rem; font-weight: 500; color: #141414; margin-bottom: 12px; line-height: 1.1; letter-spacing: -0.02em;">Private Art Viewings</h2>
+            <p style="font-family: 'Geist Mono', monospace; font-size: 0.55rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 20px; font-weight: 400;">By Special Arrangement</p>
+            
+            <div style="margin: 0 0 20px 0; height: 240px; width: 240px; margin-left: auto; margin-right: auto; background: transparent;">
+                <img src="https://imgur.com/W5aT5cP.jpg" alt="Featured Artwork" style="width: 100%; height: 100%; object-fit: contain; mix-blend-mode: darken;">
+            </div>
+            
+            <p style="font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #141414; margin-bottom: 25px; line-height: 1.4;">
+                <span style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; font-weight: 600;">deCERCA</span> gallery presents an exceptional curation of local art at our first property, the residential setting of <span style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; font-weight: 600;">CASA LAUREL</span> showcases work by multiple artists. Additional art pieces can be brought in for private viewings tailored to serious collectors.
+            </p>
+            
+            <a href="mailto:contact@la-urel.com" style="display: inline-block; padding: 12px 36px; background: #faf8f3; color: #141414; text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #141414; transition: all 0.3s ease; cursor: pointer; font-family: 'Geist Mono', monospace;" 
+               onmouseover="this.style.background='#583c4a'; this.style.color='#ffffff'; this.style.borderColor='#583c4a';" 
+               onmouseout="this.style.background='#faf8f3'; this.style.color='#141414'; this.style.borderColor='#141414';">Arrange Your Visit</a>
+        </div>
+    </div>
+
+    <!-- ========================================
+         VIRTUAL CONSULTS MODAL POP-UP
+         ======================================== -->
+    <div id="virtualConsultsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(197, 207, 208, 0.75); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="position: relative; width: 400px; height: 600px; max-width: 90%; background: #fafafa; border: 1.5px solid #141414; padding: 40px 50px; text-align: center; display: flex; flex-direction: column;">
+            <!-- Close button -->
+            <button onclick="document.getElementById('virtualConsultsModal').style.display='none';" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; cursor: pointer; padding: 8px; width: auto; height: auto; display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <h2 style="font-family: 'Geist Mono', monospace; font-size: 1.6rem; font-weight: 500; color: #141414; margin-bottom: 10px; line-height: 1.1; letter-spacing: -0.02em;">Design Consults</h2>
+                <p style="font-family: 'Geist Mono', monospace; font-size: 0.55rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 15px; font-weight: 400;">WITH STUDIO DIRECTOR</p>
+                
+                <div style="margin: 0 0 15px 0; height: 240px; width: 240px; margin-left: auto; margin-right: auto; background: transparent;">
+                    <!-- Empty space matching art image dimensions -->
+                </div>
+                
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #141414; margin-bottom: 15px; font-weight: 400; line-height: 1.4;">
+                    One-on-one virtual sessions offering expert guidance and creative direction for your projects.
+                </p>
+                
+                <div style="margin-bottom: auto;">
+                    <div style="text-align: left; display: inline-block;">
+                        <div style="margin-bottom: 0px;">
+                            <span style="font-family: 'Geist Mono', monospace; font-size: 0.56rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 400;">• Duration: 60 Minutes</span>
+                        </div>
+                        <div>
+                            <span style="font-family: 'Geist Mono', monospace; font-size: 0.56rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 400;">• Investment: $150+IVA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="mailto:contact@la-urel.com" style="display: inline-block; padding: 12px 36px; background: #faf8f3; color: #141414; text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #141414; transition: all 0.3s ease; cursor: pointer; font-family: 'Geist Mono', monospace; width: fit-content; margin: 0 auto;" 
+               onmouseover="this.style.background='#583c4a'; this.style.color='#ffffff'; this.style.borderColor='#583c4a';" 
+               onmouseout="this.style.background='#faf8f3'; this.style.color='#141414'; this.style.borderColor='#141414';">Schedule Now</a>
+        </div>
+    </div>
+
+    <!-- ========================================
+         NEWSLETTER CONFIRMATION MODAL
+         ======================================== -->
+    <!-- Cart Modal -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <div style="display: flex; align-items: baseline; gap: 20px;">
+                <h2>Your Truck</h2>
+                <a href="#" onclick="clearCart(); return false;" class="clear-items-link" style="font-size: 0.75rem; font-weight: 500; color: #583c4a; text-decoration: none; font-family: 'Geist Mono', monospace; transition: opacity 0.3s ease;">(clear items)</a>
+            </div>
+            <button class="cart-close" onclick="closeCart()" style="align-self: center; margin-top: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-totals">
+                <div class="cart-total-line">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0</span>
+                </div>
+                <div class="cart-total-line" id="savingsLine" style="display: none;">
+                    <span>Savings:</span>
+                    <span id="cartSavings" style="color: #583c4a;">-$0</span>
+                </div>
+                <div class="cart-total-line">
+                    <span>IVA (13%):</span>
+                    <span id="cartIVA">$0</span>
+                </div>
+                <div class="cart-total-line total">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+            </div>
+            <div class="cart-buttons">
+                <button id="checkoutBtn" class="cart-checkout" onclick="checkout()" disabled>Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cart functionality with localStorage for cross-page persistence
+        let cartItems = [];
+
+        // Load cart from localStorage on page load
+        function loadCart() {
+            const savedCart = localStorage.getItem('laurelCart');
+            if (savedCart) {
+                cartItems = JSON.parse(savedCart);
+            }
+            updateCart();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('laurelCart', JSON.stringify(cartItems));
+        }
+
+        function addToCart(name, price, code, imageUrl, originalPrice = null) {
+            const cartItem = {
+                name: name,
+                price: price,
+                originalPrice: originalPrice || price, // Store original price if provided
+                code: `${code}-${Date.now()}`,
+                image: imageUrl || ''
+            };
+            
+            cartItems.push(cartItem);
+            saveCart();
+            updateCart();
+            toggleCart();
+        }
+
+        function updateCart() {
+            updateCartCounter();
+            updateCartDisplay();
+        }
+
+        function updateCartCounter() {
+            const counter = document.getElementById('cartCounter');
+            if (counter) {
+                counter.textContent = cartItems.length;
+                counter.classList.toggle('has-items', cartItems.length > 0);
+            }
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('cartOverlay');
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+                const cartSubtotalElement = document.getElementById('cartSubtotal');
+                const savingsLine = document.getElementById('savingsLine');
+                const cartIVAElement = document.getElementById('cartIVA');
+                
+                if (cartSubtotalElement) cartSubtotalElement.textContent = '$0';
+                if (savingsLine) savingsLine.style.display = 'none';
+                if (cartIVAElement) cartIVAElement.textContent = '$0';
+                cartTotalElement.textContent = '$0';
+                checkoutBtn.disabled = true;
+            } else {
+                const groupedItems = [];
+                
+                cartItems.forEach((item, index) => {
+                    const existingGroup = groupedItems.find(group => 
+                        group.name === item.name && group.price === item.price
+                    );
+                    
+                    if (existingGroup) {
+                        existingGroup.quantity += 1;
+                        existingGroup.indices.push(index);
+                    } else {
+                        groupedItems.push({
+                            ...item,
+                            quantity: 1,
+                            indices: [index]
+                        });
+                    }
+                });
+
+                let total = 0;
+                let html = '';
+
+                groupedItems.forEach((group) => {
+                    const lineTotal = group.price * group.quantity;
+                    total += lineTotal;
+                    
+                    // Build price display based on quantity and discount
+                    let priceHTML = '';
+                    const safePrice = group.price || 0;
+                    const safeOriginalPrice = group.originalPrice || safePrice;
+                    const safeLineTotal = lineTotal || 0;
+                    const hasDiscount = safeOriginalPrice > safePrice;
+                    
+                    if (group.quantity > 1) {
+                        if (hasDiscount) {
+                            priceHTML = `
+                                <div class="cart-item-price">
+                                    <span style="text-decoration: line-through; opacity: 0.6;">$${safeOriginalPrice.toLocaleString()}</span>
+                                    $${safePrice.toLocaleString()} each
+                                </div>
+                                <div class="cart-item-price" style="font-weight: 600;">$${safeLineTotal.toLocaleString()} total</div>
+                            `;
+                        } else {
+                            priceHTML = `
+                                <div class="cart-item-price">$${safePrice.toLocaleString()} each</div>
+                                <div class="cart-item-price" style="font-weight: 600;">$${safeLineTotal.toLocaleString()} total</div>
+                            `;
+                        }
+                    } else {
+                        if (hasDiscount) {
+                            priceHTML = `
+                                <div class="cart-item-price">
+                                    <span style="text-decoration: line-through; opacity: 0.6;">$${safeOriginalPrice.toLocaleString()}</span>
+                                    $${safePrice.toLocaleString()}
+                                </div>
+                            `;
+                        } else {
+                            priceHTML = `<div class="cart-item-price">$${safePrice.toLocaleString()}</div>`;
+                        }
+                    }
+                    
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-image">${group.image ? `<img src="${group.image}" alt="${group.name}">` : ''}</div>
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${group.name}</div>
+                                ${group.quantity > 1 ? `<div class="cart-item-code">Qty: ${group.quantity}</div>` : ''}
+                                ${priceHTML}
+                            </div>
+                            <button class="cart-item-remove" onclick="removeFromCart(${group.indices.join(',')})">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                });
+
+                cartItemsContainer.innerHTML = html;
+                
+                // Calculate and display all totals
+                const subtotal = total;
+                const originalTotal = groupedItems.reduce((sum, group) => {
+                    return sum + ((group.originalPrice || group.price || 0) * group.quantity);
+                }, 0);
+                const savings = originalTotal - subtotal;
+                const iva = Math.round(subtotal * 0.13);
+                const finalTotal = subtotal + iva;
+                
+                // Update all total displays
+                const cartSubtotalElement = document.getElementById('cartSubtotal');
+                const cartSavingsElement = document.getElementById('cartSavings');
+                const savingsLine = document.getElementById('savingsLine');
+                const cartIVAElement = document.getElementById('cartIVA');
+                
+                if (cartSubtotalElement) cartSubtotalElement.textContent = `$${subtotal.toLocaleString()}`;
+                if (savings > 0 && cartSavingsElement && savingsLine) {
+                    cartSavingsElement.textContent = `-$${savings.toLocaleString()}`;
+                    savingsLine.style.display = 'flex';
+                } else if (savingsLine) {
+                    savingsLine.style.display = 'none';
+                }
+                if (cartIVAElement) cartIVAElement.textContent = `$${iva.toLocaleString()}`;
+                cartTotalElement.textContent = `$${finalTotal.toLocaleString()}`;
+                
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        function removeFromCart(indices) {
+            const indexArray = indices.toString().split(',').map(Number);
+            indexArray.sort((a, b) => b - a);
+            indexArray.forEach(index => {
+                cartItems.splice(index, 1);
+            });
+            saveCart();
+            updateCart();
+        }
+
+        function checkout() {
+            if (cartItems.length > 0) {
+                const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+                const itemsList = cartItems.map(item => `• ${item.name} - $${item.price.toLocaleString()}`).join('\n');
+
+                alert(`Thank you for your order!\n\n${itemsList}\n\nTotal: $${total.toLocaleString()}\n\nWe'll contact you shortly to complete your purchase.`);
+
+                cartItems = [];
+                saveCart();
+                updateCart();
+                closeCart();
+            }
+        }
+
+        function clearCart() {
+            if (cartItems.length > 0) {
+                document.getElementById('clearModal').classList.add('active');
+                document.addEventListener('click', handleClickOutside);
+                document.addEventListener('keydown', handleEscape);
+            }
+        }
+
+        function closeClearModal() {
+            document.getElementById('clearModal').classList.remove('active');
+            document.removeEventListener('click', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
+        }
+
+        function confirmClearCart() {
+            cartItems = [];
+            saveCart();
+            updateCart();
+            closeClearModal();
+        }
+
+        function handleClickOutside(e) {
+            const modal = document.getElementById('clearModal');
+            if (!modal.contains(e.target) && !e.target.classList.contains('clear-items-link')) {
+                closeClearModal();
+            }
+        }
+
+        function handleEscape(e) {
+            if (e.key === 'Escape') {
+                closeClearModal();
+            }
+        }
+
+        // Newsletter Modal Functions
+        function showNewsletterModal() {
+            document.getElementById('newsletterModal').classList.add('active');
+        }
+
+        function closeNewsletterModal() {
+            document.getElementById('newsletterModal').classList.remove('active');
+        }
+
+        // Info Modals (Shipping, Returns, Trade)
+        function showShippingModal() {
+            document.getElementById('shippingModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function showReturnsModal() {
+            document.getElementById('returnsModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function showTradeModal() {
+            document.getElementById('tradeModal').classList.add('active');
+            document.getElementById('infoModalOverlay').classList.add('active');
+        }
+
+        function closeInfoModals() {
+            document.getElementById('shippingModal').classList.remove('active');
+            document.getElementById('returnsModal').classList.remove('active');
+            document.getElementById('tradeModal').classList.remove('active');
+            document.getElementById('infoModalOverlay').classList.remove('active');
+        }
+
+        // Close info modals with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeInfoModals();
+            }
+        });
+
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+
+    <!-- Search Modal -->
+    <style>
+        .search-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(197, 207, 208, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9998;
+        }
+
+        .search-overlay.active {
+            display: block;
+        }
+
+        .search-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            max-height: 70vh;
+            background: #faf8f3;
+            border: 1.5px solid #141414;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        .search-header {
+            padding: 20px 24px;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1rem;
+            padding: 12px 0;
+            border: none;
+            background: transparent;
+            color: #141414;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #583c4a;
+            opacity: 0.5;
+        }
+
+        .search-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-results {
+            overflow-y: auto;
+            max-height: calc(70vh - 80px);
+            padding: 20px;
+        }
+
+        .search-no-results {
+            text-align: center;
+            color: #583c4a;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            padding: 40px;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            border: 1.5px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+
+        .search-result-item:hover {
+            border-color: #141414;
+            background: #fafafa;
+        }
+
+        .search-result-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border: 1.5px solid #141414;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-name {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.95rem;
+            color: #141414;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .search-result-type {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            color: #583c4a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .search-result-price {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.9rem;
+            color: #141414;
+            text-align: right;
+        }
+    </style>
+
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearch()"></div>
+    <div class="search-modal" id="searchModal">
+        <div class="search-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                <circle cx="10" cy="10" r="7"/>
+                <path d="M21 21l-6-6" stroke-linecap="round"/>
+            </svg>
+            <input 
+                type="text" 
+                class="search-input" 
+                id="searchInput" 
+                placeholder="Search furniture by name or code..." 
+                oninput="performSearch()"
+                autofocus
+            >
+            <button class="search-close" onclick="closeSearch()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-results" id="searchResults">
+            <div class="search-no-results">Start typing to search...</div>
+        </div>
+    </div>
+
+    <script>
+        // Furniture products database
+        const searchDatabase = [
+            { name: 'Globo Side Table', code: 'MM-DC-001', price: 675, url: 'globo-side-table.html', image: 'https://i.imgur.com/Cd7ykMg.jpg' },
+            { name: 'Parsons Depto. Desk', code: 'DK001', price: 1150, url: 'depto-parsons-desk.html', image: 'https://i.imgur.com/HEbJZWe.jpg' },
+            { name: 'Ronda Coffee Table', code: 'MM-TL-003', price: 1380, url: 'ronda-coffee-table.html', image: 'https://i.imgur.com/mI4q6Tw.jpg' },
+            { name: 'Dizi Side Table', code: 'AT006', price: 446, originalPrice: 525, url: 'dizi-side-table.html', image: 'https://i.imgur.com/mGwzc7m.jpg' },
+            { name: 'Dizi Coffee Table', code: 'CT004', price: 1200, url: 'dizi-coffee-table.html', image: 'https://i.imgur.com/u7g9gGh.jpg' },
+            { name: 'Petra Coffee Table', code: 'CT018', price: 1615, originalPrice: 1900, url: 'petra-coffee-table.html', image: 'https://i.imgur.com/qPjmklI.jpg' },
+            { name: 'Barro No.2 Side Table', code: 'AT016', price: 555, url: 'barro-no2-side-table.html', image: 'https://i.imgur.com/MUPkmH7.jpg' },
+            { name: 'Rosario Bistro Table', code: 'BT001', price: 715, url: 'rosario-bistro-table.html', image: 'https://i.imgur.com/Iq5eg0R.jpg' },
+            { name: 'Cazo Side Chair', code: 'SCH002', price: 900, url: 'cazo-side-chair.html', image: 'https://i.imgur.com/aPrJrZg.jpg' },
+            { name: 'Mano Sofa', code: 'SO010', price: 2255, url: 'mano-sofa.html', image: 'https://i.imgur.com/lIcg44s.jpg' },
+            { name: 'Mano Chair', code: 'CH017', price: 1240, url: 'mano-chair.html', image: 'https://i.imgur.com/8zaPHCL.jpg' },
+            { name: 'Rio Chair', code: 'CH005', price: 1130, url: 'rio-chair.html', image: 'https://i.imgur.com/xgMrofZ.jpg' },
+            { name: 'Perse Chair', code: 'CH010', price: 815, url: 'perse-chair.html', image: 'https://i.imgur.com/XwMXs6o.jpg' },
+            { name: 'Fortuna Chair', code: 'CH012', price: 695, url: 'fortuna-chair.html', image: 'https://i.imgur.com/Nzky6sa.jpg' },
+            { name: 'Poroti Side Table', code: 'AT007', price: 565, url: 'poroti-side-table.html', image: 'https://i.imgur.com/cCff85m.jpg' },
+            { name: 'Bloque No.1 Side table', code: 'AT009', price: 400, url: 'bloque-no1-side-table.html', image: 'https://i.imgur.com/OPIXl1H.jpg' },
+            { name: 'Plato Side Table', code: 'AT018', price: 675, url: 'plato-side-table.html', image: 'https://i.imgur.com/lyqffq4.jpg' },
+            { name: '1/2 and 1/2 Side Table', code: 'AT004', price: 495, url: 'half-and-half-side-table.html', image: 'https://i.imgur.com/dXgmyPU.jpg' },
+            { name: 'Pablo Side Table', code: 'AT020', price: 475, url: 'pablo-side-table.html', image: 'https://i.imgur.com/qWpb5ea.jpg' },
+            { name: 'Amanita Side Table', code: 'AT019', price: 485, url: 'amanita-side-table.html', image: 'https://i.imgur.com/bDH1fs5.jpg' },
+            { name: 'Gracia Dining Table', code: 'DT012', price: 2835, url: 'gracia-dining-table.html', image: 'https://i.imgur.com/9VFjyk2.jpg' }
+        ];
+
+        function toggleSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.getElementById('searchModal').classList.add('active');
+            document.getElementById('searchInput').focus();
+        }
+
+        function closeSearch() {
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.getElementById('searchModal').classList.remove('active');
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '<div class="search-no-results">Start typing to search...</div>';
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (query.length < 1) {
+                resultsContainer.innerHTML = '<div class="search-no-results">Start typing to search...</div>';
+                return;
+            }
+            
+            const results = searchDatabase.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.code.toLowerCase().includes(query)
+            );
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<div class="search-no-results">No products found</div>';
+                return;
+            }
+            
+            let html = '';
+            results.forEach(item => {
+                const priceDisplay = item.originalPrice ? 
+                    `<span style="text-decoration: line-through; opacity: 0.5;">$${item.originalPrice}</span> $${item.price} + iva` :
+                    `$${item.price} + iva`;
+                
+                html += `
+                    <a href="${item.url}" class="search-result-item">
+                        <img src="${item.image}" alt="${item.name}" class="search-result-image">
+                        <div class="search-result-info">
+                            <div class="search-result-name">${item.name}</div>
+                            <div class="search-result-type">${item.code}</div>
+                        </div>
+                        <div class="search-result-price">${priceDisplay}</div>
+                    </a>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('searchModal').classList.contains('active')) {
+                closeSearch();
+            }
+        });
+
+        // Smart Ticker Control
+        function initializeTicker() {
+            const ticker = document.querySelector('.ticker-wrapper');
+            let loopCount = 0;
+            const maxLoops = 3;
+            const pauseDuration = 600000; // 10 minutes in milliseconds
+            
+            ticker.addEventListener('animationiteration', function() {
+                loopCount++;
+                
+                if (loopCount >= maxLoops) {
+                    ticker.style.animationPlayState = 'paused';
+                    
+                    // Restart after 10 minutes
+                    setTimeout(function() {
+                        loopCount = 0;
+                        ticker.style.animationPlayState = 'running';
+                    }, pauseDuration);
+                }
+            });
+        }
+
+        // Initialize ticker control
+        initializeTicker();
+    </script>
+
+    <!-- Clear Items Modal -->
+    <div class="clear-modal" id="clearModal">
+        <div class="clear-modal-message">
+            Clear all items from your cart?
+        </div>
+        <div class="clear-modal-buttons">
+            <button class="clear-modal-btn" onclick="confirmClearCart()">Yes Sure</button>
+            <button class="clear-modal-btn" onclick="closeClearModal()">No</button>
+        </div>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletterModal" class="newsletter-modal">
+        <div class="newsletter-modal-header">
+            <button class="newsletter-modal-close" onclick="closeNewsletterModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="newsletter-modal-content">
+            <div class="newsletter-modal-title">— Thanks for your visit —</div>
+            <div class="newsletter-modal-subtitle">We'll be in touch soon!</div>
+        </div>
+    </div>
+
+    <!-- Info Modal Overlay -->
+    <div id="infoModalOverlay" class="info-modal-overlay" onclick="closeInfoModals()"></div>
+
+    <!-- Shipping Modal -->
+    <div id="shippingModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Shipping Terms</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Delivery Areas</h3>
+            <p>We deliver throughout Costa Rica's Greater Metropolitan Area (GAM) including San JosÃ©, EscazÃº, Santa Ana, Heredia, Alajuela, and Cartago. Extended delivery is available to Guanacaste, the Pacific and Caribbean coasts, and other regions nationwide—contact us for details.</p>
+
+            <h3>Production & Shipping Times</h3>
+            <p>Most furniture pieces are made to order by Costa Rican artisans. Standard production and delivery takes 6-8 weeks from order confirmation. We'll keep you updated throughout the process.</p>
+
+            <h3>Pickup Option</h3>
+            <p>Prefer to pick up your order? Pieces can be collected from our dispatch warehouse in EscazÃº at no additional charge once production is complete.</p>
+
+            <h3>Delivery Service</h3>
+            <p>Delivery costs are calculated based on your location and order size—you'll see the exact cost before finalizing your purchase. White-glove service (unpacking, assembly, placement, and packaging removal) is complimentary for pieces requiring assembly. Freestanding pieces are delivered and placed in your space.</p>
+
+            <h3>International Shipping</h3>
+            <p>We ship select pieces internationally. Contact us at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a> for international shipping rates and arrangements.</p>
+        </div>
+    </div>
+
+    <!-- Returns Modal -->
+    <div id="returnsModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Returns & Conditions</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Our Commitment</h3>
+            <p>Each piece from Laurel Depto. de Diseño is handcrafted by skilled Costa Rican artisans using premium materials. We stand behind the quality of our work and want you to love your furniture.</p>
+
+            <h3>Return Policy</h3>
+            <p>Custom and made-to-order pieces (which represent most of our collection) are non-returnable due to their bespoke nature. However, if your piece arrives damaged or with manufacturing defects, we'll make it right.</p>
+
+            <h3>Damaged or Defective Items</h3>
+            <p>Please inspect your furniture upon delivery. If you notice any damage or defects, contact us within 48 hours at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We'll arrange for repair, replacement, or refund as appropriate.</p>
+
+            <h3>Cancellations</h3>
+            <p>Orders can be cancelled within 24 hours of placement for a full refund. After production begins, cancellations may incur a 25% restocking fee to cover materials and labor costs.</p>
+
+            <h3>Quality Guarantee</h3>
+            <p>All our furniture comes with a 1-year warranty against manufacturing defects. Natural variations in wood grain, color, and texture are inherent to handcrafted pieces and are not considered defects.</p>
+
+            <h3>Questions?</h3>
+            <p>Contact us at +(506) 6317-3038 or <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We're here to help.</p>
+        </div>
+    </div>
+
+    <!-- Trade Program Modal -->
+    <div id="tradeModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Trade Program</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>For Interior Designers & Design Professionals</h3>
+            <p>We welcome collaboration with interior designers, architects, and design professionals on projects of all sizes. Laurel Depto. de Diseño is equipped to support your vision with quality craftsmanship and dedicated service.</p>
+
+            <h3>What We Offer</h3>
+            <p>Our trade program provides access to our full collection with the flexibility you need for client projects. We handle large orders, offer customization options to match your specifications, and work on your timeline to ensure seamless project execution.</p>
+
+            <h3>Custom Capabilities</h3>
+            <p>Many pieces in our collection can be customized—dimensions, finishes, materials, and configurations can be tailored to your project requirements. Our artisans work closely with designers to bring specific visions to life while maintaining our commitment to quality.</p>
+
+            <h3>Project Support</h3>
+            <p>From initial specification to final installation, we provide dedicated support for your projects. This includes material samples, technical drawings, project coordination, and white-glove delivery service for client satisfaction.</p>
+
+            <h3>Get Started</h3>
+            <p>To discuss your project or learn more about our trade program, reach out to us at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We're here to make your projects exceptional.</p>
+        </div>
+    </div>
+
+</body>
+</html>

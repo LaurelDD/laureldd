@@ -1,0 +1,69 @@
+/* ============================================
+   ABOUT PAGE SPECIFIC STYLES
+   ============================================ */
+
+/* Override body styles for about page - centered layout */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px; /* Overrides padding-top from main.css */
+    text-align: center;
+}
+
+.message {
+    max-width: 600px;
+}
+
+h1 {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    color: #583c4a;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    /* color inherited from body in main.css */
+    margin-bottom: 16px;
+}
+
+.emoji {
+    font-size: 2rem;
+    margin-top: 24px;
+}
+
+.back-link {
+    margin-top: 48px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.back-link a {
+    color: #141414;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: #583c4a;
+}
+
+.back-link a:hover svg path {
+    stroke: #583c4a;
+}
+
+/* SVG smiley face styling */
+.message svg {
+    margin-top: 40px;
+}

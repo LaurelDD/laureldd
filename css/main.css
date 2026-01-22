@@ -98,6 +98,19 @@
         .nav-ribbon.scrolled {
             /* Keep behavior consistent even if JS still toggles .scrolled */
             /* Styles already match base .nav-ribbon, kept for JS compatibility */
+            height: 44px;
+            background: rgba(250, 248, 243, 0.95);
+            border-top: 1.5px solid #141414;
+            border-bottom: 1.5px solid #141414;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            position: fixed; /* Fixed at top below promo banner */
+            top: 40px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         .nav-center {

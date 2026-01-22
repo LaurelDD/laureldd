@@ -6,7 +6,7 @@ html {
 }
 body {
     background-color: #fafafa;
-    padding-top: 124px; /* promo-banner (40) + nav-ribbon (44) + furniture-nav (40) */
+    padding-top: 124px !important; /* promo-banner (40) + nav-ribbon (44) + furniture-nav (40) */
 }
 
 a:hover .back-arrow-icon path {

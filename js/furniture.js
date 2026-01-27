@@ -128,35 +128,12 @@ const seasonMarkdowns = [
     }
 ];
 
-// Products Database for Search
-const productsDatabase = [
-    { name: 'Rosario Bistro Table', code: 'BT001', price: 715, url: 'rosario-bistro-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/w_400/v1763160838/Rosario_Thumbnail_gyybkh.jpg' },
-    { name: 'Petra Coffee Table', code: 'CT018', price: 1615, originalPrice: 1900, url: 'petra-coffee-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763160629/Petra_Thumbnail_n7tgb1.png' },
-    { name: 'Mano Sofa', code: 'SO010', price: 2255, url: 'mano-sofa.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/c_pad,w_400,h_600/v1763325273/Mano_Sofa_Thumbnail_kfl44u.jpg' },
-    { name: 'Depto Parsons Desk', code: 'DK001', price: 1150, url: 'depto-parsons-desk.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763156930/Depto._Parsons__Thumbnail_mhnnjq.jpg' },
-    { name: 'Globo Side Table', code: 'AT001', price: 675, url: 'globo-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763338971/Globo_Thumbnail_unymli.jpg' },
-    { name: 'Ronda Coffee Table', code: 'CT001', price: 1380, url: 'ronda-coffee-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763160052/Ronda_Coffee_Thumbnail_wdfbmj.jpg' },
-    { name: 'Dizi Side Table', code: 'AT006', price: 446, originalPrice: 525, url: 'dizi-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763159484/Dizi_Thumbnail_zomhav.jpg' },
-    { name: 'Dizi Coffee Table', code: 'CT004', price: 1200, url: 'dizi-coffee-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763160506/Dizi_Coffee_Thumbnail_uzac9u.png' },
-    { name: 'Cazo Side Chair', code: 'SCH002', price: 900, url: 'cazo-side-chair.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763160786/Cazo_Thumbnail_ogbvfi.jpg' },
-    { name: 'Barro No2 Side Table', code: 'AT016', price: 555, url: 'barro-no2-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763161511/Barro_No.2_Thumbnail_vebhc6.jpg' },
-    { name: 'Mano Chair', code: 'CH017', price: 1240, url: 'mano-chair.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/c_pad/v1763326215/Mano_Chair_Thumbnail_nk1oir.jpg' },
-    { name: 'Rio Chair', code: 'CH005', price: 1130, url: 'rio-chair.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763340150/Silla_Rio_Thumbnail_o91sh0.jpg' },
-    { name: 'Perse Chair', code: 'CH010', price: 815, url: 'perse-chair.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764016863/Perse_Thumbnail_x31dc6.jpg' },
-    { name: 'Fortuna Chair', code: 'CH012', price: 695, url: 'fortuna-chair.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764017495/Fortuna_Thumbnail_g0mngb.jpg' },
-    { name: 'Poroti Side Table', code: 'AT007', price: 565, url: 'poroti-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763328213/Poroti_Thumbnail_mh0wer.jpg' },
-    { name: 'Bloque No1 Side Table', code: 'AT009', price: 400, url: 'bloque-no1-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763328240/BloqueNo1_Thumbnail_erl34n.jpg' },
-    { name: 'Plato Side Table', code: 'AT018', price: 675, url: 'plato-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763328562/Plato_Thumbnail_amcs4n.jpg' },
-    { name: 'Half Side Table', code: 'AT004', price: 495, url: 'half-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763328283/Half_Thumbnail_bphvyz.jpg' },
-    { name: 'Pablo Side Table', code: 'AT020', price: 475, url: 'pablo-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763328308/Pablo_Thumbnail_pix7xx.jpg' },
-    { name: 'Amanita Side Table', code: 'AT026', price: 700, url: 'amanita-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764019628/Amanita_Thumbnail_vc22ih.jpg' },
-    { name: 'Gracia Dining Table', code: 'DT012', price: 2650, url: 'gracia-dining-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763328499/Gracia_Thumbnail_igvbct.jpg' },
-    { name: 'Winnie Side Table', code: 'AT028', price: 515, url: 'winnie-side-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763337412/Winnie_Thumb_iajm0w.jpg' },
-    { name: 'Morfeo Daybed', code: 'DB001', price: 2225, url: 'morfeo-daybed.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763328852/Morfeo_Daybed_Thumbnail_flklnb.jpg' },
-    { name: 'Morfeo Nightstand', code: 'NT001', price: 575, url: 'morfeo-nightstand.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763321510/Morfeo_Nightstand_Thumbnail_dyc9fc.jpg' },
-    { name: 'Sistema Sofa', code: 'SO009', price: 1275, originalPrice: 1500, url: 'sistema-sofa.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763335644/Sistema_3Seater_ryg1qz.jpg' },
-    { name: 'Botella Dining Table', code: 'DT001', price: 1700, url: 'botella-dining-table.html', image: 'https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763322945/Botella_Thumbnail_mllejo.jpg' }
-];
+// Products Database - loaded from shared products-data.json by main.js
+// main.js must be included before this file
+
+// ============================================================================
+// NAVIGATION FUNCTIONS
+// ============================================================================
 
 // Save scroll position before navigating to product page
 function saveScrollAndNavigate(url) {
@@ -679,3 +656,13 @@ function applyInitialView() {
 
 // Run immediately
 applyInitialView();
+
+// ============================================================================
+// EXPOSE FUNCTIONS TO GLOBAL SCOPE
+// ============================================================================
+// Ensure all functions are available globally for onclick handlers
+window.saveScrollAndNavigate = saveScrollAndNavigate;
+window.returnHome = returnHome;
+window.filterCategory = filterCategory;
+window.generateSeasonMarkdownGrid = generateSeasonMarkdownGrid;
+window.loadMoreProducts = typeof loadMoreProducts !== 'undefined' ? loadMoreProducts : function() {};

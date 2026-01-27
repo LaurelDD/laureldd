@@ -1,0 +1,14 @@
+{
+  "name": "laureldd",
+  "version": "1.0.0",
+  "description": "Laurel Depto. de Diseño website with Supabase backend",
+  "scripts": {
+    "build": "node scripts/generate-products-data.js && node scripts/generate-products.js",
+    "generate-products": "node scripts/generate-products.js",
+    "generate-data": "node scripts/generate-products-data.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {}
+}

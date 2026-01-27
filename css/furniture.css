@@ -1754,7 +1754,7 @@ footer {
     margin-bottom: 12px;
 }
 
-.product-name {
+.product-name h1{
     font-family: 'Geist Mono', monospace;
     font-size: 2rem;
     font-weight: 500;
@@ -1774,7 +1774,7 @@ footer {
     margin-bottom: 12px;
 }
 
-.product-price {
+.produce-cart .product-price {
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     font-weight: 400;

@@ -48,20 +48,25 @@ function updateCartCounter() {
 function toggleCart() {
     const modal = document.getElementById('cartModal');
     const overlay = document.getElementById('cartOverlay');
-    modal.classList.toggle('active');
-    overlay.classList.toggle('active');
+    if (modal) modal.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
     updateCartDisplay();
 }
 
 function closeCart() {
-    document.getElementById('cartModal').classList.remove('active');
-    document.getElementById('cartOverlay').classList.remove('active');
+    const modal = document.getElementById('cartModal');
+    const overlay = document.getElementById('cartOverlay');
+    if (modal) modal.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
 }
 
 function updateCartDisplay() {
     const cartItemsContainer = document.getElementById('cartItems');
     const cartTotalElement = document.getElementById('cartTotal');
     const checkoutBtn = document.getElementById('checkoutBtn');
+
+    // Skip if cart elements don't exist on this page
+    if (!cartItemsContainer || !cartTotalElement) return;
 
     if (cartItems.length === 0) {
         cartItemsContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
@@ -73,7 +78,7 @@ function updateCartDisplay() {
         if (savingsLine) savingsLine.style.display = 'none';
         if (cartIVAElement) cartIVAElement.textContent = '$0';
         cartTotalElement.textContent = '$0';
-        checkoutBtn.disabled = true;
+        if (checkoutBtn) checkoutBtn.disabled = true;
     } else {
         const groupedItems = [];
         
@@ -180,8 +185,8 @@ function updateCartDisplay() {
         }
         if (cartIVAElement) cartIVAElement.textContent = `$${iva.toLocaleString()}`;
         cartTotalElement.textContent = `$${finalTotal.toLocaleString()}`;
-        
-        checkoutBtn.disabled = false;
+
+        if (checkoutBtn) checkoutBtn.disabled = false;
     }
 }
 
@@ -275,30 +280,7 @@ function closeInfoModals() {
     document.getElementById('infoModalOverlay').classList.remove('active');
 }
 
-// Furniture products database
-const searchDatabase = [
-    { name: 'Globo Side Table', code: 'MM-DC-001', price: 675, url: 'globo-side-table.html', image: 'https://i.imgur.com/Cd7ykMg.jpg' },
-    { name: 'Parsons Depto. Desk', code: 'DK001', price: 1150, url: 'depto-parsons-desk.html', image: 'https://i.imgur.com/HEbJZWe.jpg' },
-    { name: 'Ronda Coffee Table', code: 'MM-TL-003', price: 1380, url: 'ronda-coffee-table.html', image: 'https://i.imgur.com/mI4q6Tw.jpg' },
-    { name: 'Dizi Side Table', code: 'AT006', price: 446, originalPrice: 525, url: 'dizi-side-table.html', image: 'https://i.imgur.com/mGwzc7m.jpg' },
-    { name: 'Dizi Coffee Table', code: 'CT004', price: 1200, url: 'dizi-coffee-table.html', image: 'https://i.imgur.com/u7g9gGh.jpg' },
-    { name: 'Petra Coffee Table', code: 'CT018', price: 1615, originalPrice: 1900, url: 'petra-coffee-table.html', image: 'https://i.imgur.com/qPjmklI.jpg' },
-    { name: 'Barro No.2 Side Table', code: 'AT016', price: 555, url: 'barro-no2-side-table.html', image: 'https://i.imgur.com/MUPkmH7.jpg' },
-    { name: 'Rosario Bistro Table', code: 'BT001', price: 715, url: 'rosario-bistro-table.html', image: 'https://i.imgur.com/Iq5eg0R.jpg' },
-    { name: 'Cazo Side Chair', code: 'SCH002', price: 900, url: 'cazo-side-chair.html', image: 'https://i.imgur.com/aPrJrZg.jpg' },
-    { name: 'Mano Sofa', code: 'SO010', price: 2255, url: 'mano-sofa.html', image: 'https://i.imgur.com/lIcg44s.jpg' },
-    { name: 'Mano Chair', code: 'CH017', price: 1240, url: 'mano-chair.html', image: 'https://i.imgur.com/8zaPHCL.jpg' },
-    { name: 'Rio Chair', code: 'CH005', price: 1130, url: 'rio-chair.html', image: 'https://i.imgur.com/xgMrofZ.jpg' },
-    { name: 'Perse Chair', code: 'CH010', price: 815, url: 'perse-chair.html', image: 'https://i.imgur.com/XwMXs6o.jpg' },
-    { name: 'Fortuna Chair', code: 'CH012', price: 695, url: 'fortuna-chair.html', image: 'https://i.imgur.com/Nzky6sa.jpg' },
-    { name: 'Poroti Side Table', code: 'AT007', price: 565, url: 'poroti-side-table.html', image: 'https://i.imgur.com/cCff85m.jpg' },
-    { name: 'Bloque No.1 Side table', code: 'AT009', price: 400, url: 'bloque-no1-side-table.html', image: 'https://i.imgur.com/OPIXl1H.jpg' },
-    { name: 'Plato Side Table', code: 'AT018', price: 675, url: 'plato-side-table.html', image: 'https://i.imgur.com/lyqffq4.jpg' },
-    { name: '1/2 and 1/2 Side Table', code: 'AT004', price: 495, url: 'half-and-half-side-table.html', image: 'https://i.imgur.com/dXgmyPU.jpg' },
-    { name: 'Pablo Side Table', code: 'AT020', price: 475, url: 'pablo-side-table.html', image: 'https://i.imgur.com/qWpb5ea.jpg' },
-    { name: 'Amanita Side Table', code: 'AT019', price: 485, url: 'amanita-side-table.html', image: 'https://i.imgur.com/bDH1fs5.jpg' },
-    { name: 'Gracia Dining Table', code: 'DT012', price: 2835, url: 'gracia-dining-table.html', image: 'https://i.imgur.com/9VFjyk2.jpg' }
-];
+// Products database is loaded by products-data.js (must be included before main.js)
 
 function toggleSearch() {
     document.getElementById('searchOverlay').classList.add('active');
@@ -316,28 +298,35 @@ function closeSearch() {
 function performSearch() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const resultsContainer = document.getElementById('searchResults');
-    
+
     if (query.length < 1) {
         resultsContainer.innerHTML = '<div class="search-no-results">Start typing to search...</div>';
         return;
     }
-    
-    const results = searchDatabase.filter(item => 
-        item.name.toLowerCase().includes(query) || 
+
+    // If database not loaded yet, show loading and retry
+    if (productsDatabase.length === 0) {
+        resultsContainer.innerHTML = '<div class="search-no-results">Loading products...</div>';
+        loadProductsDatabase().then(() => performSearch());
+        return;
+    }
+
+    const results = productsDatabase.filter(item =>
+        item.name.toLowerCase().includes(query) ||
         item.code.toLowerCase().includes(query)
     );
-    
+
     if (results.length === 0) {
         resultsContainer.innerHTML = '<div class="search-no-results">No products found</div>';
         return;
     }
-    
+
     let html = '';
     results.forEach(item => {
-        const priceDisplay = item.originalPrice ? 
-            `<span style="text-decoration: line-through; opacity: 0.5;">$${item.originalPrice}</span> $${item.price} + iva` :
-            `$${item.price} + iva`;
-        
+        const priceDisplay = item.originalPrice ?
+            `<span style="text-decoration: line-through; opacity: 0.5;">$${item.originalPrice.toLocaleString()}</span> $${item.price.toLocaleString()} + iva` :
+            `$${item.price.toLocaleString()} + iva`;
+
         html += `
             <a href="${item.url}" class="search-result-item">
                 <img src="${item.image}" alt="${item.name}" class="search-result-image">
@@ -349,7 +338,7 @@ function performSearch() {
             </a>
         `;
     });
-    
+
     resultsContainer.innerHTML = html;
 }
 

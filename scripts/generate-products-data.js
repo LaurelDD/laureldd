@@ -1,5 +1,5 @@
-// Build-time script to generate products data JSON from Supabase
-// This creates a products.json file that can be used by furniture.js and main.js
+// Build-time script to generate products data JS from Supabase
+// This creates a products-data.js file loaded via <script> tag before main.js
 // Run this during Netlify build: node scripts/generate-products-data.js
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Output file
-const outputFile = path.join(__dirname, '../js/products-data.json');
+const outputFile = path.join(__dirname, '../js/products-data.js');
 
 // Main function
 async function generateProductsData() {
@@ -37,7 +37,7 @@ async function generateProductsData() {
     if (!products || products.length === 0) {
         console.warn('No products found in Supabase');
         // Create empty array file
-        fs.writeFileSync(outputFile, JSON.stringify([], null, 2), 'utf8');
+        fs.writeFileSync(outputFile, 'var productsDatabase = [];\n', 'utf8');
         return;
     }
     
@@ -52,9 +52,10 @@ async function generateProductsData() {
         category: product.category || []
     }));
     
-    // Write to file
-    fs.writeFileSync(outputFile, JSON.stringify(transformedProducts, null, 2), 'utf8');
-    console.log(`✅ Generated products-data.json with ${transformedProducts.length} products`);
+    // Write as JS file with var declaration (loaded via <script> tag)
+    const jsContent = 'var productsDatabase = ' + JSON.stringify(transformedProducts, null, 2) + ';\n';
+    fs.writeFileSync(outputFile, jsContent, 'utf8');
+    console.log(`✅ Generated products-data.js with ${transformedProducts.length} products`);
 }
 
 // Run the script

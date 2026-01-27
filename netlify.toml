@@ -1,0 +1,19 @@
+# Netlify configuration for build-time product generation
+
+[build]
+  # Build command runs the product generation script
+  command = "npm install && npm run build"
+  # Publish directory (static files)
+  publish = "."
+
+[build.environment]
+  # These will be set in Netlify dashboard
+  # SUPABASE_URL = "your-supabase-url"
+  # SUPABASE_ANON_KEY = "your-supabase-anon-key"
+
+# Redirects for clean URLs (optional - can use slug-based URLs)
+# [[redirects]]
+#   from = "/:slug"
+#   to = "/:slug.html"
+#   status = 200
+#   conditions = {Country = ["US"]}

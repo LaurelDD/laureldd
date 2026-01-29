@@ -21,7 +21,8 @@ const templatePath = path.join(__dirname, '../product-template.html');
 const template = fs.readFileSync(templatePath, 'utf8');
 
 // Output directory for generated product pages
-const outputDir = path.join(__dirname, '..');
+const productsDir = path.join(__dirname, '..', 'pages', 'products');
+const outputDir = productsDir;
 
 // Function to generate HTML for a product
 function generateProductHTML(product) {
@@ -196,6 +197,28 @@ function generateProductHTML(product) {
                 </div>
             </div>
         `);
+    
+    // Color section (generic color picker)
+    const materials = product.materials || {};
+    const colorOptions = materials.color || [];
+    if (colorOptions.length > 0) {
+        let colorHTML = '';
+        colorOptions.forEach(option => {
+            const colorValue = option.color || '#ccc';
+            const title = option.name || option.title || '';
+            colorHTML += `<div class="color-swatch-matte" style="background-color: ${escapeHtml(colorValue)};" title="${escapeHtml(title)}" onclick="selectColor(this)"></div>`;
+        });
+        html = html.replace(/\{\{COLOR_SECTION\}\}/g, `
+            <div class="selector-group" id="color-section">
+                <div class="selector-label">Color</div>
+                <div class="color-swatches">
+                    ${colorHTML}
+                </div>
+            </div>
+        `);
+    } else {
+        html = html.replace(/\{\{COLOR_SECTION\}\}/g, '');
+    }
     
     // Hardwood section
     if (product.has_hardwood) {
@@ -383,6 +406,12 @@ async function generateProducts() {
     
     console.log(`Found ${products.length} products. Generating static pages...\n`);
     
+    // Ensure products directory exists
+    if (!fs.existsSync(productsDir)) {
+        fs.mkdirSync(productsDir, { recursive: true });
+        console.log(`📁 Created directory: pages/products/`);
+    }
+    
     // Generate HTML for each product
     products.forEach(product => {
         const html = generateProductHTML(product);
@@ -390,7 +419,7 @@ async function generateProducts() {
         const filepath = path.join(outputDir, filename);
         
         fs.writeFileSync(filepath, html, 'utf8');
-        console.log(`✓ Generated: ${filename}`);
+        console.log(`✓ Generated: pages/products/${filename}`);
     });
     
     console.log('\n✅ All product pages generated successfully!');

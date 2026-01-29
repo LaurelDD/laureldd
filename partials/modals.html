@@ -1,0 +1,190 @@
+    <!-- Cart Modal -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <div style="display: flex; align-items: baseline; gap: 20px;">
+                <h2>Your Truck</h2>
+                <a href="#" onclick="clearCart(); return false;" class="clear-items-link" style="font-size: 0.75rem; font-weight: 500; color: #583c4a; text-decoration: none; font-family: 'Geist Mono', monospace; transition: opacity 0.3s ease;">(clear items)</a>
+            </div>
+            <button class="cart-close" onclick="closeCart()" style="align-self: center; margin-top: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-totals">
+                <div class="cart-total-line">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0</span>
+                </div>
+                <div class="cart-total-line" id="savingsLine" style="display: none;">
+                    <span>Savings:</span>
+                    <span id="cartSavings" style="color: #583c4a;">-$0</span>
+                </div>
+                <div class="cart-total-line">
+                    <span>IVA (13%):</span>
+                    <span id="cartIVA">$0</span>
+                </div>
+                <div class="cart-total-line total">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+            </div>
+            <div class="cart-buttons">
+                <button id="checkoutBtn" class="cart-checkout" onclick="checkout()" disabled>Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearch()"></div>
+    <div class="search-modal" id="searchModal">
+        <div class="search-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                <circle cx="10" cy="10" r="7"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input 
+                type="text" 
+                class="search-input" 
+                id="searchInput" 
+                placeholder="Search furniture by name or code..." 
+                oninput="performSearch()"
+            />
+            <button class="search-close" onclick="closeSearch()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-results" id="searchResults">
+            <div class="search-no-results">Start typing to search...</div>
+        </div>
+    </div>
+
+    <!-- Clear Items Modal -->
+    <div class="clear-modal" id="clearModal">
+        <div class="clear-modal-message">
+            Clear all items from your cart?
+        </div>
+        <div class="clear-modal-buttons">
+            <button class="clear-modal-btn" onclick="confirmClearCart()">Yes Sure</button>
+            <button class="clear-modal-btn" onclick="closeClearModal()">No</button>
+        </div>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletterModal" class="newsletter-modal">
+        <div class="newsletter-modal-header">
+            <button class="newsletter-modal-close" onclick="closeNewsletterModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="newsletter-modal-content">
+            <div class="newsletter-modal-title">— Thanks for your visit —</div>
+            <div class="newsletter-modal-subtitle">We'll be in touch soon!</div>
+        </div>
+    </div>
+
+    <!-- Info Modal Overlay -->
+    <div id="infoModalOverlay" class="info-modal-overlay" onclick="closeInfoModals()"></div>
+
+    <!-- Shipping Modal -->
+    <div id="shippingModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Shipping Terms</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Delivery Areas</h3>
+            <p>We deliver throughout Costa Rica's Greater Metropolitan Area (GAM) including San José, Escazú, Santa Ana, Heredia, Alajuela, and Cartago. Extended delivery is available to Guanacaste, the Pacific and Caribbean coasts, and other regions nationwide—contact us for details.</p>
+
+            <h3>Production & Shipping Times</h3>
+            <p>Most furniture pieces are made to order by Costa Rican artisans. Standard production and delivery takes 6-8 weeks from order confirmation. We'll keep you updated throughout the process.</p>
+
+            <h3>Pickup Option</h3>
+            <p>Prefer to pick up your order? Pieces can be collected from our dispatch warehouse in Escazú at no additional charge once production is complete.</p>
+
+            <h3>Delivery Service</h3>
+            <p>Delivery costs are calculated based on your location and order size—you'll see the exact cost before finalizing your purchase. White-glove service (unpacking, assembly, placement, and packaging removal) is complimentary for pieces requiring assembly. Freestanding pieces are delivered and placed in your space.</p>
+
+            <h3>International Shipping</h3>
+            <p>We ship select pieces internationally. Contact us at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a> for international shipping rates and arrangements.</p>
+        </div>
+    </div>
+
+    <!-- Returns Modal -->
+    <div id="returnsModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Returns & Conditions</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>Our Commitment</h3>
+            <p>Each piece from Laurel Depto. de Diseño is handcrafted by skilled Costa Rican artisans using premium materials. We stand behind the quality of our work and want you to love your furniture.</p>
+
+            <h3>Return Policy</h3>
+            <p>Custom and made-to-order pieces (which represent most of our collection) are non-returnable due to their bespoke nature. However, if your piece arrives damaged or with manufacturing defects, we'll make it right.</p>
+
+            <h3>Damaged or Defective Items</h3>
+            <p>Please inspect your furniture upon delivery. If you notice any damage or defects, contact us within 48 hours at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We'll arrange for repair, replacement, or refund as appropriate.</p>
+
+            <h3>Cancellations</h3>
+            <p>Orders can be cancelled within 24 hours of placement for a full refund. After production begins, cancellations may incur a 25% restocking fee to cover materials and labor costs.</p>
+
+            <h3>Quality Guarantee</h3>
+            <p>All our furniture comes with a 1-year warranty against manufacturing defects. Natural variations in wood grain, color, and texture are inherent to handcrafted pieces and are not considered defects.</p>
+
+            <h3>Questions?</h3>
+            <p>Contact us at +(506) 6317-3038 or <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We're here to help.</p>
+        </div>
+    </div>
+
+    <!-- Trade Program Modal -->
+    <div id="tradeModal" class="info-modal">
+        <div class="info-modal-header">
+            <div class="info-modal-title">Trade Program</div>
+            <button class="info-modal-close" onclick="closeInfoModals()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="info-modal-content">
+            <h3>For Interior Designers & Design Professionals</h3>
+            <p>We welcome collaboration with interior designers, architects, and design professionals on projects of all sizes. Laurel Depto. de Diseño is equipped to support your vision with quality craftsmanship and dedicated service.</p>
+
+            <h3>What We Offer</h3>
+            <p>Our trade program provides access to our full collection with the flexibility you need for client projects. We handle large orders, offer customization options to match your specifications, and work on your timeline to ensure seamless project execution.</p>
+
+            <h3>Custom Capabilities</h3>
+            <p>Many pieces in our collection can be customized—dimensions, finishes, materials, and configurations can be tailored to your project requirements. Our artisans work closely with designers to bring specific visions to life while maintaining our commitment to quality.</p>
+
+            <h3>Project Support</h3>
+            <p>From initial specification to final installation, we provide dedicated support for your projects. This includes material samples, technical drawings, project coordination, and white-glove delivery service for client satisfaction.</p>
+
+            <h3>Get Started</h3>
+            <p>To discuss your project or learn more about our trade program, reach out to us at <a href="mailto:contact@la-urel.com" style="color: #583c4a; text-decoration: underline;">contact@la-urel.com</a>. We're here to make your projects exceptional.</p>
+        </div>
+    </div>
+

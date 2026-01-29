@@ -1,0 +1,172 @@
+    <!-- Furniture Categories Navigation -->
+    <nav class="furniture-nav">
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html'">Home</button>
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html#all'">All</button>
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html#seating'">Seating</button>
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html#tables'">Tables</button>
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html#lighting'">Lighting</button>
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html#outdoor'">Outdoor</button>
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html#window-treatments'">Window Treatments</button>
+        <button class="furniture-nav-link" onclick="window.location.href='../../furniture.html#grid'">The Grid</button>
+    </nav>
+
+    <!-- Synthesis Watermark -->
+    <div class="synthesis-watermark">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="520 0 280 195" width="60" height="auto">
+            <path d="M664.79,184.76c0,3.37-2.74,6.11-6.11,6.11h-33.36c-3.37,0-6.11-2.74-6.11-6.11v-41.05c0-.91-.68-1.68-1.57-1.81-.95-.12-1.77.44-2.01,1.32l-12.68,45.72c-.73,2.64-3.16,4.48-5.89,4.48h-8.2c-2.74,0-5.16-1.84-5.89-4.48l-12.68-45.75c-.22-.8-.95-1.34-1.76-1.34-.08,0-.16,0-.24.02-.9.12-1.58.89-1.58,1.81v41.07c0,3.37-2.74,6.11-6.11,6.11h-33.35c-3.37,0-6.11-2.74-6.11-6.11V21.97c0-3.37,2.74-6.11,6.11-6.11h50.67c3.01,0,5.56,2.16,6.03,5.13l7.21,44.22c.3,1.77,3.31,1.77,3.6,0l7.21-44.22c.48-2.97,3.02-5.13,6.03-5.13h50.67c3.37,0,6.11,2.74,6.11,6.11v162.8Z" fill="#141414"/>
+            <path d="M790.98,82.64h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-10.76-8.76-19.52-19.52-19.52-10.76,0-19.51,8.76-19.51,19.52v8.94h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-32.59,26.51-59.1,59.1-59.1,32.59,0,59.1,26.51,59.1,59.1v8.94Z" fill="#141414"/>
+        </svg>
+    </div>
+
+    <!-- Main Product Container -->
+    <div class="product-container">
+        
+        <!-- Gallery Wrapper (contains scrollbar and images) -->
+        <div class="gallery-wrapper">
+            <!-- Custom Scrollbar Track (Left Side) -->
+            <div class="custom-scrollbar">
+                <div class="custom-scrollbar-thumb" id="galleryScrollThumb"></div>
+            </div>
+
+            <!-- Image Gallery Section -->
+            <div class="gallery-section">
+                <div class="gallery-scroll-container" id="galleryScrollContainer">
+                    {{GALLERY_IMAGES}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Panel Wrapper -->
+        <div class="details-wrapper">
+            <!-- Custom Scrollbar Track (Right Side) -->
+            <div class="custom-scrollbar-right">
+                <div class="custom-scrollbar-thumb-right" id="detailsScrollThumb"></div>
+            </div>
+
+            <!-- Product Details Panel -->
+            <div class="details-panel">
+                <div class="details-scroll-container" id="detailsScrollContainer">
+                    <div class="product-badge">{{PRODUCT_BADGE}}</div>
+                    <h1 class="product-name">{{PRODUCT_NAME}}</h1>
+                    <div class="product-code">{{PRODUCT_CODE}}</div>
+                    <div class="product-price">{{PRODUCT_PRICE}}</div>
+            
+            <p class="product-description">
+                {{PRODUCT_DESCRIPTION}}
+            </p>
+
+            <!-- Size Selection -->
+            <!-- For ONE SIZE ONLY products: Delete all size-option buttons except one, and add class "one-size-only" to it -->
+            <div class="selector-group">
+                <div class="selector-label">Size</div>
+                <div class="size-options">
+                    {{SIZE_OPTIONS}}
+                </div>
+            </div>
+
+            
+
+            {{LOCAL_TEAK_SECTION}}
+            {{SEMI_SATIN_LACQUER_SECTION}}
+            {{WHITE_CEMENT_SECTION}}
+            {{METAL_SECTION}}
+            {{COLOR_SECTION}}
+            {{HARDWOOD_SECTION}}
+            {{FABRIC_SECTION}}
+            {{LEATHER_SECTION}}
+
+            
+
+            
+
+            
+
+            <!-- Quantity and Add to Truck -->
+            <div class="quantity-group">
+                <div class="quantity-row">
+                    <span class="quantity-label">Quantity</span>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                        <span class="quantity-value" id="quantityValue">1</span>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+                <button class="btn-add-truck" onclick="addToTruck()">Add to Truck</button>
+            </div>
+
+            <!-- Specifications -->
+            <div class="specs-section">
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Dimensions</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        {{DIMENSIONS}}
+                    </div>
+                </div>
+
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Materials</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        {{MATERIALS_SPEC}}
+                    </div>
+                </div>
+
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Care Instructions</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        {{CARE_INSTRUCTIONS}}
+                    </div>
+                </div>
+
+                <div class="spec-item" onclick="toggleSpec(this)">
+                    <div class="spec-header">
+                        <span>Shipping & Delivery</span>
+                        <span class="spec-toggle">+</span>
+                    </div>
+                    <div class="spec-content">
+                        {{SHIPPING_INFO}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lead Time -->
+            <div class="lead-time">
+                Lead Time: {{LEAD_TIME}}
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Craftsmanship Section -->
+    <section class="craft-section">
+        <div class="craft-content">
+            <h2 class="craft-title">{{CRAFTSMANSHIP_TITLE}}</h2>
+            <p class="craft-text">
+                {{CRAFTSMANSHIP_TEXT}}
+            </p>
+            <div class="made-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="520 0 280 195" width="40" height="auto">
+                    <path d="M664.79,184.76c0,3.37-2.74,6.11-6.11,6.11h-33.36c-3.37,0-6.11-2.74-6.11-6.11v-41.05c0-.91-.68-1.68-1.57-1.81-.95-.12-1.77.44-2.01,1.32l-12.68,45.72c-.73,2.64-3.16,4.48-5.89,4.48h-8.2c-2.74,0-5.16-1.84-5.89-4.48l-12.68-45.75c-.22-.8-.95-1.34-1.76-1.34-.08,0-.16,0-.24.02-.9.12-1.58.89-1.58,1.81v41.07c0,3.37-2.74,6.11-6.11,6.11h-33.35c-3.37,0-6.11-2.74-6.11-6.11V21.97c0-3.37,2.74-6.11,6.11-6.11h50.67c3.01,0,5.56,2.16,6.03,5.13l7.21,44.22c.3,1.77,3.31,1.77,3.6,0l7.21-44.22c.48-2.97,3.02-5.13,6.03-5.13h50.67c3.37,0,6.11,2.74,6.11,6.11v162.8Z" fill="#141414"/>
+                    <path d="M790.98,82.64h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-10.76-8.76-19.52-19.52-19.52-10.76,0-19.51,8.76-19.51,19.52v8.94h0c0,3.9-3.16,7.06-7.06,7.06h-25.46c-3.9,0-7.06-3.16-7.06-7.06h0v-8.94c0-32.59,26.51-59.1,59.1-59.1,32.59,0,59.1,26.51,59.1,59.1v8.94Z" fill="#141414"/>
+                </svg>
+                Made in Costa Rica
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Furniture -->
+    <section class="back-to-furniture">
+        <a href="../../furniture.html" class="back-furniture-btn">
+            <span>Back to Home</span>
+        </a>
+    </section>
+

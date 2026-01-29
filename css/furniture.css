@@ -293,6 +293,23 @@ a:hover .back-arrow-icon path {
     letter-spacing: 0.1em;
     margin-top: 4px;
 }
+.showcase-item-add-btn {
+    margin-top: 12px;
+    padding: 8px 14px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #141414;
+    background: #faf8f3;
+    border: 1.5px solid #141414;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.showcase-item-add-btn:hover {
+    background: #141414;
+    color: #faf8f3;
+}
 .showcase-item-source {
     font-family: 'Geist Mono', monospace;
     font-size: 0.6rem;
@@ -1368,6 +1385,20 @@ body {
     margin-top: 8px;
 }
 
+/* Discounted price: original struck through, then sale price */
+.cart-modal .cart-item-price-with-discount .cart-price-original,
+.cart-modal .cart-item-price .cart-price-original {
+    text-decoration: line-through !important;
+    opacity: 0.65;
+    margin-right: 6px;
+    display: inline;
+    color: #583c4a;
+}
+.cart-modal .cart-item-price-with-discount .cart-price-current {
+    font-weight: 600;
+    color: #141414;
+}
+
 .cart-item-remove {
     background: none;
     border: none;
@@ -1753,12 +1784,6 @@ footer {
     font-weight: 500;
     margin-bottom: 12px;
 }
-
-.
-
-
-
-
 
 
 

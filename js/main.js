@@ -106,19 +106,19 @@ function updateCartDisplay() {
             const lineTotal = group.price * group.quantity;
             total += lineTotal;
             
-            // Build price display based on quantity and discount
+            // Build price display based on quantity and discount (grid + product cards pass originalPrice)
             let priceHTML = '';
-            const safePrice = group.price || 0;
-            const safeOriginalPrice = group.originalPrice || safePrice;
+            const safePrice = Number(group.price) || 0;
+            const safeOriginalPrice = Number(group.originalPrice) || safePrice;
             const safeLineTotal = lineTotal || 0;
             const hasDiscount = safeOriginalPrice > safePrice;
             
             if (group.quantity > 1) {
                 if (hasDiscount) {
                     priceHTML = `
-                        <div class="cart-item-price">
-                            <span style="text-decoration: line-through; opacity: 0.6;">$${safeOriginalPrice.toLocaleString()}</span>
-                            $${safePrice.toLocaleString()} each
+                        <div class="cart-item-price cart-item-price-with-discount">
+                            <span class="cart-price-original">$${safeOriginalPrice.toLocaleString()}</span>
+                            <span class="cart-price-current">$${safePrice.toLocaleString()} each</span>
                         </div>
                         <div class="cart-item-price" style="font-weight: 600;">$${safeLineTotal.toLocaleString()} total</div>
                     `;
@@ -131,9 +131,9 @@ function updateCartDisplay() {
             } else {
                 if (hasDiscount) {
                     priceHTML = `
-                        <div class="cart-item-price">
-                            <span style="text-decoration: line-through; opacity: 0.6;">$${safeOriginalPrice.toLocaleString()}</span>
-                            $${safePrice.toLocaleString()}
+                        <div class="cart-item-price cart-item-price-with-discount">
+                            <span class="cart-price-original">$${safeOriginalPrice.toLocaleString()}</span>
+                            <span class="cart-price-current">$${safePrice.toLocaleString()}</span>
                         </div>
                     `;
                 } else {

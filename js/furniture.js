@@ -601,6 +601,8 @@ function generateSeasonMarkdownGrid() {
         const elementTag = item.url ? 'a' : 'div';
         const hrefAttr = item.url ? `href="${item.url}"` : '';
         
+        // Add to Truck uses grid sale + original for cart strikeout
+        const addToCartOnclick = `addToCart('${item.name.replace(/'/g, "\\'")}', ${item.salePrice}, '${item.code}', '${(item.image || '').replace(/'/g, "\\'")}', ${item.originalPrice}); event.preventDefault(); event.stopPropagation();`;
         html += `
             <${elementTag} ${hrefAttr} class="showcase-item ${wideClass}">
                 <img src="${item.image}" alt="${item.name}" class="showcase-item-image" ${item.imageStyle ? `style="${item.imageStyle}"` : ''}>
@@ -612,6 +614,7 @@ function generateSeasonMarkdownGrid() {
                         <span class="showcase-item-sale-price">$${item.salePrice.toLocaleString()}</span>
                     </div>
                     <div class="showcase-item-markdown">${discount}% Off</div>
+                    <button type="button" class="showcase-item-add-btn" onclick="${addToCartOnclick}">Add to Truck</button>
                 </div>
             </${elementTag}>
         `;

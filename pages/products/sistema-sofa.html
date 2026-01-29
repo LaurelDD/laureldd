@@ -428,6 +428,11 @@
         <!-- Cart Modal -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="cart-modal" id="cartModal">
+        <style>
+            .cart-modal .cart-item-price-with-discount .cart-price-original,
+            .cart-modal .cart-item-price .cart-price-original { text-decoration: line-through !important; opacity: 0.65; margin-right: 6px; display: inline; color: #583c4a; }
+            .cart-modal .cart-item-price-with-discount .cart-price-current { font-weight: 600; color: #141414; }
+        </style>
         <div class="cart-header">
             <div style="display: flex; align-items: baseline; gap: 20px;">
                 <h2>Your Truck</h2>

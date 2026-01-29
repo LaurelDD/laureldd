@@ -888,6 +888,19 @@
             margin-top: 8px;
         }
 
+        .cart-modal .cart-item-price-with-discount .cart-price-original,
+        .cart-modal .cart-item-price .cart-price-original {
+            text-decoration: line-through !important;
+            opacity: 0.65;
+            margin-right: 6px;
+            display: inline;
+            color: #583c4a;
+        }
+        .cart-modal .cart-item-price-with-discount .cart-price-current {
+            font-weight: 600;
+            color: #141414;
+        }
+
         .cart-item-remove {
             background: none;
             border: none;

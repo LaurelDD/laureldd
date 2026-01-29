@@ -321,14 +321,35 @@ function performSearch() {
         return;
     }
 
+    // Determine correct URL path based on current page location
+    function getProductUrl(productUrl) {
+        // If URL is absolute (starts with /), convert to relative based on current location
+        if (productUrl.startsWith('/')) {
+            productUrl = productUrl.substring(1); // Remove leading slash
+        }
+        
+        // Check if we're on a product page (in pages/products/)
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('/pages/products/')) {
+            // Extract just the filename from the product URL
+            const filename = productUrl.split('/').pop();
+            return filename; // Same directory, just use filename
+        }
+        
+        // Otherwise, use the relative path as-is
+        return productUrl;
+    }
+
     let html = '';
     results.forEach(item => {
         const priceDisplay = item.originalPrice ?
             `<span style="text-decoration: line-through; opacity: 0.5;">$${item.originalPrice.toLocaleString()}</span> $${item.price.toLocaleString()} + iva` :
             `$${item.price.toLocaleString()} + iva`;
 
+        const productUrl = getProductUrl(item.url);
+
         html += `
-            <a href="${item.url}" class="search-result-item">
+            <a href="${productUrl}" class="search-result-item">
                 <img src="${item.image}" alt="${item.name}" class="search-result-image">
                 <div class="search-result-info">
                     <div class="search-result-name">${item.name}</div>

@@ -47,7 +47,7 @@ async function generateProductsData() {
         code: product.code,
         price: parseFloat(product.price) || 0,
         originalPrice: product.original_price ? parseFloat(product.original_price) : null,
-        url: `${product.slug}.html`,
+        url: `pages/products/${product.slug}.html`,
         image: product.thumbnail_url || '',
         category: product.category || []
     }));

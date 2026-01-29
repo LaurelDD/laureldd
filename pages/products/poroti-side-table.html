@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{PAGE_TITLE}}</title>
+    <title>Poroti Side Table — Laurel Depto. de Diseño</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -109,7 +109,9 @@
             <!-- Image Gallery Section -->
             <div class="gallery-section">
                 <div class="gallery-scroll-container" id="galleryScrollContainer">
-                    {{GALLERY_IMAGES}}
+                    <img src="https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763328209/Poroti_1_zavffu.jpg" alt="Poroti Side Table - View 1" class="product-image first-image">
+                    <img src="https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763328213/Poroti_2_fk4rbm.jpg" alt="Poroti Side Table - View 2" class="product-image ">
+                    <!-- Add more images as needed: <img src="[IMAGE_URL_3]" alt="Poroti Side Table - View 3" class="product-image"> -->
                 </div>
             </div>
         </div>
@@ -124,13 +126,13 @@
             <!-- Product Details Panel -->
             <div class="details-panel">
                 <div class="details-scroll-container" id="detailsScrollContainer">
-                    <div class="product-badge">{{PRODUCT_BADGE}}</div>
-                    <h1 class="product-name">{{PRODUCT_NAME}}</h1>
-                    <div class="product-code">{{PRODUCT_CODE}}</div>
-                    <div class="product-price">{{PRODUCT_PRICE}}</div>
+                    <div class="product-badge">MAKEMAKE</div>
+                    <h1 class="product-name">Poroti Side Table</h1>
+                    <div class="product-code">AT007</div>
+                    <div class="product-price">$565 + iva</div>
             
             <p class="product-description">
-                {{PRODUCT_DESCRIPTION}}
+                Expertly crafted in our San José workshop, the Poroti Side Table embodies the perfect balance of contemporary design and traditional craftsmanship. Each piece is made to order, ensuring attention to every detail.
             </p>
 
             <!-- Size Selection -->
@@ -138,20 +140,74 @@
             <div class="selector-group">
                 <div class="selector-label">Size</div>
                 <div class="size-options">
-                    {{SIZE_OPTIONS}}
+                    <button class="size-option selected one-size-only" data-price="565" data-dimensions="Ø45 x H48 cm" onclick="selectSize(this)">
+                        <span class="size-name">One Size</span>
+                        <span class="size-dimensions"></span>
+                    </button>
                 </div>
             </div>
 
             
 
-            {{LOCAL_TEAK_SECTION}}
-            {{SEMI_SATIN_LACQUER_SECTION}}
-            {{WHITE_CEMENT_SECTION}}
-            {{METAL_SECTION}}
-            {{COLOR_SECTION}}
-            {{HARDWOOD_SECTION}}
-            {{FABRIC_SECTION}}
-            {{LEATHER_SECTION}}
+            
+            <div class="selector-group" id="local-teak-section">
+                <div class="selector-label">Local Teak</div>
+                <div class="color-swatches">
+                    <div class="color-swatch flat" style="background-image: url('https://res.cloudinary.com/duoqn1csd/image/upload/v1764006650/Teak_cd0mut.jpg'); background-size: cover; background-position: center;" title="Local Teak" onclick="selectTeakFinish(this)"></div>
+                </div>
+            </div>
+        
+            
+            <div class="selector-group" id="semi-satin-lacquer-section" style="display:none">
+                <div class="selector-label">Semi-Satin Lacquer</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-matte" style="background-color: #F7EDD4;" title="Crema" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B85C4F;" title="Sienna" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #E8E4DF;" title="Dove" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #C4A57B;" title="Camel" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B8B695;" title="Seagrass" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #5F6E52;" title="Olive" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #8A9BA8;" title="Bay" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #3A4D5C;" title="Nautical" onclick="selectColor(this)"></div>
+                </div>
+            </div>
+        
+            
+            <div class="selector-group" id="white-cement-section">
+                <div class="selector-label">White Cement Aggregate</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-matte" style="background-color: #F5F5F5;" title="White" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #9E9E9E;" title="Grey" onclick="selectColor(this)"></div>
+                </div>
+            </div>
+        
+            
+            <div class="selector-group" id="metal-section">
+                <div class="selector-label">Powder-Coated Steel</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-matte" style="background-color: #F7EDD4;" title="Crema" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B85C4F;" title="Sienna" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #E8E4DF;" title="Dove" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #C4A57B;" title="Camel" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #B8B695;" title="Seagrass" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #5F6E52;" title="Olive" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #8A9BA8;" title="Bay" onclick="selectColor(this)"></div>
+                    <div class="color-swatch-matte" style="background-color: #3A4D5C;" title="Nautical" onclick="selectColor(this)"></div>
+                </div>
+            </div>
+        
+            
+            
+            <div class="selector-group" id="hardwood-finish-section">
+                <div class="selector-label">Hardwood Finish</div>
+                <div class="color-swatches">
+                    <div class="color-swatch-image" style="background-color: #8B4513;" title="Natural" onclick="selectCedarColor(this)"></div>
+                    <div class="color-swatch-image" style="background-color: #654321;" title="Dark" onclick="selectCedarColor(this)"></div>
+                </div>
+            </div>
+        
+            
+            
 
             
 
@@ -180,7 +236,15 @@
                         <span class="spec-toggle">+</span>
                     </div>
                     <div class="spec-content">
-                        {{DIMENSIONS}}
+                        <div class="dimension-row">
+                            <span class="dimension-label">Diameter</span>
+                            <span class="dimension-value">45 cm / 17.7&quot;</span>
+                        </div>
+                        <div class="dimension-row">
+                            <span class="dimension-label">Height</span>
+                            <span class="dimension-value">48 cm / 18.9&quot;</span>
+                        </div>
+                        
                     </div>
                 </div>
 
@@ -190,7 +254,7 @@
                         <span class="spec-toggle">+</span>
                     </div>
                     <div class="spec-content">
-                        {{MATERIALS_SPEC}}
+                        <p><strong>Hardwood Finish:</strong> Natural hardwood available in multiple finish options, bringing warmth and organic texture to the design.</p>                                                  <p><strong>Indoor Use:</strong> This piece is designed for interior spaces.</p>
                     </div>
                 </div>
 
@@ -200,7 +264,8 @@
                         <span class="spec-toggle">+</span>
                     </div>
                     <div class="spec-content">
-                        {{CARE_INSTRUCTIONS}}
+                        <p>Clean with a soft, dry cloth. For deeper cleaning, use a slightly damp cloth and dry immediately. Avoid exposure to direct sunlight and extreme humidity.</p>
+                        <!-- LEATHER_CARE_PLACEHOLDER -->
                     </div>
                 </div>
 
@@ -210,14 +275,14 @@
                         <span class="spec-toggle">+</span>
                     </div>
                     <div class="spec-content">
-                        {{SHIPPING_INFO}}
+                        <p>Delivery is available throughout Costa Rica, with shipping costs calculated at checkout based on your location. For international orders, please contact us directly to arrange shipping. Local clients are welcome to collect their purchases at our Escazú warehouse by appointment.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Lead Time -->
             <div class="lead-time">
-                Lead Time: {{LEAD_TIME}}
+                Lead Time: 6-8 weeks
             </div>
                 </div>
             </div>
@@ -227,9 +292,9 @@
     <!-- Craftsmanship Section -->
     <section class="craft-section">
         <div class="craft-content">
-            <h2 class="craft-title">{{CRAFTSMANSHIP_TITLE}}</h2>
+            <h2 class="craft-title">Hand-Crafted in San José</h2>
             <p class="craft-text">
-                {{CRAFTSMANSHIP_TEXT}}
+                Hand-turned from solid hardwood with distinctive carved details. Each piece is individually shaped and finished to highlight the wood's natural character.
             </p>
             <div class="made-badge">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="520 0 280 195" width="40" height="auto">
@@ -498,7 +563,7 @@
 
     <script src="../../js/products-data.js"></script>
     <script src="../../js/main.js"></script>
-    <script>window.productThumbnailUrl = '{{THUMBNAIL_URL}}';</script>
+    <script>window.productThumbnailUrl = 'https://imgur.com/9PWrxwV.jpg';</script>
     <script src="../../js/product.js"></script>
 </body>
 </html>

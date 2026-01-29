@@ -4,8 +4,355 @@ var productsDatabase = [
     "code": "AT026",
     "price": 700,
     "originalPrice": null,
-    "url": "amanita-side-table.html",
+    "url": "pages/products/amanita-side-table.html",
     "image": "https://imgur.com/yqqOIm5.jpg",
     "category": []
+  },
+  {
+    "name": "Barro No.1 Side Table",
+    "code": "AT015",
+    "price": 555,
+    "originalPrice": null,
+    "url": "pages/products/barro-no1-side-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1764350521/IMG_1013_o8uent.jpg",
+    "category": [
+      "tables",
+      "side-tables",
+      "outdoor"
+    ]
+  },
+  {
+    "name": "Barro No.2 Side Table",
+    "code": "AT016",
+    "price": 555,
+    "originalPrice": null,
+    "url": "pages/products/barro-no2-side-table.html",
+    "image": "https://imgur.com/33rxsRE.jpg",
+    "category": [
+      "tables",
+      "side-tables",
+      "outdoor"
+    ]
+  },
+  {
+    "name": "Barro No.4 Side Table",
+    "code": "AT023",
+    "price": 555,
+    "originalPrice": null,
+    "url": "pages/products/barro-no4-side-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1765548139/Barro_No4_2_hwajma.jpg",
+    "category": [
+      "tables",
+      "side-tables",
+      "outdoor"
+    ]
+  },
+  {
+    "name": "Bloque No.1 Side Table",
+    "code": "AT009",
+    "price": 400,
+    "originalPrice": null,
+    "url": "pages/products/bloque-no1-side-table.html",
+    "image": "https://imgur.com/RIdRDOH.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Botella Dining Table",
+    "code": "DT001",
+    "price": 1700,
+    "originalPrice": null,
+    "url": "pages/products/botella-dining-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763322882/Botella_1_mas66x.jpg",
+    "category": [
+      "tables",
+      "dining-tables"
+    ]
+  },
+  {
+    "name": "Cazo Side Chair",
+    "code": "SCH002",
+    "price": 900,
+    "originalPrice": null,
+    "url": "pages/products/cazo-side-chair.html",
+    "image": "https://i.imgur.com/JWGGElK.jpg",
+    "category": [
+      "seating",
+      "chairs"
+    ]
+  },
+  {
+    "name": "Depto. Parsons Desk",
+    "code": "DK001",
+    "price": 1150,
+    "originalPrice": null,
+    "url": "pages/products/depto-parsons-desk.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763156922/Depto.Parsons_1_m6sjxv.jpg",
+    "category": [
+      "storage"
+    ]
+  },
+  {
+    "name": "Dizi Coffee Table",
+    "code": "CT004",
+    "price": 1200,
+    "originalPrice": null,
+    "url": "pages/products/dizi-coffee-table.html",
+    "image": "https://i.imgur.com/u7g9gGh.jpg",
+    "category": [
+      "tables",
+      "coffee-tables"
+    ]
+  },
+  {
+    "name": "Dizi Side Table",
+    "code": "AT006",
+    "price": 447,
+    "originalPrice": null,
+    "url": "pages/products/dizi-side-table.html",
+    "image": "https://i.imgur.com/TKxFHwF.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Filial Side Table",
+    "code": "AT027",
+    "price": 715,
+    "originalPrice": null,
+    "url": "pages/products/filial-side-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1765550378/Filial_Side_Table_2_vvaegq.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Fortuna Chair",
+    "code": "CH012",
+    "price": 695,
+    "originalPrice": null,
+    "url": "pages/products/fortuna-chair.html",
+    "image": "https://imgur.com/AWfloWe.jpg",
+    "category": [
+      "seating",
+      "chairs"
+    ]
+  },
+  {
+    "name": "Globo Side Table",
+    "code": "AT001",
+    "price": 675,
+    "originalPrice": null,
+    "url": "pages/products/globo-side-table.html",
+    "image": "https://i.imgur.com/Cd7ykMg.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Gracia Dining Table",
+    "code": "DT012",
+    "price": 2850,
+    "originalPrice": null,
+    "url": "pages/products/gracia-dining-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763328496/Gracia_1_qrexhs.jpg",
+    "category": [
+      "tables",
+      "dining-tables"
+    ]
+  },
+  {
+    "name": "Hache Console",
+    "code": "CO001",
+    "price": 2350,
+    "originalPrice": null,
+    "url": "pages/products/hache-console.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763336801/Hache_Console_3_nzwonn.jpg",
+    "category": [
+      "storage"
+    ]
+  },
+  {
+    "name": "Half Side Table",
+    "code": "AT004",
+    "price": 495,
+    "originalPrice": null,
+    "url": "pages/products/half-side-table.html",
+    "image": "https://imgur.com/djg5FcM.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Mano Chair",
+    "code": "CH017",
+    "price": 1240,
+    "originalPrice": null,
+    "url": "pages/products/mano-chair.html",
+    "image": "https://imgur.com/j0tiNoK.jpg",
+    "category": [
+      "seating",
+      "chairs"
+    ]
+  },
+  {
+    "name": "Mano Sofa",
+    "code": "SO010",
+    "price": 2255,
+    "originalPrice": null,
+    "url": "pages/products/mano-sofa.html",
+    "image": "https://imgur.com/49H7ne0.jpg",
+    "category": [
+      "seating",
+      "sofas"
+    ]
+  },
+  {
+    "name": "Morfeo Daybed",
+    "code": "DB001",
+    "price": 2225,
+    "originalPrice": null,
+    "url": "pages/products/morfeo-daybed.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763328852/Morfeo_Daybed_Thumbnail_flklnb.jpg",
+    "category": [
+      "seating",
+      "daybeds"
+    ]
+  },
+  {
+    "name": "Morfeo Nightstand",
+    "code": "NT001",
+    "price": 575,
+    "originalPrice": null,
+    "url": "pages/products/morfeo-nightstand.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763320553/Morfeo_Nightstand_1_kwaaju.jpg",
+    "category": [
+      "storage"
+    ]
+  },
+  {
+    "name": "Pablo Side Table",
+    "code": "AT020",
+    "price": 475,
+    "originalPrice": null,
+    "url": "pages/products/pablo-side-table.html",
+    "image": "https://imgur.com/ubigwdC.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Perse Chair",
+    "code": "CH010",
+    "price": 815,
+    "originalPrice": null,
+    "url": "pages/products/perse-chair.html",
+    "image": "https://imgur.com/LLPcFeT.jpg",
+    "category": [
+      "seating",
+      "chairs"
+    ]
+  },
+  {
+    "name": "Petra Coffee Table",
+    "code": "CT018",
+    "price": 1615,
+    "originalPrice": null,
+    "url": "pages/products/petra-coffee-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160620/Petra_1_fqmndl.jpg",
+    "category": [
+      "tables",
+      "coffee-tables"
+    ]
+  },
+  {
+    "name": "Plato Side Table",
+    "code": "AT018",
+    "price": 675,
+    "originalPrice": null,
+    "url": "pages/products/plato-side-table.html",
+    "image": "https://imgur.com/RlrAxed.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Poroti Side Table",
+    "code": "AT007",
+    "price": 565,
+    "originalPrice": null,
+    "url": "pages/products/poroti-side-table.html",
+    "image": "https://imgur.com/9PWrxwV.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
+  },
+  {
+    "name": "Rio Chair",
+    "code": "CH005",
+    "price": 1130,
+    "originalPrice": null,
+    "url": "pages/products/rio-chair.html",
+    "image": "https://imgur.com/n44X42p.jpg",
+    "category": [
+      "seating",
+      "chairs"
+    ]
+  },
+  {
+    "name": "Ronda Coffee Table",
+    "code": "CT001",
+    "price": 1380,
+    "originalPrice": null,
+    "url": "pages/products/ronda-coffee-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160042/Ronda_Coffee_1_pe8z2v.jpg",
+    "category": [
+      "tables",
+      "coffee-tables"
+    ]
+  },
+  {
+    "name": "Rosario Bistro Table",
+    "code": "BT001",
+    "price": 715,
+    "originalPrice": null,
+    "url": "pages/products/rosario-bistro-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160700/Rosario_1_rtf6aw.jpg",
+    "category": [
+      "tables"
+    ]
+  },
+  {
+    "name": "Sistema Sofa",
+    "code": "SO009",
+    "price": 5015,
+    "originalPrice": null,
+    "url": "pages/products/sistema-sofa.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763336186/Sistema_Sofa_1_hnysyn.jpg",
+    "category": [
+      "seating",
+      "sofas"
+    ]
+  },
+  {
+    "name": "Winnie Side Table",
+    "code": "AT028",
+    "price": 515,
+    "originalPrice": null,
+    "url": "pages/products/winnie-side-table.html",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763337421/Winnie_3_gwfsub.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ]
   }
 ];

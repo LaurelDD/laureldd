@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Laurel Depto. de Diseño website with Supabase backend",
   "scripts": {
-    "build": "node scripts/generate-products-data.js && node scripts/generate-products.js",
+    "build": "npm run build:pages && npm run build:products",
+    "build:pages": "node scripts/build-pages.js",
+    "build:products": "node scripts/generate-products-data.js && node scripts/generate-products.js",
     "generate-products": "node scripts/generate-products.js",
     "generate-data": "node scripts/generate-products-data.js"
   },

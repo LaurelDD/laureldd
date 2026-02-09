@@ -1,32 +1,35 @@
 // product.js - Product page specific functionality
-// Requires main.js to be loaded first
+// Requires main.js and products-data.js to be loaded first
 
 // ============================================================================
-// SEASON MARKDOWNS - Used to apply sale prices on product pages
+// SALE PRICE — driven by Supabase is_grid (productsDatabase)
 // ============================================================================
-const seasonMarkdowns = [
-    { code: 'RUG001', originalPrice: 2300, salePrice: 1955 },
-    { code: 'CT018', originalPrice: 1900, salePrice: 1615 },
-    { code: 'VES001', originalPrice: 310, salePrice: 265 },
-    { code: 'CH020', originalPrice: 1800, salePrice: 1530 },
-    { code: 'SB001', originalPrice: 2225, salePrice: 1891 },
-    { code: 'SO015', originalPrice: 6800, salePrice: 5780 },
-    { code: 'DT015', originalPrice: 1700, salePrice: 1445 },
-    { code: 'CON001', originalPrice: 2200, salePrice: 1870 },
-    { code: 'CH021', originalPrice: 1700, salePrice: 1445 },
-    { code: 'AT006', originalPrice: 526, salePrice: 447 }
-];
+// Grid items (is_grid true) use price as sale price and original_price for strikethrough.
+// Used on product pages and for Add to Truck / cart modals.
+
+function getGridSaleItem(productCode) {
+    const db = typeof productsDatabase !== 'undefined' ? productsDatabase : [];
+    const product = db.find(p => p.code === productCode && p.isGrid);
+    if (!product) return null;
+    const originalPrice = product.originalPrice != null ? product.originalPrice : product.price;
+    const salePrice = product.price;
+    return { originalPrice, salePrice };
+}
 
 // ============================================================================
 // SALE PRICE APPLICATION
 // ============================================================================
 function checkAndApplySalePrice() {
-    const productCode = document.querySelector('.product-code').textContent.trim();
-    const saleItem = seasonMarkdowns.find(item => item.code === productCode);
+    const productCodeEl = document.querySelector('.product-code');
+    if (!productCodeEl) return;
+    const productCode = productCodeEl.textContent.trim();
+    const saleItem = getGridSaleItem(productCode);
 
     if (saleItem) {
         const priceElement = document.querySelector('.product-price');
-        const discount = Math.round(((saleItem.originalPrice - saleItem.salePrice) / saleItem.originalPrice) * 100);
+        const discount = saleItem.originalPrice > 0
+            ? Math.round(((saleItem.originalPrice - saleItem.salePrice) / saleItem.originalPrice) * 100)
+            : 0;
 
         priceElement.innerHTML = `
             <span style="text-decoration: line-through; opacity: 0.5; font-size: 0.9em;">$${saleItem.originalPrice.toLocaleString()}</span>

@@ -23,25 +23,42 @@ const outputFile = path.join(__dirname, '../js/products-data.js');
 // Main function
 async function generateProductsData() {
     console.log('Fetching products from Supabase...');
-    
-    const { data: products, error } = await supabase
+
+    // Try full select first (includes is_grid if migration was run)
+    let products = null;
+    let error = null;
+
+    const resFull = await supabase
         .from('products')
-        .select('id, code, name, slug, price, original_price, thumbnail_url, category')
+        .select('id, code, name, slug, price, original_price, thumbnail_url, category, is_grid')
         .order('name');
-    
+
+    if (resFull.error && resFull.error.code === '42703') {
+        // Column is_grid doesn't exist yet — run supabase/migration.sql
+        console.warn('Column is_grid not found. Using defaults. Run supabase/migration.sql to add it.');
+        const resFallback = await supabase
+            .from('products')
+            .select('id, code, name, slug, price, original_price, thumbnail_url, category')
+            .order('name');
+        products = resFallback.data;
+        error = resFallback.error;
+    } else {
+        products = resFull.data;
+        error = resFull.error;
+    }
+
     if (error) {
         console.error('Error fetching products:', error);
         process.exit(1);
     }
-    
+
     if (!products || products.length === 0) {
         console.warn('No products found in Supabase');
-        // Create empty array file
         fs.writeFileSync(outputFile, 'var productsDatabase = [];\n', 'utf8');
         return;
     }
-    
-    // Transform products to match existing format
+
+    // Transform (is_grid may be missing until migration is run)
     const transformedProducts = products.map(product => ({
         name: product.name,
         code: product.code,
@@ -49,7 +66,8 @@ async function generateProductsData() {
         originalPrice: product.original_price ? parseFloat(product.original_price) : null,
         url: `pages/products/${product.slug}.html`,
         image: product.thumbnail_url || '',
-        category: product.category || []
+        category: product.category || [],
+        isGrid: product.is_grid === true
     }));
     
     // Write as JS file with var declaration (loaded via <script> tag)

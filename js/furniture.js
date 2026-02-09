@@ -1,135 +1,21 @@
 // furniture.js
 
 // ============================================================================
-// SEASON MARKDOWNS CONFIGURATION
+// GRID ITEMS — driven by Supabase is_grid column (products-data.js)
 // ============================================================================
-// To update the grid: add/remove items from this array
-// Grid will automatically generate based on this list
-const seasonMarkdowns = [
-    { 
-        code: 'RUG001', 
-        name: 'CJ Rug (11\' x 15\')', 
-        image: 'https://i.imgur.com/catLL4R.jpg', 
-        originalPrice: 2300, 
-        salePrice: 1955, 
-        url: null, // No product page
-        source: 'curated',
-        gridPosition: 1,
-        wide: false,
-        imageStyle: 'transform: scale(1.10); object-fit: cover;'
-    },
-    { 
-        code: 'CT018', 
-        name: 'Petra Coffee Table', 
-        image: 'https://i.imgur.com/qPjmklI.jpg', 
-        originalPrice: 1900, 
-        salePrice: 1615, 
-        url: 'pages/products/petra-coffee-table.html',
-        source: 'makemake',
-        gridPosition: 2,
-        wide: false,
-        imageStyle: ''
-    },
-    { 
-        code: 'VES001', 
-        name: 'Aged Terracotta Vessel', 
-        image: 'https://i.imgur.com/lpQ4exS.jpg', 
-        originalPrice: 310, 
-        salePrice: 265, 
-        url: null,
-        source: 'curated',
-        gridPosition: 3,
-        wide: false,
-        imageStyle: ''
-    },
-    { 
-        code: 'CH020', 
-        name: 'Dane Chair', 
-        image: 'https://i.imgur.com/xd8FO8T.jpg', 
-        originalPrice: 1800, 
-        salePrice: 1530, 
-        url: null,
-        source: 'curated',
-        gridPosition: 4,
-        wide: false,
-        imageStyle: ''
-    },
-    { 
-        code: 'SB001', 
-        name: 'Kinser Sideboard', 
-        image: 'https://i.imgur.com/UpOOzHG.jpg', 
-        originalPrice: 2225, 
-        salePrice: 1891, 
-        url: null,
-        source: 'curated',
-        gridPosition: 5,
-        wide: false,
-        imageStyle: ''
-    },
-    { 
-        code: 'SO009',
-        name: 'Sistema Sofa', 
-        image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763335644/Sistema_3Seater_ryg1qz.jpg', 
-        originalPrice: 5900, 
-        salePrice: 5015, 
-        url: 'pages/products/sistema-sofa.html',
-        source: 'makemake',
-        gridPosition: 6,
-        wide: true,
-        imageStyle: ''
-    },
-    { 
-        code: 'DT015', 
-        name: 'Cobie Dining Table', 
-        image: 'https://i.imgur.com/cVy6Ys1.jpg', 
-        originalPrice: 1700, 
-        salePrice: 1445, 
-        url: null,
-        source: 'curated',
-        gridPosition: 7,
-        wide: false,
-        imageStyle: ''
-    },
-    { 
-        code: 'CON001', 
-        name: 'Ginger Console', 
-        image: 'https://i.imgur.com/6xbSNIk.jpg', 
-        originalPrice: 2200, 
-        salePrice: 1870, 
-        url: null,
-        source: 'curated',
-        gridPosition: 8,
-        wide: true,
-        imageStyle: 'object-position: center 70%;'
-    },
-    { 
-        code: 'CH021', 
-        name: 'Lowell Swivel Chair', 
-        image: 'https://i.imgur.com/mpIKJmJ.jpg', 
-        originalPrice: 1700, 
-        salePrice: 1445, 
-        url: null,
-        source: 'curated',
-        gridPosition: 9,
-        wide: false,
-        imageStyle: ''
-    },
-    { 
-        code: 'AT006',
-        name: 'Dizi Side Table', 
-        image: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1763159484/Dizi_Thumbnail_zomhav.jpg', 
-        originalPrice: 526, 
-        salePrice: 447, 
-        url: 'pages/products/dizi-side-table.html',
-        source: 'makemake',
-        gridPosition: 10,
-        wide: false,
-        imageStyle: 'transform: scale(1.15) translateY(30px); transform-origin: center bottom; object-fit: cover; object-position: center 70%;'
-    }
-];
+// Grid items for the showcase and "The Grid" filter come from productsDatabase
+// where isGrid === true. Set is_grid in Supabase to control.
 
-// Products Database - loaded from shared products-data.json by main.js
-// main.js must be included before this file
+function getGridItems() {
+    const db = typeof productsDatabase !== 'undefined' ? productsDatabase : [];
+    return db.filter(p => p.isGrid);
+}
+
+function getGridCodes() {
+    return getGridItems().map(p => p.code);
+}
+
+// Products Database - loaded from products-data.js before main.js
 
 // ============================================================================
 // NAVIGATION FUNCTIONS
@@ -366,13 +252,15 @@ function filterCategory(category) {
                     hideElement(allFurnitureSection.querySelector('.section-header'));
                 }
                 
-                // Show ONLY product cards that have "grid" category
+                // Show ONLY product cards whose code is in Supabase is_grid
+                const gridCodes = getGridCodes();
                 const allProducts = document.querySelectorAll('.product-card');
                 let gridProducts = [];
-                
+
                 allProducts.forEach(card => {
-                    const cardCategories = (card.dataset.category || '').split(' ');
-                    if (cardCategories.includes('grid')) {
+                    const code = (card.dataset.code || '').trim();
+                    const isGrid = code && gridCodes.includes(code);
+                    if (isGrid) {
                         gridProducts.push(card);
                         card.classList.remove('hidden');
                         card.style.display = 'flex';
@@ -582,36 +470,33 @@ function loadMoreProducts() {
     }
 }
 
-// Generate Season Markdown Grid dynamically
+// Generate Season Markdown Grid from Supabase is_grid products
 function generateSeasonMarkdownGrid() {
     const gridContainer = document.querySelector('.collection-showcase .showcase-grid');
-    if (!gridContainer || seasonMarkdowns.length === 0) return;
+    const items = getGridItems();
+    if (!gridContainer || items.length === 0) return;
 
-    // Sort by grid position
-    const sortedItems = [...seasonMarkdowns].sort((a, b) => a.gridPosition - b.gridPosition);
-    
     let html = '';
-    sortedItems.forEach(item => {
-        const sourceClass = item.source === 'makemake' ? 'makemake' : 'curated';
-        const sourceText = item.source === 'makemake' ? 'MAKEMAKE' : 'Curated';
-        const wideClass = item.wide ? 'showcase-item-wide' : '';
-        const discount = Math.round(((item.originalPrice - item.salePrice) / item.originalPrice) * 100);
-        
-        // Wrap in <a> if product page exists, otherwise <div>
+    items.forEach(item => {
+        const originalPrice = item.originalPrice != null ? item.originalPrice : item.price;
+        const salePrice = item.price;
+        const sourceClass = 'makemake';
+        const sourceText = 'MAKEMAKE';
+        const wideClass = '';
+        const discount = originalPrice > 0 ? Math.round(((originalPrice - salePrice) / originalPrice) * 100) : 0;
+
         const elementTag = item.url ? 'a' : 'div';
         const hrefAttr = item.url ? `href="${item.url}"` : '';
-        
-        // Add to Truck uses grid sale + original for cart strikeout
-        const addToCartOnclick = `addToCart('${item.name.replace(/'/g, "\\'")}', ${item.salePrice}, '${item.code}', '${(item.image || '').replace(/'/g, "\\'")}', ${item.originalPrice}); event.preventDefault(); event.stopPropagation();`;
+        const addToCartOnclick = `addToCart('${(item.name || '').replace(/'/g, "\\'")}', ${salePrice}, '${(item.code || '').replace(/'/g, "\\'")}', '${(item.image || '').replace(/'/g, "\\'")}', ${originalPrice}); event.preventDefault(); event.stopPropagation();`;
         html += `
             <${elementTag} ${hrefAttr} class="showcase-item ${wideClass}">
-                <img src="${item.image}" alt="${item.name}" class="showcase-item-image" ${item.imageStyle ? `style="${item.imageStyle}"` : ''}>
+                <img src="${(item.image || '').replace(/"/g, '&quot;')}" alt="${(item.name || '').replace(/"/g, '&quot;')}" class="showcase-item-image">
                 <div class="showcase-item-overlay">
                     <div class="showcase-item-source ${sourceClass}">${sourceText}</div>
-                    <div class="showcase-item-name">${item.name}</div>
+                    <div class="showcase-item-name">${(item.name || '').replace(/</g, '&lt;')}</div>
                     <div class="showcase-item-prices">
-                        <span class="showcase-item-original-price">$${item.originalPrice.toLocaleString()}</span>
-                        <span class="showcase-item-sale-price">$${item.salePrice.toLocaleString()}</span>
+                        <span class="showcase-item-original-price">$${originalPrice.toLocaleString()}</span>
+                        <span class="showcase-item-sale-price">$${salePrice.toLocaleString()}</span>
                     </div>
                     <div class="showcase-item-markdown">${discount}% Off</div>
                     <button type="button" class="showcase-item-add-btn" onclick="${addToCartOnclick}">Add to Truck</button>
@@ -619,8 +504,21 @@ function generateSeasonMarkdownGrid() {
             </${elementTag}>
         `;
     });
-    
+
     gridContainer.innerHTML = html;
+    syncGridBadges();
+}
+
+// Sync "GRID ITEM 15% OFF" badges on product cards to Supabase is_grid (show only when code is in grid)
+function syncGridBadges() {
+    const gridCodes = getGridCodes();
+    document.querySelectorAll('.product-card').forEach(card => {
+        const code = (card.dataset.code || '').trim();
+        const badge = card.querySelector('.sale-badge');
+        if (badge) {
+            badge.style.display = code && gridCodes.includes(code) ? '' : 'none';
+        }
+    });
 }
 
 // Determine initial view based on URL
@@ -668,4 +566,5 @@ window.saveScrollAndNavigate = saveScrollAndNavigate;
 window.returnHome = returnHome;
 window.filterCategory = filterCategory;
 window.generateSeasonMarkdownGrid = generateSeasonMarkdownGrid;
+window.syncGridBadges = syncGridBadges;
 window.loadMoreProducts = typeof loadMoreProducts !== 'undefined' ? loadMoreProducts : function() {};

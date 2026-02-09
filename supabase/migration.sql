@@ -87,3 +87,7 @@ CREATE POLICY "Public can view archived products"
 
 ALTER TABLE public.products
 ADD COLUMN IF NOT EXISTS is_featured BOOLEAN NOT NULL DEFAULT false;
+
+-- Grid (Season Markdowns): products shown in "The Grid" section and 15% off
+ALTER TABLE public.products
+ADD COLUMN IF NOT EXISTS is_grid BOOLEAN NOT NULL DEFAULT false;

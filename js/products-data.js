@@ -6,7 +6,8 @@ var productsDatabase = [
     "originalPrice": null,
     "url": "pages/products/amanita-side-table.html",
     "image": "https://imgur.com/yqqOIm5.jpg",
-    "category": []
+    "category": [],
+    "isGrid": false
   },
   {
     "name": "Barro No.1 Side Table",
@@ -19,7 +20,8 @@ var productsDatabase = [
       "tables",
       "side-tables",
       "outdoor"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Barro No.2 Side Table",
@@ -32,7 +34,8 @@ var productsDatabase = [
       "tables",
       "side-tables",
       "outdoor"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Barro No.4 Side Table",
@@ -45,7 +48,8 @@ var productsDatabase = [
       "tables",
       "side-tables",
       "outdoor"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Bloque No.1 Side Table",
@@ -57,7 +61,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Botella Dining Table",
@@ -69,7 +74,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "dining-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Cazo Side Chair",
@@ -81,7 +87,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "chairs"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Depto. Parsons Desk",
@@ -92,7 +99,8 @@ var productsDatabase = [
     "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763156922/Depto.Parsons_1_m6sjxv.jpg",
     "category": [
       "storage"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Dizi Coffee Table",
@@ -104,7 +112,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "coffee-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Dizi Side Table",
@@ -116,7 +125,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Filial Side Table",
@@ -128,7 +138,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Fortuna Chair",
@@ -140,7 +151,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "chairs"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Globo Side Table",
@@ -152,7 +164,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Gracia Dining Table",
@@ -164,7 +177,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "dining-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Hache Console",
@@ -175,7 +189,8 @@ var productsDatabase = [
     "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763336801/Hache_Console_3_nzwonn.jpg",
     "category": [
       "storage"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Half Side Table",
@@ -187,7 +202,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Mano Chair",
@@ -199,7 +215,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "chairs"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Mano Sofa",
@@ -211,7 +228,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "sofas"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Morfeo Daybed",
@@ -223,7 +241,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "daybeds"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Morfeo Nightstand",
@@ -234,7 +253,8 @@ var productsDatabase = [
     "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763320553/Morfeo_Nightstand_1_kwaaju.jpg",
     "category": [
       "storage"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Pablo Side Table",
@@ -246,7 +266,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Perse Chair",
@@ -258,7 +279,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "chairs"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Petra Coffee Table",
@@ -270,7 +292,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "coffee-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Plato Side Table",
@@ -282,7 +305,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Poroti Side Table",
@@ -294,7 +318,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Rio Chair",
@@ -306,7 +331,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "chairs"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Ronda Coffee Table",
@@ -318,7 +344,8 @@ var productsDatabase = [
     "category": [
       "tables",
       "coffee-tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Rosario Bistro Table",
@@ -329,7 +356,8 @@ var productsDatabase = [
     "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160700/Rosario_1_rtf6aw.jpg",
     "category": [
       "tables"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Sistema Sofa",
@@ -341,7 +369,8 @@ var productsDatabase = [
     "category": [
       "seating",
       "sofas"
-    ]
+    ],
+    "isGrid": false
   },
   {
     "name": "Winnie Side Table",
@@ -353,6 +382,7 @@ var productsDatabase = [
     "category": [
       "tables",
       "side-tables"
-    ]
+    ],
+    "isGrid": false
   }
 ];

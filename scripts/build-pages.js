@@ -268,6 +268,7 @@ const pages = [
             'document.addEventListener("DOMContentLoaded", function() {',
             '    if (typeof loadCart === "function") loadCart();',
             '    if (typeof generateSeasonMarkdownGrid === "function") generateSeasonMarkdownGrid();',
+            '    if (typeof syncGridBadges === "function") syncGridBadges();',
             '});',
             '</script>'
         ],

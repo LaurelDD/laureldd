@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LDD - Interior Design</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -965,12 +965,14 @@
         }
     }
     
-    // Initialize on page load
-    document.addEventListener("DOMContentLoaded", function() {
+    // Run carousel/lightbox init (used on both full load and Turbo visit)
+    function runInteriorsCarouselInit() {
         initCarouselDots();
-        initProjectImages(); // Initialize project images gallery first
+        initProjectImages();
         initLightboxImages();
-    });
+    }
+    document.addEventListener("DOMContentLoaded", runInteriorsCarouselInit);
+    document.addEventListener("turbo:load", runInteriorsCarouselInit);
     </script>
 </body>
 </html>

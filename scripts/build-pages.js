@@ -238,12 +238,14 @@ const pages = [
             '    }',
             '}',
             '',
-            '// Initialize on page load',
-            'document.addEventListener("DOMContentLoaded", function() {',
+            '// Run carousel/lightbox init (used on both full load and Turbo visit)',
+            'function runInteriorsCarouselInit() {',
             '    initCarouselDots();',
-            '    initProjectImages(); // Initialize project images gallery first',
+            '    initProjectImages();',
             '    initLightboxImages();',
-            '});',
+            '}',
+            'document.addEventListener("DOMContentLoaded", runInteriorsCarouselInit);',
+            'document.addEventListener("turbo:load", runInteriorsCarouselInit);',
             '</script>'
         ]
     },

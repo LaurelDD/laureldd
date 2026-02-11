@@ -11,8 +11,11 @@ function getGridSaleItem(productCode) {
     const db = typeof productsDatabase !== 'undefined' ? productsDatabase : [];
     const product = db.find(p => p.code === productCode && p.isGrid);
     if (!product) return null;
-    const originalPrice = product.originalPrice != null ? product.originalPrice : product.price;
     const salePrice = product.price;
+    // Grid is "15% Off" — use stored original or derive so product page and cart show strikethrough
+    const originalPrice = (product.originalPrice != null && product.originalPrice > salePrice)
+        ? product.originalPrice
+        : Math.round(salePrice / 0.85);
     return { originalPrice, salePrice };
 }
 

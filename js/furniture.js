@@ -478,8 +478,11 @@ function generateSeasonMarkdownGrid() {
 
     let html = '';
     items.forEach(item => {
-        const originalPrice = item.originalPrice != null ? item.originalPrice : item.price;
+        // Grid is "15% Off" — use stored original or derive so cart shows strikethrough
         const salePrice = item.price;
+        const originalPrice = item.originalPrice != null && item.originalPrice > salePrice
+            ? item.originalPrice
+            : Math.round(salePrice / 0.85);
         const sourceClass = 'makemake';
         const sourceText = 'MAKEMAKE';
         const wideClass = '';

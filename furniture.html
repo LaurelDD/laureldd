@@ -983,12 +983,14 @@
     <script src="js/main.js"></script>
     <script src="js/furniture.js"></script>
     <script>
-    // Initialize furniture page on load
-    document.addEventListener("DOMContentLoaded", function() {
+    // Initialize furniture page (grid + cart) on full load and on Turbo visit
+    function runFurniturePageInit() {
         if (typeof loadCart === "function") loadCart();
         if (typeof generateSeasonMarkdownGrid === "function") generateSeasonMarkdownGrid();
         if (typeof syncGridBadges === "function") syncGridBadges();
-    });
+    }
+    document.addEventListener("DOMContentLoaded", runFurniturePageInit);
+    document.addEventListener("turbo:load", runFurniturePageInit);
     </script>
 </body>
 </html>

@@ -5,8 +5,11 @@ var productsDatabase = [
     "price": 700,
     "originalPrice": null,
     "url": "pages/products/amanita-side-table.html",
-    "image": "https://imgur.com/yqqOIm5.jpg",
-    "category": [],
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1764019628/Amanita_Thumbnail_vc22ih.jpg",
+    "category": [
+      "tables",
+      "side-tables"
+    ],
     "isGrid": false
   },
   {
@@ -29,7 +32,7 @@ var productsDatabase = [
     "price": 555,
     "originalPrice": null,
     "url": "pages/products/barro-no2-side-table.html",
-    "image": "https://imgur.com/33rxsRE.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763161511/Barro_No.2_Thumbnail_vebhc6.jpg",
     "category": [
       "tables",
       "side-tables",
@@ -57,7 +60,7 @@ var productsDatabase = [
     "price": 400,
     "originalPrice": null,
     "url": "pages/products/bloque-no1-side-table.html",
-    "image": "https://imgur.com/RIdRDOH.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763328240/BloqueNo1_Thumbnail_erl34n.jpg",
     "category": [
       "tables",
       "side-tables"
@@ -83,7 +86,7 @@ var productsDatabase = [
     "price": 900,
     "originalPrice": null,
     "url": "pages/products/cazo-side-chair.html",
-    "image": "https://i.imgur.com/JWGGElK.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763160786/Cazo_Thumbnail_ogbvfi.jpg",
     "category": [
       "seating",
       "chairs"
@@ -108,7 +111,7 @@ var productsDatabase = [
     "price": 1200,
     "originalPrice": null,
     "url": "pages/products/dizi-coffee-table.html",
-    "image": "https://i.imgur.com/u7g9gGh.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763160506/Dizi_Coffee_Thumbnail_uzac9u.png",
     "category": [
       "tables",
       "coffee-tables"
@@ -121,12 +124,12 @@ var productsDatabase = [
     "price": 447,
     "originalPrice": null,
     "url": "pages/products/dizi-side-table.html",
-    "image": "https://i.imgur.com/TKxFHwF.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763322945/Botella_Thumbnail_mllejo.jpg",
     "category": [
       "tables",
       "side-tables"
     ],
-    "isGrid": false
+    "isGrid": true
   },
   {
     "name": "Filial Side Table",
@@ -147,7 +150,7 @@ var productsDatabase = [
     "price": 695,
     "originalPrice": null,
     "url": "pages/products/fortuna-chair.html",
-    "image": "https://imgur.com/AWfloWe.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1764017495/Fortuna_Thumbnail_g0mngb.jpg",
     "category": [
       "seating",
       "chairs"
@@ -160,7 +163,7 @@ var productsDatabase = [
     "price": 675,
     "originalPrice": null,
     "url": "pages/products/globo-side-table.html",
-    "image": "https://i.imgur.com/Cd7ykMg.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763338971/Globo_Thumbnail_unymli.jpg",
     "category": [
       "tables",
       "side-tables"
@@ -178,7 +181,7 @@ var productsDatabase = [
       "tables",
       "dining-tables"
     ],
-    "isGrid": false
+    "isGrid": true
   },
   {
     "name": "Hache Console",
@@ -188,7 +191,8 @@ var productsDatabase = [
     "url": "pages/products/hache-console.html",
     "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763336801/Hache_Console_3_nzwonn.jpg",
     "category": [
-      "storage"
+      "tables",
+      "outdoor"
     ],
     "isGrid": false
   },
@@ -198,7 +202,7 @@ var productsDatabase = [
     "price": 495,
     "originalPrice": null,
     "url": "pages/products/half-side-table.html",
-    "image": "https://imgur.com/djg5FcM.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763328283/Half_Thumbnail_bphvyz.jpg",
     "category": [
       "tables",
       "side-tables"
@@ -211,7 +215,7 @@ var productsDatabase = [
     "price": 1240,
     "originalPrice": null,
     "url": "pages/products/mano-chair.html",
-    "image": "https://imgur.com/j0tiNoK.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/c_pad/v1763326215/Mano_Chair_Thumbnail_nk1oir.jpg",
     "category": [
       "seating",
       "chairs"
@@ -224,7 +228,7 @@ var productsDatabase = [
     "price": 2255,
     "originalPrice": null,
     "url": "pages/products/mano-sofa.html",
-    "image": "https://imgur.com/49H7ne0.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/c_pad,w_400,h_600/v1763325273/Mano_Sofa_Thumbnail_kfl44u.jpg",
     "category": [
       "seating",
       "sofas"
@@ -262,7 +266,7 @@ var productsDatabase = [
     "price": 475,
     "originalPrice": null,
     "url": "pages/products/pablo-side-table.html",
-    "image": "https://imgur.com/ubigwdC.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763328308/Pablo_Thumbnail_pix7xx.jpg",
     "category": [
       "tables",
       "side-tables"
@@ -275,7 +279,7 @@ var productsDatabase = [
     "price": 815,
     "originalPrice": null,
     "url": "pages/products/perse-chair.html",
-    "image": "https://imgur.com/LLPcFeT.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1764016863/Perse_Thumbnail_x31dc6.jpg",
     "category": [
       "seating",
       "chairs"
@@ -293,7 +297,7 @@ var productsDatabase = [
       "tables",
       "coffee-tables"
     ],
-    "isGrid": false
+    "isGrid": true
   },
   {
     "name": "Plato Side Table",
@@ -301,7 +305,7 @@ var productsDatabase = [
     "price": 675,
     "originalPrice": null,
     "url": "pages/products/plato-side-table.html",
-    "image": "https://imgur.com/RlrAxed.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763328562/Plato_Thumbnail_amcs4n.jpg",
     "category": [
       "tables",
       "side-tables"
@@ -314,7 +318,7 @@ var productsDatabase = [
     "price": 565,
     "originalPrice": null,
     "url": "pages/products/poroti-side-table.html",
-    "image": "https://imgur.com/9PWrxwV.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763328213/Poroti_Thumbnail_mh0wer.jpg",
     "category": [
       "tables",
       "side-tables"
@@ -327,7 +331,7 @@ var productsDatabase = [
     "price": 1130,
     "originalPrice": null,
     "url": "pages/products/rio-chair.html",
-    "image": "https://imgur.com/n44X42p.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_600,h_600,c_pad,b_white,e_background_removal,f_auto,q_auto/v1763340150/Silla_Rio_Thumbnail_o91sh0.jpg",
     "category": [
       "seating",
       "chairs"
@@ -355,7 +359,8 @@ var productsDatabase = [
     "url": "pages/products/rosario-bistro-table.html",
     "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763160700/Rosario_1_rtf6aw.jpg",
     "category": [
-      "tables"
+      "tables",
+      "outdoor"
     ],
     "isGrid": false
   },
@@ -370,7 +375,7 @@ var productsDatabase = [
       "seating",
       "sofas"
     ],
-    "isGrid": false
+    "isGrid": true
   },
   {
     "name": "Winnie Side Table",

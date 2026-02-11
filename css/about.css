@@ -67,3 +67,27 @@ p {
 .message svg {
     margin-top: 40px;
 }
+
+@media (max-width: 768px) {
+    body {
+        padding: 24px 20px;
+    }
+    .message {
+        max-width: 100%;
+    }
+    h1 {
+        font-size: 1.25rem;
+    }
+    p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 16px;
+    }
+    h1 {
+        font-size: 1.1rem;
+    }
+}

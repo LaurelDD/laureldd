@@ -1468,3 +1468,18 @@
             color: #141414;
             text-align: right;
         }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 3rem 24px 2rem;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                text-align: center;
+            }
+            .footer-section:nth-child(2),
+            .footer-section:nth-child(3) {
+                text-align: center;
+            }
+        }

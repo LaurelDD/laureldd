@@ -3287,3 +3287,234 @@
         .footer-logo {
             margin-top: 20px;
         }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .mission-section {
+                padding: 60px 40px;
+            }
+            .mission-content {
+                width: 100%;
+            }
+            .mission-text {
+                font-size: 1.5rem;
+            }
+            .services-timeline {
+                padding: 60px 24px 60px;
+            }
+            .timeline-content {
+                gap: 48px;
+            }
+            .timeline-item {
+                margin-bottom: 120px;
+            }
+            .footer-content {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 72px;
+            }
+            .promo-banner {
+                height: 32px;
+                font-size: 0.65rem;
+            }
+            .nav-ribbon,
+            .nav-ribbon.scrolled {
+                top: 32px;
+                height: 40px;
+            }
+            .nav-center {
+                padding: 0 8px;
+            }
+            .landing-nav-link {
+                padding: 0 16px;
+                font-size: 0.75rem;
+            }
+            .nav-icons {
+                right: 16px;
+                top: 32px;
+                height: 40px;
+                gap: 12px;
+            }
+            .nav-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+            .hero-carousel {
+                margin-top: -72px;
+            }
+            .hero-logo-container svg {
+                width: 100%;
+                max-width: 420px;
+                padding: 0 20px;
+            }
+            .mission-section {
+                padding: 48px 24px;
+            }
+            .mission-text {
+                font-size: 1.2rem;
+                line-height: 1.6;
+            }
+            .mission-text br {
+                display: none;
+            }
+            .services-timeline {
+                padding: 48px 20px 48px;
+            }
+            .timeline-content {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .timeline-item {
+                margin-bottom: 80px;
+            }
+            .timeline-text {
+                max-width: 100%;
+            }
+            .timeline-image {
+                order: -1;
+            }
+            .timeline-image img {
+                width: 100%;
+                height: auto;
+            }
+            .service-name {
+                font-size: 1.25rem;
+            }
+            .service-intro {
+                font-size: 0.9rem;
+            }
+            footer {
+                padding: 3rem 24px 2rem;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                text-align: center;
+            }
+            .footer-section:nth-child(2),
+            .footer-section:nth-child(3) {
+                text-align: center;
+            }
+            .footer-section:nth-child(1) .social-icons {
+                justify-content: center;
+            }
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter-input {
+                width: 100%;
+                max-width: 280px;
+                border-right: 1.5px solid #141414;
+            }
+            .newsletter-button {
+                width: 100%;
+                max-width: 280px;
+            }
+            .info-modal {
+                width: calc(100% - 32px);
+                max-width: none;
+                left: 16px;
+                right: 16px;
+                transform: none;
+                top: 80px;
+                max-height: calc(100vh - 100px);
+            }
+            .info-modal-content {
+                padding: 20px;
+            }
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+                max-width: 100%;
+            }
+            .search-modal {
+                padding: 80px 20px 40px;
+            }
+            .search-modal input {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding-top: 68px;
+            }
+            .promo-banner {
+                height: 28px;
+                font-size: 0.6rem;
+            }
+            .nav-ribbon,
+            .nav-ribbon.scrolled {
+                top: 28px;
+                height: 36px;
+            }
+            .landing-nav-link {
+                padding: 0 10px;
+                font-size: 0.7rem;
+            }
+            .nav-icons {
+                right: 12px;
+                gap: 10px;
+            }
+            .hero-carousel {
+                margin-top: -68px;
+            }
+            .hero-logo-container svg {
+                max-width: 320px;
+            }
+            .mission-text {
+                font-size: 1.05rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            #gridContainer {
+                height: 400px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .landing-nav-link {
+                padding: 0 8px;
+                font-size: 0.65rem;
+            }
+            .mission-text {
+                font-size: 0.95rem;
+            }
+            .hero-logo-container svg {
+                max-width: 260px;
+            }
+            #gridContainer {
+                height: 320px !important;
+            }
+        }
+
+        /* Product page: stack gallery and details on small screens */
+        @media (max-width: 900px) {
+            .product-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .gallery-wrapper {
+                position: relative;
+                top: 0;
+                width: 100%;
+                height: auto;
+                min-height: 60vh;
+            }
+            .details-wrapper {
+                width: 100%;
+            }
+            .craft-content {
+                max-width: 100%;
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }

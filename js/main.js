@@ -384,3 +384,16 @@ function initializeTicker() {
         }
     });
 }
+
+// Turbo Drive: close modals before navigation so cart/overlays don't get stuck on new page
+document.addEventListener('turbo:before-visit', function() {
+    if (typeof closeCart === 'function') closeCart();
+    if (typeof closeSearch === 'function') closeSearch();
+    if (typeof closeInfoModals === 'function') closeInfoModals();
+    document.body.style.overflow = '';
+});
+
+// Turbo Drive: re-init cart counter and display after each page load (full or Turbo visit)
+document.addEventListener('turbo:load', function() {
+    if (typeof loadCart === 'function') loadCart();
+});

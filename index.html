@@ -359,25 +359,21 @@
                         });
                     }
                     
-                    // Navigation style changes
+                    // Navigation style changes (ribbon background); keep nav icons always dark
                     const isScrolled = scrolled > heroHeight * 0.75;
-                    const strokeColor = isScrolled ? '#141414' : '#faf8f3';
-                    
-                    // Explicitly add/remove class to ensure it works reliably
                     if (isScrolled) {
                         navRibbon.classList.add('scrolled');
                     } else {
                         navRibbon.classList.remove('scrolled');
                     }
-                    navIcons.forEach(icon => icon.setAttribute('stroke', strokeColor));
-                    // Only fill circles that should be filled (menu dots and cart wheels, not search circle)
+                    const iconColor = '#141414';
+                    navIcons.forEach(icon => icon.setAttribute('stroke', iconColor));
                     navIconCircles.forEach(circle => {
-                        // Skip the search icon circle - it should never be filled
                         if (circle.getAttribute('r') !== '7') {
-                            circle.setAttribute('fill', strokeColor);
+                            circle.setAttribute('fill', iconColor);
                         }
                     });
-                    if (searchIcon) searchIcon.setAttribute('stroke', strokeColor);
+                    if (searchIcon) searchIcon.setAttribute('stroke', iconColor);
                     
                     ticking = false;
                 });

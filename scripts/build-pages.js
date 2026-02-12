@@ -27,7 +27,7 @@ const pages = [
         headerConfig: {
             showBackArrow: true,
             activeNav: 'interiors',
-            iconColor: '#faf8f3' // Light icons for dark hero background
+            iconColor: '#141414' // Dark icons (no white)
         },
         scripts: [
             '<script src="js/products-data.js"></script>',

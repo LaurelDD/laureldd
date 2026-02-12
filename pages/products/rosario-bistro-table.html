@@ -483,6 +483,41 @@
         </div>
     </div>
 
+    <!-- Virtual Consults Modal (index "Virtual Consults" + interiors "Book Consultation") -->
+    <div id="virtualConsultsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(197, 207, 208, 0.75); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="position: relative; width: 400px; height: 600px; max-width: 90%; background: #fafafa; border: 1.5px solid #141414; padding: 40px 50px; text-align: center; display: flex; flex-direction: column;">
+            <button onclick="document.getElementById('virtualConsultsModal').style.display='none';" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; cursor: pointer; padding: 8px; width: auto; height: auto; display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <h2 style="font-family: 'Geist Mono', monospace; font-size: 1.6rem; font-weight: 500; color: #141414; margin-bottom: 10px; line-height: 1.1; letter-spacing: -0.02em;">Design Consults</h2>
+                <p style="font-family: 'Geist Mono', monospace; font-size: 0.55rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 15px; font-weight: 400;">WITH STUDIO DIRECTOR</p>
+                <div style="margin: 0 0 15px 0; height: 240px; width: 240px; margin-left: auto; margin-right: auto; overflow: hidden; border-radius: 50%; border: 1.5px solid #141414;">
+                    <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769446505/squaremjq-virtualconsults_nomjad_9111ae.jpg" alt="María José - Studio Director" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.25);">
+                </div>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #141414; margin-bottom: 15px; font-weight: 400; line-height: 1.4;">
+                    One-on-one virtual sessions offering expert guidance and creative direction for your projects.
+                </p>
+                <div style="margin-bottom: auto;">
+                    <div style="text-align: left; display: inline-block;">
+                        <div style="margin-bottom: 0px;">
+                            <span style="font-family: 'Geist Mono', monospace; font-size: 0.56rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 400;">• Duration: 60 Minutes</span>
+                        </div>
+                        <div>
+                            <span style="font-family: 'Geist Mono', monospace; font-size: 0.56rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 400;">• Investment: $150+IVA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="mailto:contact@la-urel.com" style="display: inline-block; padding: 12px 36px; background: #faf8f3; color: #141414; text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #141414; transition: all 0.3s ease; cursor: pointer; font-family: 'Geist Mono', monospace; width: fit-content; margin: 0 auto;"
+               onmouseover="this.style.background='#583c4a'; this.style.color='#ffffff'; this.style.borderColor='#583c4a';"
+               onmouseout="this.style.background='#faf8f3'; this.style.color='#141414'; this.style.borderColor='#141414';">Schedule Now</a>
+        </div>
+    </div>
+
     <!-- Info Modal Overlay -->
     <div id="infoModalOverlay" class="info-modal-overlay" onclick="closeInfoModals()"></div>
 

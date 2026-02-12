@@ -446,9 +446,13 @@ function buildPage(pageConfig) {
     // Replace page title in head
     head = head.replace('{{PAGE_TITLE}}', pageConfig.title);
     
-    // Override CSS paths for product-template (used to generate pages in pages/products/)
+    // Override asset paths for product-template (pages live in pages/products/, so need ../../)
     if (pageConfig.overrideCSSPaths) {
         head = head.replace('href="css/main.css"', 'href="../../css/main.css"');
+        head = head.replace('href="images/favicon.ico"', 'href="../../images/favicon.ico"');
+        head = head.replace('href="favicon-32x32.png"', 'href="../../favicon-32x32.png"');
+        head = head.replace('href="favicon-16x16.png"', 'href="../../favicon-16x16.png"');
+        head = head.replace('href="apple-touch-icon.png"', 'href="../../apple-touch-icon.png"');
     }
     
     // Add additional CSS if specified

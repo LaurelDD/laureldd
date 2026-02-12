@@ -1373,6 +1373,11 @@
             cursor: pointer;
         }
 
+        /* Dots container: relative so plus button can be positioned to the right */
+        [id^="dots"] {
+            position: relative;
+        }
+
         .carousel-slide,
         .carousel-container > div {
             min-width: 100%;
@@ -1555,6 +1560,24 @@
 
         .magazine-close:hover svg {
             stroke: #141414;
+        }
+
+        .magazine-text-panel {
+            position: fixed;
+            top: 119px;
+            left: 50px;
+            width: 280px;
+            max-height: calc(100vh - 194px);
+            overflow-y: auto;
+            font-family: 'Geist Mono', monospace;
+            z-index: 1;
+            padding: 0;
+            padding-right: 12px;
+            margin: 0;
+        }
+
+        .magazine-text-panel h3:first-child {
+            margin-top: 0;
         }
 
         /* Consultation Egg Styles */

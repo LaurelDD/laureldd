@@ -374,7 +374,19 @@
     </footer>
 
 
-        <!-- Cart Modal -->
+        <!-- Magazine-Style Lightbox (white, description left, images right) - used on interiors -->
+    <div class="magazine-lightbox" id="magazineLightbox">
+        <button class="magazine-close" onclick="closeMagazineLightbox()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="magazine-text-panel" id="magazineTextPanel"></div>
+        <div class="magazine-filmstrip" id="magazineFilmstrip" style="position: relative; z-index: 10;"></div>
+    </div>
+
+    <!-- Cart Modal -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="cart-modal" id="cartModal">
         <style>

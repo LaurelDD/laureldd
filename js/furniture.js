@@ -169,6 +169,9 @@ function filterCategory(category) {
         // Handle different categories
         if (category === 'home') {
             // HOME = Full furniture page with all decorative sections
+            document.body.classList.remove('wt-view');
+            const wtSection = document.getElementById('windowTreatmentsSection');
+            if (wtSection) hideElement(wtSection);
             showElement(introSection);
             showElement(logoContainer);
             showElement(gridTitleBand);
@@ -177,6 +180,7 @@ function filterCategory(category) {
             editorialSections.forEach(section => showElement(section));
             showElement(triptychSection);
             if (allFurnitureSection) {
+                showElement(allFurnitureSection);
                 showElement(allFurnitureSection.querySelector('.section-header'));
             }
             
@@ -201,6 +205,9 @@ function filterCategory(category) {
             
         } else if (category === 'all') {
             // ALL = Show ALL furniture thumbnails only (no decorative sections)
+            document.body.classList.remove('wt-view');
+            const wtSection = document.getElementById('windowTreatmentsSection');
+            if (wtSection) hideElement(wtSection);
             hideElement(introSection);
             hideElement(logoContainer);
             hideElement(gridTitleBand);
@@ -209,6 +216,7 @@ function filterCategory(category) {
             editorialSections.forEach(section => hideElement(section));
             hideElement(triptychSection);
             if (allFurnitureSection) {
+                showElement(allFurnitureSection);
                 hideElement(allFurnitureSection.querySelector('.section-header'));
             }
             
@@ -301,6 +309,37 @@ function filterCategory(category) {
                 window.currentFilteredProducts = gridProducts;
                 
                 return; // Exit early, don't process normal filtering
+            }
+            
+            // Special handling for "Window Treatments" - show WT content section
+            if (category === 'window-treatments') {
+                hideElement(introSection);
+                hideElement(logoContainer);
+                hideElement(showcaseSection);
+                hideElement(featuredSection);
+                hideElement(gridTitleBand);
+                editorialSections.forEach(section => hideElement(section));
+                hideElement(triptychSection);
+                if (allFurnitureSection) {
+                    hideElement(allFurnitureSection);
+                }
+                hideElement(loadMoreContainer);
+                const wtSection = document.getElementById('windowTreatmentsSection');
+                if (wtSection) {
+                    showElement(wtSection);
+                    initWtShowcaseCarousel();
+                }
+                document.body.classList.add('wt-view');
+                window.currentFilteredCategory = 'window-treatments';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            
+            // Hide Window Treatments section when showing any other category
+            document.body.classList.remove('wt-view');
+            const wtSection = document.getElementById('windowTreatmentsSection');
+            if (wtSection) {
+                hideElement(wtSection);
             }
             
             // Hide decorative sections for specific categories (non-grid)
@@ -544,7 +583,8 @@ function applyInitialView() {
             const buttons = document.querySelectorAll('.furniture-nav-link');
             buttons.forEach(button => {
                 const buttonText = button.textContent.toLowerCase().replace(/\s+/g, '-');
-                if (buttonText === view || 
+                if (buttonText === view ||
+                    (button.textContent === 'Window Treatments' && view === 'window-treatments') ||
                     (button.textContent === 'The Grid' && view === 'grid') ||
                     (button.textContent === 'All' && view === 'all')) {
                     // Prevent scroll on initial filter
@@ -562,12 +602,101 @@ function applyInitialView() {
 applyInitialView();
 
 // ============================================================================
+// WINDOW TREATMENTS — Modal & Carousel (when WT section is visible on furniture page)
+// ============================================================================
+var wtShowcaseCurrentSlide = 0;
+var wtShowcaseSlides = null;
+var wtShowcaseDots = null;
+var wtShowcaseInterval = null;
+
+function wtShowcaseGoToSlide(index) {
+    wtShowcaseSlides = document.querySelectorAll('#windowTreatmentsSection .wt-showcase-slide');
+    wtShowcaseDots = document.querySelectorAll('#windowTreatmentsSection .wt-showcase-dots .wt-dot-wrapper');
+    if (!wtShowcaseSlides || wtShowcaseSlides.length === 0) return;
+    if (wtShowcaseSlides[wtShowcaseCurrentSlide]) {
+        wtShowcaseSlides[wtShowcaseCurrentSlide].classList.remove('active');
+    }
+    if (wtShowcaseDots && wtShowcaseDots[wtShowcaseCurrentSlide]) {
+        wtShowcaseDots[wtShowcaseCurrentSlide].classList.remove('active');
+    }
+    wtShowcaseCurrentSlide = index;
+    if (wtShowcaseSlides[wtShowcaseCurrentSlide]) wtShowcaseSlides[wtShowcaseCurrentSlide].classList.add('active');
+    if (wtShowcaseDots && wtShowcaseDots[wtShowcaseCurrentSlide]) wtShowcaseDots[wtShowcaseCurrentSlide].classList.add('active');
+}
+
+function initWtShowcaseCarousel() {
+    wtShowcaseSlides = document.querySelectorAll('#windowTreatmentsSection .wt-showcase-slide');
+    wtShowcaseDots = document.querySelectorAll('#windowTreatmentsSection .wt-showcase-dots .wt-dot-wrapper');
+    wtShowcaseCurrentSlide = 0;
+    if (wtShowcaseInterval) clearInterval(wtShowcaseInterval);
+    if (wtShowcaseSlides.length > 0) {
+        wtShowcaseInterval = setInterval(function() {
+            var next = (wtShowcaseCurrentSlide + 1) % wtShowcaseSlides.length;
+            wtShowcaseGoToSlide(next);
+        }, 5000);
+    }
+}
+
+function openWtModal() {
+    var modal = document.getElementById('wtContactModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    var form = document.getElementById('wtModalForm');
+    var success = document.getElementById('wtModalSuccess');
+    if (form) form.style.display = 'block';
+    if (success) success.style.display = 'none';
+    var input = document.getElementById('wtContactInput');
+    if (input) input.value = '';
+}
+
+function closeWtModal() {
+    var modal = document.getElementById('wtContactModal');
+    if (modal) modal.classList.remove('active');
+}
+
+function updateWtPlaceholder() {
+    var emailRadio = document.querySelector('input[name="contactMethod"][value="email"]');
+    var input = document.getElementById('wtContactInput');
+    if (!input) return;
+    if (emailRadio && emailRadio.checked) {
+        input.placeholder = 'your@email.com';
+        input.type = 'email';
+    } else {
+        input.placeholder = '(506) 1234-5678';
+        input.type = 'tel';
+    }
+}
+
+function submitWtContact() {
+    var input = document.getElementById('wtContactInput');
+    var form = document.getElementById('wtModalForm');
+    var success = document.getElementById('wtModalSuccess');
+    if (!input || !input.value.trim()) {
+        alert('Please enter your contact information');
+        return;
+    }
+    if (form) form.style.display = 'none';
+    if (success) success.style.display = 'block';
+    setTimeout(closeWtModal, 2000);
+}
+
+// Close WT modal when clicking overlay
+document.addEventListener('click', function(e) {
+    var modal = document.getElementById('wtContactModal');
+    if (modal && e.target === modal) closeWtModal();
+});
+
+// ============================================================================
 // EXPOSE FUNCTIONS TO GLOBAL SCOPE
 // ============================================================================
-// Ensure all functions are available globally for onclick handlers
 window.saveScrollAndNavigate = saveScrollAndNavigate;
 window.returnHome = returnHome;
 window.filterCategory = filterCategory;
 window.generateSeasonMarkdownGrid = generateSeasonMarkdownGrid;
 window.syncGridBadges = syncGridBadges;
 window.loadMoreProducts = typeof loadMoreProducts !== 'undefined' ? loadMoreProducts : function() {};
+window.wtShowcaseGoToSlide = wtShowcaseGoToSlide;
+window.openWtModal = openWtModal;
+window.closeWtModal = closeWtModal;
+window.updateWtPlaceholder = updateWtPlaceholder;
+window.submitWtContact = submitWtContact;

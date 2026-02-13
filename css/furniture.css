@@ -2514,3 +2514,730 @@ footer {
         font-size: 0.85rem;
     }
 }
+
+/* ============================================================================
+   WINDOW TREATMENTS SECTION (furniture page filter)
+   ============================================================================ */
+#windowTreatmentsSection {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Only when Window Treatments view is active: unconstrain .main-content so hero is full width and carousel is left-aligned. Other furniture views (Home, All, etc.) keep normal padding and max-width. */
+body.wt-view .main-content {
+    padding: 0;
+    max-width: none;
+}
+
+/* Full-width hero (initial image) - when body.wt-view, .main-content is full width so this spans edge to edge */
+.window-treatments-section .wt-heritage-bg.wt-hero-full {
+    width: 100%;
+    padding-top: 80px;
+    padding-bottom: 120px;
+    background-image: url('https://res.cloudinary.com/duoqn1csd/image/upload/v1765256649/PP27-148_uydehj.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    box-sizing: border-box;
+}
+.window-treatments-section .wt-heritage-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(250, 248, 243, 0.3);
+    z-index: 0;
+}
+.window-treatments-section .wt-heritage-bg .mission-content {
+    position: relative;
+    z-index: 1;
+    width: 1000px;
+    max-width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+.window-treatments-section .mission-section:not(.wt-heritage-bg) {
+    background: #fafafa;
+    padding: 80px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.window-treatments-section .mission-content {
+    width: 1000px;
+    max-width: 100%;
+    text-align: center;
+}
+.window-treatments-section .mission-text {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: #141414;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+.window-treatments-section .mission-text strong { font-weight: 600; }
+.window-treatments-section .mission-text em { font-style: italic; }
+.window-treatments-section .mission-text .regular { font-weight: 300; font-style: normal; }
+.window-treatments-section .wt-signature {
+    margin: 60px 0 0;
+    text-align: center;
+}
+.window-treatments-section .wt-signature-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.95rem;
+    color: #141414;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.window-treatments-section .wt-signature-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #141414;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+}
+
+/* Typography - match reference sizes */
+.window-treatments-section .wt-heading {
+    font-family: 'Geist Mono', monospace;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #141414;
+    margin-bottom: 24px;
+    line-height: 1.1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.window-treatments-section .wt-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+.window-treatments-section .wt-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #141414;
+    margin-bottom: 25px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+.window-treatments-section .wt-body:last-of-type {
+    margin-bottom: 35px;
+}
+.window-treatments-section .wt-cta-btn {
+    display: inline-block;
+    padding: 12px 36px;
+    background: #faf8f3;
+    color: #141414;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1.5px solid #141414;
+    font-family: 'Geist Mono', monospace;
+}
+.window-treatments-section .wt-cta-btn:hover {
+    background: #583c4a;
+    color: #faf8f3;
+    border-color: #583c4a;
+}
+
+/* Transform Your View - Carousel LEFT aligned, text right */
+.window-treatments-section .wt-showcase {
+    padding: 200px 0 80px;
+    background: #fafafa;
+}
+.window-treatments-section .wt-showcase-container {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.window-treatments-section .wt-showcase-left {
+    flex: 0 0 50%;
+    max-width: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.window-treatments-section .wt-showcase-carousel {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    min-height: 500px;
+    overflow: hidden;
+}
+.window-treatments-section .wt-showcase-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.window-treatments-section .wt-showcase-slide.active {
+    opacity: 1;
+}
+.window-treatments-section .wt-showcase-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    display: block;
+}
+@media (min-width: 1024px) {
+    .window-treatments-section .wt-showcase-carousel {
+        height: 600px;
+        min-height: 600px;
+    }
+}
+.window-treatments-section .wt-showcase-dots {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 12px;
+}
+.window-treatments-section .wt-showcase-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+}
+.window-treatments-section .wt-showcase-text {
+    max-width: 600px;
+    text-align: center;
+}
+.window-treatments-section .wt-dot-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+}
+.window-treatments-section .wt-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #583c4a;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+}
+.window-treatments-section .wt-dot-wrapper.active .wt-dot {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Section heads */
+.window-treatments-section .wt-section-head {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.window-treatments-section .wt-section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #141414;
+    margin: 0;
+}
+.window-treatments-section .wt-section-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-top: 16px;
+    font-weight: 400;
+}
+
+/* WT Category grid - longer tiles */
+.window-treatments-section .wt-section.wt-products {
+    padding: 120px 50px 80px;
+}
+.window-treatments-section .wt-category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.window-treatments-section .wt-category-card {
+    border: 1.5px solid #141414;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+    background: #faf8f3;
+}
+.window-treatments-section .wt-category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.window-treatments-section .wt-category-image-wrapper {
+    position: relative;
+    line-height: 0;
+}
+.window-treatments-section .wt-category-title-tag {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c5cfd0;
+    color: #141414;
+    padding: 10px 24px 12px;
+    z-index: 4;
+    border-left: 1.5px solid #141414;
+    border-right: 1.5px solid #141414;
+    border-bottom: 1.5px solid #141414;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.window-treatments-section .wt-category-title-tag h3 {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #141414;
+    margin: 0;
+    white-space: nowrap;
+}
+.window-treatments-section .wt-btn-customize {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-top: 1.5px solid #141414;
+    background: transparent;
+    color: #141414;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+.window-treatments-section .wt-btn-customize:hover {
+    background: #c5cfd0;
+    color: #141414;
+}
+.window-treatments-section .wt-category-info {
+    padding: 30px 25px;
+    background: #faf8f3;
+    border-top: 1.5px solid #141414;
+}
+.window-treatments-section .wt-category-description {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #141414;
+}
+.window-treatments-section .wt-category-image {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+}
+@media (min-width: 768px) {
+    .window-treatments-section .wt-category-image {
+        height: 550px;
+    }
+}
+@media (max-width: 767px) {
+    .window-treatments-section .wt-showcase-container {
+        flex-direction: column !important;
+    }
+    .window-treatments-section .wt-showcase-left {
+        max-width: 100%;
+        flex: 1 1 100%;
+    }
+    .window-treatments-section .wt-showcase-dots {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .window-treatments-section .wt-category-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .window-treatments-section .wt-category-image {
+        height: 380px;
+    }
+}
+
+/* Our Curated Fabric Library */
+.window-treatments-section .wt-fabric-library {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 80px 50px;
+    background: #fafafa;
+}
+.window-treatments-section .wt-fabric-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+}
+.window-treatments-section .wt-fabric-wheels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 550px;
+}
+.window-treatments-section .wt-fabric-wheel-item {
+    text-align: center;
+}
+.window-treatments-section .wt-fabric-wheel {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid #141414;
+    margin: 0 auto 16px;
+    position: relative;
+    overflow: hidden;
+}
+.window-treatments-section .wt-wheel-sheers {
+    background: conic-gradient(from 0deg, #e8e4dc 0deg 60deg, #d4cfc4 60deg 120deg, #c5c0b5 120deg 180deg, #b6b0a5 180deg 240deg, #a7a196 240deg 300deg, #989287 300deg 360deg);
+}
+.window-treatments-section .wt-wheel-performance-linens {
+    background: conic-gradient(from 0deg, #d4b5a0 0deg 60deg, #9fa8a3 60deg 120deg, #c4a89e 120deg 180deg, #8b9e9a 180deg 240deg, #b89f93 240deg 300deg, #a4b0a8 300deg 360deg);
+}
+.window-treatments-section .wt-wheel-performance-neutrals {
+    background: conic-gradient(from 0deg, #c9c4bd 0deg 60deg, #b8b3ac 60deg 120deg, #a7a299 120deg 180deg, #969186 180deg 240deg, #858073 240deg 300deg, #746f60 300deg 360deg);
+}
+.window-treatments-section .wt-wheel-blackouts {
+    background: conic-gradient(from 0deg, #2a2a2a 0deg 60deg, #3d3d3d 60deg 120deg, #505050 120deg 180deg, #636363 180deg 240deg, #767676 240deg 300deg, #898989 300deg 360deg);
+}
+.window-treatments-section .wt-fabric-wheel-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    color: #141414;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+    line-height: 1.3;
+}
+.window-treatments-section .wt-fabric-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+}
+.window-treatments-section .wt-fabric-right .wt-showcase-text {
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Finishing Hardware */
+.window-treatments-section .wt-finishing-hardware {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 80px 0;
+    background: #fafafa;
+}
+.window-treatments-section .wt-hardware-left {
+    flex: 1;
+    position: relative;
+}
+.window-treatments-section .wt-hardware-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    min-height: 500px;
+}
+@media (min-width: 1024px) {
+    .window-treatments-section .wt-hardware-left img {
+        min-height: 600px;
+    }
+}
+.window-treatments-section .wt-hardware-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+}
+.window-treatments-section .wt-hardware-right .wt-showcase-text {
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Our Process */
+.window-treatments-section .wt-process {
+    padding: 120px 50px 80px;
+    background: #fff;
+}
+.window-treatments-section .wt-process-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+.window-treatments-section .wt-process-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #141414;
+    margin-bottom: 16px;
+}
+.window-treatments-section .wt-process-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    color: #583c4a;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    margin-top: 16px;
+}
+.window-treatments-section .wt-process-list {
+    max-width: 750px;
+    margin: 0 auto;
+}
+.window-treatments-section .wt-process-item {
+    display: flex;
+    gap: 12px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(20, 20, 20, 0.1);
+    align-items: baseline;
+}
+.window-treatments-section .wt-process-item:last-child {
+    border-bottom: none;
+}
+.window-treatments-section .wt-process-number {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #141414;
+    line-height: 1.4;
+    flex-shrink: 0;
+}
+.window-treatments-section .wt-process-number::after {
+    content: ' : ';
+}
+.window-treatments-section .wt-process-content {
+    flex: 1;
+}
+.window-treatments-section .wt-process-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #141414;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+.window-treatments-section .wt-process-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #583c4a;
+}
+
+/* We Work With */
+.window-treatments-section .wt-partners {
+    padding: 60px 50px;
+    background: #fafafa;
+    text-align: center;
+}
+.window-treatments-section .wt-partners-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #141414;
+    margin-bottom: 60px;
+}
+.window-treatments-section .wt-partners-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+.window-treatments-section .wt-partner-item {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.9rem;
+    color: #141414;
+    text-align: center;
+    flex: 1;
+    min-width: 140px;
+}
+.window-treatments-section .wt-partner-placeholder {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+@media (max-width: 767px) {
+    .window-treatments-section .wt-fabric-library {
+        flex-direction: column;
+        padding: 60px 24px;
+    }
+    .window-treatments-section .wt-fabric-wheels {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    .window-treatments-section .wt-fabric-wheel {
+        width: 140px;
+        height: 140px;
+    }
+    .window-treatments-section .wt-finishing-hardware {
+        flex-direction: column;
+    }
+    .window-treatments-section .wt-hardware-left img {
+        min-height: 400px;
+    }
+    .window-treatments-section .wt-partners-grid {
+        flex-direction: column;
+        gap: 32px;
+    }
+}
+
+/* WT Contact modal */
+.wt-contact-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(197, 207, 208, 0.75);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+.wt-contact-modal.active {
+    display: flex;
+}
+.wt-contact-modal .wt-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    background-color: #faf8f3;
+    padding: 40px;
+    border: 1.5px solid #141414;
+    z-index: 10001;
+    text-align: center;
+}
+.wt-contact-modal .wt-modal-close {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid #141414;
+    background: transparent;
+    color: #141414;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    line-height: 1;
+    transition: all 0.3s ease;
+    z-index: 10;
+    padding: 0;
+}
+.wt-contact-modal .wt-modal-close:hover {
+    background: #c5cfd0;
+    transform: rotate(90deg);
+}
+.wt-contact-modal .wt-modal-header {
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #141414;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.wt-contact-modal .wt-modal-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #141414;
+    margin-bottom: 30px;
+}
+.wt-contact-modal .wt-radio-group {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+.wt-contact-modal .wt-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.9rem;
+    color: #141414;
+    cursor: pointer;
+}
+.wt-contact-modal .wt-input-field {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border: 1.5px solid #141414;
+    background: #fff;
+    color: #141414;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+.wt-contact-modal .wt-input-field:focus {
+    outline: none;
+    border-color: #583c4a;
+}
+.wt-contact-modal .wt-modal-submit {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: #141414;
+    color: #faf8f3;
+    border: 1.5px solid #141414;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.wt-contact-modal .wt-modal-submit:hover {
+    background: #583c4a;
+    border-color: #583c4a;
+}
+.wt-contact-modal .wt-modal-success {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #141414;
+    padding: 60px 40px;
+}

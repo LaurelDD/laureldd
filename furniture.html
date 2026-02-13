@@ -249,7 +249,7 @@
             <div class="triptych-content-wrapper">
                 <div class="triptych-content">
                     <p class="triptych-description">How it all started! Custom-made drapery, blinds and shades with a high regard for detail.</p>
-                    <a href="#" class="triptych-link">View Treatments</a>
+                    <a href="#" class="triptych-link" onclick="event.preventDefault(); filterCategory('window-treatments');">View Treatments</a>
                 </div>
 
                 <div class="triptych-content">
@@ -263,6 +263,253 @@
                 </div>
             </div>
         </section>
+
+        <!-- WINDOW TREATMENTS SECTION (shown when filter = window-treatments) -->
+        <section id="windowTreatmentsSection" class="window-treatments-section" style="display: none;">
+            <!-- Heritage - Full width hero -->
+            <section class="mission-section wt-heritage-bg wt-hero-full">
+                <div class="mission-content">
+                    <p class="mission-text">
+                        For over three decades,<br> what began as my mother's sewing workshop<br>
+                        has evolved into a <strong style="color: #141414;"><em>tradition of excellence in window treatments</em></strong><span class="regular">.</span>
+                        From her original atelier where she meticulously crafted draperies<br>
+                        for Costa Rican homes, we've inherited<br> not just techniques,
+                        but an unwavering commitment to quality and detail.
+                    </p>
+                    <div class="wt-signature">
+                        <p class="wt-signature-name">— María José</p>
+                        <p class="wt-signature-title">Founder & Creative Director, Laurel</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transform Your View - Carousel left, text right -->
+            <section class="wt-showcase">
+                <div class="wt-showcase-container">
+                    <div class="wt-showcase-left">
+                        <div class="wt-showcase-carousel">
+                            <div class="wt-showcase-slide active">
+                                <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769185910/LAUCAT-425_feaps3.jpg" alt="Window treatments showcase">
+                            </div>
+                            <div class="wt-showcase-slide">
+                                <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769449373/IMG_6636_kjhuoh.jpg" alt="Window treatments showcase">
+                            </div>
+                            <div class="wt-showcase-slide">
+                                <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769185944/IMG_6415_juhzxx.jpg" alt="Window treatments showcase">
+                            </div>
+                            <div class="wt-showcase-slide">
+                                <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769454412/IMG_4140_ra5re1.jpg" alt="Window treatments showcase">
+                            </div>
+                        </div>
+                        <div class="wt-showcase-dots">
+                            <div class="wt-dot-wrapper active" onclick="wtShowcaseGoToSlide(0)">
+                                <div class="wt-dot"></div>
+                            </div>
+                            <div class="wt-dot-wrapper" onclick="wtShowcaseGoToSlide(1)">
+                                <div class="wt-dot"></div>
+                            </div>
+                            <div class="wt-dot-wrapper" onclick="wtShowcaseGoToSlide(2)">
+                                <div class="wt-dot"></div>
+                            </div>
+                            <div class="wt-dot-wrapper" onclick="wtShowcaseGoToSlide(3)">
+                                <div class="wt-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wt-showcase-right">
+                        <div class="wt-showcase-text">
+                            <h2 class="wt-heading">Transform Your View</h2>
+                            <p class="wt-subtitle">Tradition Meets Innovation</p>
+                            <p class="wt-body">Today, Laurel's capabilities have expanded to include contemporary designs and advanced automation, but Giovanna's guiding hand remains integral to our process. Every pleat, every hem, every installation carries forward the standards she established—now enhanced with modern innovation but never compromising the artisanal touch that defines our work.</p>
+                            <p class="wt-body">In strategic partnership with EECR, we supply customers with motorized solutions of the best quality across a range of budgets. Through this alliance, we deliver smart solutions that span from high-end systems—where EECR leads locally—to our joint carefully developed mid-tier automation.</p>
+                            <a href="#" class="wt-cta-btn" onclick="event.preventDefault(); openWtModal();">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Products -->
+            <section class="wt-section wt-products">
+                <div class="wt-section-head">
+                    <h2 class="wt-section-title">Our Products</h2>
+                    <p class="wt-section-subtitle">Residential & Commercial Solutions</p>
+                </div>
+                <div class="wt-category-grid">
+                    <div class="wt-category-card">
+                        <div class="wt-category-image-wrapper">
+                            <div class="wt-category-title-tag">
+                                <h3>Curtains & Drapes</h3>
+                            </div>
+                            <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769176786/IMG_0663_dsy6rq.jpg" alt="Custom curtains and drapes" class="wt-category-image">
+                        </div>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openWtModal();">Start Customizing</a>
+                        <div class="wt-category-info">
+                            <p class="wt-category-description">Custom drapery tailored to your specifications — from sheers and velvet to blackout linens. Professional pleating and finishing with motorized or manual hardware options.</p>
+                        </div>
+                    </div>
+                    <div class="wt-category-card">
+                        <div class="wt-category-image-wrapper">
+                            <div class="wt-category-title-tag">
+                                <h3>Blinds & Shades</h3>
+                            </div>
+                            <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769185947/IMG_6336_dhvoyk.jpg" alt="Blinds and shades" class="wt-category-image">
+                        </div>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openWtModal();">Start Customizing</a>
+                        <div class="wt-category-info">
+                            <p class="wt-category-description">Roman shades, roller blinds, and cellular options for clean, modern light control. Available in motorized systems with smart home integration and cordless mechanisms.</p>
+                        </div>
+                    </div>
+                    <div class="wt-category-card">
+                        <div class="wt-category-image-wrapper">
+                            <div class="wt-category-title-tag">
+                                <h3>Shutters</h3>
+                            </div>
+                            <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769204161/LAUCAT-615_ekj5ho.jpg" alt="Custom shutters" class="wt-category-image" style="object-position: left;">
+                        </div>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openWtModal();">Start Customizing</a>
+                        <div class="wt-category-info">
+                            <p class="wt-category-description">Custom hardwood shutters built to your dimensions. Available with fixed or adjustable louvers, or solid panel designs for light and privacy control with lasting architectural value.</p>
+                        </div>
+                    </div>
+                    <div class="wt-category-card">
+                        <div class="wt-category-image-wrapper">
+                            <div class="wt-category-title-tag">
+                                <h3>Valances & Cornices</h3>
+                            </div>
+                            <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769200937/IMG_4167_twuslq.jpg" alt="Valances and cornices" class="wt-category-image">
+                        </div>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openWtModal();">Start Customizing</a>
+                        <div class="wt-category-info">
+                            <p class="wt-category-description">Decorative top treatments that conceal curtain hardware and add character to windows. Available in soft fabric styles or structured wood designs to complement your drapery or stand alone.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Curated Fabric Library -->
+            <section class="wt-section wt-fabric-library">
+                <div class="wt-fabric-left">
+                    <div class="wt-fabric-wheels">
+                        <div class="wt-fabric-wheel-item">
+                            <div class="wt-fabric-wheel wt-wheel-sheers"></div>
+                            <p class="wt-fabric-wheel-label">Sheers</p>
+                        </div>
+                        <div class="wt-fabric-wheel-item">
+                            <div class="wt-fabric-wheel wt-wheel-performance-linens"></div>
+                            <p class="wt-fabric-wheel-label">Performance<br>Linens</p>
+                        </div>
+                        <div class="wt-fabric-wheel-item">
+                            <div class="wt-fabric-wheel wt-wheel-performance-neutrals"></div>
+                            <p class="wt-fabric-wheel-label">Performance<br>Neutrals</p>
+                        </div>
+                        <div class="wt-fabric-wheel-item">
+                            <div class="wt-fabric-wheel wt-wheel-blackouts"></div>
+                            <p class="wt-fabric-wheel-label">Blackouts</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wt-fabric-right">
+                    <div class="wt-showcase-text">
+                        <h2 class="wt-heading">Our Curated Fabric Library</h2>
+                        <p class="wt-subtitle">Premium Materials & Custom Options</p>
+                        <p class="wt-body">Select fabric from our curated wheels—Sheers, Performance Linens, Performance Neutrals, and Blackouts. These carefully selected batch swatches represent our most-loved materials and can be requested as complete sample sets to explore in your space.</p>
+                        <p class="wt-body">Beyond these favorites, we provide access to hundreds of additional options from designer brands including Kravet, Sunbrella, Perennials and more... Already have fabric? We welcome client-supplied materials and work with your cuts to create custom treatments that perfectly match your vision.</p>
+                        <a href="#" class="wt-cta-btn" onclick="event.preventDefault(); openWtModal();">Request Swatches</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Finishing Hardware -->
+            <section class="wt-section wt-finishing-hardware">
+                <div class="wt-hardware-left">
+                    <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769176786/IMG_0663_dsy6rq.jpg" alt="Finishing hardware">
+                </div>
+                <div class="wt-hardware-right">
+                    <div class="wt-showcase-text">
+                        <h2 class="wt-heading">Finishing Hardware</h2>
+                        <p class="wt-subtitle">Custom Details for Designer Spaces</p>
+                        <p class="wt-body">Apart from motorized or track systems, we provide quality finishing hardware—rods, finials, brackets, and custom mounting solutions. Our collection features both Laurel's own designs and carefully selected pieces from premium manufacturers.</p>
+                        <p class="wt-body">All hardware is made to order and customized to your exact specifications—dimensions, finishes, and installation requirements.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Process -->
+            <section class="wt-section wt-process">
+                <div class="wt-process-header">
+                    <h2 class="wt-process-title">Our Process</h2>
+                    <p class="wt-process-subtitle">Every step guided with expertise</p>
+                </div>
+                <div class="wt-process-list">
+                    <div class="wt-process-item">
+                        <div class="wt-process-number">1</div>
+                        <div class="wt-process-content">
+                            <p class="wt-process-label">Consultation</p>
+                            <p class="wt-process-text">We meet with designers, clients, or project managers to discuss aesthetic preferences, functional needs, and specific requirements. Whether working from architectural plans or visiting an existing space, our team evaluates window orientation, dimensions, and room usage to recommend tailored solutions.</p>
+                        </div>
+                    </div>
+                    <div class="wt-process-item">
+                        <div class="wt-process-number">2</div>
+                        <div class="wt-process-content">
+                            <p class="wt-process-label">Design & Material Selection</p>
+                            <p class="wt-process-text">We present fabric samples, hardware options, and design recommendations. From performance fabrics to luxury textiles, motorized systems to manual hardware — materials selected for beauty and durability. Detailed specifications ensure selections meet both aesthetic goals and practical requirements.</p>
+                        </div>
+                    </div>
+                    <div class="wt-process-item">
+                        <div class="wt-process-number">3</div>
+                        <div class="wt-process-content">
+                            <p class="wt-process-label">Custom Fabrication</p>
+                            <p class="wt-process-text">Custom fabric treatments are crafted in our Costa Rican workshop to exact specifications — professional pleating, precision cutting, and meticulous finishing using techniques refined over three decades. We source motorized systems through our Asian product line and work in close collaboration with Lutron representatives for premium automation solutions. Rigorous quality checks ensure flawless construction throughout.</p>
+                        </div>
+                    </div>
+                    <div class="wt-process-item">
+                        <div class="wt-process-number">4</div>
+                        <div class="wt-process-content">
+                            <p class="wt-process-label">Professional Installation</p>
+                            <p class="wt-process-text">Our team handles mounting, hanging, testing motorized systems, and final adjustments for perfect operation and appearance. We coordinate with your schedule for a seamless installation from start to finish.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- We Work With -->
+            <section class="wt-section wt-partners">
+                <h3 class="wt-partners-title">We Work With</h3>
+                <div class="wt-partners-grid">
+                    <div class="wt-partner-item">P/Kaufmann Contract<br><span class="wt-partner-placeholder">(Logo placeholder)</span></div>
+                    <div class="wt-partner-item">Lutron Systems<br><span class="wt-partner-placeholder">(Logo placeholder)</span></div>
+                    <div class="wt-partner-item">The Shade Store<br><span class="wt-partner-placeholder">(Logo placeholder)</span></div>
+                    <div class="wt-partner-item">Walcot House<br><span class="wt-partner-placeholder">(Logo placeholder)</span></div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Window Treatments Contact Modal (used when WT section is visible) -->
+        <div id="wtContactModal" class="wt-contact-modal">
+            <div class="wt-modal-content">
+                <button class="wt-modal-close" onclick="closeWtModal()">&times;</button>
+                <div id="wtModalForm" class="wt-modal-form-wrapper">
+                    <h2 class="wt-modal-header">Let's Get Started</h2>
+                    <p class="wt-modal-text">Our design team will reach out within 48 hours to discuss your project. How would you prefer we contact you?</p>
+                    <div class="wt-radio-group">
+                        <label class="wt-radio-label">
+                            <input type="radio" name="contactMethod" value="email" checked onchange="updateWtPlaceholder()">
+                            <span>Email</span>
+                        </label>
+                        <label class="wt-radio-label">
+                            <input type="radio" name="contactMethod" value="phone" onchange="updateWtPlaceholder()">
+                            <span>Phone</span>
+                        </label>
+                    </div>
+                    <input type="text" id="wtContactInput" class="wt-input-field" placeholder="your@email.com" required>
+                    <button class="wt-modal-submit" onclick="submitWtContact()">Submit Request</button>
+                </div>
+                <div id="wtModalSuccess" class="wt-modal-success" style="display: none;">
+                    <p style="font-size: 1.5rem; margin-bottom: 12px;">✓</p>
+                    <p>Thanks! We'll be in touch soon.</p>
+                </div>
+            </div>
+        </div>
 
         <!-- ALL FURNITURE - ONE ROW + LOAD MORE -->
         <section class="all-furniture-section">

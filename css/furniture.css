@@ -997,14 +997,16 @@ body {
     background: #583c4a;
     color: white;
     border-radius: 50%;
-    min-width: 18px;
-    height: 18px;
-    font-size: 11px;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    font-size: 10px;
     font-weight: bold;
     display: none;
     align-items: center;
     justify-content: center;
     border: 2px solid #fafafa;
+    box-sizing: border-box;
 }
 
 .cart-counter.has-items {
@@ -2394,6 +2396,38 @@ footer {
     body {
         padding-top: 100px !important;
     }
+    .promo-banner {
+        height: 32px;
+        font-size: 0.65rem;
+    }
+    .nav-ribbon,
+    .nav-ribbon.scrolled {
+        top: 32px;
+        height: 40px;
+        padding-left: 52px;
+        padding-right: 120px;
+    }
+    .nav-ribbon > div:first-of-type {
+        left: 16px !important;
+    }
+    .nav-center {
+        padding: 0 8px;
+    }
+    .landing-nav-link {
+        padding: 0 16px;
+        font-size: 0.75rem !important;
+    }
+    .nav-icons {
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 40px;
+        gap: 12px;
+    }
+    .nav-icon svg {
+        width: 18px;
+        height: 18px;
+    }
     .furniture-nav {
         top: 72px;
         height: 36px;
@@ -2467,6 +2501,34 @@ footer {
     body {
         padding-top: 96px !important;
     }
+    .promo-banner {
+        height: 28px;
+        font-size: 0.6rem;
+    }
+    .nav-ribbon,
+    .nav-ribbon.scrolled {
+        top: 28px;
+        height: 36px;
+        padding-left: 48px;
+        padding-right: 110px;
+    }
+    .nav-ribbon > div:first-of-type {
+        left: 12px !important;
+    }
+    .nav-center {
+        padding: 0 8px;
+    }
+    .landing-nav-link {
+        padding: 0 10px;
+        font-size: 0.7rem !important;
+    }
+    .nav-icons {
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 36px;
+        gap: 10px;
+    }
     .furniture-nav {
         top: 68px;
         height: 32px;
@@ -2507,6 +2569,10 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .landing-nav-link {
+        padding: 0 8px;
+        font-size: 0.65rem !important;
+    }
     .section-title {
         font-size: 1.25rem;
     }

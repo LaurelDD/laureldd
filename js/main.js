@@ -231,6 +231,10 @@ function openCheckoutModal() {
     if (modal) modal.classList.add('active');
     const orderSummaryEl = document.getElementById('checkoutOrderSummary');
     if (orderSummaryEl) orderSummaryEl.value = '';
+    const formWrap = document.getElementById('checkoutFormWrap');
+    const confirmation = document.getElementById('checkoutConfirmation');
+    if (formWrap) formWrap.style.display = '';
+    if (confirmation) confirmation.style.display = 'none';
 }
 
 function closeCheckoutModal() {
@@ -238,6 +242,11 @@ function closeCheckoutModal() {
     const modal = document.getElementById('checkoutModal');
     if (overlay) overlay.classList.remove('active');
     if (modal) modal.classList.remove('active');
+}
+
+function closeCheckoutModalAfterConfirm() {
+    closeCheckoutModal();
+    closeCart();
 }
 
 function checkout() {
@@ -320,9 +329,12 @@ async function submitCheckoutForm(e) {
         cartItems = [];
         saveCart();
         updateCart();
-        closeCheckoutModal();
-        closeCart();
-        alert("Thank you for your order! We'll contact you shortly to complete your purchase.");
+        const formWrap = document.getElementById('checkoutFormWrap');
+        const confirmation = document.getElementById('checkoutConfirmation');
+        if (formWrap) formWrap.style.display = 'none';
+        if (confirmation) confirmation.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit order';
     } catch (err) {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit order';

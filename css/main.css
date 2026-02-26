@@ -961,6 +961,23 @@
             background: #c5cfd0;
             transform: rotate(90deg);
         }
+        .checkout-form-wrap {
+            display: block;
+        }
+        .checkout-confirmation {
+            text-align: center;
+            padding-top: 0;
+        }
+        .checkout-confirmation-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #141414;
+            margin: 0 0 30px 0;
+        }
+        .checkout-confirmation .checkout-btn-primary {
+            width: 100%;
+        }
         .checkout-form {
             padding: 0;
             text-align: left;

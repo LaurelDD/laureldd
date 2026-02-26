@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS products (
   has_metal BOOLEAN DEFAULT false,
   has_hardwood BOOLEAN DEFAULT false,
   has_fabric BOOLEAN DEFAULT false,
+  has_strippedfabric BOOLEAN DEFAULT false,
   has_leather BOOLEAN DEFAULT false,
   has_grs BOOLEAN DEFAULT false,
   

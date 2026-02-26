@@ -370,7 +370,7 @@ var productsDatabase = [
     "price": 5015,
     "originalPrice": null,
     "url": "pages/products/sistema-sofa.html",
-    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763336186/Sistema_Sofa_1_hnysyn.jpg",
+    "image": "https://res.cloudinary.com/duoqn1csd/image/upload/w_1200,f_auto,q_auto/v1763335641/Sistema_2Seater_csbhos.jpg",
     "category": [
       "seating",
       "sofas"

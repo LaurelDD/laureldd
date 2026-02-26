@@ -421,9 +421,17 @@ function selectTeakFinish(element) {
 }
 
 function selectMaterial(element) {
-    document.querySelectorAll('.material-chip').forEach(chip => {
-        chip.classList.remove('selected');
-    });
+    const fabricSection = document.getElementById('fabric-section');
+    if (fabricSection && fabricSection.contains(element)) {
+        // Fabric: only one selection at a time
+        fabricSection.querySelectorAll('.color-swatch-image.selected, .color-swatch.selected').forEach(el => {
+            el.classList.remove('selected');
+        });
+    } else {
+        document.querySelectorAll('.material-chip').forEach(chip => {
+            chip.classList.remove('selected');
+        });
+    }
     element.classList.add('selected');
 }
 

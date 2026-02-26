@@ -260,8 +260,9 @@ function generateProductHTML(product) {
         html = html.replace(/\{\{HARDWOOD_SECTION\}\}/g, '');
     }
     
-    // Fabric section
-    if (product.has_fabric) {
+    // Fabric section: show when has_fabric OR has_strippedfabric (Supabase column)
+    const showFabric = product.has_fabric || product.has_strippedfabric;
+    if (showFabric) {
         const materials = product.materials || {};
         const fabricOptions = materials.fabric || [];
         let fabricHTML = '';
@@ -271,8 +272,8 @@ function generateProductHTML(product) {
                 const imageUrl = option.image || '';
                 const title = option.name || option.title || '';
                 const style = imageUrl ? 
-                    `background-image: url('${escapeHtml(imageUrl)}'); background-size: cover; background-position: center;` :
-                    `background-color: ${escapeHtml(option.color || '#ccc')};`;
+                    `background-image: url('${escapeHtml(imageUrl)}'); background-size: cover; background-position: center; min-width: 40px; min-height: 40px;` :
+                    `background-color: ${escapeHtml(option.color || '#ccc')}; min-width: 40px; min-height: 40px;`;
                 fabricHTML += `<div class="color-swatch-image" style="${style}" title="${escapeHtml(title)}" onclick="selectMaterial(this)"></div>`;
             });
             
@@ -285,8 +286,8 @@ function generateProductHTML(product) {
             </div>
         `);
         } else {
-            // Mano (Chair & Sofa) use striped fabric options; others use solid
-            const isMano = product.slug === 'mano-chair' || product.slug === 'mano-sofa';
+            // Striped fabric when has_strippedfabric; otherwise solid
+            const useStriped = product.has_strippedfabric;
             const defaultStripedFabrics = [
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098143/42102-0004_98107560_1200_dlwasr.jpg', title: 'Striped 1' },
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098078/42102-0002_98107552_1200_ev98z6.jpg', title: 'Striped 2' },
@@ -299,7 +300,7 @@ function generateProductHTML(product) {
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098005/42102-0009_98107543_1200_feikr7.jpg', title: 'Solid 3' },
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764097907/42102-0001_98107536_1200_lafbjb.jpg', title: 'Solid 4' }
             ];
-            const defaultFabrics = isMano ? defaultStripedFabrics : defaultSolidFabrics;
+            const defaultFabrics = useStriped ? defaultStripedFabrics : defaultSolidFabrics;
             defaultFabrics.forEach(f => {
                 fabricHTML += `<div class="color-swatch-image" style="background-image: url('${escapeHtml(f.url)}'); background-size: cover; background-position: center; min-width: 40px; min-height: 40px;" title="${escapeHtml(f.title)}" onclick="selectMaterial(this)"></div>`;
             });

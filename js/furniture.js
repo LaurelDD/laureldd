@@ -350,7 +350,9 @@ function filterCategory(category) {
             hideElement(gridTitleBand);
             editorialSections.forEach(section => hideElement(section));
             hideElement(triptychSection);
+            // Show the product grid section (it may have been hidden when viewing Window Treatments)
             if (allFurnitureSection) {
+                showElement(allFurnitureSection);
                 hideElement(allFurnitureSection.querySelector('.section-header'));
             }
             
@@ -427,6 +429,46 @@ function filterCategory(category) {
         // Smooth scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+}
+
+// Build the main product grid from productsDatabase (thumbnail_url). Shows all products; first 12 visible, rest in "See More".
+function renderProductGrid() {
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+    const db = typeof productsDatabase !== 'undefined' ? productsDatabase : [];
+    const products = db.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    if (products.length === 0) return;
+
+    const INITIAL_VISIBLE = 12;
+    let html = '';
+    products.forEach((p, index) => {
+        const categoryStr = Array.isArray(p.category) ? p.category.join(' ') : (p.category || '');
+        const isSale = p.originalPrice != null && p.originalPrice > p.price;
+        const hiddenClass = index >= INITIAL_VISIBLE ? ' hidden' : '';
+        const batchAttr = index >= INITIAL_VISIBLE ? ' data-batch="1"' : '';
+        const saleAttr = isSale ? ' data-sale="true"' : '';
+        const imgSrc = (p.image || '').replace(/'/g, "\\'");
+        const nameEsc = (p.name || '').replace(/'/g, "\\'");
+        const priceHtml = isSale
+            ? `<span class="price-original">$${(p.originalPrice || 0).toLocaleString()}</span><span class="price-sale">$${(p.price || 0).toLocaleString()}</span> + iva`
+            : `$${(p.price || 0).toLocaleString()} + iva`;
+        const saleBadge = isSale ? '<div class="sale-badge">GRID ITEM 15% OFF</div>' : '';
+        html += `
+                <div class="product-card${hiddenClass}" data-code="${(p.code || '').replace(/"/g, '&quot;')}" data-category="${(categoryStr || '').replace(/"/g, '&quot;')}"${batchAttr}${saleAttr}>
+                    <div class="product-image-container">
+                        ${saleBadge}
+                        <img src="${(p.image || '').replace(/"/g, '&quot;')}" alt="${(p.name || '').replace(/"/g, '&quot;')}" class="product-image">
+                    </div>
+                    <button class="btn-view" onclick="saveScrollAndNavigate('${(p.url || '').replace(/'/g, "\\'")}')">View</button>
+                    <div class="product-info">
+                        <h3 class="product-name">${(p.name || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</h3>
+                        <div class="product-price">${priceHtml}</div>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('${nameEsc}', ${p.price}, '${(p.code || '').replace(/'/g, "\\'")}', '${imgSrc}'${isSale ? ', ' + (p.originalPrice || p.price) : ''})">Add to Truck</button>
+                </div>`;
+    });
+    grid.innerHTML = html;
+    syncGridBadges();
 }
 
 // Load more products function
@@ -562,6 +604,11 @@ function syncGridBadges() {
         }
     });
 }
+
+// Populate product grid from Supabase (productsDatabase) on load
+document.addEventListener('DOMContentLoaded', function() {
+    renderProductGrid();
+});
 
 // Determine initial view based on URL
 function getInitialView() {
@@ -744,6 +791,7 @@ window.returnHome = returnHome;
 window.filterCategory = filterCategory;
 window.generateSeasonMarkdownGrid = generateSeasonMarkdownGrid;
 window.syncGridBadges = syncGridBadges;
+window.renderProductGrid = renderProductGrid;
 window.loadMoreProducts = typeof loadMoreProducts !== 'undefined' ? loadMoreProducts : function() {};
 window.wtShowcaseGoToSlide = wtShowcaseGoToSlide;
 window.openWtModal = openWtModal;

@@ -236,8 +236,16 @@ function generateProductHTML(product) {
                 hardwoodHTML += `<div class="color-swatch-image" style="${style}" title="${escapeHtml(title)}" onclick="selectCedarColor(this)"></div>`;
             });
         } else {
-            hardwoodHTML = `<div class="color-swatch-image" style="background-color: #8B4513;" title="Natural" onclick="selectCedarColor(this)"></div>
-                    <div class="color-swatch-image" style="background-color: #654321;" title="Dark" onclick="selectCedarColor(this)"></div>`;
+            // Default hardwood finish images (Guanacaste, Ebony, Cesar, Ash)
+            const defaultHardwoodFinishes = [
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1771258533/Guanacaste_scwih0.jpg', title: 'Guanacaste' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1771258531/Ebony_fyqiqv.jpg', title: 'Ebony' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1771258530/Cesar_r9v21e.jpg', title: 'Cesar' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1771258530/Ash-Finish_vwtvjk.jpg', title: 'Ash' }
+            ];
+            defaultHardwoodFinishes.forEach(f => {
+                hardwoodHTML += `<div class="color-swatch-image" style="background-image: url('${escapeHtml(f.url)}'); background-size: cover; background-position: center;" title="${escapeHtml(f.title)}" onclick="selectCedarColor(this)"></div>`;
+            });
         }
         
         html = html.replace(/\{\{HARDWOOD_SECTION\}\}/g, `
@@ -277,7 +285,24 @@ function generateProductHTML(product) {
             </div>
         `);
         } else {
-            html = html.replace(/\{\{FABRIC_SECTION\}\}/g, '');
+            // Default Solid Fabric Options (four images)
+            const defaultSolidFabrics = [
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098143/42102-0004_98107560_1200_dlwasr.jpg', title: 'Solid 1' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098078/42102-0002_98107552_1200_ev98z6.jpg', title: 'Solid 2' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098005/42102-0009_98107543_1200_feikr7.jpg', title: 'Solid 3' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764097907/42102-0001_98107536_1200_lafbjb.jpg', title: 'Solid 4' }
+            ];
+            defaultSolidFabrics.forEach(f => {
+                fabricHTML += `<div class="color-swatch-image" style="background-image: url('${escapeHtml(f.url)}'); background-size: cover; background-position: center;" title="${escapeHtml(f.title)}" onclick="selectMaterial(this)"></div>`;
+            });
+            html = html.replace(/\{\{FABRIC_SECTION\}\}/g, `
+            <div class="selector-group" id="fabric-section">
+                <div class="selector-label">Fabric</div>
+                <div class="color-swatches">
+                    ${fabricHTML}
+                </div>
+            </div>
+        `);
         }
     } else {
         html = html.replace(/\{\{FABRIC_SECTION\}\}/g, '');

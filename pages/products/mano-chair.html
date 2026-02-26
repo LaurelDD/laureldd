@@ -207,8 +207,7 @@
             <div class="selector-group" id="hardwood-finish-section">
                 <div class="selector-label">Hardwood Finish</div>
                 <div class="color-swatches">
-                    <div class="color-swatch-image" style="background-color: #8B4513;" title="Natural" onclick="selectCedarColor(this)"></div>
-                    <div class="color-swatch-image" style="background-color: #654321;" title="Dark" onclick="selectCedarColor(this)"></div>
+                    <div class="color-swatch-image" style="background-image: url('https://res.cloudinary.com/duoqn1csd/image/upload/v1771258533/Guanacaste_scwih0.jpg'); background-size: cover; background-position: center;" title="Guanacaste" onclick="selectCedarColor(this)"></div><div class="color-swatch-image" style="background-image: url('https://res.cloudinary.com/duoqn1csd/image/upload/v1771258531/Ebony_fyqiqv.jpg'); background-size: cover; background-position: center;" title="Ebony" onclick="selectCedarColor(this)"></div><div class="color-swatch-image" style="background-image: url('https://res.cloudinary.com/duoqn1csd/image/upload/v1771258530/Cesar_r9v21e.jpg'); background-size: cover; background-position: center;" title="Cesar" onclick="selectCedarColor(this)"></div><div class="color-swatch-image" style="background-image: url('https://res.cloudinary.com/duoqn1csd/image/upload/v1771258530/Ash-Finish_vwtvjk.jpg'); background-size: cover; background-position: center;" title="Ash" onclick="selectCedarColor(this)"></div>
                 </div>
             </div>
         
@@ -392,6 +391,17 @@
         <div class="magazine-filmstrip" id="magazineFilmstrip" style="position: relative; z-index: 10;"></div>
     </div>
 
+    <!-- Hidden Netlify form used by checkout JS to trigger email notifications -->
+    <form name="truck-checkout" netlify netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="truck-checkout" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="tel" name="phone" />
+        <textarea name="message"></textarea>
+        <textarea name="order_summary"></textarea>
+        <input type="text" name="bot-field" />
+    </form>
+
     <!-- Cart Modal -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="cart-modal" id="cartModal">
@@ -437,6 +447,45 @@
             <div class="cart-buttons">
                 <button id="checkoutBtn" class="cart-checkout" onclick="checkout()" disabled>Proceed to Checkout</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Checkout (customer info) Modal – shown when user clicks Proceed to Checkout -->
+    <div class="checkout-overlay" id="checkoutOverlay" onclick="closeCheckoutModal()"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-modal-inner">
+            <div class="checkout-modal-header">
+                <h2 class="checkout-modal-title">Complete your order</h2>
+                <button type="button" class="checkout-modal-close" onclick="closeCheckoutModal()" aria-label="Close">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="checkoutForm" class="checkout-form" onsubmit="submitCheckoutForm(event)">
+                <div class="checkout-field">
+                    <label for="checkoutName">Name</label>
+                    <input type="text" id="checkoutName" name="name" required placeholder="Your name" autocomplete="name">
+                </div>
+                <div class="checkout-field">
+                    <label for="checkoutEmail">Email</label>
+                    <input type="email" id="checkoutEmail" name="email" required placeholder="your@email.com" autocomplete="email">
+                </div>
+                <div class="checkout-field">
+                    <label for="checkoutPhone">Phone</label>
+                    <input type="tel" id="checkoutPhone" name="phone" placeholder="+506 0000 0000" autocomplete="tel">
+                </div>
+                <div class="checkout-field">
+                    <label for="checkoutMessage">Message (optional)</label>
+                    <textarea id="checkoutMessage" name="message" rows="3" placeholder="Delivery notes or questions..."></textarea>
+                </div>
+                <input type="hidden" name="order_summary" id="checkoutOrderSummary" value="">
+                <div class="checkout-form-actions">
+                    <button type="button" class="checkout-btn-secondary" onclick="closeCheckoutModal()">Cancel</button>
+                    <button type="submit" class="checkout-btn-primary" id="checkoutSubmitBtn">Submit order</button>
+                </div>
+            </form>
         </div>
     </div>
 

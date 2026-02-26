@@ -647,6 +647,9 @@ function openWtModal() {
     if (success) success.style.display = 'none';
     var input = document.getElementById('wtContactInput');
     if (input) input.value = '';
+    var checkboxes = modal.querySelectorAll('input[name="swatchBatch"]');
+    if (checkboxes) checkboxes.forEach(function(cb) { cb.checked = false; });
+    clearWtError();
 }
 
 function closeWtModal() {
@@ -654,9 +657,54 @@ function closeWtModal() {
     if (modal) modal.classList.remove('active');
 }
 
-function updateWtPlaceholder() {
-    var emailRadio = document.querySelector('input[name="contactMethod"][value="email"]');
+function clearWtError() {
+    var err = document.getElementById('wtModalError');
+    if (err) { err.textContent = ''; err.classList.remove('visible'); }
+}
+
+function submitWtContact() {
+    var checkboxes = document.querySelectorAll('#wtContactModal input[name="swatchBatch"]:checked');
     var input = document.getElementById('wtContactInput');
+    var form = document.getElementById('wtModalForm');
+    var success = document.getElementById('wtModalSuccess');
+    var errEl = document.getElementById('wtModalError');
+    clearWtError();
+    if (!checkboxes || checkboxes.length === 0) {
+        if (errEl) { errEl.textContent = 'Please select at least one swatch collection.'; errEl.classList.add('visible'); }
+        return;
+    }
+    if (!input || !input.value.trim()) {
+        if (errEl) { errEl.textContent = 'Please enter your email.'; errEl.classList.add('visible'); }
+        return;
+    }
+    if (form) form.style.display = 'none';
+    if (success) success.style.display = 'block';
+    setTimeout(closeWtModal, 2000);
+}
+
+// Contact Us modal (Let's Get Started)
+function openContactModal() {
+    var modal = document.getElementById('contactUsModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    var form = document.getElementById('contactModalForm');
+    var success = document.getElementById('contactModalSuccess');
+    if (form) form.style.display = 'block';
+    if (success) success.style.display = 'none';
+    var input = document.getElementById('contactInput');
+    if (input) { input.value = ''; input.placeholder = 'your@email.com'; input.type = 'email'; }
+    var emailRadio = document.querySelector('#contactUsModal input[name="contactMethod"][value="email"]');
+    if (emailRadio) emailRadio.checked = true;
+}
+
+function closeContactModal() {
+    var modal = document.getElementById('contactUsModal');
+    if (modal) modal.classList.remove('active');
+}
+
+function updateContactPlaceholder() {
+    var emailRadio = document.querySelector('#contactUsModal input[name="contactMethod"][value="email"]');
+    var input = document.getElementById('contactInput');
     if (!input) return;
     if (emailRadio && emailRadio.checked) {
         input.placeholder = 'your@email.com';
@@ -667,23 +715,25 @@ function updateWtPlaceholder() {
     }
 }
 
-function submitWtContact() {
-    var input = document.getElementById('wtContactInput');
-    var form = document.getElementById('wtModalForm');
-    var success = document.getElementById('wtModalSuccess');
+function submitContact() {
+    var input = document.getElementById('contactInput');
+    var form = document.getElementById('contactModalForm');
+    var success = document.getElementById('contactModalSuccess');
     if (!input || !input.value.trim()) {
         alert('Please enter your contact information');
         return;
     }
     if (form) form.style.display = 'none';
     if (success) success.style.display = 'block';
-    setTimeout(closeWtModal, 2000);
+    setTimeout(closeContactModal, 2000);
 }
 
-// Close WT modal when clicking overlay
+// Close modals when clicking overlay
 document.addEventListener('click', function(e) {
-    var modal = document.getElementById('wtContactModal');
-    if (modal && e.target === modal) closeWtModal();
+    var wtModal = document.getElementById('wtContactModal');
+    if (wtModal && e.target === wtModal) closeWtModal();
+    var contactModal = document.getElementById('contactUsModal');
+    if (contactModal && e.target === contactModal) closeContactModal();
 });
 
 // ============================================================================
@@ -698,5 +748,9 @@ window.loadMoreProducts = typeof loadMoreProducts !== 'undefined' ? loadMoreProd
 window.wtShowcaseGoToSlide = wtShowcaseGoToSlide;
 window.openWtModal = openWtModal;
 window.closeWtModal = closeWtModal;
-window.updateWtPlaceholder = updateWtPlaceholder;
+window.clearWtError = clearWtError;
 window.submitWtContact = submitWtContact;
+window.openContactModal = openContactModal;
+window.closeContactModal = closeContactModal;
+window.updateContactPlaceholder = updateContactPlaceholder;
+window.submitContact = submitContact;

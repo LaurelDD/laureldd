@@ -3,6 +3,13 @@
 // Cart functionality with localStorage for cross-page persistence
 let cartItems = [];
 
+// Helper to URL-encode data for Netlify Forms
+function encodeFormData(data) {
+    return Object.keys(data)
+        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+        .join('&');
+}
+
 // Load cart from localStorage on page load
 function loadCart() {
     const savedCart = localStorage.getItem('laurelCart');
@@ -200,17 +207,126 @@ function removeFromCart(indices) {
     updateCart();
 }
 
+function getCartSummary() {
+    if (cartItems.length === 0) return null;
+    const grouped = [];
+    cartItems.forEach((item) => {
+        const existing = grouped.find(g => g.name === item.name && g.price === item.price);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            grouped.push({ ...item, quantity: 1 });
+        }
+    });
+    const subtotal = grouped.reduce((sum, g) => sum + g.price * g.quantity, 0);
+    const iva = Math.round(subtotal * 0.13);
+    const total = subtotal + iva;
+    return { groupedItems: grouped, subtotal, iva, total };
+}
+
+function openCheckoutModal() {
+    const overlay = document.getElementById('checkoutOverlay');
+    const modal = document.getElementById('checkoutModal');
+    if (overlay) overlay.classList.add('active');
+    if (modal) modal.classList.add('active');
+    const orderSummaryEl = document.getElementById('checkoutOrderSummary');
+    if (orderSummaryEl) orderSummaryEl.value = '';
+}
+
+function closeCheckoutModal() {
+    const overlay = document.getElementById('checkoutOverlay');
+    const modal = document.getElementById('checkoutModal');
+    if (overlay) overlay.classList.remove('active');
+    if (modal) modal.classList.remove('active');
+}
+
 function checkout() {
-    if (cartItems.length > 0) {
-        const total = cartItems.reduce((sum, item) => sum + item.price, 0);
-        const itemsList = cartItems.map(item => `• ${item.name} - $${item.price.toLocaleString()}`).join('\n');
-
-        alert(`Thank you for your order!\n\n${itemsList}\n\nTotal: $${total.toLocaleString()}\n\nWe'll contact you shortly to complete your purchase.`);
-
+    if (cartItems.length === 0) return;
+    const modal = document.getElementById('checkoutModal');
+    if (modal) {
+        openCheckoutModal();
+    } else {
+        const summary = getCartSummary();
+        if (!summary) return;
+        const lines = summary.groupedItems.map(g =>
+            `${g.name} x ${g.quantity} — $${(g.price * g.quantity).toLocaleString()}`
+        );
+        alert(`Thank you for your order!\n\n${lines.join('\n')}\n\nTotal: $${summary.total.toLocaleString()}\n\nWe'll contact you shortly to complete your purchase. Email us at contact@la-urel.com with your details.`);
         cartItems = [];
         saveCart();
         updateCart();
         closeCart();
+    }
+}
+
+async function submitCheckoutForm(e) {
+    e.preventDefault();
+    
+    // When viewing the site directly from the filesystem (file://),
+    // Netlify Forms POSTs cannot work and browsers block fetch to file://.
+    // In that case, show a message instead of attempting the network call.
+    if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        alert("Checkout email only works when the site is served over http/https (for example via Netlify or a local dev server). For now, please email us at contact@la-urel.com with your order details.");
+        closeCheckoutModal();
+        closeCart();
+        return;
+    }
+    
+    const form = document.getElementById('checkoutForm');
+    const submitBtn = document.getElementById('checkoutSubmitBtn');
+    if (!form || !submitBtn) return;
+
+    const name = (document.getElementById('checkoutName') && document.getElementById('checkoutName').value) || '';
+    const email = (document.getElementById('checkoutEmail') && document.getElementById('checkoutEmail').value) || '';
+    const phone = (document.getElementById('checkoutPhone') && document.getElementById('checkoutPhone').value) || '';
+    const message = (document.getElementById('checkoutMessage') && document.getElementById('checkoutMessage').value) || '';
+
+    const summary = getCartSummary();
+    if (!summary) {
+        closeCheckoutModal();
+        closeCart();
+        return;
+    }
+
+    const lines = summary.groupedItems.map(g =>
+        `${g.name} x ${g.quantity} — $${(g.price * g.quantity).toLocaleString()}`
+    );
+    const orderSummary = [
+        '--- ORDER ---',
+        lines.join('\n'),
+        `Subtotal: $${summary.subtotal.toLocaleString()}`,
+        `IVA (13%): $${summary.iva.toLocaleString()}`,
+        `Total: $${summary.total.toLocaleString()}`
+    ].join('\n');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+        const res = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encodeFormData({
+                'form-name': 'truck-checkout',
+                name: name.trim(),
+                email: email.trim(),
+                phone: (phone || '').trim(),
+                message: (message || '').trim(),
+                order_summary: orderSummary
+            })
+        });
+
+        if (!res.ok) throw new Error('Send failed');
+        cartItems = [];
+        saveCart();
+        updateCart();
+        closeCheckoutModal();
+        closeCart();
+        alert("Thank you for your order! We'll contact you shortly to complete your purchase.");
+    } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit order';
+        alert('Something went wrong. Please email us at contact@la-urel.com with your order details.');
     }
 }
 

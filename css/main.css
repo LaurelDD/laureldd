@@ -891,6 +891,138 @@
             color: #141414;
         }
 
+        /* Checkout (customer info) Modal */
+        .checkout-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 10002;
+        }
+        .checkout-overlay.active {
+            display: block;
+        }
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10003;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .checkout-modal.active {
+            display: flex;
+        }
+        .checkout-modal-inner {
+            background: #fafafa;
+            border: 1.5px solid #141414;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 420px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        .checkout-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px 12px;
+            border-bottom: 1px solid #e8e4df;
+        }
+        .checkout-modal-title {
+            font-family: 'Geist Mono', monospace;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #141414;
+            margin: 0;
+        }
+        .checkout-modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #141414;
+        }
+        .checkout-form {
+            padding: 20px;
+        }
+        .checkout-field {
+            margin-bottom: 16px;
+        }
+        .checkout-field label {
+            display: block;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #141414;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .checkout-field input,
+        .checkout-field textarea {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            border: 1.5px solid #141414;
+            border-radius: 4px;
+            background: #fff;
+            color: #141414;
+            box-sizing: border-box;
+        }
+        .checkout-field textarea {
+            resize: vertical;
+            min-height: 72px;
+        }
+        .checkout-form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #e8e4df;
+        }
+        .checkout-btn-secondary,
+        .checkout-btn-primary {
+            flex: 1;
+            padding: 12px 20px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .checkout-btn-secondary {
+            background: #fff;
+            color: #141414;
+            border: 1.5px solid #141414;
+        }
+        .checkout-btn-secondary:hover {
+            background: #f0eeea;
+        }
+        .checkout-btn-primary {
+            background: #583c4a;
+            color: #fff;
+            border: 1.5px solid #583c4a;
+        }
+        .checkout-btn-primary:hover:not(:disabled) {
+            background: #3d2830;
+            border-color: #3d2830;
+        }
+        .checkout-btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         /* Newsletter Modal */
         .newsletter-modal {
             position: fixed;

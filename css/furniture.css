@@ -2950,51 +2950,73 @@ body.wt-view .main-content {
     }
 }
 
-/* Our Curated Fabric Library */
+/* Our Curated Fabric Library — stacked: wheels on top, text below */
 .window-treatments-section .wt-fabric-library {
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
+    align-items: center;
     gap: 0;
-    padding: 80px 50px;
+    padding: 120px 50px 80px;
     background: #fafafa;
 }
-.window-treatments-section .wt-fabric-left {
-    flex: 1;
+.window-treatments-section .wt-fabric-wheels-row {
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 60px 40px;
-}
-.window-treatments-section .wt-fabric-wheels {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: 550px;
+    align-items: flex-start;
+    gap: 50px;
+    margin-bottom: 95px;
+    flex-wrap: wrap;
 }
 .window-treatments-section .wt-fabric-wheel-item {
     text-align: center;
 }
 .window-treatments-section .wt-fabric-wheel {
-    width: 180px;
-    height: 180px;
+    width: 207px;
+    height: 207px;
     border-radius: 50%;
-    border: 2px solid #141414;
+    border: 1px solid #141414;
     margin: 0 auto 16px;
     position: relative;
     overflow: hidden;
 }
-.window-treatments-section .wt-wheel-sheers {
-    background: conic-gradient(from 0deg, #e8e4dc 0deg 60deg, #d4cfc4 60deg 120deg, #c5c0b5 120deg 180deg, #b6b0a5 180deg 240deg, #a7a196 240deg 300deg, #989287 300deg 360deg);
+.window-treatments-section .wt-fabric-wheel.wt-wheel-img {
+    background: #f0ebe3;
 }
-.window-treatments-section .wt-wheel-performance-linens {
-    background: conic-gradient(from 0deg, #d4b5a0 0deg 60deg, #9fa8a3 60deg 120deg, #c4a89e 120deg 180deg, #8b9e9a 180deg 240deg, #b89f93 240deg 300deg, #a4b0a8 300deg 360deg);
+.window-treatments-section .wt-wheel-seg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
-.window-treatments-section .wt-wheel-performance-neutrals {
-    background: conic-gradient(from 0deg, #c9c4bd 0deg 60deg, #b8b3ac 60deg 120deg, #a7a299 120deg 180deg, #969186 180deg 240deg, #858073 240deg 300deg, #746f60 300deg 360deg);
+.window-treatments-section .wt-wheel-dividers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
 }
-.window-treatments-section .wt-wheel-blackouts {
-    background: conic-gradient(from 0deg, #2a2a2a 0deg 60deg, #3d3d3d 60deg 120deg, #505050 120deg 180deg, #636363 180deg 240deg, #767676 240deg 300deg, #898989 300deg 360deg);
+.window-treatments-section .wt-wheel-dividers span {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: #141414;
+    transform: translateX(-50%);
+    transform-origin: center center;
 }
+.window-treatments-section .wt-wheel-dividers span:nth-child(1) { transform: translateX(-50%) rotate(0deg); }
+.window-treatments-section .wt-wheel-dividers span:nth-child(2) { transform: translateX(-50%) rotate(90deg); }
+.window-treatments-section .wt-wheel-dividers span:nth-child(3) { transform: translateX(-50%) rotate(180deg); }
+.window-treatments-section .wt-wheel-dividers span:nth-child(4) { transform: translateX(-50%) rotate(270deg); }
+.window-treatments-section .wt-wheel-dividers-6 span:nth-child(1) { transform: translateX(-50%) rotate(0deg); }
+.window-treatments-section .wt-wheel-dividers-6 span:nth-child(2) { transform: translateX(-50%) rotate(60deg); }
+.window-treatments-section .wt-wheel-dividers-6 span:nth-child(3) { transform: translateX(-50%) rotate(120deg); }
+.window-treatments-section .wt-wheel-dividers-6 span:nth-child(4) { transform: translateX(-50%) rotate(180deg); }
+.window-treatments-section .wt-wheel-dividers-6 span:nth-child(5) { transform: translateX(-50%) rotate(240deg); }
+.window-treatments-section .wt-wheel-dividers-6 span:nth-child(6) { transform: translateX(-50%) rotate(300deg); }
 .window-treatments-section .wt-fabric-wheel-label {
     font-family: 'Geist Mono', monospace;
     font-size: 0.85rem;
@@ -3004,16 +3026,22 @@ body.wt-view .main-content {
     margin: 0;
     line-height: 1.3;
 }
-.window-treatments-section .wt-fabric-right {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 50px;
-}
-.window-treatments-section .wt-fabric-right .wt-showcase-text {
-    max-width: 600px;
+.window-treatments-section .wt-fabric-text {
+    max-width: 700px;
+    margin: 0 auto;
     text-align: center;
+}
+.window-treatments-section .wt-fabric-text .wt-heading {
+    margin-bottom: 24px;
+}
+.window-treatments-section .wt-fabric-text .wt-subtitle {
+    margin-bottom: 25px;
+}
+.window-treatments-section .wt-fabric-text .wt-body {
+    margin-bottom: 25px;
+}
+.window-treatments-section .wt-fabric-text .wt-body:last-of-type {
+    margin-bottom: 35px;
 }
 
 /* Finishing Hardware */
@@ -3136,7 +3164,8 @@ body.wt-view .main-content {
     color: #141414;
     margin-bottom: 60px;
 }
-.window-treatments-section .wt-partners-grid {
+.window-treatments-section .wt-partners-grid,
+.window-treatments-section .wt-partners-logos {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3157,19 +3186,32 @@ body.wt-view .main-content {
     font-size: 0.7rem;
     color: #666;
 }
+.window-treatments-section .wt-partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 80px;
+}
+.window-treatments-section .wt-partner-logo img {
+    max-height: 105px;
+    max-width: 300px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
 
 @media (max-width: 767px) {
     .window-treatments-section .wt-fabric-library {
-        flex-direction: column;
         padding: 60px 24px;
     }
-    .window-treatments-section .wt-fabric-wheels {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
+    .window-treatments-section .wt-fabric-wheels-row {
+        gap: 32px;
+        margin-bottom: 60px;
     }
     .window-treatments-section .wt-fabric-wheel {
-        width: 140px;
-        height: 140px;
+        width: 160px;
+        height: 160px;
     }
     .window-treatments-section .wt-finishing-hardware {
         flex-direction: column;
@@ -3177,7 +3219,8 @@ body.wt-view .main-content {
     .window-treatments-section .wt-hardware-left img {
         min-height: 400px;
     }
-    .window-treatments-section .wt-partners-grid {
+    .window-treatments-section .wt-partners-grid,
+    .window-treatments-section .wt-partners-logos {
         flex-direction: column;
         gap: 32px;
     }
@@ -3258,6 +3301,38 @@ body.wt-view .main-content {
     gap: 30px;
     margin-bottom: 20px;
     justify-content: center;
+}
+.wt-contact-modal .wt-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+.wt-contact-modal .wt-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.9rem;
+    color: #141414;
+    cursor: pointer;
+}
+.wt-contact-modal .wt-checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #583c4a;
+}
+.wt-contact-modal .wt-modal-error {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #c0392b;
+    margin-bottom: 12px;
+    min-height: 20px;
+    display: none;
+}
+.wt-contact-modal .wt-modal-error.visible {
+    display: block;
 }
 .wt-contact-modal .wt-radio-label {
     display: flex;

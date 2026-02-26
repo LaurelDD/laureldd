@@ -285,15 +285,23 @@ function generateProductHTML(product) {
             </div>
         `);
         } else {
-            // Default Solid Fabric Options (four images)
+            // Mano (Chair & Sofa) use striped fabric options; others use solid
+            const isMano = product.slug === 'mano-chair' || product.slug === 'mano-sofa';
+            const defaultStripedFabrics = [
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098143/42102-0004_98107560_1200_dlwasr.jpg', title: 'Striped 1' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098078/42102-0002_98107552_1200_ev98z6.jpg', title: 'Striped 2' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098005/42102-0009_98107543_1200_feikr7.jpg', title: 'Striped 3' },
+                { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764097907/42102-0001_98107536_1200_lafbjb.jpg', title: 'Striped 4' }
+            ];
             const defaultSolidFabrics = [
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098143/42102-0004_98107560_1200_dlwasr.jpg', title: 'Solid 1' },
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098078/42102-0002_98107552_1200_ev98z6.jpg', title: 'Solid 2' },
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764098005/42102-0009_98107543_1200_feikr7.jpg', title: 'Solid 3' },
                 { url: 'https://res.cloudinary.com/duoqn1csd/image/upload/v1764097907/42102-0001_98107536_1200_lafbjb.jpg', title: 'Solid 4' }
             ];
-            defaultSolidFabrics.forEach(f => {
-                fabricHTML += `<div class="color-swatch-image" style="background-image: url('${escapeHtml(f.url)}'); background-size: cover; background-position: center;" title="${escapeHtml(f.title)}" onclick="selectMaterial(this)"></div>`;
+            const defaultFabrics = isMano ? defaultStripedFabrics : defaultSolidFabrics;
+            defaultFabrics.forEach(f => {
+                fabricHTML += `<div class="color-swatch-image" style="background-image: url('${escapeHtml(f.url)}'); background-size: cover; background-position: center; min-width: 40px; min-height: 40px;" title="${escapeHtml(f.title)}" onclick="selectMaterial(this)"></div>`;
             });
             html = html.replace(/\{\{FABRIC_SECTION\}\}/g, `
             <div class="selector-group" id="fabric-section">

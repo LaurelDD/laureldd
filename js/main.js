@@ -513,11 +513,88 @@ function initializeTicker() {
     });
 }
 
+// Contact modal (Interiors Get in Touch; also used when modal is in partials)
+function openContactModal() {
+    var modal = document.getElementById('contactUsModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    var form = document.getElementById('contactModalForm');
+    var success = document.getElementById('contactModalSuccess');
+    if (form) form.style.display = 'block';
+    if (success) success.style.display = 'none';
+    var input = document.getElementById('contactInput');
+    if (input) { input.value = ''; input.placeholder = 'your@email.com'; input.type = 'email'; }
+    var emailRadio = document.querySelector('#contactUsModal input[name="contactMethod"][value="email"]');
+    if (emailRadio) emailRadio.checked = true;
+}
+function closeContactModal() {
+    var modal = document.getElementById('contactUsModal');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+function updateContactPlaceholder() {
+    var emailRadio = document.querySelector('#contactUsModal input[name="contactMethod"][value="email"]');
+    var input = document.getElementById('contactInput');
+    if (!input) return;
+    if (emailRadio && emailRadio.checked) {
+        input.placeholder = 'your@email.com';
+        input.type = 'email';
+    } else {
+        input.placeholder = '(506) 1234-5678';
+        input.type = 'tel';
+    }
+}
+function submitContact() {
+    var input = document.getElementById('contactInput');
+    var form = document.getElementById('contactModalForm');
+    var success = document.getElementById('contactModalSuccess');
+    var methodRadio = document.querySelector('#contactUsModal input[name="contactMethod"]:checked');
+    if (!input || !input.value.trim()) {
+        alert('Please enter your contact information');
+        return;
+    }
+    var contactMethod = (methodRadio && methodRadio.value) || 'email';
+    var contactValue = input.value.trim();
+    if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (form) form.style.display = 'none';
+        if (success) success.style.display = 'block';
+        setTimeout(closeContactModal, 2000);
+        return;
+    }
+    var submitBtn = document.querySelector('#contactUsModal .wt-modal-submit');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+    fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: (typeof encodeFormData === 'function' ? encodeFormData : function(d) {
+            return Object.keys(d).map(function(k) { return encodeURIComponent(k) + '=' + encodeURIComponent(d[k]); }).join('&');
+        })({
+            'form-name': 'wt-contact',
+            contact_method: contactMethod,
+            contact_value: contactValue
+        })
+    }).then(function(res) {
+        if (res.ok) {
+            if (form) form.style.display = 'none';
+            if (success) success.style.display = 'block';
+            setTimeout(closeContactModal, 2000);
+        } else {
+            alert('Something went wrong. Please try again or email contact@la-urel.com');
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Request'; }
+        }
+    }).catch(function() {
+        alert('Something went wrong. Please try again or email contact@la-urel.com');
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Request'; }
+    });
+}
+
 // Turbo Drive: close modals before navigation so cart/overlays don't get stuck on new page
 document.addEventListener('turbo:before-visit', function() {
     if (typeof closeCart === 'function') closeCart();
     if (typeof closeSearch === 'function') closeSearch();
     if (typeof closeInfoModals === 'function') closeInfoModals();
+    if (typeof closeContactModal === 'function') closeContactModal();
     document.body.style.overflow = '';
 });
 

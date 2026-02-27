@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laurel Depto. de Diseño</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <script src="https://unpkg.com/@hotwired/turbo@7/dist/turbo.es2017-umd.js"></script>
     
     <!-- External CSS -->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
         <div class="header-container">
@@ -575,29 +575,35 @@
             <div class="checkout-modal-header">
                 <h2 class="checkout-modal-title">Complete your order</h2>
             </div>
-            <form id="checkoutForm" class="checkout-form" onsubmit="submitCheckoutForm(event)">
-                <div class="checkout-field">
-                    <label for="checkoutName">Name</label>
-                    <input type="text" id="checkoutName" name="name" required placeholder="Your name" autocomplete="name">
-                </div>
-                <div class="checkout-field">
-                    <label for="checkoutEmail">Email</label>
-                    <input type="email" id="checkoutEmail" name="email" required placeholder="your@email.com" autocomplete="email">
-                </div>
-                <div class="checkout-field">
-                    <label for="checkoutPhone">Phone</label>
-                    <input type="tel" id="checkoutPhone" name="phone" placeholder="+506 0000 0000" autocomplete="tel">
-                </div>
-                <div class="checkout-field">
-                    <label for="checkoutMessage">Message (optional)</label>
-                    <textarea id="checkoutMessage" name="message" rows="3" placeholder="Delivery notes or questions..."></textarea>
-                </div>
-                <input type="hidden" name="order_summary" id="checkoutOrderSummary" value="">
-                <div class="checkout-form-actions">
-                    <button type="button" class="checkout-btn-secondary" onclick="closeCheckoutModal()">Cancel</button>
-                    <button type="submit" class="checkout-btn-primary" id="checkoutSubmitBtn">Submit order</button>
-                </div>
-            </form>
+            <div id="checkoutFormWrap" class="checkout-form-wrap">
+                <form id="checkoutForm" class="checkout-form" onsubmit="submitCheckoutForm(event)">
+                    <div class="checkout-field">
+                        <label for="checkoutName">Name</label>
+                        <input type="text" id="checkoutName" name="name" required placeholder="Your name" autocomplete="name">
+                    </div>
+                    <div class="checkout-field">
+                        <label for="checkoutEmail">Email</label>
+                        <input type="email" id="checkoutEmail" name="email" required placeholder="your@email.com" autocomplete="email">
+                    </div>
+                    <div class="checkout-field">
+                        <label for="checkoutPhone">Phone</label>
+                        <input type="tel" id="checkoutPhone" name="phone" placeholder="+506 0000 0000" autocomplete="tel">
+                    </div>
+                    <div class="checkout-field">
+                        <label for="checkoutMessage">Message (optional)</label>
+                        <textarea id="checkoutMessage" name="message" rows="3" placeholder="Delivery notes or questions..."></textarea>
+                    </div>
+                    <input type="hidden" name="order_summary" id="checkoutOrderSummary" value="">
+                    <div class="checkout-form-actions">
+                        <button type="button" class="checkout-btn-secondary" onclick="closeCheckoutModal()">Cancel</button>
+                        <button type="submit" class="checkout-btn-primary" id="checkoutSubmitBtn">Submit order</button>
+                    </div>
+                </form>
+            </div>
+            <div id="checkoutConfirmation" class="checkout-confirmation" style="display: none;">
+                <p class="checkout-confirmation-text">This is not an automated system. We've received your order and will be in touch shortly to confirm and complete your purchase.</p>
+                <button type="button" class="checkout-btn-primary" onclick="closeCheckoutModalAfterConfirm()">Close</button>
+            </div>
         </div>
     </div>
 
@@ -784,7 +790,7 @@
     </div>
 
 
-    <script src="js/products-data.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/products-data.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>

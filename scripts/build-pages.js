@@ -15,8 +15,8 @@ const pages = [
             iconColor: '#141414', // Dark icons for light background
         },
         scripts: [
-            '<script src="js/products-data.js"></script>',
-            '<script src="js/main.js"></script>'
+            '<script src="/js/products-data.js"></script>',
+            '<script src="/js/main.js"></script>'
         ]
     },
     {
@@ -30,8 +30,8 @@ const pages = [
             iconColor: '#141414' // Dark icons (no white)
         },
         scripts: [
-            '<script src="js/products-data.js"></script>',
-            '<script src="js/main.js"></script>',
+            '<script src="/js/products-data.js"></script>',
+            '<script src="/js/main.js"></script>',
             '<script>if (typeof loadCart === "function") loadCart();</script>',
             '<script>',
             '// Initialize carousel dots and navigation',
@@ -286,9 +286,9 @@ const pages = [
         },
         scripts: [
             '<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>',
-            '<script src="js/products-data.js"></script>',
-            '<script src="js/main.js"></script>',
-            '<script src="js/furniture.js"></script>',
+            '<script src="/js/products-data.js"></script>',
+            '<script src="/js/main.js"></script>',
+            '<script src="/js/furniture.js"></script>',
             '<script>',
             '// Initialize furniture page (grid + cart) on full load and on Turbo visit',
             'function runFurniturePageInit() {',
@@ -300,7 +300,7 @@ const pages = [
             'document.addEventListener("turbo:load", runFurniturePageInit);',
             '</script>'
         ],
-        additionalCSS: ['<link rel="stylesheet" href="css/furniture.css">']
+        additionalCSS: ['<link rel="stylesheet" href="/css/furniture.css">']
     },
     {
         name: 'product-template',
@@ -448,11 +448,11 @@ function buildPage(pageConfig) {
     
     // Override asset paths for product-template (pages live in pages/products/, so need ../../)
     if (pageConfig.overrideCSSPaths) {
-        head = head.replace('href="css/main.css"', 'href="../../css/main.css"');
-        head = head.replace('href="images/favicon.ico"', 'href="../../images/favicon.ico"');
-        head = head.replace('href="favicon-32x32.png"', 'href="../../favicon-32x32.png"');
-        head = head.replace('href="favicon-16x16.png"', 'href="../../favicon-16x16.png"');
-        head = head.replace('href="apple-touch-icon.png"', 'href="../../apple-touch-icon.png"');
+        head = head.replace('href="/css/main.css"', 'href="../../css/main.css"');
+        head = head.replace('href="/images/favicon.ico"', 'href="../../images/favicon.ico"');
+        head = head.replace('href="/favicon-32x32.png"', 'href="../../favicon-32x32.png"');
+        head = head.replace('href="/favicon-16x16.png"', 'href="../../favicon-16x16.png"');
+        head = head.replace('href="/apple-touch-icon.png"', 'href="../../apple-touch-icon.png"');
     }
     
     // Add additional CSS if specified

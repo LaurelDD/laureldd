@@ -294,7 +294,7 @@
                         <p style="font-family: 'Geist Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: #583c4a; margin-bottom: 24px; font-weight: 300;">
                             Our approach is holistic: we act as a valuable mediator between clients and construction teams, guiding projects from concept through completion. From luxury rental properties to high-end residences, our commitment to quality and attention to detail ensure that each space reflects our clients' needs and aspirations—whether large-scale renovations or thoughtfully curated interiors.
                         </p>
-                        <a href="mailto:interiors@la-urel.com" style="display: inline-flex; align-items: center; gap: 8px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; font-family: 'Geist Mono', monospace;"
+                        <a href="#" onclick="event.preventDefault(); typeof openContactModal === 'function' && openContactModal();" style="display: inline-flex; align-items: center; gap: 8px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; font-family: 'Geist Mono', monospace;"
                            onmouseover="this.style.color='#583c4a'; this.style.transform='scale(1.05)';" 
                            onmouseout="this.style.color='#141414'; this.style.transform='scale(1)';">
                             <span style="text-decoration: underline; text-underline-offset: 2px;">Get in Touch</span>
@@ -409,6 +409,39 @@
                 isScrolling = !isScrolling;
             });
         </script>
+
+        <!-- Contact modal (Get in Touch) + Netlify form -->
+        <div id="contactUsModal" class="wt-contact-modal">
+            <div class="wt-modal-content">
+                <button class="wt-modal-close" onclick="closeContactModal()">&times;</button>
+                <div id="contactModalForm" class="wt-modal-form-wrapper">
+                    <h2 class="wt-modal-header">Let's Get Started</h2>
+                    <p class="wt-modal-text">Our design team will reach out within 48 hours to discuss your project. How would you prefer we contact you?</p>
+                    <div class="wt-radio-group">
+                        <label class="wt-radio-label">
+                            <input type="radio" name="contactMethod" value="email" checked onchange="updateContactPlaceholder()">
+                            <span>Email</span>
+                        </label>
+                        <label class="wt-radio-label">
+                            <input type="radio" name="contactMethod" value="phone" onchange="updateContactPlaceholder()">
+                            <span>Phone</span>
+                        </label>
+                    </div>
+                    <input type="text" id="contactInput" class="wt-input-field" placeholder="your@email.com" required>
+                    <button class="wt-modal-submit" onclick="submitContact()">Submit Request</button>
+                </div>
+                <div id="contactModalSuccess" class="wt-modal-success" style="display: none;">
+                    <p style="font-size: 1.5rem; margin-bottom: 12px;">✓</p>
+                    <p>Thanks! We'll be in touch soon.</p>
+                </div>
+            </div>
+        </div>
+        <form name="wt-contact" netlify netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="wt-contact" />
+            <input type="text" name="contact_method" />
+            <input type="text" name="contact_value" />
+            <input type="text" name="bot-field" />
+        </form>
         
     </div>
     <!-- End interior-design-wrapper -->

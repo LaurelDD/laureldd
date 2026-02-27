@@ -16,7 +16,8 @@ const pages = [
         },
         scripts: [
             '<script src="/js/products-data.js"></script>',
-            '<script src="/js/main.js"></script>'
+            '<script src="/js/main.js"></script>',
+            '<script src="/js/furniture.js"></script>'
         ]
     },
     {

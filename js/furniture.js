@@ -618,7 +618,12 @@ function initProductGrid() {
     }
 }
 document.addEventListener('DOMContentLoaded', initProductGrid);
-document.addEventListener('turbo:load', initProductGrid);
+document.addEventListener('turbo:load', function() {
+    initProductGrid();
+    // Fallback: Turbo may replace body before our listener runs; retry after a tick so #productGrid is in DOM
+    setTimeout(initProductGrid, 0);
+    requestAnimationFrame(initProductGrid);
+});
 // If we're on furniture and DOM is already ready (e.g. DOMContentLoaded already fired), run immediately
 if (document.getElementById('productGrid') && (document.readyState === 'complete' || document.readyState === 'interactive')) {
     initProductGrid();

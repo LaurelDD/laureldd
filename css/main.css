@@ -313,6 +313,40 @@
             font-style: normal;
         }
 
+        /* Home page: Grid CTA "Shop Now" link – ensure correct styles on all hosts (Netlify, etc.) */
+        .home-grid-cta .home-shop-cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0;
+            background: transparent;
+            color: #141414;
+            text-decoration: none;
+            font-family: 'Geist Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s ease, stroke 0.3s ease;
+            cursor: pointer;
+        }
+        .home-grid-cta .home-shop-cta-link:hover {
+            color: #583c4a;
+        }
+        .home-grid-cta .home-shop-cta-link:hover .home-shop-cta-arrow {
+            color: #583c4a;
+        }
+        .home-grid-cta .home-shop-cta-text {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 1.5px;
+        }
+        .home-grid-cta .home-shop-cta-arrow {
+            flex-shrink: 0;
+            transition: color 0.3s ease;
+            color: #141414;
+        }
+
         .services-timeline {
             background: #fafafa;
             padding: 80px 50px 80px;

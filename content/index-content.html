@@ -228,16 +228,13 @@
          ROW 8: GRID (CTA + IMAGE)
          ======================================== -->
     <!-- Grid CTA Section -->
-    <div style="text-align: center; padding: 80px 20px 80px; background: #fafafa;">
+    <div class="home-grid-cta" style="text-align: center; padding: 80px 20px 80px; background: #fafafa;">
         <h2 style="font-family: 'Geist Mono', monospace; font-size: 1.5rem; font-weight: 500; color: #141414; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">All Furniture on Our Grid is Always Marked Down</h2>
         <p style="font-family: 'Geist Mono', monospace; font-size: 0.7rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 25px; font-weight: 400;">Find your perfect piece, the seasonal grid is our window to select collections</p>
-        <a href="furniture.html" style="display: inline-flex; align-items: center; gap: 12px; padding: 0; background: transparent; color: #141414; text-decoration: none; font-family: 'Geist Mono', monospace; font-size: 28.8px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; cursor: pointer;" 
-           onmouseover="this.style.color='#583c4a'; this.querySelector('svg').style.stroke='#583c4a';" 
-           onmouseout="this.style.color='#141414'; this.querySelector('svg').style.stroke='#141414';"
-           onclick="localStorage.setItem('openToGrid', 'true');">
-            <span style="text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px;">Shop Now</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="transition: stroke 0.3s ease;">
-                <path d="M22 12H5M12 19l-7-7 7-7" stroke="#141414" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="scale(-1, 1) translate(-24, 0)"/>
+        <a href="furniture.html" class="home-shop-cta-link" onclick="localStorage.setItem('openToGrid', 'true');">
+            <span class="home-shop-cta-text">Shop Now</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="home-shop-cta-arrow" aria-hidden="true">
+                <path d="M22 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="scale(-1, 1) translate(-24, 0)"/>
             </svg>
         </a>
     </div>

@@ -558,7 +558,7 @@
 
     </div>
 
-    <!-- Floating Schedule Visit Button -->
+    <!-- Floating Schedule Visit Button (opens showhouse modal; form is via "Schedule Your Visit" inside modal) -->
     <button class="floating-showhouse-btn" onclick="document.getElementById('showhouseModal').style.display='flex';">
         Schedule a Visit
     </button>
@@ -583,7 +583,7 @@
                     Experience our furniture collection, see and touch a selection of <strong style="letter-spacing: 0.05em;">MAKEMAKE</strong> pieces, curated retail items, and custom window treatments displayed in a beautifully designed home setting.
                 </p>
             <p style="font-family: 'Geist Mono', monospace; font-size: 0.65rem; color: #583c4a; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 400; margin-bottom: 30px;">Conveniently located in Escazú, near La Paco</p>
-            <a href="/cdn-cgi/l/email-protection#adcec2c3d9ccced9edc1cc80d8dfc8c183cec2c0" style="position: absolute; bottom: 0px; left: 0px; right: 0px; display: block; padding: 16px 0px; background: rgb(250, 248, 243); color: rgb(20, 20, 20); text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border-top: 1.5px solid rgb(20, 20, 20); transition: 0.3s; cursor: pointer; font-family: &quot;Geist Mono&quot;, monospace; text-align: center;" onmouseover="this.style.background='#583c4a'; this.style.color='#ffffff';" onmouseout="this.style.background='#faf8f3'; this.style.color='#141414';">Schedule Your Visit</a></div>
+            <a href="#" style="position: absolute; bottom: 0px; left: 0px; right: 0px; display: block; padding: 16px 0px; background: rgb(250, 248, 243); color: rgb(20, 20, 20); text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border-top: 1.5px solid rgb(20, 20, 20); transition: 0.3s; cursor: pointer; font-family: &quot;Geist Mono&quot;, monospace; text-align: center;" onmouseover="this.style.background='#583c4a'; this.style.color='#ffffff';" onmouseout="this.style.background='#faf8f3'; this.style.color='#141414';" onclick="event.preventDefault(); document.getElementById('showhouseModal').style.display='none'; typeof openContactModal === 'function' && openContactModal();">Schedule Your Visit</a></div>
     </div>
 
 

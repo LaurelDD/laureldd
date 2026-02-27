@@ -248,6 +248,10 @@ function filterCategory(category) {
         } else {
             // Special handling for "The Grid" - show product cards for grid items only
             if (category === 'grid') {
+                // Hide Window Treatments if we're coming from there
+                document.body.classList.remove('wt-view');
+                const wtSectionForGrid = document.getElementById('windowTreatmentsSection');
+                if (wtSectionForGrid) hideElement(wtSectionForGrid);
                 // Hide all decorative sections including showcase
                 hideElement(introSection);
                 hideElement(logoContainer);
@@ -256,7 +260,9 @@ function filterCategory(category) {
                 hideElement(gridTitleBand);
                 editorialSections.forEach(section => hideElement(section));
                 hideElement(triptychSection);
+                // Show the product grid section (it may have been hidden when viewing Window Treatments)
                 if (allFurnitureSection) {
+                    showElement(allFurnitureSection);
                     hideElement(allFurnitureSection.querySelector('.section-header'));
                 }
                 

@@ -293,6 +293,7 @@ const pages = [
             '// Initialize furniture page (grid + cart) on full load and on Turbo visit',
             'function runFurniturePageInit() {',
             '    if (typeof loadCart === "function") loadCart();',
+            '    if (typeof renderProductGrid === "function") renderProductGrid();',
             '    if (typeof generateSeasonMarkdownGrid === "function") generateSeasonMarkdownGrid();',
             '    if (typeof syncGridBadges === "function") syncGridBadges();',
             '}',

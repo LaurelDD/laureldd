@@ -611,10 +611,18 @@ function syncGridBadges() {
     });
 }
 
-// Populate product grid from Supabase (productsDatabase) on load
-document.addEventListener('DOMContentLoaded', function() {
-    renderProductGrid();
-});
+// Populate product grid from productsDatabase on load (full page and Turbo)
+function initProductGrid() {
+    if (document.getElementById('productGrid') && typeof productsDatabase !== 'undefined') {
+        renderProductGrid();
+    }
+}
+document.addEventListener('DOMContentLoaded', initProductGrid);
+document.addEventListener('turbo:load', initProductGrid);
+// If we're on furniture and DOM is already ready (e.g. DOMContentLoaded already fired), run immediately
+if (document.getElementById('productGrid') && (document.readyState === 'complete' || document.readyState === 'interactive')) {
+    initProductGrid();
+}
 
 // Determine initial view based on URL
 function getInitialView() {

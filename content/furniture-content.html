@@ -259,7 +259,7 @@
                             </div>
                             <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1771945044/CurtainsDrapesHero_cfg4pz.jpg" alt="Custom curtains and drapes" class="wt-category-image">
                         </div>
-                        <a href="furniture.html" class="wt-btn-customize">Start Customizing</a>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openContactModal();">Start Customizing</a>
                         <div class="wt-category-info">
                             <p class="wt-category-description">Custom drapery tailored to your specifications — from sheers and velvet to blackout linens. Professional pleating and finishing with motorized or manual hardware options.</p>
                         </div>
@@ -271,7 +271,7 @@
                             </div>
                             <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769185947/IMG_6336_dhvoyk.jpg" alt="Blinds and shades" class="wt-category-image">
                         </div>
-                        <a href="furniture.html" class="wt-btn-customize">Start Customizing</a>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openContactModal();">Start Customizing</a>
                         <div class="wt-category-info">
                             <p class="wt-category-description">Roman shades, roller blinds, and cellular options for clean, modern light control. Available in motorized systems with smart home integration and cordless mechanisms.</p>
                         </div>
@@ -283,7 +283,7 @@
                             </div>
                             <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769204161/LAUCAT-615_ekj5ho.jpg" alt="Custom shutters" class="wt-category-image" style="object-position: left;">
                         </div>
-                        <a href="furniture.html" class="wt-btn-customize">Start Customizing</a>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openContactModal();">Start Customizing</a>
                         <div class="wt-category-info">
                             <p class="wt-category-description">Custom hardwood shutters built to your dimensions. Available with fixed or adjustable louvers, or solid panel designs for light and privacy control with lasting architectural value.</p>
                         </div>
@@ -295,7 +295,7 @@
                             </div>
                             <img src="https://res.cloudinary.com/duoqn1csd/image/upload/v1769200937/IMG_4167_twuslq.jpg" alt="Valances and cornices" class="wt-category-image">
                         </div>
-                        <a href="furniture.html" class="wt-btn-customize">Start Customizing</a>
+                        <a href="#" class="wt-btn-customize" onclick="event.preventDefault(); openContactModal();">Start Customizing</a>
                         <div class="wt-category-info">
                             <p class="wt-category-description">Decorative top treatments that conceal curtain hardware and add character to windows. Available in soft fabric styles or structured wood designs to complement your drapery or stand alone.</p>
                         </div>
@@ -504,6 +504,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Hidden Netlify forms for Window Treatments (submitted via JS) -->
+        <form name="wt-swatches" netlify netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="wt-swatches" />
+            <input type="text" name="email" />
+            <input type="text" name="swatch_batches" />
+            <input type="text" name="bot-field" />
+        </form>
+        <form name="wt-contact" netlify netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="wt-contact" />
+            <input type="text" name="contact_method" />
+            <input type="text" name="contact_value" />
+            <input type="text" name="bot-field" />
+        </form>
 
         <!-- ALL FURNITURE - ONE ROW + LOAD MORE -->
         <section class="all-furniture-section">

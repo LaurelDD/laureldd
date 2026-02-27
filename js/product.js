@@ -384,10 +384,13 @@ function selectColor(element) {
     });
     element.classList.add('selected');
 
-    // If mode is 'one', deselect hardwood finishes when MDF color is selected
+    // If mode is 'one', deselect hardwood finishes when MDF color is selected (do not touch fabric section)
     if (window.materialSelectionMode === 'one') {
+        const fabricSection = document.getElementById('fabric-section');
         document.querySelectorAll('.color-swatch-image').forEach(swatch => {
-            swatch.classList.remove('selected');
+            if (!fabricSection || !fabricSection.contains(swatch)) {
+                swatch.classList.remove('selected');
+            }
         });
     }
 }
@@ -398,10 +401,13 @@ function selectCedarColor(element) {
     });
     element.classList.add('selected');
 
-    // If mode is 'one', deselect MDF colors when hardwood finish is selected
+    // If mode is 'one', deselect MDF colors when hardwood finish is selected (do not touch fabric section)
     if (window.materialSelectionMode === 'one') {
+        const fabricSection = document.getElementById('fabric-section');
         document.querySelectorAll('.color-swatch, .color-swatch-matte').forEach(swatch => {
-            swatch.classList.remove('selected');
+            if (!fabricSection || !fabricSection.contains(swatch)) {
+                swatch.classList.remove('selected');
+            }
         });
     }
 

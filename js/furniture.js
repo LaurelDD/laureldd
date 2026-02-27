@@ -724,9 +724,41 @@ function submitWtContact() {
         if (errEl) { errEl.textContent = 'Please enter your email.'; errEl.classList.add('visible'); }
         return;
     }
-    if (form) form.style.display = 'none';
-    if (success) success.style.display = 'block';
-    setTimeout(closeWtModal, 2000);
+    var email = input.value.trim();
+    var swatchBatches = Array.prototype.map.call(checkboxes, function(cb) { return cb.value; }).join(', ');
+
+    if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (form) form.style.display = 'none';
+        if (success) success.style.display = 'block';
+        setTimeout(closeWtModal, 2000);
+        return;
+    }
+
+    var submitBtn = document.querySelector('#wtContactModal .wt-modal-submit');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+    fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: (typeof encodeFormData === 'function' ? encodeFormData : function(d) {
+            return Object.keys(d).map(function(k) { return encodeURIComponent(k) + '=' + encodeURIComponent(d[k]); }).join('&');
+        })({
+            'form-name': 'wt-swatches',
+            email: email,
+            swatch_batches: swatchBatches
+        })
+    }).then(function(res) {
+        if (res.ok) {
+            if (form) form.style.display = 'none';
+            if (success) success.style.display = 'block';
+            setTimeout(closeWtModal, 2000);
+        } else {
+            if (errEl) { errEl.textContent = 'Something went wrong. Please try again or email contact@la-urel.com'; errEl.classList.add('visible'); }
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Request Swatches'; }
+        }
+    }).catch(function() {
+        if (errEl) { errEl.textContent = 'Something went wrong. Please try again or email contact@la-urel.com'; errEl.classList.add('visible'); }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Request Swatches'; }
+    });
 }
 
 // Contact Us modal (Let's Get Started)
@@ -766,13 +798,46 @@ function submitContact() {
     var input = document.getElementById('contactInput');
     var form = document.getElementById('contactModalForm');
     var success = document.getElementById('contactModalSuccess');
+    var methodRadio = document.querySelector('#contactUsModal input[name="contactMethod"]:checked');
     if (!input || !input.value.trim()) {
         alert('Please enter your contact information');
         return;
     }
-    if (form) form.style.display = 'none';
-    if (success) success.style.display = 'block';
-    setTimeout(closeContactModal, 2000);
+    var contactMethod = (methodRadio && methodRadio.value) || 'email';
+    var contactValue = input.value.trim();
+
+    if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+        if (form) form.style.display = 'none';
+        if (success) success.style.display = 'block';
+        setTimeout(closeContactModal, 2000);
+        return;
+    }
+
+    var submitBtn = document.querySelector('#contactUsModal .wt-modal-submit');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+    fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: (typeof encodeFormData === 'function' ? encodeFormData : function(d) {
+            return Object.keys(d).map(function(k) { return encodeURIComponent(k) + '=' + encodeURIComponent(d[k]); }).join('&');
+        })({
+            'form-name': 'wt-contact',
+            contact_method: contactMethod,
+            contact_value: contactValue
+        })
+    }).then(function(res) {
+        if (res.ok) {
+            if (form) form.style.display = 'none';
+            if (success) success.style.display = 'block';
+            setTimeout(closeContactModal, 2000);
+        } else {
+            alert('Something went wrong. Please try again or email contact@la-urel.com');
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Request'; }
+        }
+    }).catch(function() {
+        alert('Something went wrong. Please try again or email contact@la-urel.com');
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Request'; }
+    });
 }
 
 // Close modals when clicking overlay
